@@ -217,13 +217,6 @@
   left: 280px;
   width: calc(100% - 280px);
 }
-.home-section .content {
-  display: inline-block;
-  color: #11101d;
-  font-size: 25px;
-  font-weight: 500;
-  margin: 18px;
-}
 @media (max-width: 420px) {
   .sidebar li .tooltip {
     display: none;

@@ -34,33 +34,33 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 
 // Bidan
-Route::prefix('login')->middleware(['auth', 'bidan'])->group(function(){
+Route::prefix('login')->middleware(['auth', 'bidan'])->group(function () {
     // Bidan Controller
-    Route::resource('bidans',BidanController::class);
+    Route::resource('bidans', BidanController::class);
 
 
     // DataAnakController
-    Route::resource('danaks',DataAnakController::class);
+    Route::resource('danaks', DataAnakController::class);
+    Route::get('gettabelanak', [DataAnakController::class, 'getData'])->name('danaks.getData');
+
 
 
     // DatabulananController
-    Route::resource('dbulanans',DatabulananController::class);
+    Route::resource('dbulanans', DatabulananController::class);
 
 
 
     // DataPosyanduController
-    Route::resource('dposyandus',DataPosyanduController::class);
+    Route::resource('dposyandus', DataPosyanduController::class);
 
 
 
     // GrafikPerkembanganController
-    Route::resource('gperkembangans',GrafikPerkembanganController::class);
-
+    Route::resource('gperkembangans', GrafikPerkembanganController::class);
 });
 
 
 // Kader
-Route::prefix('login')->middleware(['auth', 'kader'])->group(function(){
-    Route::resource('kaders',KaderController::class);
-
+Route::prefix('login')->middleware(['auth', 'kader'])->group(function () {
+    Route::resource('kaders', KaderController::class);
 });

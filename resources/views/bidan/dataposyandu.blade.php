@@ -4,7 +4,8 @@
     @include('layouts.navbar')
     <section class="home-section">
         <div class="content">
-            Halaman Data Posyandu
+            <h1 class="m-3">Halaman Data Posyandu</h1>
+
         </div>
     </section>
 

@@ -17,10 +17,21 @@ class DanakFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_anak' => fake()->name(),
-            'tempat_lahir' => fake()->city(),
-            'tanggal_lahir' => fake()->date(),
+            'nama_anak' => $this->faker->name(),
+            'tempat_lahir' => $this->faker->city(),
+            'tanggal_lahir' => $this->faker->date(),
             'umur' => $this->faker->numberBetween(1, 10),
+            'jk' => $this->generateGender(),
+            't_posyandu' => $this->faker->company('hospital'), // Generates a random company name
         ];
+    }
+
+    public function generateGender()
+    {
+        // Generate a random gender based on the name
+        $namaAnak = $this->faker->name();
+        $gender = $this->faker->randomElement(['L', 'P']); // Assuming 'L' is male and 'P' is female
+        // You can implement a more sophisticated logic to determine gender based on the name if needed.
+        return $gender;
     }
 }
