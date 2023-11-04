@@ -20,6 +20,6 @@ class BidanMiddleware
             return $next($request);
         }
 
-        return redirect()->route('kaders.index')->with('error', 'Access denied. You need admin privileges.');
+        return redirect()->route('kaders.index')->with('error', 'Akses Ditolak, Anda Bukan Bidan.');
     }
 }

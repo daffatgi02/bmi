@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");
             $table->string("umur");
+            $table->string("jk");
+            $table->string("t_posyandu");
+            $table->string("status")->nullable();
             $table->timestamps();
         });
     }

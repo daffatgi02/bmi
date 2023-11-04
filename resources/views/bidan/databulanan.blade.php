@@ -4,7 +4,7 @@
     @include('layouts.navbar')
     <section class="home-section">
         <div class="content">
-            Halaman Data Bulanan
+            <h1 class="m-3">Halaman Data Bulanan</h1>
         </div>
     </section>
 

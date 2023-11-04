@@ -14,18 +14,20 @@
                         <div class="card-body">
                             <div class="d-flex ">
                                 <i class="bi bi-search fs-3 me-2"></i>
-                                <input type="text" id="searchInput" class="form-control mb-3" placeholder="Cari Nama">
+                                <input type="text" id="searchInput" class="form-control mb-3 border border-dark-subtle" placeholder="Cari Nama">
                             </div>
 
-                            <select class="form-select mb-3" size="8" id="namabb" name="namabb" required>
+                            <select class="form-select mb-3" size="7" id="namabb" name="namabb" required>
                                 <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2" value="null"
                                     disabled>
                                     Silahkan Pilih Nama
                                 </option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                                <option value="3">Thres</option>
+                                @foreach ($danaks->sortBy('nama_anak') as $data )
+                                    <option class="border m-1" value="{{$data->nama_anak}}">
+                                        - {{$data->nama_anak}}
+                                    </option>
+                                @endforeach
+
                             </select>
                             <div class="form-floating mb-3">
                                 <input type="number" class="form-control border border-dark-subtle" id="floatingInput"
