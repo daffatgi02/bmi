@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">
+                    <h3>Register</h3>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -61,16 +63,27 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 d-none">
                             <label for="level" class="col-md-4 col-form-label text-md-end">{{ __('Level') }}</label>
 
                             <div class="col-md-6">
-                                <input id="level" type="text" class="form-control" name="level" value="bidan">
+                                <input id="level" type="text" class="form-control" name="level" value="kader">
                             </div>
                         </div>
 
-                        <div class="row mb-0">
+                        <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input border border-dark" type="checkbox" name="cekLevel" id="cekLevel">
+                                    <label class="form-check-label" for="cekLevel">
+                                        Registrasi Sebagai bidan
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-0 d-flex justify-content-center">
+                            <div class="col-md-4 d-grid col">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
