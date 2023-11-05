@@ -22,21 +22,40 @@
                                             class="form-control mb-3 border border-dark-subtle" placeholder="Cari Nama"
                                             onclick="selectAllText(this);" onfocus="selectAllText(this);">
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <select class="form-select mb-3" size="7" id="danaks_id" name="danaks_id"
+                                                required>
+                                                <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2"
+                                                    value="null" disabled>
+                                                    Silahkan Pilih Nama
+                                                </option>
 
-                                    <select class="form-select mb-3" size="7" id="danaks_id" name="danaks_id"
-                                        required>
-                                        <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2"
-                                            value="null" disabled>
-                                            Silahkan Pilih Nama
-                                        </option>
-
-                                        @foreach ($danaks->sortBy('nama_anak') as $data)
-                                            <option class="border border-dark-subtle mb-2 ps-2" value="{{ $data->id }}">
-                                                - {{ $data->nama_anak }}
-                                            </option>
-                                        @endforeach
-
-                                    </select>
+                                                @foreach ($danaks->sortBy('nama_anak') as $data)
+                                                    <option class="border border-dark-subtle mb-2 ps-2"
+                                                        value="{{ $data->id }}">
+                                                        - {{ $data->nama_anak }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 d-flex flex-md-column">
+                                            <div class="form-check">
+                                                <input class="form-check-input border border-dark-subtle" type="radio"
+                                                    name="flexRadioDefault" id="c_jkl" required>
+                                                <label class="form-check-label" for="c_jkl">
+                                                    Laki-Laki
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input border border-dark-subtle" type="radio"
+                                                    name="flexRadioDefault" id="c_jkw" required>
+                                                <label class="form-check-label" for="c_jkw">
+                                                    Wanita
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-floating mb-3">
@@ -61,7 +80,7 @@
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control border-dark-subtle" id="st_anak"
                                                     name="st_anak" placeholder="Status Anak" required readonly
-                                                    value="-">
+                                                    value="- Silahkan Pilih Jenis Kelamin">
                                                 <label for="st_anak">Status Aanak</label>
                                             </div>
                                         </div>
@@ -150,6 +169,9 @@
                     // Temukan elemen select yang ingin di-reset
                     let danaksSelect = document.getElementById("danaks_id");
 
+                    // Temukan semua elemen radio
+                    let radioElements = document.querySelectorAll('input[type="radio"]');
+
                     // Simpan indeks pilihan awal
                     let initialSelectedIndex = danaksSelect.selectedIndex;
 
@@ -159,7 +181,7 @@
                         inputElements.forEach(function(input) {
                             if (input !== searchInput) {
                                 if (input.type === "text") {
-                                    input.value = "-";
+                                    input.value = "- Silahkan Pilih Jenis Kelamin";
                                 } else if (input.type === "number") {
                                     input.value = 0;
                                 }
@@ -168,20 +190,34 @@
 
                         // Reset pilihan pada elemen select ke opsi pertama (indeks 0)
                         danaksSelect.selectedIndex = initialSelectedIndex;
+
+                        // Uncheck semua radio buttons
+                        radioElements.forEach(function(radio) {
+                            radio.checked = false;
+                        });
                     });
                 });
+
 
                 // Stautus
                 // Ambil elemen input bb_anak, tb_anak, dan st_anak
                 let bb_anakInput = document.getElementById('bb_anak');
                 let tb_anakInput = document.getElementById('tb_anak');
                 let st_anakInput = document.getElementById('st_anak');
+                let radioJkl = document.getElementById('c_jkl');
+                let radioJkw = document.getElementById('c_jkw');
 
                 // Tambahkan event listener untuk input bb_anak
                 bb_anakInput.addEventListener('input', updateStatusAnak);
 
                 // Tambahkan event listener untuk input tb_anak
                 tb_anakInput.addEventListener('input', updateStatusAnak);
+
+                // Tambahkan event listener untuk radio "Laki-Laki" (c_jkl)
+                radioJkl.addEventListener('change', updateStatusAnak);
+
+                // Tambahkan event listener untuk radio "Wanita" (c_jkw)
+                radioJkw.addEventListener('change', updateStatusAnak);
 
                 // Fungsi untuk mengupdate nilai st_anak
                 function updateStatusAnak() {
@@ -194,13 +230,21 @@
                         // Hitung hasil dari bb_anak + tb_anak
                         let st_anakValue = bb_anakValue + tb_anakValue;
 
-                        // Periksa total st_anakValue
-                        if (st_anakValue <= 10) {
-                            // Jika total <= 10, atur nilai st_anakInput menjadi "Stunting"
-                            st_anakInput.value = "Stunting";
-                        } else {
-                            // Jika total > 10, atur nilai st_anakInput menjadi "Tidak Stunting"
-                            st_anakInput.value = "Tidak Stunting";
+                        // Periksa radio button yang terpilih
+                        if (radioJkl.checked) {
+                            // Jika "Laki-Laki" terpilih
+                            if (st_anakValue <= 10) {
+                                st_anakInput.value = "Stunting";
+                            } else {
+                                st_anakInput.value = "Tidak Stunting";
+                            }
+                        } else if (radioJkw.checked) {
+                            // Jika "Wanita" terpilih
+                            if (st_anakValue <= 10) {
+                                st_anakInput.value = "Tidak Stunting";
+                            } else {
+                                st_anakInput.value = "Stunting";
+                            }
                         }
                     } else {
                         // Jika salah satu nilai tidak valid, atur nilai st_anak ke 0
@@ -267,9 +311,9 @@
                         name: "danaks.umur",
                         className: 'text-center align-middle',
                         width: "10%",
-                        render: function(data, type, row, meta) {
-                            return data + ' Tahun';
-                        }
+                        // render: function(data, type, row, meta) {
+                        //     return data + ' Tahun';
+                        // }
                     },
                     {
                         data: "st_anak",

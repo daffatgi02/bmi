@@ -106,9 +106,9 @@
                         name: "umur",
                         className: 'text-center align-middle',
                         width: "10%",
-                        render: function(data, type, row, meta) {
-                            return data + ' Tahun';
-                        }
+                        // render: function(data, type, row, meta) {
+                        //     return data + ' Tahun';
+                        // }
                     },
                     {
                         data: "tanggal_lahir",
