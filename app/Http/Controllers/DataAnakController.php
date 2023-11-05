@@ -15,6 +15,7 @@ class DataAnakController extends Controller
     public function index()
     {
         $dposyandu = Dposyandu::all();
+        confirmDelete();
         return view("bidan.dataanak", compact('dposyandu'));
     }
 
@@ -38,7 +39,6 @@ class DataAnakController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -90,7 +90,22 @@ class DataAnakController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $danak = Danak::findOrFail($id);
+
+        // Update data anak berdasarkan ID yang diterima
+        $danak->nama_anak = $request->nama_anak;
+        $danak->tempat_lahir = $request->tempat_lahir;
+        $danak->tanggal_lahir = $request->tanggal_lahir;
+        $danak->umur = $request->umur;
+        $danak->jk = $request->jk;
+        $danak->t_posyandu = $request->t_posyandu;
+
+        // Simpan perubahan data anak ke dalam database
+        $danak->save();
+        Alert::success('Berhasil Memperbarui', 'Data Anak Berhasil Diperbarui.');
+
+        // Redirect ke halaman yang sesuai setelah pembaruan data
+        return redirect()->route('danaks.index');
     }
 
     /**
@@ -103,7 +118,7 @@ class DataAnakController extends Controller
 
 
         $danak->delete(); // Hapus data dari database
-        Alert::success('Berhasil Terhapus', 'Produk Berhasil Terhapus.');
+        Alert::success('Berhasil Terhapus', 'Data Anak Terhapus.');
 
         return redirect()->route('danaks.index');
     }

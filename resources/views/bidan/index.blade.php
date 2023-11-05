@@ -5,7 +5,6 @@
     <section class="home-section">
         <div class="content">
             <h1 class="m-3">Dashboard </h1>
-
         </div>
     </section>
 

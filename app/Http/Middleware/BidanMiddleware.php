@@ -20,6 +20,6 @@ class BidanMiddleware
             return $next($request);
         }
 
-        return redirect()->route('kaders.index')->with('error', 'Akses Ditolak, Anda Bukan Bidan.');
+        return redirect()->route('kaders.index')->with('error', 'Data Terinput!');
     }
 }
