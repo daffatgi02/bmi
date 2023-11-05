@@ -13,32 +13,32 @@
             <span class="tooltip">Dashboard</span>
         </li>
         <li>
-            <a href="{{route('danaks.index')}}">
+            <a href="{{ route('danaks.index') }}">
                 <i class='bx bx-user'></i>
                 <span class="links_name">Data Anak</span>
             </a>
             <span class="tooltip">Data Anak</span>
         </li>
         <li>
-            <a href="{{route('dposyandus.index')}}">
+            <a href="{{ route('dposyandus.index') }}">
                 <i class='bx bx-building-house'></i>
                 <span class="links_name">Data Posyandu</span>
             </a>
             <span class="tooltip">Data Posyandu</span>
         </li>
         <li>
-            <a href="{{route('gperkembangans.index')}}">
-                <i class='bx bx-line-chart' ></i>
-                <span class="links_name">Grafik Perkembangan</span>
-            </a>
-            <span class="tooltip">Grafik Perkembangan</span>
-        </li>
-        <li>
-            <a href="{{route('dbulanans.index')}}">
-                <i class='bx bx-table' ></i>
+            <a href="{{ route('dbulanans.index') }}">
+                <i class='bx bx-table'></i>
                 <span class="links_name">Data Bulanan</span>
             </a>
             <span class="tooltip">Data Bulanan</span>
+        </li>
+        <li>
+            <a href="{{ route('gperkembangans.index') }}">
+                <i class='bx bx-line-chart'></i>
+                <span class="links_name">Grafik Perkembangan</span>
+            </a>
+            <span class="tooltip">Grafik Perkembangan</span>
         </li>
 
         <li class="profile">

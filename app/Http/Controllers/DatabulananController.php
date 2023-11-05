@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Danak;
+use App\Models\Dbulan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DatabulananController extends Controller
 {
@@ -11,7 +14,21 @@ class DatabulananController extends Controller
      */
     public function index()
     {
-        return view("bidan.databulanan");
+        $danaks = Danak::all();
+        $dbulans = Dbulan::all();
+        return view("bidan.databulanan", compact('danaks', 'dbulans'));
+    }
+
+    public function getData(Request $request)
+    {
+
+        $dbulanans = Dbulan::with('danaks');
+
+        if ($request->ajax()) {
+            return datatables()->of($dbulanans)
+                ->addIndexColumn()
+                ->toJson();
+        }
     }
 
     /**
@@ -27,7 +44,20 @@ class DatabulananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Buat objek Mahal baru berdasarkan data yang diterima
+        $dbulans = new Dbulan();
+        $dbulans->danaks_id = $request->danaks_id;
+        $dbulans->bb_anak = $request->bb_anak;
+        $dbulans->tb_anak = $request->tb_anak;
+
+        $dbulans->st_anak = $request->st_anak;
+
+        // Simpan objek Mahal ke dalam database
+        $dbulans->save();
+        Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
+
+        // Redirect ke halaman yang sesuai setelah penyimpanan data
+        return redirect()->route('dbulanans.index');
     }
 
     /**

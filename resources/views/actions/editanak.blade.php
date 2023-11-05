@@ -60,10 +60,10 @@
                             <hr>
                             <div class="row d-flex justify-content-center">
                                 <div class="col-md-3 col-3 d-grid">
-                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-success shadow">Edit</button>
                                 </div>
                                 <div class="col-md-3 col-3 d-grid">
-                                    <a href="{{route('danaks.index')}}" id="batal" class="btn btn-danger" danaks-bs-dismiss="card">Batal</a>
+                                    <a href="{{route('danaks.index')}}" id="batal" class="btn btn-danger shadow" danaks-bs-dismiss="card">Batal</a>
                                 </div>
                             </div>
                         </form>

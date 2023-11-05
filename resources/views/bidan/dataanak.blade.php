@@ -5,12 +5,12 @@
 
     <div class="d-md-block">
         @include('layouts.navbar')
-        <section class="home-section">
+        <section class="home-section mb-5">
             <div class="content">
                 <h1 class="m-3">Halaman Data Anak</h1>
                 <div class="container mt-3 pt-3">
                     <div class="row ">
-                        <div class="col-md-3 col-lg-2 col-7 offset-md-9 offset-lg-10 offset-5 mb-3 d-grid">
+                        <div class="col-md-3 col-lg-2 col-7 offset-md-9 offset-lg-10 offset-5 mb-4 d-grid">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary shadow" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
@@ -21,7 +21,7 @@
                             <div class="table-responsive border border-dark-subtle p-3 shadow rounded-3">
                                 <table class="table table-striped table-bordered border" id="tabelanak">
                                     <thead class="fw-bold table-info ">
-                                        <tr >
+                                        <tr>
                                             <td class="text-center">id</td>
                                             <td class="text-center">No.</td>
                                             <td class="text-center">Nama</td>
@@ -62,6 +62,7 @@
 @push('scripts')
     <script type="module">
         $(document).ready(function() {
+            $.fn.DataTable.ext.pager.numbers_length = 5;
             $('#tabelanak').DataTable({
                 serverSide: true,
                 processing: true,
@@ -139,6 +140,25 @@
                     [10, 25, 50, 100, "All"],
                 ],
 
+            });
+
+            $(".datatable").on("click", ".btn-delete", function(e) {
+                e.preventDefault();
+
+                var form = $(this).closest("form");
+
+                Swal.fire({
+                    title: "Apakah Anda Yakin Menghapus Data " + "?",
+                    text: "Anda tidak akan dapat mengembalikannya!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "bg-primary",
+                    confirmButtonText: "Ya, hapus!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
             });
         });
     </script>

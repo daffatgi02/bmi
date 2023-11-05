@@ -34,33 +34,49 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 
 // Bidan
-Route::prefix('login')->middleware(['auth', 'bidan'])->group(function () {
-    // Bidan Controller
-    Route::resource('bidans', BidanController::class);
+Route::prefix('login')->middleware(['auth'])->group(function () {
+
+    // BIDAN
+    Route::middleware(['bidan'])->group(function () {
+        // Bidan Controller
+        Route::resource('bidans', BidanController::class);
 
 
-    // DataAnakController
-    Route::resource('danaks', DataAnakController::class);
-    Route::get('gettabelanak', [DataAnakController::class, 'getData'])->name('danaks.getData');
+        // DataAnakController
+        Route::resource('danaks', DataAnakController::class);
+        Route::get('gettabelanak', [DataAnakController::class, 'getData'])->name('danaks.getData');
+
+
+        // DatabulananController
+        Route::resource('dbulanans', DatabulananController::class);
+        Route::get('gettabelbulanan', [DatabulananController::class, 'getData'])->name('dbulanans.getData');
+
+
+        // DataPosyanduController
+        Route::resource('dposyandus', DataPosyanduController::class);
+        Route::get('gettabelposyandu', [DataPosyanduController::class, 'getData'])->name('danaks.getData');
 
 
 
-    // DatabulananController
-    Route::resource('dbulanans', DatabulananController::class);
+        // GrafikPerkembanganController
+        Route::resource('gperkembangans', GrafikPerkembanganController::class);
+    });
 
 
 
-    // DataPosyanduController
-    Route::resource('dposyandus', DataPosyanduController::class);
 
+    // KADER
+    Route::middleware(['kader'])->group(function () {
+        // Route kader
+        Route::resource('kaders', KaderController::class);
 
-
-    // GrafikPerkembanganController
-    Route::resource('gperkembangans', GrafikPerkembanganController::class);
+    });
 });
 
 
-// Kader
-Route::prefix('login')->middleware(['auth', 'kader'])->group(function () {
-    Route::resource('kaders', KaderController::class);
-});
+// // Kader
+// Route::prefix('login')->middleware(['auth', 'kader'])->group(function () {
+//     // Route kader
+//     Route::resource('kaders', KaderController::class);
+
+// });

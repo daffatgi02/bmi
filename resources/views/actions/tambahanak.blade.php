@@ -11,7 +11,7 @@
             <label for="floatingInput">Nama Anak:</label>
         </div>
         {{-- Select Jk --}}
-        <select class="form-select mb-3" aria-label="Default select example" name="jk" id="jk">
+        <select class="form-select mb-3" aria-label="Default select example" name="jk" id="jk" required>
             <option disabled value="" {{ old('jk') ? '' : 'selected' }}>Pilih Jenis Kelamin</option>
             <option value="L" {{ old('jk') === 'L' ? 'selected' : '' }}>Laki-Laki</option>
             <option value="P" {{ old('jk') === 'P' ? 'selected' : '' }}>Wanita</option>
@@ -33,7 +33,7 @@
         </div>
 
         {{-- Select Posyandu --}}
-        <select class="form-select mb-3" aria-label="Default select example" name="t_posyandu" id="t_posyandu">
+        <select class="form-select mb-3" aria-label="Default select example" name="t_posyandu" id="t_posyandu" required>
             <option disabled value="" {{ old('t_posyandu') ? '' : 'selected' }}>Pilih Posyandu</option>
             @foreach ($dposyandu->sortBy('nama_posyandu') as $data)
                 <option value="{{ $data->nama_posyandu }}"
@@ -48,10 +48,10 @@
         <hr>
         <div class="row d-flex justify-content-center">
             <div class="col-md-3 col-3 d-grid">
-                <button class="btn btn-success">Submit</button>
+                <button class="btn btn-success shadow">Simpan</button>
             </div>
             <div class="col-md-3 col-3 d-grid">
-                <a id="batal" class="btn btn-danger" data-bs-dismiss="modal">Batal</a>
+                <a id="batal" class="btn btn-danger shadow" data-bs-dismiss="modal">Batal</a>
             </div>
         </div>
     </form>

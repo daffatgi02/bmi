@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Danak;
+use App\Models\Dbulan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KaderController extends Controller
 {
@@ -13,7 +15,8 @@ class KaderController extends Controller
     public function index()
     {
         $danaks = Danak::all();
-        return view('kader.index', compact('danaks'));
+        $dbulans = Dbulan::all();
+        return view('kader.index', compact('danaks','dbulans'));
 
     }
 
@@ -30,7 +33,20 @@ class KaderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Buat objek Mahal baru berdasarkan data yang diterima
+        $dbulans = new Dbulan();
+        $dbulans->danaks_id = $request->danaks_id;
+        $dbulans->bb_anak = $request->bb_anak;
+        $dbulans->tb_anak = $request->tb_anak;
+
+        $dbulans->st_anak = $request->st_anak;
+
+        // Simpan objek Mahal ke dalam database
+        $dbulans->save();
+        Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
+
+        // Redirect ke halaman yang sesuai setelah penyimpanan data
+        return redirect()->route('kaders.index');
     }
 
     /**
