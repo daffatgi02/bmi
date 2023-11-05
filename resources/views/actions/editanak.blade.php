@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="umur" name="umur" placeholder="Masukkan Umur"
+                                <input type="text" class="form-control" id="umur" name="umur" placeholder="Masukkan Umur"
                                     value="{{ $danaks->umur }}" required>
                                 <label for="floatingInput">Umur:</label>
                             </div>

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Danak;
+use App\Models\Dbulan;
+use App\Models\Dposyandu;
 use Illuminate\Http\Request;
 
 class BidanController extends Controller
@@ -11,7 +14,10 @@ class BidanController extends Controller
      */
     public function index()
     {
-        return view('bidan.index');
+        $danaks = Danak::all();
+        $dbulans = Dbulan::all();
+        $dposyandus = Dposyandu::all();
+        return view('bidan.index', compact('danaks', 'dposyandus', 'dbulans'));
     }
 
     /**
