@@ -6,12 +6,12 @@
         <div class="content">
             <h1 class="m-3">Halaman Data Bulanan</h1>
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
+                <div class="row mt-4 justify-content-center">
+                    <div class="col-md-8 mb-5 d-flex">
                         <form action="{{ route('dbulanans.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card shadow">
-                                <div class="card-header bg-info text-white">
+                                <div class="card-header bg-danger text-white">
                                     <h3>Input Data</h3>
                                 </div>
 
@@ -23,8 +23,8 @@
                                             onclick="selectAllText(this);" onfocus="selectAllText(this);">
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-10">
-                                            <select class="form-select mb-3" size="7" id="danaks_id" name="danaks_id"
+                                        <div class="col-12">
+                                            <select class="form-select mb-2" size="7" id="danaks_id" name="danaks_id"
                                                 required>
                                                 <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2"
                                                     value="null" disabled>
@@ -32,31 +32,17 @@
                                                 </option>
 
                                                 @foreach ($danaks->sortBy('nama_anak') as $data)
-                                                    <option class="border border-dark-subtle mb-2 ps-2"
-                                                        value="{{ $data->id }}">
-                                                        - {{ $data->nama_anak }}
+                                                    <option
+                                                        class="border border-dark-subtle mb-2 ps-2 overflow-auto overflow-md-hidden"
+                                                        value="{{ $data->id }}" data-jk="{{ $data->jk }}"
+                                                        data-t_posyandu="{{ $data->t_posyandu }}">
+                                                        - {{ $data->nama_anak }} | {{ $data->t_posyandu }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-2 d-flex flex-md-column">
-                                            <div class="form-check">
-                                                <input class="form-check-input border border-dark-subtle" type="radio"
-                                                    name="flexRadioDefault" id="c_jkl" required>
-                                                <label class="form-check-label" for="c_jkl">
-                                                    Laki-Laki
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input border border-dark-subtle" type="radio"
-                                                    name="flexRadioDefault" id="c_jkw" required>
-                                                <label class="form-check-label" for="c_jkw">
-                                                    Wanita
-                                                </label>
-                                            </div>
-                                        </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mt-2    ">
                                         <div class="col-6">
                                             <div class="form-floating mb-3">
                                                 <input type="number" class="form-control border border-dark-subtle"
@@ -80,7 +66,7 @@
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control border-dark-subtle" id="st_anak"
                                                     name="st_anak" placeholder="Status Anak" required readonly
-                                                    value="- Silahkan Pilih Jenis Kelamin">
+                                                    value="- Silahkan Masukan Data">
                                                 <label for="st_anak">Status Aanak</label>
                                             </div>
                                         </div>
@@ -99,14 +85,19 @@
                                 </div>
                             </div>
                         </form>
+                        <div>
+                            <a href="#totabel" class="btn btn-info ms-2 d-md-block d-none"><i class="bi bi-table"></i>
+                                Tabel</a>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row mt-5">
+
+
                     <div class="col-12">
+                        <h2 class="d-block mt-2" id="totabel"> Tabel Bulanan:</h2>
                         <div class="table-responsive border border-dark-subtle p-4 shadow rounded-3">
                             <table class="table table-striped table-bordered border datatable" id="tabelbulanan">
-                                <thead class="fw-bold table-info ">
+                                <thead class="fw-bold table-danger ">
                                     <tr>
                                         <th class="text-center">id</th>
                                         <th class="text-center">No.</th>
@@ -121,144 +112,134 @@
                             </table>
                         </div>
                     </div>
+
                 </div>
-            </div>
 
-            {{-- Script --}}
-            <script>
-                // Search
-                document.addEventListener("DOMContentLoaded", function() {
-                    const searchInput = document.getElementById("searchInput");
-                    const danaksSelect = document.getElementById("danaks_id");
 
-                    // Simpan opsi "Silahkan Pilih Nama" ke dalam variabel
-                    const placeholderOption = danaksSelect.querySelector('option[value="null"]');
+                {{-- Script --}}
+                <script>
+                    // Search
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const searchInput = document.getElementById("searchInput");
+                        const danaksSelect = document.getElementById("danaks_id");
 
-                    // Membuat daftar semua opsi (kecuali opsi "Silahkan Pilih Nama")
-                    const options = Array.from(danaksSelect.options).filter(option => option.value !== "null");
+                        // Simpan opsi "Silahkan Pilih Nama" ke dalam variabel
+                        const placeholderOption = danaksSelect.querySelector('option[value="null"]');
 
-                    // Menambahkan event listener untuk input pencarian
-                    searchInput.addEventListener("input", function() {
-                        const searchText = searchInput.value.toLowerCase();
-                        const filteredOptions = options.filter(option => option.textContent.toLowerCase().includes(
-                            searchText));
+                        // Membuat daftar semua opsi (kecuali opsi "Silahkan Pilih Nama")
+                        const options = Array.from(danaksSelect.options).filter(option => option.value !== "null");
 
-                        // Mengosongkan dropdown
-                        danaksSelect.innerHTML = '';
+                        // Menambahkan event listener untuk input pencarian
+                        searchInput.addEventListener("input", function() {
+                            const searchText = searchInput.value.toLowerCase();
+                            const filteredOptions = options.filter(option => option.textContent.toLowerCase().includes(
+                                searchText));
 
-                        // Tambahkan kembali opsi "Silahkan Pilih Nama"
-                        danaksSelect.appendChild(placeholderOption);
+                            // Mengosongkan dropdown
+                            danaksSelect.innerHTML = '';
 
-                        // Menampilkan opsi yang sesuai
-                        filteredOptions.forEach(option => {
-                            danaksSelect.appendChild(option.cloneNode(true));
+                            // Tambahkan kembali opsi "Silahkan Pilih Nama"
+                            danaksSelect.appendChild(placeholderOption);
+
+                            // Menampilkan opsi yang sesuai
+                            filteredOptions.forEach(option => {
+                                danaksSelect.appendChild(option.cloneNode(true));
+                            });
                         });
                     });
-                });
 
-                // Reset
-                document.addEventListener("DOMContentLoaded", function() {
-                    // Temukan elemen tombol reset
-                    let resetButton = document.getElementById("reset");
+                    // Reset
+                    document.addEventListener("DOMContentLoaded", function() {
+                        // Temukan elemen tombol reset
+                        let resetButton = document.getElementById("reset");
 
-                    // Temukan semua elemen input dalam formulir yang ingin di-reset, except for the search input
-                    let inputElements = document.querySelectorAll('input[type="text"], input[type="number"]');
-                    // Exclude the search input from the list of input elements
-                    let searchInput = document.getElementById("searchInput");
+                        // Temukan semua elemen input dalam formulir yang ingin di-reset, except for the search input
+                        let inputElements = document.querySelectorAll('input[type="text"], input[type="number"]');
+                        // Exclude the search input from the list of input elements
+                        let searchInput = document.getElementById("searchInput");
 
-                    // Temukan elemen select yang ingin di-reset
-                    let danaksSelect = document.getElementById("danaks_id");
+                        // Temukan elemen select yang ingin di-reset
+                        let danaksSelect = document.getElementById("danaks_id");
 
-                    // Temukan semua elemen radio
-                    let radioElements = document.querySelectorAll('input[type="radio"]');
+                        // Temukan semua elemen radio
+                        let radioElements = document.querySelectorAll('input[type="radio"]');
 
-                    // Simpan indeks pilihan awal
-                    let initialSelectedIndex = danaksSelect.selectedIndex;
+                        // Simpan indeks pilihan awal
+                        let initialSelectedIndex = danaksSelect.selectedIndex;
 
-                    // Tambahkan event listener untuk tombol reset
-                    resetButton.addEventListener("click", function() {
-                        // Loop melalalui semua elemen input kecuali search input dan reset nilainya
-                        inputElements.forEach(function(input) {
-                            if (input !== searchInput) {
-                                if (input.type === "text") {
-                                    input.value = "- Silahkan Pilih Jenis Kelamin";
-                                } else if (input.type === "number") {
-                                    input.value = 0;
+                        // Tambahkan event listener untuk tombol reset
+                        resetButton.addEventListener("click", function() {
+                            // Loop melalalui semua elemen input kecuali search input dan reset nilainya
+                            inputElements.forEach(function(input) {
+                                if (input !== searchInput) {
+                                    if (input.type === "text") {
+                                        input.value = "- Silahkan Pilih Jenis Kelamin";
+                                    } else if (input.type === "number") {
+                                        input.value = 0;
+                                    }
+                                }
+                            });
+
+                            // Reset pilihan pada elemen select ke opsi pertama (indeks 0)
+                            danaksSelect.selectedIndex = initialSelectedIndex;
+
+                            // Uncheck semua radio buttons
+                            radioElements.forEach(function(radio) {
+                                radio.checked = false;
+                            });
+                        });
+                    });
+
+
+                    // Stautus
+                    // Ambil elemen input bb_anak, tb_anak, dan st_anak
+                    let bb_anakInput = document.getElementById('bb_anak');
+                    let tb_anakInput = document.getElementById('tb_anak');
+                    let st_anakInput = document.getElementById('st_anak');
+                    let danaksId = document.getElementById('danaks_id');
+
+                    // Tambahkan event listener untuk perubahan dropdown
+                    danaksId.addEventListener('change', updateStatusAnak);
+                    bb_anakInput.addEventListener('input', updateStatusAnak);
+                    tb_anakInput.addEventListener('input', updateStatusAnak);
+
+                    function updateStatusAnak() {
+                        let selectedOption = danaksId.options[danaksId.selectedIndex];
+                        let jkValue = selectedOption.getAttribute('data-jk');
+                        let tPosyandu = selectedOption.getAttribute('data-t_posyandu');
+
+                        let bb_anakValue = parseFloat(bb_anakInput.value);
+                        let tb_anakValue = parseFloat(tb_anakInput.value);
+
+                        if (!isNaN(bb_anakValue) && !isNaN(tb_anakValue)) {
+                            let st_anakValue = bb_anakValue + tb_anakValue;
+
+                            if (jkValue === 'L') {
+                                if (st_anakValue <= 10) {
+                                    st_anakInput.value = "Stunting";
+                                } else {
+                                    st_anakInput.value = "Tidak Stunting";
+                                }
+                            } else if (jkValue === 'P') {
+                                if (st_anakValue <= 10) {
+                                    st_anakInput.value = "Tidak Stunting";
+                                } else {
+                                    st_anakInput.value = "Stunting";
                                 }
                             }
-                        });
-
-                        // Reset pilihan pada elemen select ke opsi pertama (indeks 0)
-                        danaksSelect.selectedIndex = initialSelectedIndex;
-
-                        // Uncheck semua radio buttons
-                        radioElements.forEach(function(radio) {
-                            radio.checked = false;
-                        });
-                    });
-                });
-
-
-                // Stautus
-                // Ambil elemen input bb_anak, tb_anak, dan st_anak
-                let bb_anakInput = document.getElementById('bb_anak');
-                let tb_anakInput = document.getElementById('tb_anak');
-                let st_anakInput = document.getElementById('st_anak');
-                let radioJkl = document.getElementById('c_jkl');
-                let radioJkw = document.getElementById('c_jkw');
-
-                // Tambahkan event listener untuk input bb_anak
-                bb_anakInput.addEventListener('input', updateStatusAnak);
-
-                // Tambahkan event listener untuk input tb_anak
-                tb_anakInput.addEventListener('input', updateStatusAnak);
-
-                // Tambahkan event listener untuk radio "Laki-Laki" (c_jkl)
-                radioJkl.addEventListener('change', updateStatusAnak);
-
-                // Tambahkan event listener untuk radio "Wanita" (c_jkw)
-                radioJkw.addEventListener('change', updateStatusAnak);
-
-                // Fungsi untuk mengupdate nilai st_anak
-                function updateStatusAnak() {
-                    // Ambil nilai dari bb_anak dan tb_anak
-                    let bb_anakValue = parseFloat(bb_anakInput.value);
-                    let tb_anakValue = parseFloat(tb_anakInput.value);
-
-                    // Periksa apakah kedua nilai adalah angka yang valid
-                    if (!isNaN(bb_anakValue) && !isNaN(tb_anakValue)) {
-                        // Hitung hasil dari bb_anak + tb_anak
-                        let st_anakValue = bb_anakValue + tb_anakValue;
-
-                        // Periksa radio button yang terpilih
-                        if (radioJkl.checked) {
-                            // Jika "Laki-Laki" terpilih
-                            if (st_anakValue <= 10) {
-                                st_anakInput.value = "Stunting";
-                            } else {
-                                st_anakInput.value = "Tidak Stunting";
-                            }
-                        } else if (radioJkw.checked) {
-                            // Jika "Wanita" terpilih
-                            if (st_anakValue <= 10) {
-                                st_anakInput.value = "Tidak Stunting";
-                            } else {
-                                st_anakInput.value = "Stunting";
-                            }
+                        } else {
+                            st_anakInput.value = '- Inputan Tidak Valid';
                         }
-                    } else {
-                        // Jika salah satu nilai tidak valid, atur nilai st_anak ke 0
-                        st_anakInput.value = 0;
                     }
-                }
 
 
-                // Select
-                function selectAllText(input) {
-                    input.select();
-                };
-            </script>
-        </div>
+
+                    // Select
+                    function selectAllText(input) {
+                        input.select();
+                    };
+                </script>
+            </div>
     </section>
 
     {{-- PESAN ERROR --}}
@@ -298,28 +279,35 @@
                         data: "danaks.nama_anak",
                         name: "danaks.nama_anak",
                         className: 'align-middle',
+                        width: "25%",
 
                     },
                     {
                         data: "danaks.jk",
                         name: "danaks.jk",
                         className: 'text-center align-middle',
-                        width: "5%",
+                        width: "3%",
                     },
                     {
                         data: "danaks.umur",
                         name: "danaks.umur",
                         className: 'text-center align-middle',
                         width: "10%",
-                        // render: function(data, type, row, meta) {
-                        //     return data + ' Tahun';
-                        // }
                     },
                     {
                         data: "st_anak",
                         name: "st_anak",
                         className: 'text-center align-middle',
                         width: "15%",
+                        render: function(data, type, row, meta) {
+                            if (data === 'Tidak Stunting') {
+                                return '<span style="color: white; padding:8px; background-color:green; border-radius:8px">' + data + '</span>';
+                            } else if (data === 'Stunting') {
+                                return '<span style="color: white; padding:8px; background-color:red; border-radius:8px">   ' + data + '</span>';
+                            } else {
+                                return data;
+                            }
+                        },
                     },
                     {
                         data: "created_at",
@@ -353,8 +341,8 @@
                     [0, "desc"]
                 ],
                 lengthMenu: [
-                    [10, 25, 50, 100, -1],
-                    [10, 25, 50, 100, "All"],
+                    [25, 50, 100, -1],
+                    [25, 50, 100, "All"],
                 ],
 
             });

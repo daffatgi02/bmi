@@ -20,6 +20,8 @@
                             </div>
 
                             {{-- Select Jk --}}
+                            <label for="jk" class="mb-2 fw-bold">Jenis Kelamin:</label>
+
                             <select class="form-select mb-3" aria-label="Default select example" name="jk" id="jk">
                                 <option disabled value="" {{ old('jk', $danaks->jk) ? '' : 'selected' }}>Pilih Jenis Kelamin
                                 </option>
@@ -33,14 +35,15 @@
                                 <label for= "floatingInput">Tempat Lahir:</label>
                             </div>
 
-                            <div class="form-floating mb-3">
+                            <div class="mb-3">
+                                <label for="tanggal_anak" class="mb-2 fw-bold">Tanggal Lahir:</label>
                                 <input type="date" class="form-control" id="tanggal_anak" name="tanggal_lahir"
                                     value="{{ $danaks->tanggal_lahir }}" required>
                             </div>
 
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="umur" name="umur" placeholder="Masukkan Umur"
-                                    value="{{ $danaks->umur }}" required>
+                                    value="{{ $danaks->umur }}" required readonly>
                                 <label for="floatingInput">Umur:</label>
                             </div>
 

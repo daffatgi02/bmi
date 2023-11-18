@@ -17,7 +17,7 @@
                     <div class="col-12">
                         <div class="table-responsive border border-dark-subtle p-4 shadow rounded-3">
                             <table class="table table-striped table-bordered border datatable" id="tabelposyandu">
-                                <thead class="fw-bold table-info ">
+                                <thead class="fw-bold table-warning ">
                                     <tr>
                                         <th class="text-center">id</th>
                                         <th class="text-center">No.</th>
@@ -51,10 +51,12 @@
 @endsection
 
 @push('scripts')
+
     <script type="module">
         $(document).ready(function() {
             $.fn.DataTable.ext.pager.numbers_length = 5;
             $('#tabelposyandu').DataTable({
+                responsive:true,
                 serverSide: true,
                 processing: true,
                 ajax: "gettabelposyandu",

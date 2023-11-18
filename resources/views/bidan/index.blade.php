@@ -8,7 +8,7 @@
             <div class="container mt-3 pt-3">
                 <div class="row ">
                     {{-- Total Anak --}}
-                    <div class="col-md-3 col-12 mb-3">
+                    <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
                         <div class="card" style="width: 18rem; max-width:18rem; height: 15rem; max-height:15rem;">
                             <div class="card-body bg-info">
                                 <h5 class="card-title fw-bold">Total Anak</h5>
@@ -28,7 +28,7 @@
                     </div>
 
                     {{-- Total Posyandu --}}
-                    <div class="col-md-3 col-12 mb-3">
+                    <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
                         <div class="card" style="width: 18rem; max-width:18rem; height: 15rem; max-height:15rem;">
                             <div class="card-body bg-warning">
                                 <h5 class="card-title fw-bold">Total Posyandu</h5>
@@ -42,9 +42,9 @@
                     </div>
 
 
-                    <div class="col-md-3 col-12 mb-3">
-                        <div class="card" style="width: 18rem; max-width:18rem; height: 15rem; max-height:15rem;">
-                            <div class="card-body bg-danger">
+                    <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
+                        <div class="card " style="width: 18rem; max-width:18rem; height: 15rem; max-height:15rem;">
+                            <div class="card-body bg-danger ">
                                 <h5 class="card-title fw-bold">Total Pendataan</h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary mb-3">Pada Posyandu Kelurahan Japan</h6>
                                 <div class="d-flex">
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-12 mb-3">
+                    <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
                         <div class="card" style="width: 18rem; max-width:18rem; height: 15rem; max-height:15rem;">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">Total Anak</h5>
