@@ -7,7 +7,7 @@
                 <form action="{{ route('kaders.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card shadow">
-                        <div class="card-header bg-info text-white">
+                        <div class="card-header bg-danger text-white">
                             <h3>Input Data</h3>
                         </div>
 
@@ -17,27 +17,34 @@
                                 <input type="text" id="searchInput" class="form-control mb-3 border border-dark-subtle"
                                     placeholder="Cari Nama" onclick="selectAllText(this);" onfocus="selectAllText(this);">
                             </div>
-
-                            <select class="form-select mb-3" size="7" id="danaks_id" name="danaks_id" required>
-                                <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2" value="null"
-                                    disabled>
-                                    Silahkan Pilih Nama
-                                </option>
-
-                                @foreach ($danaks->sortBy('nama_anak') as $data)
-                                    <option class="border border-dark-subtle mb-2 ps-2" value="{{ $data->id }}">
-                                        - {{ $data->nama_anak }}
-                                    </option>
-                                @endforeach
-
-                            </select>
                             <div class="row">
+                                <div class="col-12">
+                                    <select class="form-select mb-2" size="7" id="danaks_id" name="danaks_id"
+                                        required>
+                                        <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2"
+                                            value="null" disabled>
+                                            Silahkan Pilih Nama
+                                        </option>
+
+                                        @foreach ($danaks->sortBy('nama_anak') as $data)
+                                            <option
+                                                class="border border-dark-subtle mb-2 ps-2 overflow-auto overflow-md-hidden"
+                                                value="{{ $data->id }}" data-jk="{{ $data->jk }}"
+                                                data-t_posyandu="{{ $data->t_posyandu }}">
+                                                - {{ $data->nama_anak }} | {{ $data->t_posyandu }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
                                 <div class="col-6">
                                     <div class="form-floating mb-3">
                                         <input type="number" class="form-control border border-dark-subtle" id="bb_anak"
                                             name="bb_anak" placeholder="Masukan Berat Badan (KG)" value="0" required
                                             onclick="selectAllText(this);" onfocus="selectAllText(this);">
-                                        <label for="bb_anak">Berat Badan (KG)</label>
+                                        <label class="d-md-block d-none" for="bb_anak">Berat Badan (KG)</label>
+                                        <label class="d-md-none d-block" for="bb_anak">Berat Badan</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -45,13 +52,15 @@
                                         <input type="number" class="form-control border-dark-subtle" id="tb_anak"
                                             name="tb_anak" placeholder="Masukan Tinggi Badan (KG)" value="0" required
                                             onclick="selectAllText(this);" onfocus="selectAllText(this);">
-                                        <label for="tb_anak">Tinggi Badan (CM)</label>
+                                        <label class="d-md-block d-none" for="tb_anak">Tinggi Badan (CM)</label>
+                                        <label class="d-md-none d-block" for="tb_anak">Tinggi Badan</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control border-dark-subtle" id="st_anak"
-                                            name="st_anak" placeholder="Status Anak" required readonly value="">
+                                            name="st_anak" placeholder="Status Anak" required readonly
+                                            value="- Silahkan Masukan Data">
                                         <label for="st_anak">Status Aanak</label>
                                     </div>
                                 </div>
@@ -60,11 +69,11 @@
 
                             {{-- Button --}}
                             <div class="row d-flex justify-content-center">
-                                <div class="col-md-3 col-3 d-grid">
-                                    <button class="btn btn-success">Submit</button>
+                                <div class="col-md-3 col-4 d-grid">
+                                    <button class="btn btn-success shadow">Submit</button>
                                 </div>
-                                <div class="col-md-3 col-3 d-grid">
-                                    <a id="reset" class="btn btn-danger">Reset</a>
+                                <div class="col-md-3 col-4 d-grid">
+                                    <a id="reset" class="btn btn-danger shadow">Reset</a>
                                 </div>
                             </div>
                         </div>
@@ -73,6 +82,7 @@
             </div>
         </div>
     </div>
+    {{-- Script --}}
     <script>
         // Search
         document.addEventListener("DOMContentLoaded", function() {
@@ -117,6 +127,9 @@
             // Temukan elemen select yang ingin di-reset
             let danaksSelect = document.getElementById("danaks_id");
 
+            // Temukan semua elemen radio
+            let radioElements = document.querySelectorAll('input[type="radio"]');
+
             // Simpan indeks pilihan awal
             let initialSelectedIndex = danaksSelect.selectedIndex;
 
@@ -126,7 +139,7 @@
                 inputElements.forEach(function(input) {
                     if (input !== searchInput) {
                         if (input.type === "text") {
-                            input.value = "-";
+                            input.value = "- Silahkan Pilih Jenis Kelamin";
                         } else if (input.type === "number") {
                             input.value = 0;
                         }
@@ -135,6 +148,11 @@
 
                 // Reset pilihan pada elemen select ke opsi pertama (indeks 0)
                 danaksSelect.selectedIndex = initialSelectedIndex;
+
+                // Uncheck semua radio buttons
+                radioElements.forEach(function(radio) {
+                    radio.checked = false;
+                });
             });
         });
 
@@ -144,31 +162,42 @@
         let bb_anakInput = document.getElementById('bb_anak');
         let tb_anakInput = document.getElementById('tb_anak');
         let st_anakInput = document.getElementById('st_anak');
+        let danaksId = document.getElementById('danaks_id');
 
-        // Tambahkan event listener untuk input bb_anak
+        // Tambahkan event listener untuk perubahan dropdown
+        danaksId.addEventListener('change', updateStatusAnak);
         bb_anakInput.addEventListener('input', updateStatusAnak);
-
-        // Tambahkan event listener untuk input tb_anak
         tb_anakInput.addEventListener('input', updateStatusAnak);
 
-        // Fungsi untuk mengupdate nilai st_anak
         function updateStatusAnak() {
-            // Ambil nilai dari bb_anak dan tb_anak
+            let selectedOption = danaksId.options[danaksId.selectedIndex];
+            let jkValue = selectedOption.getAttribute('data-jk');
+            let tPosyandu = selectedOption.getAttribute('data-t_posyandu');
+
             let bb_anakValue = parseFloat(bb_anakInput.value);
             let tb_anakValue = parseFloat(tb_anakInput.value);
 
-            // Periksa apakah kedua nilai adalah angka yang valid
             if (!isNaN(bb_anakValue) && !isNaN(tb_anakValue)) {
-                // Hitung hasil dari bb_anak + tb_anak
                 let st_anakValue = bb_anakValue + tb_anakValue;
 
-                // Masukkan hasil perhitungan ke dalam input st_anak
-                st_anakInput.value = st_anakValue;
+                if (jkValue === 'L') {
+                    if (st_anakValue <= 10) {
+                        st_anakInput.value = "Stunting";
+                    } else {
+                        st_anakInput.value = "Tidak Stunting";
+                    }
+                } else if (jkValue === 'P') {
+                    if (st_anakValue <= 10) {
+                        st_anakInput.value = "Tidak Stunting";
+                    } else {
+                        st_anakInput.value = "Stunting";
+                    }
+                }
             } else {
-                // Jika salah satu nilai tidak valid, atur nilai st_anak ke 0
-                st_anakInput.value = 0;
+                st_anakInput.value = '- Inputan Tidak Valid';
             }
-        };
+        }
+
 
         // Select
         function selectAllText(input) {

@@ -106,14 +106,27 @@
                         name: "umur",
                         className: 'text-center align-middle',
                         width: "10%",
-                        // render: function(data, type, row, meta) {
-                        //     return data + ' Tahun';
-                        // }
+
                     },
                     {
                         data: "tanggal_lahir",
                         name: "tanggal_lahir",
                         className: 'text-center align-middle',
+                        render: function(data) {
+                            // Konversi data tanggal dari format default (biasanya ISO 8601) ke "DD-MM-YYYY"
+                            if (data) {
+                                var date = new Date(data);
+                                var day = date.getDate();
+                                var month = date.getMonth() +
+                                    1; // Perlu ditambahkan 1 karena Januari dimulai dari 0
+                                var year = date.getFullYear();
+                                // Format tanggal dalam "DD-MM-YYYY"
+                                return day.toString().padStart(2, '0') + '-' + month.toString()
+                                    .padStart(2, '0') + '-' + year;
+                            } else {
+                                return '';
+                            }
+                        },
 
                     },
                     {

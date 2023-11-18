@@ -30,7 +30,7 @@
                 required>
 
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-8">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control border border-dark-subtle" id="umur" name="umur"
@@ -54,7 +54,7 @@
                     </label>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- Select Posyandu --}}
         <select class="form-select mb-3 border border-dark-subtle" aria-label="Default select example" name="t_posyandu"

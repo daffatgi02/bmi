@@ -46,12 +46,22 @@ class DataAnakController extends Controller
      */
     public function store(Request $request)
     {
-        // Buat objek Mahal baru berdasarkan data yang diterima
         $danak = new Danak;
         $danak->nama_anak = $request->nama_anak;
         $danak->tempat_lahir = $request->tempat_lahir;
         $danak->tanggal_lahir = $request->tanggal_lahir;
-        $danak->umur = $request->umur;
+
+        $dateOfBirth = \Carbon\Carbon::parse($request->tanggal_lahir);
+        $now = \Carbon\Carbon::now();
+        $umur = $now->diff($dateOfBirth);
+
+        if ($umur->y < 1) {
+            $umurTotal = $umur->m . " bulan";
+        } else {
+            $umurTotal = $umur->y . " tahun";
+        }
+
+        $danak->umur = $umurTotal;
         $danak->jk = $request->jk;
         $danak->t_posyandu = $request->t_posyandu;
 
@@ -96,7 +106,18 @@ class DataAnakController extends Controller
         $danak->nama_anak = $request->nama_anak;
         $danak->tempat_lahir = $request->tempat_lahir;
         $danak->tanggal_lahir = $request->tanggal_lahir;
-        $danak->umur = $request->umur;
+
+        $dateOfBirth = \Carbon\Carbon::parse($request->tanggal_lahir);
+        $now = \Carbon\Carbon::now();
+        $umur = $now->diff($dateOfBirth);
+
+        if ($umur->y < 1) {
+            $umurTotal = $umur->m . " bulan";
+        } else {
+            $umurTotal = $umur->y . " tahun";
+        }
+
+        $danak->umur = $umurTotal;
         $danak->jk = $request->jk;
         $danak->t_posyandu = $request->t_posyandu;
 

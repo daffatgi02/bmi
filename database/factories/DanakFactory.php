@@ -16,11 +16,27 @@ class DanakFactory extends Factory
      */
     public function definition(): array
     {
+        $maxYears = 10; // Umur maksimal dalam tahun
+        $randomYears = $this->faker->numberBetween(1, $maxYears); // Umur antara 1 hingga 10 tahun
+        $maxMonths = $maxYears * 12; // Konversi tahun ke bulan untuk batasan maksimal
+
+        $randomMonths = $this->faker->numberBetween(1, $maxMonths); // Umur dalam bulan antara 1 hingga 120 (10 tahun)
+
+        // Jika umur yang di-generate melebihi 10 tahun, atur kembali umur ke 10 tahun dalam bulan
+        if ($randomMonths > $maxMonths) {
+            $randomMonths = $maxMonths;
+        }
+
+        $umurText = ($randomMonths < 12) ? $randomMonths . " bulan" : floor($randomMonths / 12) . " tahun";
+
+        // Tanggal lahir yang akan di-generate akan menjadi hari ini dikurangi dengan umur dalam bulan
+        $randomBirthDate = $this->faker->dateTimeThisDecade('-' . $randomMonths . ' months');
+
         return [
             'nama_anak' => $this->faker->name(),
             'tempat_lahir' => $this->faker->city(),
-            'tanggal_lahir' => $this->faker->date(),
-            'umur' => $this->faker->numberBetween(1, 10),
+            'tanggal_lahir' => $randomBirthDate->format('Y-m-d'), // Format tanggal lahir
+            'umur' => $umurText, // Umur dalam bulan atau tahun
             'jk' => $this->generateGender(),
             't_posyandu' => $this->faker->company('hospital'), // Generates a random company name
         ];
