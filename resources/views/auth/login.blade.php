@@ -76,11 +76,14 @@
                         <div class="mt-5 mb-5 ms-3">
                             <h4>
                                 Anda Sudah Login, Silahkan
-                                 <a href="{{route('bidans.index')}}" class="btn btn-primary ms-2 mt-2"> Masuk </a>
+                                <a href="{{ route('bidans.index') }}" class="btn btn-primary ms-2 mt-2"> Masuk </a>
                             </h4>
                         </div>
                     @endguest
                 </div>
+                <a href="{{route('antrians.index')}}" class="btn btn-success mt-3">
+                    <i class="bi bi-hourglass-split me-2"></i>Daftar Antrian
+                </a>
             </div>
         </div>
     </div>

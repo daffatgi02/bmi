@@ -15,19 +15,18 @@
                         </button>
                     </div>
                     <div class="col-12">
-                        <div class="table-responsive border border-dark-subtle p-4 shadow rounded-3">
-                            <table class="table table-striped table-bordered border datatable" id="tabelposyandu">
-                                <thead class="fw-bold table-warning ">
-                                    <tr>
-                                        <th class="text-center">id</th>
-                                        <th class="text-center">No.</th>
-                                        <th class="text-center">Nama Posyandu</th>
-                                        <th class="text-center">Alamat Posyandu</th>
-                                        <th class="text-center">Opsi</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                        <table class="table table-striped table-hover table-bordered datatable shadow" id="tabelposyandu" style="width: 100%">
+
+                            <thead class="fw-bold table-warning ">
+                                <tr>
+                                    <th class="text-center">id</th>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center w-50">Nama Posyandu</th>
+                                    <th class="text-center w-50">Alamat Posyandu</th>
+                                    <th class="text-center">Opsi</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -41,7 +40,6 @@
             </div>
         </div>
     </div>
-
     {{-- PESAN ERROR --}}
     @if (session('error'))
         <script>
@@ -51,12 +49,11 @@
 @endsection
 
 @push('scripts')
-
     <script type="module">
         $(document).ready(function() {
             $.fn.DataTable.ext.pager.numbers_length = 5;
-            $('#tabelposyandu').DataTable({
-                responsive:true,
+            var dataTable = new DataTable('#tabelposyandu', {
+                responsive: true,
                 serverSide: true,
                 processing: true,
                 ajax: "gettabelposyandu",
@@ -93,9 +90,7 @@
                         name: "actions",
                         orderable: false,
                         searchable: false,
-                        className: 'align-middle text-center',
-                        width: "5%"
-
+                        className: 'align-middle'
                     },
                 ],
                 order: [
@@ -126,6 +121,5 @@
                 });
             });
         });
-
     </script>
 @endpush
