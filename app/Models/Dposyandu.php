@@ -12,4 +12,8 @@ class Dposyandu extends Model
     {
         return $this->hasMany(Danak::class);
     }
+    public function dantrians()
+    {
+        return $this->hasMany(Dantrian::class);
+    }
 }

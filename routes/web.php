@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AntrianController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BidanController;
 use App\Http\Controllers\DataAnakController;
@@ -33,7 +34,7 @@ Auth::routes();
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 
-// Bidan
+// Controller Login
 Route::prefix('login')->middleware(['auth'])->group(function () {
 
     // BIDAN
@@ -54,7 +55,7 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
 
         // DataPosyanduController
         Route::resource('dposyandus', DataPosyanduController::class);
-        Route::get('gettabelposyandu', [DataPosyanduController::class, 'getData'])->name('danaks.getData');
+        Route::get('gettabelposyandu', [DataPosyanduController::class, 'getData'])->name('dposyandus.getData');
 
 
 
@@ -74,9 +75,8 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
 });
 
 
-// // Kader
-// Route::prefix('login')->middleware(['auth', 'kader'])->group(function () {
-//     // Route kader
-//     Route::resource('kaders', KaderController::class);
 
-// });
+// Antrian
+Route::resource('antrians', AntrianController::class);
+Route::get('gettabelantrian', [AntrianController::class, 'getData'])->name('antrians.getData');
+

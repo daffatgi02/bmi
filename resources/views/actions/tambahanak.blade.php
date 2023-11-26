@@ -73,10 +73,10 @@
         <hr>
         <div class="row d-flex justify-content-center">
             <div class="col-md-3 col-3 d-grid">
-                <button class="btn btn-success shadow">Simpan</button>
+                <a id="batal" class="btn btn-danger shadow" data-bs-dismiss="modal">Batal</a>
             </div>
             <div class="col-md-3 col-3 d-grid">
-                <a id="batal" class="btn btn-danger shadow" data-bs-dismiss="modal">Batal</a>
+                <button class="btn btn-success shadow">Simpan</button>
             </div>
         </div>
     </form>

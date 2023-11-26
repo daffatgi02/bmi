@@ -6,13 +6,13 @@
     <form action="{{ route('dposyandus.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-floating mb-3">
-            <input type="text" class="form-control border border-dark-subtle" id="nama_posyandu" name="nama_posyandu" placeholder="Masukkan Nama Posyandu"
-                required>
+            <input type="text" class="form-control border border-dark-subtle" id="nama_posyandu" name="nama_posyandu"
+                placeholder="Masukkan Nama Posyandu" required>
             <label for="floatingInput">Nama Posyandu:</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control border border-dark-subtle" id="lokasi_posyandu" name="lokasi_posyandu" placeholder="Masukkan Nama Posyandu"
-                required>
+            <input type="text" class="form-control border border-dark-subtle" id="lokasi_posyandu"
+                name="lokasi_posyandu" placeholder="Masukkan Nama Posyandu" required>
             <label for="floatingInput">Lokasi Posyandu:</label>
         </div>
 
@@ -22,10 +22,10 @@
         <hr>
         <div class="row d-flex justify-content-center">
             <div class="col-md-3 col-3 d-grid">
-                <button class="btn btn-success shadow">Simpan</button>
+                <a id="batal" class="btn btn-danger shadow" data-bs-dismiss="modal">Batal</a>
             </div>
             <div class="col-md-3 col-3 d-grid">
-                <a id="batal" class="btn btn-danger shadow" data-bs-dismiss="modal">Batal</a>
+                <button class="btn btn-success shadow">Simpan</button>
             </div>
         </div>
     </form>

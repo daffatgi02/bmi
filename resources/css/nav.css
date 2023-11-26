@@ -215,10 +215,13 @@
 }
 .sidebar.open ~ .home-section {
   left: 280px;
-  width: calc(100% - 280px);
+  width: calc(99% - 280px);
 }
 @media (max-width: 420px) {
   .sidebar li .tooltip {
+    display: none;
+  }
+  .sidebar #btn {
     display: none;
   }
 }

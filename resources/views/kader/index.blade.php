@@ -28,7 +28,7 @@
 
                                         @foreach ($danaks->sortBy('nama_anak') as $data)
                                             <option
-                                                class="border border-dark-subtle mb-2 ps-2 overflow-auto overflow-md-hidden"
+                                                class="border border-dark-subtle mb-2 ps-2 overflow-auto overflow-md-hidden px-2"
                                                 value="{{ $data->id }}" data-jk="{{ $data->jk }}"
                                                 data-t_posyandu="{{ $data->t_posyandu }}">
                                                 - {{ $data->nama_anak }} | {{ $data->t_posyandu }}
@@ -70,10 +70,10 @@
                             {{-- Button --}}
                             <div class="row d-flex justify-content-center">
                                 <div class="col-md-3 col-4 d-grid">
-                                    <button class="btn btn-success shadow">Submit</button>
+                                    <a id="reset" class="btn btn-danger shadow">Reset</a>
                                 </div>
                                 <div class="col-md-3 col-4 d-grid">
-                                    <a id="reset" class="btn btn-danger shadow">Reset</a>
+                                    <button class="btn btn-success shadow">Submit</button>
                                 </div>
                             </div>
                         </div>

@@ -76,10 +76,10 @@
                                     {{-- Button --}}
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-md-3 col-4 d-grid">
-                                            <button class="btn btn-success shadow">Submit</button>
+                                            <a id="reset" class="btn btn-danger shadow">Reset</a>
                                         </div>
                                         <div class="col-md-3 col-4 d-grid">
-                                            <a id="reset" class="btn btn-danger shadow">Reset</a>
+                                            <button class="btn btn-success shadow">Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -95,24 +95,21 @@
 
                     <div class="col-12">
                         <h2 class="d-block mt-2" id="totabel"> Tabel Bulanan:</h2>
-                        <div class="table-responsive border border-dark-subtle p-4 shadow rounded-3">
-                            <table class="table table-striped table-bordered border datatable" id="tabelbulanan">
-                                <thead class="fw-bold table-danger ">
-                                    <tr>
-                                        <th class="text-center">id</th>
-                                        <th class="text-center">No.</th>
-                                        <th class="text-center">Nama</th>
-                                        <th class="text-center">Jenis Kelamin</th>
-                                        <th class="text-center">Umur</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">Tanggal Priksa</th>
-                                        <th class="text-center">Posyandu</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                        <table class="table table-striped table-hover table-bordered datatable shadow" id="tabelbulanan" style="width: 100%">
+                            <thead class="fw-bold table-danger ">
+                                <tr>
+                                    <th class="text-center">id</th>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Jenis Kelamin</th>
+                                    <th class="text-center">Umur</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Tanggal Priksa</th>
+                                    <th class="text-center">Posyandu</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
-
                 </div>
 
 
@@ -255,11 +252,12 @@
     <script type="module">
         $(document).ready(function() {
             $.fn.DataTable.ext.pager.numbers_length = 5;
-            $('#tabelbulanan').DataTable({
+            var dataTable = new DataTable('#tabelbulanan', {
                 serverSide: true,
                 processing: true,
                 ajax: "gettabelbulanan",
                 pagingType: "simple_numbers",
+                responsive: true, // Enable responsive extension
                 columns: [{
                         data: "id",
                         name: "id",
@@ -270,7 +268,7 @@
                         name: "DT_RowIndex",
                         orderable: false,
                         searchable: false,
-                        className: 'text-center align-middle',
+                        className: ' align-middle',
                         render: function(data, type, row, meta) {
                             return data + '.';
                         }
@@ -285,25 +283,27 @@
                     {
                         data: "danaks.jk",
                         name: "danaks.jk",
-                        className: 'text-center align-middle',
+                        className: ' align-middle',
                         width: "3%",
                     },
                     {
                         data: "danaks.umur",
                         name: "danaks.umur",
-                        className: 'text-center align-middle',
+                        className: ' align-middle',
                         width: "10%",
                     },
                     {
                         data: "st_anak",
                         name: "st_anak",
-                        className: 'text-center align-middle',
+                        className: ' align-middle',
                         width: "15%",
                         render: function(data, type, row, meta) {
                             if (data === 'Tidak Stunting') {
-                                return '<span style="color: white; padding:8px; background-color:green; border-radius:8px">' + data + '</span>';
+                                return '<span style="color: green; font-weight:bold ">' +
+                                    data + '</span>';
                             } else if (data === 'Stunting') {
-                                return '<span style="color: white; padding:8px; background-color:red; border-radius:8px">   ' + data + '</span>';
+                                return '<span style="color: red; font-weight:bold  ">' +
+                                    data + '</span>';
                             } else {
                                 return data;
                             }
@@ -312,7 +312,7 @@
                     {
                         data: "created_at",
                         name: "created_at",
-                        className: 'text-center align-middle',
+                        className: ' align-middle',
                         width: "15%",
                         render: function(data) {
                             // Konversi data tanggal dari format default (biasanya ISO 8601) ke "DD-MM-YYYY"
