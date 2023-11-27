@@ -28,10 +28,10 @@
 
                                         @foreach ($danaks->sortBy('nama_anak') as $data)
                                             <option
-                                                class="border border-dark-subtle mb-2 ps-2 overflow-auto overflow-md-hidden px-2"
+                                                class="border border-dark-subtle mb-2 px-2 overflow-auto overflow-md-hidden px-2"
                                                 value="{{ $data->id }}" data-jk="{{ $data->jk }}"
                                                 data-t_posyandu="{{ $data->t_posyandu }}">
-                                                - {{ $data->nama_anak }} | {{ $data->t_posyandu }}
+                                                - {{ $data->nama_anak }} | {{ $data->nik_anak }}
                                             </option>
                                         @endforeach
                                     </select>

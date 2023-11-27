@@ -13,7 +13,7 @@ class DantrianSeeder extends Seeder
      */
     public function run(): void
     {
-        Dantrian::factory()->count(60)->create();
+        Dantrian::factory()->count(200)->create();
 
     }
 }

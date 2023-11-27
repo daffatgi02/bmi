@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string("umur");
             $table->string("jk");
             $table->string("t_posyandu");
+            $table->string("nik_anak");
+            $table->string("nowa");
             $table->timestamps();
         });
     }

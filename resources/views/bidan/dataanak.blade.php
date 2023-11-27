@@ -15,12 +15,15 @@
                         </button>
                     </div>
                     <div class="col-12">
-                        <table class="table table-striped table-hover table-bordered datatable shadow" id="tabelanak" style="width: 100%">
+                        <table class="table table-striped table-hover table-bordered datatable shadow" id="tabelanak"
+                            style="width: 100%">
                             <thead class="fw-bold table-info">
                                 <tr>
                                     <th class="text-center">id</th>
                                     <th class="text-center">No.</th>
                                     <th class="text-center">Nama</th>
+                                    <th class="text-center">NIK</th>
+                                    <th class="text-center">No WA</th>
                                     <th class="text-center">Jenis Kelamin</th>
                                     <th class="text-center">Tempat Lahir</th>
                                     <th class="text-center">Umur</th>
@@ -35,8 +38,14 @@
             </div>
         </div>
     </section>
-
-
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @include('actions.tambahanak')
+            </div>
+        </div>
+    </div>
 
     {{-- PESAN ERROR --}}
     @if (session('error'))
@@ -54,7 +63,7 @@
                 serverSide: true,
                 processing: true,
                 ajax: "gettabelanak",
-                pagingType:'simple',
+                pagingType: 'simple_numbers',
                 responsive: true, // Enable responsive extension
                 columns: [{
                         data: "id",
@@ -77,6 +86,19 @@
                     {
                         data: "nama_anak",
                         name: "nama_anak",
+                        className: 'align-middle',
+                        width: "20%",
+
+                    },
+                    {
+                        data: "nik_anak",
+                        name: "nik_anak",
+                        className: 'align-middle',
+
+                    },
+                    {
+                        data: "nowa",
+                        name: "nowa",
                         className: 'align-middle',
 
                     },
@@ -124,7 +146,7 @@
                         data: "t_posyandu",
                         name: "t_posyandu",
                         className: 'align-middle',
-                        width: "20%",
+                        width: "10%",
                     },
                     {
                         data: "actions",

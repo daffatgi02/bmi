@@ -33,10 +33,10 @@
 
                                                 @foreach ($danaks->sortBy('nama_anak') as $data)
                                                     <option
-                                                        class="border border-dark-subtle mb-2 ps-2 overflow-auto overflow-md-hidden"
+                                                        class="border border-dark-subtle mb-2 px-2 overflow-auto overflow-md-hidden"
                                                         value="{{ $data->id }}" data-jk="{{ $data->jk }}"
                                                         data-t_posyandu="{{ $data->t_posyandu }}">
-                                                        - {{ $data->nama_anak }} | {{ $data->t_posyandu }}
+                                                        - {{ $data->nama_anak }} | {{ $data->nik_anak }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -101,8 +101,8 @@
                                     <th class="text-center">id</th>
                                     <th class="text-center">No.</th>
                                     <th class="text-center">Nama</th>
-                                    <th class="text-center">Jenis Kelamin</th>
                                     <th class="text-center">Umur</th>
+                                    <th class="text-center">Jenis Kelamin</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Tanggal Priksa</th>
                                     <th class="text-center">Posyandu</th>
@@ -261,17 +261,20 @@
                 columns: [{
                         data: "id",
                         name: "id",
-                        visible: false
+                        visible: false,
                     },
                     {
                         data: "DT_RowIndex",
                         name: "DT_RowIndex",
                         orderable: false,
                         searchable: false,
+                        visible: false,
+                        width: "3%",
                         className: ' align-middle',
                         render: function(data, type, row, meta) {
                             return data + '.';
                         }
+
                     },
                     {
                         data: "danaks.nama_anak",
@@ -281,16 +284,16 @@
 
                     },
                     {
-                        data: "danaks.jk",
-                        name: "danaks.jk",
-                        className: ' align-middle',
-                        width: "3%",
-                    },
-                    {
                         data: "danaks.umur",
                         name: "danaks.umur",
                         className: ' align-middle',
                         width: "10%",
+                    },
+                    {
+                        data: "danaks.jk",
+                        name: "danaks.jk",
+                        className: 'align-middle',
+                        width: "15%",
                     },
                     {
                         data: "st_anak",

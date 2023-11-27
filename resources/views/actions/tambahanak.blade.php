@@ -25,7 +25,7 @@
         </div>
 
         <div class="form mb-3 ">
-            <label for="tanggal_anak" class="mb-2"> Tanggal Lahir: </label>
+            <h6>Tanggal Lahir:</h6>
             <input type="date" class="form-control border border-dark-subtle" id="tanggal_anak" name="tanggal_lahir"
                 required>
 
@@ -67,6 +67,19 @@
                 </option>
             @endforeach
         </select>
+
+        <hr>
+        <h5>Informasi Tambahan</h5>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control border border-dark-subtle" id="nik_anak" name="nik_anak"
+                placeholder="Masukkan NIK" required maxlength="16">
+            <label for="floatingInput">NIK:</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control border border-dark-subtle" id="nowa" name="nowa"
+                placeholder="Masukkan Nomor HP" required maxlength="13">
+            <label for="floatingInput">No WA:</label>
+        </div>
 
 
         {{-- Button --}}
