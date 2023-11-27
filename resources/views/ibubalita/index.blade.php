@@ -56,11 +56,11 @@
         </div>
         <div class="d-flex mt-5 mb-4">
             <i class="bi bi-list-ol fs-4 me-2"></i>
-            <h2>Urutan Antrian</h2>
+            <h2>Lihat Urutan Antrian</h2>
         </div>
         <div class="mt-4 px-1">
             <div class="mt-4 mb-4">
-                <h6>Silahkan Pilih Posyandu: </h6>
+                <h5>Silahkan Pilih Posyandu: </h5>
                 @foreach ($dposyandu as $data)
                     <button class="badge text-bg-warning" onclick="tampilkanTabel()">
                         {{ $data->nama_posyandu }}
@@ -72,8 +72,8 @@
                     <tr>
                         <th>id</th>
                         <th>Urutan</th>
-                        <th class="w-75">Nama</th>
-                        <th>Posyandu</th>
+                        <th class="w-50">Nama</th>
+                        <th class="w-50">Posyandu</th>
                     </tr>
                 </thead>
             </table>
@@ -96,6 +96,7 @@
                     processing: true,
                     serverSide: true,
                     responsive: true,
+                    lengthChange: false,
                     ajax: "gettabelantrian",
                     pagingType: 'simple',
                     columns: [{
@@ -130,11 +131,11 @@
                         },
                     ],
                     order: [
-                        [0, "desc"]
+                        [3, "desc"]
                     ],
                     lengthMenu: [
-                        [10, 25, 50, 100, -1],
-                        [10, 25, 50, 100, "All"],
+                        [-1],
+                        ["All"],
                     ],
 
                     searching: true,
@@ -143,7 +144,7 @@
                         regex: true
                     },
                     language: {
-                        search: "Nama Posyandu:", // Mengganti teks "Search" menjadi "Cari"
+                        search: "", // Mengganti teks "Search" menjadi "Cari"
                     },
                 });
                 $('#tabel_antrian_filter input[type="search"]').prop('disabled', true);

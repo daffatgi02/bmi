@@ -10,3 +10,8 @@
 label {
     font-weight: bold;
 }
+
+#tabel_antrian_filter input[type="search"] {
+    display: none;
+    /* Geser ke luar layar */
+}

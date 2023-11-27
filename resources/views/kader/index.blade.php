@@ -3,7 +3,33 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-12 col-lg-6 mb-4">
+                <div class="d-flex">
+                    <i class="bi bi-list-ol fs-4 me-2"></i>
+                    <h2>Silahkan Pilih Posyandu</h2>
+                </div>
+                <div class="mt-2 px-1">
+                    <div class="mb-4">
+                        @foreach ($dposyandu as $data)
+                            <button class="badge text-bg-warning" onclick="tampilkanTabel()">
+                                {{ $data->nama_posyandu }}
+                            </button>
+                        @endforeach
+                    </div>
+                    <table id="tabel_antrian" class="table table-bordered shadow" style="width:100%; display: none;">
+                        <thead class="table-warning">
+                            <tr>
+                                <th>id</th>
+                                <th>Urutan</th>
+                                <th class="w-50">Nama</th>
+                                <th class="w-50">Posyandu</th>
+                                <th class="w-50">Opsi</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 ">
                 <form action="{{ route('kaders.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card shadow">
@@ -84,6 +110,13 @@
     </div>
     {{-- Script --}}
     <script>
+        // Tabel Antrian
+        function tampilkanTabel() {
+            var tabel = document.getElementById("tabel_antrian");
+            if (tabel.style.display === "none") {
+                tabel.style.display = "table"; // Tampilkan tabel jika sembunyi
+            }
+        }
         // Search
         document.addEventListener("DOMContentLoaded", function() {
             const searchInput = document.getElementById("searchInput");
@@ -212,3 +245,79 @@
         </script>
     @endif
 @endsection
+
+@push('scripts')
+    <script type="module">
+        // Tabel Antrian
+        $(document).ready(function() {
+            $('.badge.text-bg-warning').on('click', function() {
+                var posyanduValue = $(this).text().trim();
+                $('#tabel_antrian_filter input[type="search"]').val(posyanduValue).trigger(
+                    'input');
+                dataTable.search(posyanduValue).draw(); // Memfilter dan memperbarui DataTable
+            });
+            var dataTable = new DataTable('#tabel_antrian', {
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                ajax: "gettabelantrian2",
+                pagingType: 'simple',
+                columns: [{
+                        data: "id",
+                        name: "id",
+                        visible: false
+                    },
+                    {
+                        data: "DT_RowIndex",
+                        name: "DT_RowIndex",
+                        orderable: false,
+                        searchable: false,
+                        className: 'text-center align-middle',
+                        render: function(data, type, row, meta) {
+                            return data + '.';
+                        }
+                    },
+                    {
+                        data: "n_antrian",
+                        name: "n_antrian",
+                        className: 'align-middle',
+                        searchable: false,
+                        orderable: false,
+                    },
+                    {
+                        data: "t_posyandu",
+                        name: "t_posyandu",
+                        className: 'align-middle',
+
+                    },
+                    {
+                        data: "actions",
+                        name: "actions",
+                        orderable: false,
+                        searchable: false,
+                        className: 'align-middle',
+                        width: "5%"
+
+                    },
+                ],
+                order: [
+                    [3, "desc"]
+                ],
+                lengthMenu: [
+                    [6],
+                    [6],
+                ],
+
+                searching: true,
+                search: {
+                    smart: false,
+                    regex: true
+                },
+                language: {
+                    search: "", // Mengganti teks "Search" menjadi "Cari"
+                },
+            });
+            $('#tabel_antrian_filter input[type="search"]').prop('disabled', true);
+        });
+    </script>
+@endpush

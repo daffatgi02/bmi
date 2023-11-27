@@ -51,6 +51,8 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
         // DatabulananController
         Route::resource('dbulanans', DatabulananController::class);
         Route::get('gettabelbulanan', [DatabulananController::class, 'getData'])->name('dbulanans.getData');
+        Route::get('gettabelantrian1', [DatabulananController::class, 'getData2'])->name('antrians.getData');
+
 
 
         // DataPosyanduController
@@ -70,6 +72,7 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
     Route::middleware(['kader'])->group(function () {
         // Route kader
         Route::resource('kaders', KaderController::class);
+        Route::get('gettabelantrian2', [KaderController::class, 'getData2'])->name('antrians.getData');
 
     });
 });
@@ -79,4 +82,3 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
 // Antrian
 Route::resource('antrians', AntrianController::class);
 Route::get('gettabelantrian', [AntrianController::class, 'getData'])->name('antrians.getData');
-

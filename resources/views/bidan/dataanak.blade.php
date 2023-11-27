@@ -64,7 +64,8 @@
                 processing: true,
                 ajax: "gettabelanak",
                 pagingType: 'simple_numbers',
-                responsive: true, // Enable responsive extension
+                responsive: true,
+                fixedHeader: true,
                 columns: [{
                         data: "id",
                         name: "id",
@@ -107,6 +108,7 @@
                         name: "jk",
                         className: 'align-middle',
                         width: "5%",
+
                     },
                     {
                         data: "tempat_lahir",
@@ -163,7 +165,7 @@
                 ],
                 lengthMenu: [
                     [25, 50, 100, -1],
-                    [25, 50, 100, "All"],
+                    [50, 100, "All"],
                 ],
 
             });
