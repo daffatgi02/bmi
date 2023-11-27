@@ -68,6 +68,7 @@
                         name: "DT_RowIndex",
                         orderable: false,
                         searchable: false,
+                        visible: false,
                         className: 'text-center align-middle',
                         render: function(data, type, row, meta) {
                             return data + '.';

@@ -59,6 +59,17 @@
                                 @endforeach
                             </select>
 
+                            <hr>
+                            <h5>Informasi Tambahan</h5>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="nik_anak" name="nik_anak" placeholder="Masukkan NIK"
+                                    value="{{ $danaks->nik_anak }}" required  maxlength="16">
+                                <label for="floatingInput">NIK:</label>
+                            <div class="form-floating mt-3">
+                                <input type="text" class="form-control" id="nowa" name="nowa" placeholder="Masukkan No WA"
+                                    value="{{ $danaks->nowa }}" required  maxlength="13">
+                                <label for="floatingInput">No WA:</label>
+                            </div>
                             {{-- Button --}}
                             <hr>
                             <div class="row d-flex justify-content-center">

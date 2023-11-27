@@ -64,6 +64,8 @@ class DataAnakController extends Controller
         $danak->umur = $umurTotal;
         $danak->jk = $request->jk;
         $danak->t_posyandu = $request->t_posyandu;
+        $danak->nik_anak = $request->nik_anak;
+        $danak->nowa = $request->nowa;
 
         // Simpan objek Mahal ke dalam database
         $danak->save();
@@ -120,6 +122,8 @@ class DataAnakController extends Controller
         $danak->umur = $umurTotal;
         $danak->jk = $request->jk;
         $danak->t_posyandu = $request->t_posyandu;
+        $danak->nik_anak = $request->nik_anak;
+        $danak->nowa = $request->nowa;
 
         // Simpan perubahan data anak ke dalam database
         $danak->save();
