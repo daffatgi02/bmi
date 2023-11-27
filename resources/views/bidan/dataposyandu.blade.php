@@ -58,6 +58,7 @@
                 processing: true,
                 ajax: "gettabelposyandu",
                 pagingType: "simple_numbers",
+                fixedHeader: true,
                 columns: [{
                         data: "id",
                         name: "id",

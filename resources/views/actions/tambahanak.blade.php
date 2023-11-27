@@ -30,32 +30,6 @@
                 required>
 
         </div>
-        {{-- <div class="row">
-            <div class="col-8">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control border border-dark-subtle" id="umur" name="umur"
-                        placeholder="Masukkan Umur" required>
-                    <label for="floatingInput">Umur:</label>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="form-check">
-                    <input class="form-check-input border border-dark-subtle" type="radio" name="flexRadioDefault"
-                        id="c_bulan" required>
-                    <label class="form-check-label" for="c_bulan">
-                        Bulan
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input border border-dark-subtle" type="radio" name="flexRadioDefault"
-                        id="c_tahun" required>
-                    <label class="form-check-label" for="c_tahun">
-                        Tahun
-                    </label>
-                </div>
-            </div>
-        </div> --}}
-
         {{-- Select Posyandu --}}
         <select class="form-select mb-3 border border-dark-subtle" aria-label="Default select example" name="t_posyandu"
             id="t_posyandu" required>

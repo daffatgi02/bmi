@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Danak;
+use App\Models\Dantrian;
 use App\Models\Dbulan;
+use App\Models\Dposyandu;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -16,7 +18,8 @@ class DatabulananController extends Controller
     {
         $danaks = Danak::all();
         $dbulans = Dbulan::all();
-        return view("bidan.databulanan", compact('danaks', 'dbulans'));
+        $dposyandu = Dposyandu::all();
+        return view("bidan.databulanan", compact('danaks', 'dbulans', 'dposyandu'));
     }
 
     public function getData(Request $request)
@@ -30,6 +33,21 @@ class DatabulananController extends Controller
                 ->toJson();
         }
     }
+    public function getData2(Request $request)
+    {
+
+        $dantrians = Dantrian::all();
+
+        if ($request->ajax()) {
+            return datatables()->of($dantrians)
+                ->addIndexColumn()
+                ->addColumn('actions', function ($dantrian) {
+                    return view('actions.actionantrian', compact('dantrian'));
+                })
+                ->toJson();
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -89,6 +107,13 @@ class DatabulananController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // ELOQUENT
+        $dbulanan = Dantrian::find($id);
+
+
+        $dbulanan->delete(); // Hapus data dari database
+        Alert::success('Antrian Selesai');
+
+        return redirect()->route('dbulanans.index');
     }
 }

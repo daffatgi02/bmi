@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Danak;
+use App\Models\Dantrian;
 use App\Models\Dbulan;
+use App\Models\Dposyandu;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -16,8 +18,23 @@ class KaderController extends Controller
     {
         $danaks = Danak::all();
         $dbulans = Dbulan::all();
-        return view('kader.index', compact('danaks','dbulans'));
+        $dposyandu = Dposyandu::all();
+        return view('kader.index', compact('danaks','dbulans', 'dposyandu'));
 
+    }
+    public function getData2(Request $request)
+    {
+
+        $dantrians = Dantrian::all();
+
+        if ($request->ajax()) {
+            return datatables()->of($dantrians)
+                ->addIndexColumn()
+                ->addColumn('actions', function ($dantrian) {
+                    return view('actions.actionantrian2', compact('dantrian'));
+                })
+                ->toJson();
+        }
     }
 
     /**
@@ -78,6 +95,13 @@ class KaderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // ELOQUENT
+        $kader = Dantrian::find($id);
+
+
+        $kader->delete(); // Hapus data dari database
+        Alert::success('Antrian Selesai');
+
+        return redirect()->route('kaders.index');
     }
 }

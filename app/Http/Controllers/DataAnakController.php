@@ -51,8 +51,9 @@ class DataAnakController extends Controller
         $danak->tempat_lahir = $request->tempat_lahir;
         $danak->tanggal_lahir = $request->tanggal_lahir;
 
-        $dateOfBirth = \Carbon\Carbon::parse($request->tanggal_lahir);
-        $now = \Carbon\Carbon::now();
+        // Menghitung umur dari updated_at
+        $dateOfBirth = \Carbon\Carbon::parse($danak->tanggal_lahir);
+        $now = \Carbon\Carbon::parse($danak->updated_at);
         $umur = $now->diff($dateOfBirth);
 
         if ($umur->y < 1) {
@@ -109,8 +110,8 @@ class DataAnakController extends Controller
         $danak->tempat_lahir = $request->tempat_lahir;
         $danak->tanggal_lahir = $request->tanggal_lahir;
 
-        $dateOfBirth = \Carbon\Carbon::parse($request->tanggal_lahir);
-        $now = \Carbon\Carbon::now();
+        $dateOfBirth = \Carbon\Carbon::parse($danak->tanggal_lahir);
+        $now = \Carbon\Carbon::parse($danak->updated_at);
         $umur = $now->diff($dateOfBirth);
 
         if ($umur->y < 1) {
@@ -119,6 +120,7 @@ class DataAnakController extends Controller
             $umurTotal = $umur->y . " tahun";
         }
 
+        // Update umur dengan perhitungan ulang berdasarkan updated_at terkini
         $danak->umur = $umurTotal;
         $danak->jk = $request->jk;
         $danak->t_posyandu = $request->t_posyandu;
