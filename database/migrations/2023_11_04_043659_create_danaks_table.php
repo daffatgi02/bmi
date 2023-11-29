@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("nama_anak");
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");
-            $table->string("umur");
+            // $table->string("umur");
             $table->string("jk");
             $table->string("t_posyandu");
             $table->string("nik_anak");

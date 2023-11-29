@@ -11,7 +11,7 @@
                 <div class="mt-2 px-1">
                     <div class="mb-4">
                         @foreach ($dposyandu as $data)
-                            <button class="badge text-bg-warning" onclick="tampilkanTabel()">
+                            <button class="badge ku" onclick="tampilkanTabel(this)">
                                 {{ $data->nama_posyandu }}
                             </button>
                         @endforeach
@@ -20,10 +20,10 @@
                         <thead class="table-warning">
                             <tr>
                                 <th>id</th>
-                                <th>Urutan</th>
-                                <th class="w-50">Nama</th>
-                                <th class="w-50">Posyandu</th>
-                                <th class="w-50">Opsi</th>
+                                <th style="background-color: #272343; color:#E3F6F5">Urutan</th>
+                                <th style="background-color: #272343; color:#E3F6F5" class="w-50">Nama</th>
+                                <th style="background-color: #272343; color:#E3F6F5" class="w-50">Posyandu</th>
+                                <th style="background-color: #272343; color:#E3F6F5" class="w-50">Opsi</th>
                             </tr>
                         </thead>
                     </table>
@@ -33,7 +33,7 @@
                 <form action="{{ route('kaders.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card shadow">
-                        <div class="card-header bg-danger text-white">
+                        <div class="card-header" id="calc-stunting">
                             <h3>Input Data</h3>
                         </div>
 
@@ -53,10 +53,18 @@
                                         </option>
 
                                         @foreach ($danaks->sortBy('nama_anak') as $data)
+                                            @php
+                                                // Mendapatkan umur dari perbedaan tanggal sekarang dengan tanggal lahir
+                                                $tanggal_lahir = new DateTime($data->tanggal_lahir);
+                                                $sekarang = new DateTime();
+                                                $umur = $tanggal_lahir->diff($sekarang);
+                                                $umurTotal = $umur->y < 1 ? ($umur->m < 1 ? '±' . $umur->d . ' hari' : $umur->m . ' bulan') : $umur->y . ' tahun';
+                                            @endphp
                                             <option
-                                                class="border border-dark-subtle mb-2 px-2 overflow-auto overflow-md-hidden px-2"
-                                                value="{{ $data->id }}" data-jk="{{ $data->jk }}"
-                                                data-t_posyandu="{{ $data->t_posyandu }}">
+                                                class="border border-dark-subtle mb-2 px-2 overflow-auto overflow-md-hidden"
+                                                value="{{ $data->id }}" {{-- untuk rumus stunting --}}
+                                                data-jk="{{ $data->jk }}" data-t_posyandu="{{ $data->t_posyandu }}"
+                                                data-umur="{{ $umurTotal }}"> <!-- Menambahkan data-umur -->
                                                 - {{ $data->nama_anak }} | {{ $data->nik_anak }}
                                             </option>
                                         @endforeach
@@ -65,6 +73,8 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col-6">
+                                    {{-- Untuk Umur Periksa --}}
+                                    <input type="text" id="umur_periksa" name="umur_periksa" class="d-none">
                                     <div class="form-floating mb-3">
                                         <input type="number" class="form-control border border-dark-subtle" id="bb_anak"
                                             name="bb_anak" placeholder="Masukan Berat Badan (KG)" value="0" required
@@ -110,12 +120,36 @@
     </div>
     {{-- Script --}}
     <script>
+        // Mendapatkan elemen select dengan class 'form-select' dan id 'danaks_id'
+        var select = document.getElementById('danaks_id');
+
+        // Mendapatkan elemen input dengan id 'umur_periksa'
+        var umurInput = document.getElementById('umur_periksa');
+
+        // Menambahkan event listener untuk mengubah nilai input saat opsi dipilih
+        select.addEventListener('change', function() {
+            // Mendapatkan umur dari data-umur pada opsi yang dipilih
+            var selectedOption = select.options[select.selectedIndex];
+            var umur = selectedOption.getAttribute('data-umur');
+
+            // Memasukkan nilai umur ke dalam input 'umur_periksa'
+            umurInput.value = umur;
+        });
         // Tabel Antrian
-        function tampilkanTabel() {
+        function tampilkanTabel(button) {
+            var badges = document.querySelectorAll('.badge.ku');
+
+            // Remove 'active' class from all badges
+            badges.forEach(function(badge) {
+                badge.classList.remove('active');
+            });
+
+            // Add 'active' class to the clicked badge
+            button.classList.add('active');
+
+            // Display the table
             var tabel = document.getElementById("tabel_antrian");
-            if (tabel.style.display === "none") {
-                tabel.style.display = "table"; // Tampilkan tabel jika sembunyi
-            }
+            tabel.style.display = "table";
         }
         // Search
         document.addEventListener("DOMContentLoaded", function() {
@@ -250,7 +284,7 @@
     <script type="module">
         // Tabel Antrian
         $(document).ready(function() {
-            $('.badge.text-bg-warning').on('click', function() {
+            $('.badge.ku').on('click', function() {
                 var posyanduValue = $(this).text().trim();
                 $('#tabel_antrian_filter input[type="search"]').val(posyanduValue).trigger(
                     'input');

@@ -39,7 +39,7 @@ class DanakFactory extends Factory
             'nama_anak' => $this->faker->name(),
             'tempat_lahir' => $this->faker->city(),
             'tanggal_lahir' => $randomBirthDate->format('Y-m-d'), // Format tanggal lahir
-            'umur' => $umurText, // Umur dalam bulan atau tahun
+            // 'umur' => $umurText, // Umur dalam bulan atau tahun
             'jk' => $this->generateGender(),
             't_posyandu' => 'Posyandu ' . sprintf('%02d', $this->faker->numberBetween(1, 10)),
             'nik_anak' => $nikAnak, // Assign NIK

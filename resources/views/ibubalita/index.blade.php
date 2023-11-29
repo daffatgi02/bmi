@@ -14,7 +14,7 @@
             <form action="{{ route('antrians.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
-                    <div class="card-header bg-info">
+                    <div class="card-header" id="calc-stunting">
                         <span class="fs-5">Isi Data</span class="fs-5">
                     </div>
                     <div class="card-body">
@@ -62,7 +62,7 @@
             <div class="mt-4 mb-4">
                 <h5>Silahkan Pilih Posyandu: </h5>
                 @foreach ($dposyandu as $data)
-                    <button class="badge text-bg-warning" onclick="tampilkanTabel()">
+                    <button class="badge" onclick="tampilkanTabel()">
                         {{ $data->nama_posyandu }}
                     </button>
                 @endforeach
@@ -87,7 +87,7 @@
                 }
             }
             $(document).ready(function() {
-                $('.badge.text-bg-warning').on('click', function() {
+                $('.badge').on('click', function() {
                     var posyanduValue = $(this).text().trim();
                     $('#tabel_antrian_filter input[type="search"]').val(posyanduValue).trigger('input');
                     dataTable.search(posyanduValue).draw(); // Memfilter dan memperbarui DataTable

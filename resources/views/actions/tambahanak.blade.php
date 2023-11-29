@@ -28,7 +28,6 @@
             <h6>Tanggal Lahir:</h6>
             <input type="date" class="form-control border border-dark-subtle" id="tanggal_anak" name="tanggal_lahir"
                 required>
-
         </div>
         {{-- Select Posyandu --}}
         <select class="form-select mb-3 border border-dark-subtle" aria-label="Default select example" name="t_posyandu"

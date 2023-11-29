@@ -7,11 +7,44 @@
     font-family: "Poppins", sans-serif;
 }
 
+body{
+    background-color: #E3F6F5;
+}
 label {
     font-weight: bold;
 }
 
 #tabel_antrian_filter input[type="search"] {
     display: none;
-    /* Geser ke luar layar */
+}
+
+
+.badge {
+    color: #272343;
+    background-color: #E3F6F5;
+}
+
+/* Ketika dihover */
+.badge:hover {
+    background-color: #4f4975;
+    color: #E3F6F5;
+}
+.badge.active {
+    background-color: #4f4975;
+    color: #E3F6F5;
+}
+
+#calc-stunting{
+    background-color: #272343;
+    color: #fff;
+}
+
+#nav-title{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 15px;
+    padding-left: 15px;
+    background-color: #272343;
+    color: #fff;
+    border-radius: 8px;
 }

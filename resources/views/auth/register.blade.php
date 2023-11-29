@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
+            <div class="card mt-3">
+                <div class="card-header" id="calc-stunting">
                     <h3>Register</h3>
                 </div>
 
@@ -14,7 +14,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nama') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Konfirmasi Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -85,7 +85,7 @@
                         <div class="row mb-0 d-flex justify-content-center">
                             <div class="col-md-4 d-grid col">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Registrasi') }}
                                 </button>
                             </div>
                         </div>
@@ -94,5 +94,8 @@
             </div>
         </div>
     </div>
+    <a href="/login" class="btn btn-success mt-3">
+        <i class="bi bi-box-arrow-in-up me-2 fw-bold"></i></i>Sudah Punya akun
+    </a>
 </div>
 @endsection
