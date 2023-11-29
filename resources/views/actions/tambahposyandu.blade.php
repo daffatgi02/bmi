@@ -11,9 +11,8 @@
             <label for="floatingInput">Nama Posyandu:</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control border border-dark-subtle" id="lokasi_posyandu"
-                name="lokasi_posyandu" placeholder="Masukkan Nama Posyandu" required>
-            <label for="floatingInput">Lokasi Posyandu:</label>
+            <textarea class="form-control" placeholder="Lokasi Posyandu" id="lokasi_posyandu" name="lokasi_posyandu" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Lokasi Posyandu:</label>
         </div>
 
 

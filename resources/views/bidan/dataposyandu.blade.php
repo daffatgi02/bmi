@@ -4,12 +4,12 @@
     @include('layouts.navbar')
     <section class="home-section mb-5">
         <div class="content">
-            <h1 class="m-3">Halaman Data Posyandu</h1>
+            <h1 class="m-3 text-decoration-underline">Halaman Data Posyandu</h1>
             <div class="container mt-3 pt-3">
                 <div class="row ">
                     <div class="col-md-3 col-lg-2 col-7 offset-md-9 offset-lg-10 offset-5 mb-4 d-grid">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary shadow" data-bs-toggle="modal"
+                        <button type="button" class="btn shadow" data-bs-toggle="modal" id="btn-tambah"
                             data-bs-target="#exampleModal">
                             <i class="bi bi-plus-circle me-2"></i>Posyandu
                         </button>
@@ -17,13 +17,13 @@
                     <div class="col-12">
                         <table class="table table-striped table-hover table-bordered datatable shadow" id="tabelposyandu" style="width: 100%">
 
-                            <thead class="fw-bold table-warning ">
+                            <thead class="fw-bold">
                                 <tr>
-                                    <th class="text-center">id</th>
-                                    <th class="text-center">No.</th>
-                                    <th class="text-center w-50">Nama Posyandu</th>
-                                    <th class="text-center w-50">Alamat Posyandu</th>
-                                    <th class="text-center">Opsi</th>
+                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">id</th>
+                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">No.</th>
+                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center w-50">Nama Posyandu</th>
+                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center w-50">Alamat Posyandu</th>
+                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Opsi</th>
                                 </tr>
                             </thead>
                         </table>
@@ -58,7 +58,6 @@
                 processing: true,
                 ajax: "gettabelposyandu",
                 pagingType: "simple_numbers",
-                fixedHeader: true,
                 columns: [{
                         data: "id",
                         name: "id",

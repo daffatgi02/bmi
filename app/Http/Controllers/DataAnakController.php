@@ -51,18 +51,22 @@ class DataAnakController extends Controller
         $danak->tempat_lahir = $request->tempat_lahir;
         $danak->tanggal_lahir = $request->tanggal_lahir;
 
-        // Menghitung umur dari updated_at
-        $dateOfBirth = \Carbon\Carbon::parse($danak->tanggal_lahir);
-        $now = \Carbon\Carbon::parse($danak->updated_at);
-        $umur = $now->diff($dateOfBirth);
+        // // Menghitung umur dari updated_at
+        // $dateOfBirth = \Carbon\Carbon::parse($danak->tanggal_lahir);
+        // $now = \Carbon\Carbon::parse($danak->updated_at);
+        // $umur = $now->diff($dateOfBirth);
 
-        if ($umur->y < 1) {
-            $umurTotal = $umur->m . " bulan";
-        } else {
-            $umurTotal = $umur->y . " tahun";
-        }
+        // if ($umur->y < 1) {
+        //     if ($umur->m < 1) {
+        //         $umurTotal = "±". $umur->d . " hari";
+        //     } else {
+        //         $umurTotal = $umur->m . " bulan";
+        //     }
+        // } else {
+        //     $umurTotal = $umur->y . " tahun";
+        // }
 
-        $danak->umur = $umurTotal;
+        // $danak->umur = $umurTotal;
         $danak->jk = $request->jk;
         $danak->t_posyandu = $request->t_posyandu;
         $danak->nik_anak = $request->nik_anak;
@@ -110,18 +114,22 @@ class DataAnakController extends Controller
         $danak->tempat_lahir = $request->tempat_lahir;
         $danak->tanggal_lahir = $request->tanggal_lahir;
 
-        $dateOfBirth = \Carbon\Carbon::parse($danak->tanggal_lahir);
-        $now = \Carbon\Carbon::parse($danak->updated_at);
-        $umur = $now->diff($dateOfBirth);
+        // // Menghitung umur dari updated_at
+        // $dateOfBirth = \Carbon\Carbon::parse($danak->tanggal_lahir);
+        // $now = \Carbon\Carbon::parse($danak->updated_at);
+        // $umur = $now->diff($dateOfBirth);
 
-        if ($umur->y < 1) {
-            $umurTotal = $umur->m . " bulan";
-        } else {
-            $umurTotal = $umur->y . " tahun";
-        }
+        // if ($umur->y < 1) {
+        //     if ($umur->m < 1) {
+        //         $umurTotal = "±". $umur->d . " hari";
+        //     } else {
+        //         $umurTotal = $umur->m . " bulan";
+        //     }
+        // } else {
+        //     $umurTotal = $umur->y . " tahun";
+        // }
 
-        // Update umur dengan perhitungan ulang berdasarkan updated_at terkini
-        $danak->umur = $umurTotal;
+        // $danak->umur = $umurTotal;
         $danak->jk = $request->jk;
         $danak->t_posyandu = $request->t_posyandu;
         $danak->nik_anak = $request->nik_anak;
@@ -140,12 +148,18 @@ class DataAnakController extends Controller
      */
     public function destroy(string $id)
     {
-        // ELOQUENT
-        $danak = Danak::find($id);
+        try {
+            $danak = Danak::find($id);
 
-
-        $danak->delete(); // Hapus data dari database
-        Alert::success('Berhasil Terhapus', 'Data Anak Terhapus.');
+            if ($danak) {
+                $danak->delete(); // Hapus data dari database
+                Alert::success('Berhasil Terhapus', 'Data Anak Terhapus.');
+            } else {
+                Alert::error('Gagal Menghapus', 'Data Anak Masih Terikat pada Data Bulanan.');
+            }
+        } catch (\Exception $e) {
+            Alert::error('Gagal Menghapus', 'Data Anak Masih Terikat pada Data Bulanan.');
+        }
 
         return redirect()->route('danaks.index');
     }

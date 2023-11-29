@@ -25,7 +25,6 @@
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/nav.css', 'resources/js/nav.js'])
 
-
 </head>
 
 <body>

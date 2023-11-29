@@ -6,13 +6,18 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
+body{
+    background-color: #E3F6F5;
+}
+
 .sidebar {
   position: fixed;
   left: 0;
   top: 0;
   height: 100%;
   width: 78px;
-  background: #11101d;
+  background: #272343;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -31,7 +36,7 @@
   transition: all 0.5s ease;
 }
 .sidebar .logo-details .logo_name {
-  color: #fff;
+  color: #E3F6F5;
   font-size: 20px;
   font-weight: 600;
   opacity: 0;
@@ -57,7 +62,7 @@
   text-align: right;
 }
 .sidebar i {
-  color: #fff;
+  color: #272343;
   height: 60px;
   min-width: 50px;
   font-size: 28px;
@@ -79,7 +84,7 @@
   top: -20px;
   left: calc(100% + 15px);
   z-index: 3;
-  background: #fff;
+  background: #272343;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   padding: 6px 12px;
   border-radius: 4px;
@@ -89,6 +94,7 @@
   white-space: nowrap;
   pointer-events: none;
   transition: 0s;
+  color: #fff;
 }
 .sidebar li:hover .tooltip {
   opacity: 1;
@@ -100,23 +106,6 @@
 .sidebar.open li .tooltip {
   display: none;
 }
-.sidebar input {
-  font-size: 15px;
-  color: #fff;
-  font-weight: 400;
-  outline: none;
-  height: 50px;
-  width: 100%;
-  width: 50px;
-  border: none;
-  border-radius: 12px;
-  transition: all 0.5s ease;
-  background: #1d1b31;
-}
-.sidebar.open input {
-  padding: 0 20px 0 50px;
-  width: 100%;
-}
 
 .sidebar li a {
   display: flex;
@@ -126,13 +115,13 @@
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #11101d;
+  background: #E3F6F5;
 }
 .sidebar li a:hover {
-  background: #fff;
+  background: #BAE8E8;
 }
 .sidebar li a .links_name {
-  color: #fff;
+  color: #272343;
   font-size: 15px;
   font-weight: 400;
   white-space: nowrap;
@@ -198,6 +187,7 @@
   line-height: 60px;
   border-radius: 0px;
   transition: all 0.5s ease;
+
 }
 .sidebar.open .profile #log_out {
   width: 50px;
@@ -205,7 +195,7 @@
 }
 .home-section {
   position: relative;
-  background: #fff;
+  /* background: #E3F6F5; */
   /* min-height: 100vh; */
   top: 0;
   left: 78px;
@@ -229,4 +219,51 @@
 #tabel_antrian_filter input[type="search"] {
     display: none;
     /* Geser ke luar layar */
+}
+
+#btn-tambah {
+    background-color: #272343;
+    color: #E3F6F5;
+}
+
+/* Ketika dihover */
+#btn-tambah:hover {
+    background-color: #4f4975;
+    color: #E3F6F5;
+}
+
+
+.badge {
+    color: #272343;
+    background-color: #E3F6F5;
+}
+
+/* Ketika dihover */
+.badge:hover {
+    background-color: #4f4975;
+    color: #E3F6F5;
+}
+.badge.active {
+    background-color: #4f4975;
+    color: #E3F6F5;
+}
+
+#btn-detail-dashboard {
+    color: #272343;
+    background-color: #E3F6F5;
+}
+
+/* Ketika dihover */
+#btn-detail-dashboard:hover {
+    background-color: #4f4975;
+    color: #E3F6F5;
+}
+
+#calc-stunting{
+    background-color: #272343;
+    color: #fff;
+}
+
+label {
+    font-weight: bold;
 }

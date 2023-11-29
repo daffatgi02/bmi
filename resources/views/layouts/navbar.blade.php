@@ -1,8 +1,7 @@
 <div class="sidebar">
     <div class="logo-details">
-        <i class='bx bx-home-heart icon' style='color:#ffffff'></i>
-        <div class="logo_name">Posyandu</div>
-        <i class='bx bx-menu' id="btn"></i>
+        <div class="logo_name">Connect Pediatrics</div>
+        <i class='bx bx-menu' id="btn" style='color:#ffffff'></i>
     </div>
     <ul class="nav-list">
         <li>
@@ -43,7 +42,7 @@
 
         <li class="profile">
             <div class="profile-details">
-                <i class="bi bi-person-circle"></i>
+                <i class="bi bi-person-circle" style='color:#ffffff'></i>
                 <div class="name_job">
                     <div class="name"> {{ Auth::user()->name }}</div>
                 </div>
@@ -52,7 +51,7 @@
                 onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
 
-                <i class='bx bx-log-out out' id="log_out"></i>
+                <i class='bx bx-log-out out' id="log_out" style='color:#ffffff'></i>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf

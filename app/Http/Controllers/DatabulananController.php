@@ -65,6 +65,7 @@ class DatabulananController extends Controller
         // Buat objek Mahal baru berdasarkan data yang diterima
         $dbulans = new Dbulan();
         $dbulans->danaks_id = $request->danaks_id;
+        $dbulans->umur_periksa = $request->umur_periksa;
         $dbulans->bb_anak = $request->bb_anak;
         $dbulans->tb_anak = $request->tb_anak;
 
