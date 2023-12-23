@@ -4,9 +4,9 @@
     @include('layouts.navbar')
     <section class="home-section mb-5">
         <div class="content">
-            <h1 class="m-3 text-decoration-underline">Halaman Data Anak</h1>
             <div class="container mt-3 pt-3">
                 <div class="row ">
+                    <h1 class="fw-bold h mb-4">Halaman Data Anak</h1>
                     <div class="col-md-3 col-lg-2 col-7 offset-md-9 offset-lg-10 offset-5 mb-4 d-grid">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn shadow" data-bs-toggle="modal" id="btn-tambah"
@@ -19,17 +19,21 @@
                             style="width: 100%">
                             <thead class="fw-bold">
                                 <tr>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">id</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">No.</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center w-50">Nama</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">NIK</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">No WA</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Jenis Kelamin</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center w-25">Tempat Lahir</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Umur</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Tanggal Lahir</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center w-25">Posyandu</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Opsi</th>
+                                    <th id="th" class="text-center">id</th>
+                                    <th id="th" class="text-center">No.</th>
+                                    <th id="th" class="text-center w-50">Nama</th>
+                                    <th id="th" class="text-center">NIK</th>
+                                    <th id="th" class="text-center">No WA</th>
+                                    <th id="th" class="text-center">Jenis Kelamin
+                                    </th>
+                                    <th id="th" class="text-center w-25">Tempat
+                                        Lahir</th>
+                                    <th id="th" class="text-center">Umur</th>
+                                    <th id="th" class="text-center">Tanggal Lahir
+                                    </th>
+                                    <th id="th" class="text-center w-25">Posyandu
+                                    </th>
+                                    <th id="th" class="text-center">Opsi</th>
                                 </tr>
                             </thead>
                         </table>

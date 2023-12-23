@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Danak;
 use App\Models\Dposyandu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DataAnakController extends Controller
@@ -14,9 +15,10 @@ class DataAnakController extends Controller
      */
     public function index()
     {
+        $title = "Data Anak";
         $dposyandu = Dposyandu::all();
         confirmDelete();
-        return view("bidan.dataanak", compact('dposyandu'));
+        return view("bidan.dataanak", compact('dposyandu', 'title'));
     }
 
     public function getData(Request $request)
@@ -46,27 +48,36 @@ class DataAnakController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'nama_anak' => 'required|string|max:255',
+            'jk' => 'required|in:L,P',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            't_posyandu' => 'required|string|max:255',
+            'nik_anak' => 'required|numeric|digits:16',
+            'nowa' => 'required|numeric', // Merubah maksimal digit menjadi 13
+        ], [
+            'nik_anak.required' => 'Kolom NIK anak harus diisi.',
+            'nik_anak.numeric' => 'NIK anak harus berupa angka.',
+            'nik_anak.digits' => 'NIK anak harus terdiri dari 16 digit.',
+            'nowa.required' => 'Kolom Nomor WA harus diisi.',
+            'nowa.numeric' => 'Nomor WA harus berupa angka.',
+        ]);
+
+
+        if ($validator->fails()) {
+            Alert::error('Gagal Menambahkan', 'Perisksa kembali data yang diinputkan.');
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $danak = new Danak;
         $danak->nama_anak = $request->nama_anak;
         $danak->tempat_lahir = $request->tempat_lahir;
         $danak->tanggal_lahir = $request->tanggal_lahir;
 
-        // // Menghitung umur dari updated_at
-        // $dateOfBirth = \Carbon\Carbon::parse($danak->tanggal_lahir);
-        // $now = \Carbon\Carbon::parse($danak->updated_at);
-        // $umur = $now->diff($dateOfBirth);
 
-        // if ($umur->y < 1) {
-        //     if ($umur->m < 1) {
-        //         $umurTotal = "±". $umur->d . " hari";
-        //     } else {
-        //         $umurTotal = $umur->m . " bulan";
-        //     }
-        // } else {
-        //     $umurTotal = $umur->y . " tahun";
-        // }
-
-        // $danak->umur = $umurTotal;
         $danak->jk = $request->jk;
         $danak->t_posyandu = $request->t_posyandu;
         $danak->nik_anak = $request->nik_anak;
@@ -95,11 +106,12 @@ class DataAnakController extends Controller
     {
 
         // ELOQUENT
+        $title = "Edit Data Anak";
         $danaks = Danak::find($id);
 
         $dposyandu = Dposyandu::all();
 
-        return view('actions.editanak', compact('danaks', 'dposyandu'));
+        return view('actions.editanak', compact('danaks', 'dposyandu', 'title'));
     }
 
     /**
@@ -107,6 +119,30 @@ class DataAnakController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $validator = Validator::make($request->all(), [
+            'nama_anak' => 'required|string|max:255',
+            'jk' => 'required|in:L,P',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            't_posyandu' => 'required|string|max:255',
+            'nik_anak' => 'required|numeric|digits:16',
+            'nowa' => 'required|numeric|digits:13', // Mengubah maksimal digit menjadi 13
+        ], [
+            'nik_anak.required' => 'Kolom NIK anak harus diisi.',
+            'nik_anak.numeric' => 'NIK anak harus berupa angka.',
+            'nik_anak.digits' => 'NIK anak harus terdiri dari 16 digit.',
+            'nowa.required' => 'Kolom Nomor WA harus diisi.',
+            'nowa.numeric' => 'Nomor WA harus berupa angka.',
+            'nowa.digits' => 'Nomor WA harus terdiri dari 13 digit.',
+        ]);
+
+        if ($validator->fails()) {
+            Alert::error('Gagal Memperbarui', 'Periksa kembali data yang diinputkan.');
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $danak = Danak::findOrFail($id);
 
         // Update data anak berdasarkan ID yang diterima
@@ -114,22 +150,6 @@ class DataAnakController extends Controller
         $danak->tempat_lahir = $request->tempat_lahir;
         $danak->tanggal_lahir = $request->tanggal_lahir;
 
-        // // Menghitung umur dari updated_at
-        // $dateOfBirth = \Carbon\Carbon::parse($danak->tanggal_lahir);
-        // $now = \Carbon\Carbon::parse($danak->updated_at);
-        // $umur = $now->diff($dateOfBirth);
-
-        // if ($umur->y < 1) {
-        //     if ($umur->m < 1) {
-        //         $umurTotal = "±". $umur->d . " hari";
-        //     } else {
-        //         $umurTotal = $umur->m . " bulan";
-        //     }
-        // } else {
-        //     $umurTotal = $umur->y . " tahun";
-        // }
-
-        // $danak->umur = $umurTotal;
         $danak->jk = $request->jk;
         $danak->t_posyandu = $request->t_posyandu;
         $danak->nik_anak = $request->nik_anak;

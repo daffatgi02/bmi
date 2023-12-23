@@ -16,11 +16,11 @@ class KaderController extends Controller
      */
     public function index()
     {
+
         $danaks = Danak::all();
         $dbulans = Dbulan::all();
         $dposyandu = Dposyandu::all();
-        return view('kader.index', compact('danaks','dbulans', 'dposyandu'));
-
+        return view('kader.index', compact('danaks', 'dbulans', 'dposyandu'));
     }
     public function getData2(Request $request)
     {
@@ -56,6 +56,8 @@ class KaderController extends Controller
         $dbulans->umur_periksa = $request->umur_periksa;
         $dbulans->bb_anak = $request->bb_anak;
         $dbulans->tb_anak = $request->tb_anak;
+        $dbulans->lk_anak = $request->lk_anak;
+        $dbulans->ll_anak = $request->ll_anak;
 
         $dbulans->st_anak = $request->st_anak;
 

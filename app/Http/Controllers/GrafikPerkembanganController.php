@@ -11,7 +11,8 @@ class GrafikPerkembanganController extends Controller
      */
     public function index()
     {
-        return view("bidan.grafikperkembangan");
+        $title="Data Grafik Perkembangan";
+        return view("bidan.grafikperkembangan", compact('title'));
 
     }
 

@@ -4,9 +4,9 @@
     @include('layouts.navbar')
     <section class="home-section mb-5">
         <div class="content">
-            <h1 class="m-3 text-decoration-underline">Halaman Data Posyandu</h1>
             <div class="container mt-3 pt-3">
                 <div class="row ">
+                    <h1 class="fw-bold h mb-4">Halaman Data Posyandu</h1>
                     <div class="col-md-3 col-lg-2 col-7 offset-md-9 offset-lg-10 offset-5 mb-4 d-grid">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn shadow" data-bs-toggle="modal" id="btn-tambah"
@@ -19,11 +19,11 @@
 
                             <thead class="fw-bold">
                                 <tr>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">id</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">No.</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center w-50">Nama Posyandu</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center w-50">Alamat Posyandu</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Opsi</th>
+                                    <th id="th" class="text-center">id</th>
+                                    <th id="th" class="text-center">No.</th>
+                                    <th id="th" class="text-center w-50">Nama Posyandu</th>
+                                    <th id="th" class="text-center w-50">Alamat Posyandu</th>
+                                    <th id="th" class="text-center">Opsi</th>
                                 </tr>
                             </thead>
                         </table>

@@ -5,9 +5,10 @@
         <div class="mb-4">
             <div class="d-flex mb-4">
                 <i class="bi bi-book fs-4 me-2"></i>
-                <h2>Daftar Antrian</h2>
+                <h2 class="fw-bold">Daftar Antrian</h2>
                 <div class="ms-auto">
-                    <a id="batal" href="/" class="btn btn-danger shadow"> <i class="bi bi-arrow-left-square"></i> Kembali</a>
+                    <a id="batal" href="/" class="btn btn-danger shadow"> <i class="bi bi-arrow-left-square"></i>
+                        Kembali</a>
                 </div>
             </div>
 
@@ -15,7 +16,7 @@
                 @csrf
                 <div class="card">
                     <div class="card-header" id="calc-stunting">
-                        <span class="fs-5">Isi Data</span class="fs-5">
+                        <span class="fs-5 fw-bold">Isi Data</span class="fs-5">
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
@@ -43,11 +44,8 @@
                     <div class="card-footer">
                         {{-- Button Submit --}}
                         <div class="row d-flex justify-content-center">
-                            {{-- <div class="col-md-3 col-4 d-grid">
-                                <a id="batal" href="/" class="btn btn-danger shadow">Kembali</a>
-                            </div> --}}
                             <div class="col-md-3 col-6 d-grid">
-                                <button class="btn btn-success shadow">Daftar Antrian</button>
+                                <button class="btn btn-logreg fw-bold shadow">Daftar Antrian</button>
                             </div>
                         </div>
                     </div>
@@ -56,13 +54,13 @@
         </div>
         <div class="d-flex mt-5 mb-4">
             <i class="bi bi-list-ol fs-4 me-2"></i>
-            <h2>Lihat Urutan Antrian</h2>
+            <h2 class="fw-bold">Lihat Urutan Antrian</h2>
         </div>
         <div class="mt-4 px-1">
             <div class="mt-4 mb-4">
                 <h5>Silahkan Pilih Posyandu: </h5>
                 @foreach ($dposyandu as $data)
-                    <button class="badge" onclick="tampilkanTabel()">
+                    <button class="badge ku m-1" onclick="tampilkanTabel(this)">
                         {{ $data->nama_posyandu }}
                     </button>
                 @endforeach
@@ -71,20 +69,30 @@
                 <thead class="table-warning">
                     <tr>
                         <th>id</th>
-                        <th>Urutan</th>
-                        <th class="w-50">Nama</th>
-                        <th class="w-50">Posyandu</th>
+                        <th id="th" >Urutan</th>
+                        <th id="th" class="w-50">Nama</th>
+                        <th id="th" class="w-50">Posyandu</th>
                     </tr>
                 </thead>
             </table>
         </div>
 
         <script>
-            function tampilkanTabel() {
+            // Tabel Antrian
+            function tampilkanTabel(button) {
+                var badges = document.querySelectorAll('.badge.ku');
+
+                // Remove 'active' class from all badges
+                badges.forEach(function(badge) {
+                    badge.classList.remove('active');
+                });
+
+                // Add 'active' class to the clicked badge
+                button.classList.add('active');
+
+                // Display the table
                 var tabel = document.getElementById("tabel_antrian");
-                if (tabel.style.display === "none") {
-                    tabel.style.display = "table"; // Tampilkan tabel jika sembunyi
-                }
+                tabel.style.display = "table";
             }
             $(document).ready(function() {
                 $('.badge').on('click', function() {

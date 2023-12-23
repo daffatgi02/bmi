@@ -4,7 +4,11 @@
     @include('layouts.navbar')
     <section class="home-section">
         <div class="content">
-            <h1 class="m-3 text-decoration-underline">Halaman Grafik Perkembangan </h1>
+            <div class="container mt-3 pt-3">
+                <div class="row ">
+                    <h1 class="fw-bold h mb-4">Halaman Grafik Perkembangan </h1>
+                </div>
+            </div>
 
         </div>
     </section>
