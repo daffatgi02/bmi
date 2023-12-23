@@ -5,10 +5,10 @@
     <section class="home-section mb-5">
         <div class="container mt-2 pt-4">
             <div class="row d-flex justify-content-center">
-                <div class="col-md-6">
+                <div class="col-md-10">
                     <div class="card shadow">
                         <div class="card-header" id="calc-stunting">
-                            <h1 class="card-title fs-3" id="examplecardLabel">Informasi Data Anak</h1>
+                            <h1 class="card-title fs-3 fw-bold" id="examplecardLabel">Informasi Data Anak</h1>
                         </div>
                         <form action="{{ route('danaks.update', $danaks->id) }}" method="POST"
                             enctype="multipart/form-danaks">
@@ -20,50 +20,61 @@
 
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="nama_anak" name="nama_anak"
-                                                placeholder="Masukkan Nama Anak" value="{{ $danaks->nama_anak }}" required>
-                                            <label for="floatingInput">Nama Anak:</label>
+                                                placeholder="Masukkan Nama Anak"
+                                                value="{{ old('nama_anak', $danaks->nama_anak) }}" required>
+                                            <label for="floatingInput" class="fw-bold">Nama Anak:</label>
+                                            @error('nama_anak')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
-                                        {{-- Select Jk --}}
+                                        <!-- Select Jk -->
                                         <label for="jk" class="mb-2 fw-bold">Jenis Kelamin:</label>
 
                                         <select class="form-select mb-3" aria-label="Default select example" name="jk"
-                                            id="jk">
+                                            id="jk" required>
                                             <option disabled value="" {{ old('jk', $danaks->jk) ? '' : 'selected' }}>
-                                                Pilih
-                                                Jenis Kelamin
-                                            </option>
+                                                Pilih Jenis Kelamin</option>
                                             <option value="L" {{ old('jk', $danaks->jk) === 'L' ? 'selected' : '' }}>
-                                                Laki-Laki
-                                            </option>
+                                                Laki-Laki</option>
                                             <option value="P" {{ old('jk', $danaks->jk) === 'P' ? 'selected' : '' }}>
-                                                Wanita
-                                            </option>
+                                                Wanita</option>
                                         </select>
 
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
-                                                placeholder="Masukkan Tempat Lahir" value="{{ $danaks->tempat_lahir }}"
-                                                required>
-                                            <label for= "floatingInput">Tempat Lahir:</label>
+                                                placeholder="Masukkan Tempat Lahir"
+                                                value="{{ old('tempat_lahir', $danaks->tempat_lahir) }}" required>
+                                            <label for="floatingInput" class="fw-bold">Tempat Lahir:</label>
+                                            @error('tempat_lahir')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="tanggal_anak" class="mb-2 fw-bold">Tanggal Lahir:</label>
                                             <input type="date" class="form-control" id="tanggal_anak"
-                                                name="tanggal_lahir" value="{{ $danaks->tanggal_lahir }}" required>
+                                                name="tanggal_lahir"
+                                                value="{{ old('tanggal_lahir', $danaks->tanggal_lahir) }}" required>
+                                            @error('tanggal_lahir')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="umur" name="umur"
-                                                placeholder="Masukkan Umur" value="{{ $danaks->umur }}" required readonly>
-                                            <label for="floatingInput">Umur:</label>
+                                                placeholder="Masukkan Umur" value="{{ old('umur', $danaks->umur) }}"
+                                                required readonly>
+                                            <label for="floatingInput" class="fw-bold">Umur:</label>
+                                            @error('umur')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
-                                        {{-- Select Posyandu --}}
-                                        <label for="floatingInput" class="fw-bold">Nama Posyandu:</label>
+                                        <!-- Select Posyandu -->
+                                        <label for="t_posyandu" class="fw-bold">Nama Posyandu:</label>
                                         <select class="form-select mb-3" aria-label="Default select example"
-                                            name="t_posyandu" id="t_posyandu">
+                                            name="t_posyandu" id="t_posyandu" required>
                                             <option disabled value=""
                                                 {{ old('t_posyandu', $danaks->t_posyandu) ? '' : 'selected' }}>Pilih
                                                 Posyandu</option>
@@ -74,31 +85,44 @@
                                                 </option>
                                             @endforeach
                                         </select>
+                                        @error('t_posyandu')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
+
+                                    <!-- Second Column -->
                                     <hr class="d-lg-none d-block">
                                     <div class="col-12 col-lg-6">
-                                        <h5>Informasi Tambahan</h5>
+                                        <h5 class="fw-bold">Informasi Tambahan</h5>
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="nik_anak" name="nik_anak"
-                                                placeholder="Masukkan NIK" value="{{ $danaks->nik_anak }}" required
-                                                maxlength="16">
-                                            <label for="floatingInput">NIK:</label>
-                                            <div class="form-floating mt-3">
-                                                <input type="text" class="form-control" id="nowa" name="nowa"
-                                                    placeholder="Masukkan No WA" value="{{ $danaks->nowa }}" required
-                                                    maxlength="13">
-                                                <label for="floatingInput">No WA:</label>
-                                            </div>
+                                                placeholder="Masukkan NIK" value="{{ old('nik_anak', $danaks->nik_anak) }}"
+                                                required maxlength="16">
+                                            <label for="floatingInput" class="fw-bold">NIK:</label>
+                                            @error('nik_anak')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="nowa" name="nowa"
+                                                placeholder="Masukkan No WA" value="{{ old('nowa', $danaks->nowa) }}"
+                                                required maxlength="13">
+                                            <label for="floatingInput" class="fw-bold">No WA:</label>
+                                            @error('nowa')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {{-- Button --}}
+
+                            <!-- Button -->
                             <div class="card-footer">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-md-3 col-3 d-grid">
-                                        <a href="{{ route('danaks.index') }}" id="batal" class="btn btn-danger shadow"
-                                            danaks-bs-dismiss="card">Batal</a>
+                                        <a href="{{ route('danaks.index') }}" id="batal"
+                                            class="btn btn-danger shadow" danaks-bs-dismiss="card">Batal</a>
                                     </div>
                                     <div class="col-md-3 col-3 d-grid">
                                         <button class="btn btn-success shadow">Edit</button>

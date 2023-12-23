@@ -5,10 +5,10 @@
     <section class="home-section mb-5">
         <div class="container mt-5 pt-5">
             <div class="row d-flex justify-content-center">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="card shadow">
                         <div class="card-header" id="calc-stunting">
-                            <h1 class="card-title fs-3" id="examplecardLabel">Edit Data Posyandu</h1>
+                            <h1 class="card-title fs-3 fw-bold" id="examplecardLabel">Edit Data Posyandu</h1>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('dposyandus.update', $dposyandus->id) }}" method="POST"
@@ -20,12 +20,12 @@
                                     <input type="text" class="form-control" id="nama_posyandu" name="nama_posyandu"
                                         placeholder="Masukkan Nama Posyandu" value="{{ $dposyandus->nama_posyandu }}"
                                         required>
-                                    <label for="floatingInput">Nama Posyandu:</label>
+                                    <label for="floatingInput" class="fw-bold">Nama Posyandu:</label>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <textarea class="form-control" placeholder="Lokasi Posyandu" id="lokasi_posyandu" name="lokasi_posyandu"
                                         style="height: 100px">{{ $dposyandus->lokasi_posyandu }}</textarea>
-                                    <label for="floatingTextarea2">Lokasi Posyandu:</label>
+                                    <label for="floatingTextarea2" class="fw-bold">Lokasi Posyandu:</label>
                                 </div>
 
 

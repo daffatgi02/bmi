@@ -14,10 +14,11 @@ class BidanController extends Controller
      */
     public function index()
     {
+        $title="Dashboard";
         $danaks = Danak::all();
         $dbulans = Dbulan::all();
         $dposyandus = Dposyandu::all();
-        return view('bidan.index', compact('danaks', 'dposyandus', 'dbulans'));
+        return view('bidan.index', compact('danaks', 'dposyandus', 'dbulans', 'title'));
     }
 
     /**

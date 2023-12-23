@@ -4,15 +4,15 @@
     @include('layouts.navbar')
     <section class="home-section mb-5">
         <div class="content">
-            <h1 class="m-3 text-decoration-underline">Halaman Data Bulanan</h1>
-            <div class="container">
-                <div class="row mt-4 justify-content-center">
+            <div class="container mt-3 pt-3">
+                <div class="row justify-content-center">
+                    <h1 class="fw-bold h mb-4">Halaman Data Bulanan</h1>
                     <div class="col-12 col-lg-6 mb-5 d-flex">
                         <form action="{{ route('dbulanans.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card shadow">
                                 <div class="card-header" id="calc-stunting">
-                                    <h3>Input Data</h3>
+                                    <h3 class="fw-bold">Input Data</h3>
                                 </div>
 
                                 <div class="card-body">
@@ -73,11 +73,31 @@
                                                 <label class="d-md-none d-block" for="tb_anak">Tinggi Badan</label>
                                             </div>
                                         </div>
+                                        {{-- LIla --}}
+                                        <div class="col-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="number" class="form-control border border-dark-subtle"
+                                                    id="lk_anak" name="lk_anak" placeholder="Masukan Lingkar Kepala (CM)"
+                                                    value="0" required onclick="selectAllText(this);"
+                                                    onfocus="selectAllText(this);">
+                                                <label class="d-md-block d-none" for="lk_anak">Lingkar Kepala (CM)</label>
+                                                <label class="d-md-none d-block" for="lk_anak">Lingkar Kepala</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="number" class="form-control border-dark-subtle" id="ll_anak"
+                                                    name="ll_anak" placeholder="Masukan Lingkar Lengan (CM)" value="0"
+                                                    required onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                                <label class="d-md-block d-none" for="ll_anak">Lingkar Lengan (CM)</label>
+                                                <label class="d-md-none d-block" for="ll_anak">Lingkar Lengan</label>
+                                            </div>
+                                        </div>
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control border-dark-subtle" id="st_anak"
-                                                    name="st_anak" placeholder="Status Anak" required readonly
-                                                    value="- Silahkan Masukan Data">
+                                                <input type="text" class="form-control border-dark-subtle"
+                                                    id="st_anak" name="st_anak" placeholder="Status Anak" required
+                                                    readonly value="- Silahkan Masukan Data">
                                                 <label for="st_anak">Status Aanak</label>
                                             </div>
                                         </div>
@@ -96,10 +116,6 @@
                                 </div>
                             </div>
                         </form>
-                        {{-- <div>
-                            <a href="#totabel" class="btn btn-info ms-2 d-md-block d-none"><i class="bi bi-table"></i>
-                                Tabel</a>
-                        </div> --}}
                     </div>
 
                     <div class="col-12 col-lg-6 mb-4">
@@ -121,10 +137,10 @@
                                 <thead class="table-warning">
                                     <tr>
                                         <th>id</th>
-                                        <th style="background-color: #272343; color:#E3F6F5">Urutan</th>
-                                        <th style="background-color: #272343; color:#E3F6F5" class="w-50">Nama</th>
-                                        <th style="background-color: #272343; color:#E3F6F5" class="w-50">Posyandu</th>
-                                        <th style="background-color: #272343; color:#E3F6F5" class="w-50">Opsi</th>
+                                        <th id="th">Urutan</th>
+                                        <th id="th" class="w-50">Nama</th>
+                                        <th id="th" class="w-50">Posyandu</th>
+                                        <th id="th" class="w-50">Opsi</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -140,14 +156,15 @@
                                 <tr>
                                     {{-- <th class="text-center">id</th>
                                     <th class="text-center">No.</th> --}}
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Nama</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Umur</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Jenis Kelamin
+                                    <th id="th" class="text-center">Nama</th>
+                                    <th id="th" class="text-center">Umur</th>
+                                    <th id="th" class="text-center">Jenis Kelamin
                                     </th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Status</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Tanggal
+                                    <th id="th" class="text-center">Status</th>
+                                    <th id="th" class="text-center">Tanggal
                                         Priksa</th>
-                                    <th style="background-color: #272343; color:#E3F6F5" class="text-center">Posyandu</th>
+                                    <th id="th" class="text-center">Posyandu</th>
+                                    <th id="th" class="text-center">Opsi</th>
                                 </tr>
                             </thead>
                         </table>
@@ -158,16 +175,16 @@
                 {{-- Script --}}
                 <script>
                     // Mendapatkan elemen select dengan class 'form-select' dan id 'danaks_id'
-                    var select = document.getElementById('danaks_id');
+                    let select = document.getElementById('danaks_id');
 
                     // Mendapatkan elemen input dengan id 'umur_periksa'
-                    var umurInput = document.getElementById('umur_periksa');
+                    let umurInput = document.getElementById('umur_periksa');
 
                     // Menambahkan event listener untuk mengubah nilai input saat opsi dipilih
                     select.addEventListener('change', function() {
                         // Mendapatkan umur dari data-umur pada opsi yang dipilih
-                        var selectedOption = select.options[select.selectedIndex];
-                        var umur = selectedOption.getAttribute('data-umur');
+                        let selectedOption = select.options[select.selectedIndex];
+                        let umur = selectedOption.getAttribute('data-umur');
 
                         // Memasukkan nilai umur ke dalam input 'umur_periksa'
                         umurInput.value = umur;
@@ -419,6 +436,15 @@
                         className: 'align-middle',
                         width: "25%",
                         searchable: true,
+
+                    },
+                    {
+                        data: "actions2",
+                        name: "actions2",
+                        orderable: false,
+                        searchable: false,
+                        className: 'align-middle',
+                        width: "5%"
 
                     },
                 ],

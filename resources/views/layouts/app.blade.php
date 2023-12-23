@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Posyandu</title>
+    <title>Connect Pediatrics</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -38,7 +38,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <h4 id="nav-title" class="shadow">Connect Pediatrics</h4>
+                    <h4 id="nav-title" class="shadow fw-bold">Connect Pediatrics</h4>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

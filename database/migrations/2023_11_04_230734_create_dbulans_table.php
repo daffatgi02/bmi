@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('umur_periksa');
             $table->string("bb_anak");
             $table->string("tb_anak");
+            $table->string("lk_anak");
+            $table->string("ll_anak");
             $table->string("st_anak");
             $table->timestamps();
         });

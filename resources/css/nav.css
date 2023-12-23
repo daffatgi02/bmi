@@ -8,7 +8,7 @@
 }
 
 body{
-    background-color: #E3F6F5;
+    background-color: #fff;
 }
 
 .sidebar {
@@ -17,7 +17,7 @@ body{
   top: 0;
   height: 100%;
   width: 78px;
-  background: #272343;
+  background-color: #18543d;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -36,7 +36,7 @@ body{
   transition: all 0.5s ease;
 }
 .sidebar .logo-details .logo_name {
-  color: #E3F6F5;
+  color: #fff;
   font-size: 20px;
   font-weight: 600;
   opacity: 0;
@@ -62,7 +62,7 @@ body{
   text-align: right;
 }
 .sidebar i {
-  color: #272343;
+  color: #19573e;
   height: 60px;
   min-width: 50px;
   font-size: 28px;
@@ -84,12 +84,12 @@ body{
   top: -20px;
   left: calc(100% + 15px);
   z-index: 3;
-  background: #272343;
+  background: #19573e;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: bold;
   opacity: 0;
   white-space: nowrap;
   pointer-events: none;
@@ -115,15 +115,15 @@ body{
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #E3F6F5;
+  background: #fff;
 }
 .sidebar li a:hover {
-  background: #BAE8E8;
+  background: #42E6A4;
 }
 .sidebar li a .links_name {
-  color: #272343;
+  color: #19573e;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: bold;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
@@ -136,7 +136,10 @@ body{
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i {
   transition: all 0.5s ease;
-  color: #11101d;
+  color: #19573e;
+}
+.sidebar li a .out {
+  color: #fff;
 }
 .sidebar li a .out:hover {
   transition: all 0.5s ease;
@@ -155,7 +158,7 @@ body{
   left: 0;
   bottom: -8px;
   padding: 10px 14px;
-  background: #1d1b31;
+  background: #0d2d20;
   transition: all 0.5s ease;
   overflow: hidden;
 }
@@ -181,7 +184,7 @@ body{
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  background: #1d1b31;
+  background: #0d2d20;
   width: 100%;
   height: 60px;
   line-height: 60px;
@@ -216,54 +219,89 @@ body{
   }
 }
 
+
+
 #tabel_antrian_filter input[type="search"] {
     display: none;
     /* Geser ke luar layar */
 }
 
-#btn-tambah {
-    background-color: #272343;
-    color: #E3F6F5;
+#btn-tambah{
+    color: #fff;
+    background-color: #19573e;
 }
-
-/* Ketika dihover */
-#btn-tambah:hover {
-    background-color: #4f4975;
-    color: #E3F6F5;
+#btn-tambah:hover{
+    background-color: rgb(25, 87, 62, 0.7);
+    color: #fff;
 }
 
 
 .badge {
-    color: #272343;
-    background-color: #E3F6F5;
+    color: #19573e;
+    background-color: #fff;
 }
 
 /* Ketika dihover */
 .badge:hover {
-    background-color: #4f4975;
-    color: #E3F6F5;
+    background-color: #42E6A4;
+    color: #19573e;
 }
 .badge.active {
-    background-color: #4f4975;
-    color: #E3F6F5;
+    background-color: rgb(65, 230, 164, 0.7);
+    color: #19573e;
 }
+
 
 #btn-detail-dashboard {
     color: #272343;
-    background-color: #E3F6F5;
+    background-color: rgb(64, 230, 163,0.3);
 }
 
 /* Ketika dihover */
 #btn-detail-dashboard:hover {
-    background-color: #4f4975;
-    color: #E3F6F5;
+    background-color: rgb(64, 230, 163, 1);
+    color: #103727;
 }
 
 #calc-stunting{
-    background-color: #272343;
-    color: #fff;
+    background-color: #42E6A4;
+    color: #103727;
 }
 
-label {
-    font-weight: bold;
+#card-dash{
+    background-color: #42E6A4;
+    color: #103727;
+}
+#card-body-dash{
+    color: #103727;
+    background-color: #fff;
+}
+
+.modal-title{
+    padding-top:3px;
+    padding-bottom: 3px;
+    padding-left: 25px;
+    padding-right: 25px;
+    color: #103727;
+    background-color: #42E6A4;
+    border-radius: 8px;
+}
+
+#th{
+    background-color: #42E6A4;
+    color: #103727;
+}
+
+
+h1.fw-bold.h{
+    color: #103727;
+}
+
+.btn-success-cp{
+    background-color:rgb(65, 230, 164, 0.3);
+    color: #19573e;
+}
+.btn-success-cp:hover{
+    background-color: rgb(65, 230, 164, 1);
+    color: #0d3122;
 }

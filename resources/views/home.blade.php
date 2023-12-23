@@ -6,7 +6,7 @@
             <div class="col-md-8 mt-md-5 mt-5 pt-md-0 pt-5">
                 <h1>Akun Sudah Teregistrasi</h1>
                 <div class="card">
-                    <div class="card-header">Innformasi</div>
+                    <div class="card-header fw-bold" id="calc-stunting">Informasi</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -17,7 +17,7 @@
 
                         Akun <b>{{ Auth::user()->name }}</b> sudah Teregistrasi sebagai!
                         <br>
-                        <a class="btn btn-primary mt-5" href="{{ route('logout') }}"
+                        <a class="btn btn-logreg fw-bold mt-5" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             Masuk

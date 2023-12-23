@@ -20,10 +20,10 @@
                         <thead class="table-warning">
                             <tr>
                                 <th>id</th>
-                                <th style="background-color: #272343; color:#E3F6F5">Urutan</th>
-                                <th style="background-color: #272343; color:#E3F6F5" class="w-50">Nama</th>
-                                <th style="background-color: #272343; color:#E3F6F5" class="w-50">Posyandu</th>
-                                <th style="background-color: #272343; color:#E3F6F5" class="w-50">Opsi</th>
+                                <th id="th">Urutan</th>
+                                <th id="th" class="w-50">Nama</th>
+                                <th id="th" class="w-50">Posyandu</th>
+                                <th id="th" class="w-50">Opsi</th>
                             </tr>
                         </thead>
                     </table>
@@ -34,7 +34,7 @@
                     @csrf
                     <div class="card shadow">
                         <div class="card-header" id="calc-stunting">
-                            <h3>Input Data</h3>
+                            <h3 class="fw-bold">Input Data</h3>
                         </div>
 
                         <div class="card-body">
@@ -90,6 +90,25 @@
                                             onclick="selectAllText(this);" onfocus="selectAllText(this);">
                                         <label class="d-md-block d-none" for="tb_anak">Tinggi Badan (CM)</label>
                                         <label class="d-md-none d-block" for="tb_anak">Tinggi Badan</label>
+                                    </div>
+                                </div>
+                                {{-- LIla --}}
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control border border-dark-subtle" id="lk_anak"
+                                            name="lk_anak" placeholder="Masukan Lingkar Kepala (CM)" value="0" required
+                                            onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                        <label class="d-md-block d-none" for="lk_anak">Lingkar Kepala (CM)</label>
+                                        <label class="d-md-none d-block" for="lk_anak">Lingkar Kepala</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control border-dark-subtle" id="ll_anak"
+                                            name="ll_anak" placeholder="Masukan Lingkar Lengan (CM)" value="0"
+                                            required onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                        <label class="d-md-block d-none" for="ll_anak">Lingkar Lengan (CM)</label>
+                                        <label class="d-md-none d-block" for="ll_anak">Lingkar Lengan</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
