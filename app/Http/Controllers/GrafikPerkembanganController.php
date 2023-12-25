@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\GrafikPerkembanganChart;
 use Illuminate\Http\Request;
 
 class GrafikPerkembanganController extends Controller
@@ -9,11 +10,14 @@ class GrafikPerkembanganController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(GrafikPerkembanganChart $chart)
     {
-        $title="Data Grafik Perkembangan";
-        return view("bidan.grafikperkembangan", compact('title'));
-
+        $title = "Data Grafik Perkembangan";
+        return view(
+            "bidan.grafikperkembangan",
+            compact('title'),
+            ['chart' => $chart->build()]
+        );
     }
 
     /**

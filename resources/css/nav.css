@@ -1,222 +1,314 @@
 /* Google Font Link */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
-body{
+body {
     background-color: #fff;
 }
 
 .sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 78px;
-  background-color: #18543d;
-  padding: 6px 14px;
-  z-index: 99;
-  transition: all 0.5s ease;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 78px;
+    background-color: #18543d;
+    padding: 6px 14px;
+    z-index: 99;
+    transition: all 0.5s ease;
 }
+
 .sidebar.open {
-  width: 280px;
+    width: 280px;
 }
+
 .sidebar .logo-details {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
+
 .sidebar .logo-details .icon {
-  opacity: 0;
-  transition: all 0.5s ease;
+    opacity: 0;
+    transition: all 0.5s ease;
 }
+
 .sidebar .logo-details .logo_name {
-  color: #fff;
-  font-size: 20px;
-  font-weight: 600;
-  opacity: 0;
-  transition: all 0.5s ease;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.5s ease;
 }
+
 .sidebar.open .logo-details .icon,
 .sidebar.open .logo-details .logo_name {
-  opacity: 1;
+    opacity: 1;
 }
+
 .sidebar .logo-details #btn {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  font-size: 22px;
-  transition: all 0.4s ease;
-  font-size: 23px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.5s ease;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: all 0.4s ease;
+    font-size: 23px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
 }
+
 .sidebar.open .logo-details #btn {
-  text-align: right;
+    text-align: right;
 }
+
 .sidebar i {
-  color: #19573e;
-  height: 60px;
-  min-width: 50px;
-  font-size: 28px;
-  text-align: center;
-  line-height: 60px;
+    color: #19573e;
+    height: 60px;
+    min-width: 50px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
 }
+
 .sidebar .nav-list {
-  margin-top: 20px;
-  margin-left: -30px;
-  height: 100%;
+    margin-top: 20px;
+    margin-left: -30px;
+    height: 100%;
 }
+
 .sidebar li {
-  position: relative;
-  margin: 8px 0;
-  list-style: none;
+    position: relative;
+    margin: 8px 0;
+    list-style: none;
 }
+
 .sidebar li .tooltip {
-  position: absolute;
-  top: -20px;
-  left: calc(100% + 15px);
-  z-index: 3;
-  background: #19573e;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: bold;
-  opacity: 0;
-  white-space: nowrap;
-  pointer-events: none;
-  transition: 0s;
-  color: #fff;
+    position: absolute;
+    top: -20px;
+    left: calc(100% + 18px);
+    z-index: 3;
+    background: #19573e;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: 0s;
+    color: #fff;
 }
+
 .sidebar li:hover .tooltip {
-  opacity: 1;
-  pointer-events: auto;
-  transition: all 0.4s ease;
-  top: 50%;
-  transform: translateY(-50%);
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+    top: 50%;
+    transform: translateY(-50%);
 }
+
 .sidebar.open li .tooltip {
-  display: none;
+    display: none;
 }
 
 .sidebar li a {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  border-radius: 12px;
-  align-items: center;
-  text-decoration: none;
-  transition: all 0.4s ease;
-  background: #fff;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    background: #fff;
 }
+
 .sidebar li a:hover {
-  background: #42E6A4;
+    background: #42E6A4;
 }
+
 .sidebar li a .links_name {
-  color: #19573e;
-  font-size: 15px;
-  font-weight: bold;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.4s;
+    color: #19573e;
+    font-size: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
 }
+
 .sidebar.open li a .links_name {
-  opacity: 1;
-  pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
+
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i {
-  transition: all 0.5s ease;
-  color: #19573e;
+    transition: all 0.5s ease;
+    color: #19573e;
 }
+
 .sidebar li a .out {
-  color: #fff;
+    color: #fff;
 }
+
 .sidebar li a .out:hover {
-  transition: all 0.5s ease;
-  color: red;
+    transition: all 0.5s ease;
+    color: red;
 }
+
 .sidebar li i {
-  height: 50px;
-  line-height: 50px;
-  font-size: 18px;
-  border-radius: 12px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    border-radius: 12px;
 }
+
 .sidebar li.profile {
-  position: fixed;
-  height: 60px;
-  width: 78px;
-  left: 0;
-  bottom: -8px;
-  padding: 10px 14px;
-  background: #0d2d20;
-  transition: all 0.5s ease;
-  overflow: hidden;
+    position: fixed;
+    height: 60px;
+    width: 78px;
+    left: 0;
+    bottom: -8px;
+    padding: 10px 14px;
+    background: #0d2d20;
+    transition: all 0.5s ease;
+    overflow: hidden;
 }
+
 .sidebar.open li.profile {
-  width: 280px;
+    width: 280px;
 }
+
 .sidebar li .profile-details {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
 }
+
 .sidebar li.profile .name {
-  font-size: 15px;
-  font-weight: 400;
-  color: #fff;
-  white-space: nowrap;
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+    white-space: nowrap;
 }
+
 .sidebar li.profile .job {
-  font-size: 12px;
+    font-size: 12px;
 }
+
 .sidebar .profile #log_out {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  background: #0d2d20;
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  border-radius: 0px;
-  transition: all 0.5s ease;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background: #0d2d20;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 0px;
+    transition: all 0.5s ease;
 
 }
+
 .sidebar.open .profile #log_out {
-  width: 50px;
-  background: none;
+    width: 50px;
+    background: none;
 }
+
 .home-section {
-  position: relative;
-  /* background: #E3F6F5; */
-  /* min-height: 100vh; */
-  top: 0;
-  left: 78px;
-  width: calc(100% - 78px);
-  transition: all 0.5s ease;
-  z-index: 2;
+    position: relative;
+    /* background: #E3F6F5; */
+    /* min-height: 100vh; */
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
 }
-.sidebar.open ~ .home-section {
-  left: 280px;
-  width: calc(99% - 280px);
+
+.sidebar.open~.home-section {
+    left: 280px;
+    width: calc(99% - 280px);
 }
-@media (max-width: 420px) {
-  .sidebar li .tooltip {
+
+.navbar {
     display: none;
-  }
-  .sidebar #btn {
-    display: none;
-  }
+}
+
+/* MEDIA QUERRY */
+@media (max-width: 500px) {
+    .sidebar li .tooltip {
+        display: none;
+    }
+
+    .sidebar #btn {
+        display: none;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .home-section {
+        position: relative;
+        /* background: #E3F6F5; */
+        /* min-height: 100vh; */
+        top: 0;
+        left: 10px;
+        width: calc(100% - 10px);
+        transition: all 0.5s ease;
+        z-index: 2;
+    }
+
+    .navbar {
+        display: block;
+        background-color: #18543d;
+    }
+
+    #offcanvasNavbar {
+        width: 70%;
+    }
+
+    .offcanvas-body .nav-list li {
+        list-style: none;
+        border: rgb(16, 55, 39) solid 2px;
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: rgb(66, 230, 164, 0.2);
+        width: 105%;
+        margin-left: -15px;
+    }
+
+    .offcanvas-body .nav-list li a {
+        color: #0d3122;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    #btn-logout{
+        margin-top: 40px;
+        list-style: none;
+        border: rgb(201, 255, 233) solid 2px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: rgb(255, 0, 0, 0.2);
+        font-weight: bold;
+    }
+    .tooltip{
+        display: none;
+    }
+
 }
 
 
@@ -226,11 +318,12 @@ body{
     /* Geser ke luar layar */
 }
 
-#btn-tambah{
+#btn-tambah {
     color: #fff;
     background-color: #19573e;
 }
-#btn-tambah:hover{
+
+#btn-tambah:hover {
     background-color: rgb(25, 87, 62, 0.7);
     color: #fff;
 }
@@ -246,6 +339,7 @@ body{
     background-color: #42E6A4;
     color: #19573e;
 }
+
 .badge.active {
     background-color: rgb(65, 230, 164, 0.7);
     color: #19573e;
@@ -254,7 +348,7 @@ body{
 
 #btn-detail-dashboard {
     color: #272343;
-    background-color: rgb(64, 230, 163,0.3);
+    background-color: rgb(64, 230, 163, 0.3);
 }
 
 /* Ketika dihover */
@@ -263,22 +357,23 @@ body{
     color: #103727;
 }
 
-#calc-stunting{
+#calc-stunting {
     background-color: #42E6A4;
     color: #103727;
 }
 
-#card-dash{
+#card-dash {
     background-color: #42E6A4;
     color: #103727;
 }
-#card-body-dash{
+
+#card-body-dash {
     color: #103727;
     background-color: #fff;
 }
 
-.modal-title{
-    padding-top:3px;
+.modal-title {
+    padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 25px;
     padding-right: 25px;
@@ -287,21 +382,22 @@ body{
     border-radius: 8px;
 }
 
-#th{
+#th {
     background-color: #42E6A4;
     color: #103727;
 }
 
 
-h1.fw-bold.h{
+h1.fw-bold.h {
     color: #103727;
 }
 
-.btn-success-cp{
-    background-color:rgb(65, 230, 164, 0.3);
+.btn-success-cp {
+    background-color: rgb(65, 230, 164, 0.3);
     color: #19573e;
 }
-.btn-success-cp:hover{
+
+.btn-success-cp:hover {
     background-color: rgb(65, 230, 164, 1);
     color: #0d3122;
 }

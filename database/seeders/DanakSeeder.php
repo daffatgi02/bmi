@@ -13,7 +13,7 @@ class DanakSeeder extends Seeder
      */
     public function run(): void
     {
-        Danak::factory()->count(80)->create();
+        Danak::factory()->count(300)->create();
 
     }
 }
