@@ -59,8 +59,8 @@
                                 <div class="d-flex">
                                     <h1 class="me-2 fw-bold">{{ $dbulans->count() }}</h1>
                                     <p class="fw-bold">
-                                        Stunting: {{ $dbulans->where('st_anak', 'Stunting')->count() }} <br>
-                                        Tidak Stunting: {{ $dbulans->where('st_anak', 'Tidak Stunting')->count() }}
+                                        Gizi Baik: {{ $dbulans->where('st_anak', 'Gizi Baik')->count() }} <br>
+                                        Gizi Buruk: {{ $dbulans->where('st_anak', 'Gizi Buruk')->count() }}
                                     </p>
                                 </div>
                                 <a href="{{ route('dbulanans.index') }}" class="btn btn-light fw-bold"

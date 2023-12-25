@@ -305,15 +305,15 @@
 
                             if (jkValue === 'L') {
                                 if (st_anakValue <= 10) {
-                                    st_anakInput.value = "Stunting";
+                                    st_anakInput.value = "Gizi Buruk";
                                 } else {
-                                    st_anakInput.value = "Tidak Stunting";
+                                    st_anakInput.value = "Gizi Baik";
                                 }
                             } else if (jkValue === 'P') {
                                 if (st_anakValue <= 10) {
-                                    st_anakInput.value = "Tidak Stunting";
+                                    st_anakInput.value = "Gizi Baik";
                                 } else {
-                                    st_anakInput.value = "Stunting";
+                                    st_anakInput.value = "Gizi Buruk";
                                 }
                             }
                         } else {
@@ -397,10 +397,10 @@
                         className: ' align-middle',
                         width: "15%",
                         render: function(data, type, row, meta) {
-                            if (data === 'Tidak Stunting') {
+                            if (data === 'Gizi Baik') {
                                 return '<span style="color: green; font-weight:bold ">' +
                                     data + '</span>';
-                            } else if (data === 'Stunting') {
+                            } else if (data === 'Gizi Buruk') {
                                 return '<span style="color: red; font-weight:bold  ">' +
                                     data + '</span>';
                             } else {

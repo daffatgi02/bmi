@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\DetailChart;
 use App\Models\Danak;
 use App\Models\Dposyandu;
 use Illuminate\Http\Request;
@@ -111,7 +112,11 @@ class DataAnakController extends Controller
 
         $dposyandu = Dposyandu::all();
 
-        return view('actions.editanak', compact('danaks', 'dposyandu', 'title'));
+
+        return view(
+            'actions.editanak',
+            compact('danaks', 'dposyandu', 'title'),
+        );
     }
 
     /**

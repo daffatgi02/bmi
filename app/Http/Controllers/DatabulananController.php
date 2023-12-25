@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\DetailChart;
 use App\Models\Danak;
 use App\Models\Dantrian;
 use App\Models\Dbulan;
@@ -88,22 +89,37 @@ class DatabulananController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, DetailChart $chart)
     {
-        //
+        // ELOQUENT
+        $title = "E-KMS Anak";
+        $dbulanans = Dbulan::find($id);
+        $danaks = Danak::all();
+
+        return view(
+            'actions.detailbulanan',
+            compact('dbulanans',   'danaks', 'title'),
+            ['chart' => $chart->build('dbulanans')]
+        );
+
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, DetailChart $chart)
     {
         // ELOQUENT
         $title = "Edit Data Bulanan Anak";
         $dbulanans = Dbulan::find($id);
         $danaks = Danak::all();
 
-        return view('actions.editbulanan', compact('dbulanans', 'danaks', 'title'));
+        return view(
+            'actions.editbulanan',
+            compact('dbulanans', 'danaks', 'title'),
+            ['chart' => $chart->build()]
+        );
     }
 
     /**

@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Dantrian;
-use App\Models\Dposyandu;
+
 use Illuminate\Database\Seeder;
 
 
@@ -19,6 +18,7 @@ class DatabaseSeeder extends Seeder
           DanakSeeder::class,
           DposyanduSeeder::class,
           DantrianSeeder::class,
+          DbulanSeeder::class,
         ]);
     }
 }
