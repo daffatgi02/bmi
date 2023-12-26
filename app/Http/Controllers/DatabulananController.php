@@ -89,26 +89,28 @@ class DatabulananController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id, DetailChart $chart)
+    public function show(string $danaks_id, DetailChart $chart)
     {
         // ELOQUENT
         $title = "E-KMS Anak";
-        $dbulanans = Dbulan::find($id);
+        $dbulanans = Dbulan::find($danaks_id);
         $danaks = Danak::all();
+
+        // Assuming 'danaks_id' is extracted from the URL parameter $id
+        // $danaksId = $id; // Adjust this part based on how you retrieve the danaks_id
 
         return view(
             'actions.detailbulanan',
-            compact('dbulanans',   'danaks', 'title'),
-            ['chart' => $chart->build('dbulanans')]
+            compact('dbulanans', 'danaks', 'title'),
+            ['chart' => $chart->build($danaks_id)]
         );
-
-
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id, DetailChart $chart)
+    public function edit(string $id)
     {
         // ELOQUENT
         $title = "Edit Data Bulanan Anak";
@@ -118,7 +120,6 @@ class DatabulananController extends Controller
         return view(
             'actions.editbulanan',
             compact('dbulanans', 'danaks', 'title'),
-            ['chart' => $chart->build()]
         );
     }
 

@@ -6,8 +6,7 @@
         <div class="container mt-3 pt-3">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-10">
-
-                    {{-- {{ $dbulanans->danaks->nama_anak }} --}}
+                    
                     {!! $chart->container() !!}
 
                 </div>

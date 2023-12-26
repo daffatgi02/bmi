@@ -55,6 +55,7 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
 
 
 
+
         // DataPosyanduController
         Route::resource('dposyandus', DataPosyanduController::class);
         Route::get('gettabelposyandu', [DataPosyanduController::class, 'getData'])->name('dposyandus.getData');
