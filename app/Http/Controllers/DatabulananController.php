@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Charts\DetailChart;
+use App\Exports\DbulanExport;
 use App\Models\Danak;
 use App\Models\Dantrian;
 use App\Models\Dbulan;
 use App\Models\Dposyandu;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DatabulananController extends Controller
@@ -54,6 +56,12 @@ class DatabulananController extends Controller
     }
 
 
+    public function exportbulanan()
+    {
+        return Excel::download(new DbulanExport, 'Data-Bulanan.xlsx');
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -71,6 +79,7 @@ class DatabulananController extends Controller
         $dbulans = new Dbulan();
         $dbulans->danaks_id = $request->danaks_id;
         $dbulans->umur_periksa = $request->umur_periksa;
+        $dbulans->nama_posyandu = $request->nama_posyandu;
         $dbulans->bb_anak = $request->bb_anak;
         $dbulans->tb_anak = $request->tb_anak;
         $dbulans->lk_anak = $request->lk_anak;
@@ -94,14 +103,13 @@ class DatabulananController extends Controller
         // ELOQUENT
         $title = "E-KMS Anak";
         $dbulanans = Dbulan::find($danaks_id);
-        $danaks = Danak::all();
 
         // Assuming 'danaks_id' is extracted from the URL parameter $id
         // $danaksId = $id; // Adjust this part based on how you retrieve the danaks_id
 
         return view(
             'actions.detailbulanan',
-            compact('dbulanans', 'danaks', 'title'),
+            compact('dbulanans', 'title'),
             ['chart' => $chart->build($danaks_id)]
         );
     }

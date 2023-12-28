@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('danaks', function (Blueprint $table) {
             $table->id();
-            $table->string("nama_anak");
-            $table->string("tempat_lahir");
-            $table->date("tanggal_lahir");
-            // $table->string("umur");
-            $table->string("jk");
-            $table->string("t_posyandu");
+            $table->foreignId('dposyandu_id')->constrained();
             $table->string("nik_anak");
-            $table->string("nowa");
+            $table->string("nama_anak");
+            $table->date("tanggal_lahir");
+            $table->string("jk");
+            $table->string("nama_ortu");
+            $table->string("nik_ortu");
+            $table->string("hp_ortu");
             $table->timestamps();
         });
     }

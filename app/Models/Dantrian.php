@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dantrian extends Model
 {
     use HasFactory;
-    public function dposyandu()
+    public function dposyandus()
     {
         return $this->belongsTo(Dposyandu::class);
     }
