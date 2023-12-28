@@ -21,14 +21,12 @@
                                 <tr>
                                     <th id="th" class="text-center">id</th>
                                     <th id="th" class="text-center">No.</th>
-                                    <th id="th" class="text-center w-50">Nama</th>
-                                    <th id="th" class="text-center">NIK</th>
+                                    <th id="th" class="text-center w-25">Nama</th>
+                                    <th id="th" class="text-center  w-25">NIK</th>
                                     <th id="th" class="text-center">No WA</th>
                                     <th id="th" class="text-center">Jenis Kelamin
                                     </th>
-                                    <th id="th" class="text-center w-25">Tempat
-                                        Lahir</th>
-                                    <th id="th" class="text-center">Umur</th>
+                                    <th id="th" class="text-center  w-25">Umur</th>
                                     <th id="th" class="text-center">Tanggal Lahir
                                     </th>
                                     <th id="th" class="text-center w-25">Posyandu
@@ -101,8 +99,8 @@
 
                     },
                     {
-                        data: "nowa",
-                        name: "nowa",
+                        data: "hp_ortu",
+                        name: "hp_ortu",
                         className: 'align-middle',
                         visible: false,
 
@@ -113,12 +111,6 @@
                         className: 'align-middle',
 
                     },
-                    {
-                        data: "tempat_lahir",
-                        name: "tempat_lahir",
-                        className: 'align-middle',
-
-                    },
                     // logika untuk mendapatkan umur
                     {
                         data: "tanggal_lahir",
@@ -126,7 +118,6 @@
                         className: 'align-middle',
                         render: function(data, type, row) {
                             if (type === 'display' || type === 'filter') {
-                                // Hitung umur berdasarkan tanggal_lahir
                                 var birthDate = new Date(data);
                                 var today = new Date();
                                 var ageDate = new Date(today - birthDate);
@@ -134,7 +125,6 @@
                                 var months = ageDate.getUTCMonth();
                                 var days = ageDate.getUTCDate() - 1;
 
-                                // Aturan penampilan umur
                                 if (years < 1) {
                                     if (months < 1) {
                                         return "±" + days + " hari";
@@ -142,13 +132,17 @@
                                         return months + " bulan";
                                     }
                                 } else {
-                                    return years + " tahun";
+                                    var ageString = years + " tahun";
+                                    if (months > 0) {
+                                        ageString += " " + months + " bulan";
+                                    }
+                                    return ageString;
                                 }
                             } else {
-                                // Tampilkan data tanggal_lahir biasa untuk pengurutan
                                 return data;
                             }
-                        },
+                        }
+
                     },
 
                     {
@@ -174,8 +168,8 @@
 
                     },
                     {
-                        data: "t_posyandu",
-                        name: "t_posyandu",
+                        data: "dposyandu.nama_posyandu",
+                        name: "dposyandu.nama_posyandu",
                         className: 'align-middle',
                         width: "10%",
                     },

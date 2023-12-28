@@ -5,7 +5,7 @@
     <section class="home-section mb-5">
         <div class="container mt-3 pt-3">
             <div class="row d-flex justify-content-center">
-                <div class="col-md-10">
+                <div class="col-lg-6 col-md-8 col-sm-10">
                     <div class="card shadow">
                         <div class="card-header" id="calc-stunting">
                             <h1 class="card-title fs-3 fw-bold" id="examplecardLabel">Edit Data Bulanan Anak</h1>
@@ -113,9 +113,9 @@
                     // Implement the logic here based on your requirements
                     // Example logic (please modify based on your requirements):
                     if (st_anakValue <= 10) {
-                        st_anakInput.value = "Stunting";
+                        st_anakInput.value = "Gizi Buruk";
                     } else {
-                        st_anakInput.value = "Tidak Stunting";
+                        st_anakInput.value = "Gizi Baik";
                     }
                 } else {
                     st_anakInput.value = '- Inputan Tidak Valid';

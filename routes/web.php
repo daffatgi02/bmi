@@ -52,6 +52,7 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
         Route::resource('dbulanans', DatabulananController::class);
         Route::get('gettabelbulanan', [DatabulananController::class, 'getData'])->name('dbulanans.getData');
         Route::get('gettabelantrian1', [DatabulananController::class, 'getData2'])->name('antrians.getData');
+        Route::get('exportbulanan', [DatabulananController::class, 'exportbulanan'])->name('exportbulanan');
 
 
 
@@ -64,6 +65,7 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
 
         // GrafikPerkembanganController
         Route::resource('gperkembangans', GrafikPerkembanganController::class);
+
     });
 
 

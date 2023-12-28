@@ -33,17 +33,28 @@
 
                                                 @foreach ($danaks->sortBy('nama_anak') as $data)
                                                     @php
-                                                        // Mendapatkan umur dari perbedaan tanggal sekarang dengan tanggal lahir
                                                         $tanggal_lahir = new DateTime($data->tanggal_lahir);
                                                         $sekarang = new DateTime();
                                                         $umur = $tanggal_lahir->diff($sekarang);
-                                                        $umurTotal = $umur->y < 1 ? ($umur->m < 1 ? '±' . $umur->d . ' hari' : $umur->m . ' bulan') : $umur->y . ' tahun';
+
+                                                        if ($umur->y < 1) {
+                                                            if ($umur->m < 1) {
+                                                                $umurTotal = '±' . $umur->d . ' hari';
+                                                            } else {
+                                                                $umurTotal = $umur->m . ' bulan';
+                                                            }
+                                                        } else {
+                                                            $umurTotal = $umur->y . ' tahun';
+                                                            if ($umur->m > 0) {
+                                                                $umurTotal .= ' ' . $umur->m . ' bulan';
+                                                            }
+                                                        }
                                                     @endphp
                                                     <option
                                                         class="border border-dark-subtle mb-2 px-2 overflow-auto overflow-md-hidden"
                                                         value="{{ $data->id }}" {{-- untuk rumus stunting --}}
                                                         data-jk="{{ $data->jk }}"
-                                                        data-t_posyandu="{{ $data->t_posyandu }}"
+                                                        data-nama_posyandu="{{ $data->dposyandu->nama_posyandu }}"
                                                         data-umur="{{ $umurTotal }}"> <!-- Menambahkan data-umur -->
                                                         - {{ $data->nama_anak }} | {{ $data->nik_anak }}
                                                     </option>
@@ -55,6 +66,7 @@
                                         <div class="col-6">
                                             {{-- Untuk Umur Periksa --}}
                                             <input type="text" id="umur_periksa" name="umur_periksa" class="d-none">
+                                            <input type="text" id="nama_posyandu" name='nama_posyandu' class="d-none">
                                             <div class="form-floating mb-3">
                                                 <input type="number" class="form-control border border-dark-subtle"
                                                     id="bb_anak" name="bb_anak" placeholder="Masukan Berat Badan (KG)"
@@ -149,14 +161,25 @@
 
 
                     <div class="col-12">
-                        <h2 class="d-block mt-2" id="totabel"> Tabel Bulanan:</h2>
+                        <div class="row align-items-center mb-3">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <h2 class="d-block mt-2" id="totabel"> Tabel Bulanan:</h2>
+
+                            </div>
+                            <div class="col-lg-8 col-md-6 col-12 d-flex justify-content-md-end">
+                                <a href="{{ route('exportbulanan') }}" class="btn btn-success">
+                                    <i class="bi bi-file-earmark-spreadsheet"></i> Excel
+                                </a>
+                            </div>
+                        </div>
+
                         <table class="table table-striped table-hover table-bordered datatable shadow" id="tabelbulanan"
                             style="width: 100%">
                             <thead class="fw-bold">
                                 <tr>
                                     {{-- <th class="text-center">id</th>
                                     <th class="text-center">No.</th> --}}
-                                    <th id="th" class="text-center">Nama</th>
+                                    <th id="th" class="text-center w-25">Nama</th>
                                     <th id="th" class="text-center">Umur</th>
                                     <th id="th" class="text-center">Jenis Kelamin
                                     </th>
@@ -179,15 +202,18 @@
 
                     // Mendapatkan elemen input dengan id 'umur_periksa'
                     let umurInput = document.getElementById('umur_periksa');
+                    let posyanduInput = document.getElementById('nama_posyandu');
 
                     // Menambahkan event listener untuk mengubah nilai input saat opsi dipilih
                     select.addEventListener('change', function() {
                         // Mendapatkan umur dari data-umur pada opsi yang dipilih
                         let selectedOption = select.options[select.selectedIndex];
                         let umur = selectedOption.getAttribute('data-umur');
+                        let posyandu = selectedOption.getAttribute('data-nama_posyandu');
 
                         // Memasukkan nilai umur ke dalam input 'umur_periksa'
                         umurInput.value = umur;
+                        posyanduInput.value = posyandu;
                     });
 
                     // Tabel Antrian
@@ -295,7 +321,6 @@
                     function updateStatusAnak() {
                         let selectedOption = danaksId.options[danaksId.selectedIndex];
                         let jkValue = selectedOption.getAttribute('data-jk');
-                        let tPosyandu = selectedOption.getAttribute('data-t_posyandu');
 
                         let bb_anakValue = parseFloat(bb_anakInput.value);
                         let tb_anakValue = parseFloat(tb_anakInput.value);
@@ -431,8 +456,8 @@
                         },
                     },
                     {
-                        data: "danaks.t_posyandu",
-                        name: "danaks.t_posyandu",
+                        data: "nama_posyandu",
+                        name: "nama_posyandu",
                         className: 'align-middle',
                         width: "25%",
                         searchable: true,

@@ -19,13 +19,13 @@ class DataAnakController extends Controller
         $title = "Data Anak";
         $dposyandu = Dposyandu::all();
         confirmDelete();
-        return view("bidan.dataanak", compact('dposyandu', 'title'));
+        return view("bidan.dataanak", compact('title', 'dposyandu'));
     }
 
     public function getData(Request $request)
     {
 
-        $danaks = Danak::all();
+        $danaks = Danak::with('dposyandu');
 
         if ($request->ajax()) {
             return datatables()->of($danaks)
@@ -51,19 +51,20 @@ class DataAnakController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'nama_anak' => 'required|string|max:255',
-            'jk' => 'required|in:L,P',
-            'tempat_lahir' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
-            't_posyandu' => 'required|string|max:255',
             'nik_anak' => 'required|numeric|digits:16',
-            'nowa' => 'required|numeric', // Merubah maksimal digit menjadi 13
+            'nama_anak' => 'required|string|max:255',
+            'nama_ortu' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jk' => 'required|in:L,P',
+            'dposyandu_id' => 'required|string|max:255',
+            'nik_ortu' => 'required|numeric|digits:16',
+            'hp_ortu' => 'required|numeric', // Merubah maksimal digit menjadi 13
         ], [
             'nik_anak.required' => 'Kolom NIK anak harus diisi.',
             'nik_anak.numeric' => 'NIK anak harus berupa angka.',
             'nik_anak.digits' => 'NIK anak harus terdiri dari 16 digit.',
-            'nowa.required' => 'Kolom Nomor WA harus diisi.',
-            'nowa.numeric' => 'Nomor WA harus berupa angka.',
+            'hp_ortu.required' => 'Kolom Nomor WA harus diisi.',
+            'hp_ortu.numeric' => 'Nomor WA harus berupa angka.',
         ]);
 
 
@@ -74,15 +75,16 @@ class DataAnakController extends Controller
                 ->withInput();
         }
         $danak = new Danak;
-        $danak->nama_anak = $request->nama_anak;
-        $danak->tempat_lahir = $request->tempat_lahir;
-        $danak->tanggal_lahir = $request->tanggal_lahir;
-
-
-        $danak->jk = $request->jk;
-        $danak->t_posyandu = $request->t_posyandu;
         $danak->nik_anak = $request->nik_anak;
-        $danak->nowa = $request->nowa;
+        $danak->nama_anak = $request->nama_anak;
+        $danak->tanggal_lahir = $request->tanggal_lahir;
+        $danak->dposyandu_id = $request->dposyandu_id;
+        $danak->jk = $request->jk;
+
+
+        $danak->nik_ortu = $request->nik_ortu;
+        $danak->nama_ortu = $request->nama_ortu;
+        $danak->hp_ortu = $request->hp_ortu;
 
         // Simpan objek Mahal ke dalam database
         $danak->save();
@@ -105,18 +107,11 @@ class DataAnakController extends Controller
      */
     public function edit(string $id)
     {
-
-        // ELOQUENT
         $title = "Edit Data Anak";
         $danaks = Danak::find($id);
-
         $dposyandu = Dposyandu::all();
 
-
-        return view(
-            'actions.editanak',
-            compact('danaks', 'dposyandu', 'title'),
-        );
+        return view('actions.editanak', compact('danaks', 'dposyandu', 'title'));
     }
 
     /**
@@ -126,24 +121,25 @@ class DataAnakController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'nama_anak' => 'required|string|max:255',
-            'jk' => 'required|in:L,P',
-            'tempat_lahir' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
-            't_posyandu' => 'required|string|max:255',
             'nik_anak' => 'required|numeric|digits:16',
-            'nowa' => 'required|numeric|digits:13', // Mengubah maksimal digit menjadi 13
+            'nama_anak' => 'required|string|max:255',
+            'nama_ortu' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jk' => 'required|in:L,P',
+            'dposyandu_id' => 'required|string|max:255',
+            'nik_ortu' => 'required|numeric|digits:16',
+            'hp_ortu' => 'required|numeric', // Merubah maksimal digit menjadi 13
         ], [
             'nik_anak.required' => 'Kolom NIK anak harus diisi.',
             'nik_anak.numeric' => 'NIK anak harus berupa angka.',
             'nik_anak.digits' => 'NIK anak harus terdiri dari 16 digit.',
-            'nowa.required' => 'Kolom Nomor WA harus diisi.',
-            'nowa.numeric' => 'Nomor WA harus berupa angka.',
-            'nowa.digits' => 'Nomor WA harus terdiri dari 13 digit.',
+            'hp_ortu.required' => 'Kolom Nomor WA harus diisi.',
+            'hp_ortu.numeric' => 'Nomor WA harus berupa angka.',
         ]);
 
+
         if ($validator->fails()) {
-            Alert::error('Gagal Memperbarui', 'Periksa kembali data yang diinputkan.');
+            Alert::error('Gagal Menambahkan', 'Perisksa kembali data yang diinputkan.');
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -151,14 +147,15 @@ class DataAnakController extends Controller
         $danak = Danak::findOrFail($id);
 
         // Update data anak berdasarkan ID yang diterima
-        $danak->nama_anak = $request->nama_anak;
-        $danak->tempat_lahir = $request->tempat_lahir;
-        $danak->tanggal_lahir = $request->tanggal_lahir;
-
-        $danak->jk = $request->jk;
-        $danak->t_posyandu = $request->t_posyandu;
         $danak->nik_anak = $request->nik_anak;
-        $danak->nowa = $request->nowa;
+        $danak->nama_anak = $request->nama_anak;
+        $danak->tanggal_lahir = $request->tanggal_lahir;
+        $danak->jk = $request->jk;
+        $danak->dposyandu_id = $request->dposyandu_id;
+
+        $danak->nik_ortu = $request->nik_ortu;
+        $danak->nama_ortu = $request->nama_ortu;
+        $danak->hp_ortu = $request->hp_ortu;
 
         // Simpan perubahan data anak ke dalam database
         $danak->save();

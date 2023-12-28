@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Charts\GrafikPerkembanganChart;
+use App\Models\Dbulan;
+use App\Models\Dposyandu;
 use Illuminate\Http\Request;
 
 class GrafikPerkembanganController extends Controller
@@ -13,12 +15,15 @@ class GrafikPerkembanganController extends Controller
     public function index(GrafikPerkembanganChart $chart)
     {
         $title = "Data Grafik Perkembangan";
+        $dbulans = Dbulan::all();
         return view(
             "bidan.grafikperkembangan",
-            compact('title'),
+            compact('title', 'dbulans'),
             ['chart' => $chart->build()]
         );
     }
+
+
 
     /**
      * Show the form for creating a new resource.

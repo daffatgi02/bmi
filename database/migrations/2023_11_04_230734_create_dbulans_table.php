@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('danaks_id')->constrained();
             $table->string('umur_periksa');
+            $table->string('nama_posyandu');
             $table->string("bb_anak");
             $table->string("tb_anak");
             $table->string("lk_anak");

@@ -1,5 +1,5 @@
 <div class="d-flex">
-    <a href="{{ route('dposyandus.edit', ['dposyandu' => $dposyandu->id]) }}" class="btn btn-success btn-sm me-2 shadow"><i
+    <a href="{{ route('dposyandus.edit', ['dposyandu' => $dposyandu->id]) }}" class="btn btn-primary btn-sm me-2 shadow"><i
             class="bi-pencil-square"></i></a>
 
     <div>
