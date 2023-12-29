@@ -10,7 +10,7 @@ class Danak extends Model
     use HasFactory;
     public function dposyandu()
     {
-        return $this->belongsTo(Dposyandu::class);
+        return $this->belongsTo(Dposyandu::class, 'dposyandu_id');
     }
     public function dbulan()
     {

@@ -102,20 +102,20 @@
                                         <h5 class="fw-bold">Informasi Orang Tua</h5>
 
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="nama_ortu" name="nama_ortu"
-                                                placeholder="Masukkan Nama Anak"
-                                                value="{{ old('nama_ortu', $danaks->nama_ortu) }}" required>
-                                            <label for="floatingInput" class="">Nama Anak:</label>
-                                            @error('nama_ortu')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="nik_ortu" name="nik_ortu"
                                                 placeholder="Masukkan NIK" value="{{ old('nik_ortu', $danaks->nik_ortu) }}"
                                                 required maxlength="16">
                                             <label for="floatingInput" class="">NIK Orang Tua:</label>
                                             @error('nik_ortu')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="nama_ortu" name="nama_ortu"
+                                                placeholder="Masukkan Nama Anak"
+                                                value="{{ old('nama_ortu', $danaks->nama_ortu) }}" required>
+                                            <label for="floatingInput" class="">Nama Anak:</label>
+                                            @error('nama_ortu')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>

@@ -12,16 +12,21 @@ class GrafikPerkembanganController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(GrafikPerkembanganChart $chart)
+    public function index(Request $request, GrafikPerkembanganChart $chart)
     {
         $title = "Data Grafik Perkembangan";
         $dbulans = Dbulan::all();
+
+        // Ambil posyandu yang dipilih dari dropdown
+        $selectedPosyandu = $request->input('posyandu'); // Pastikan ini sesuai dengan nama field pada form
+
         return view(
             "bidan.grafikperkembangan",
-            compact('title', 'dbulans'),
-            ['chart' => $chart->build()]
+            compact('title', 'dbulans', 'selectedPosyandu'),
+            ['chart' => $chart->build($selectedPosyandu)] // Kirim posyandu ke fungsi build chart
         );
     }
+
 
 
 

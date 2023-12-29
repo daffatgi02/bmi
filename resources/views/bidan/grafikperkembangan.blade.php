@@ -8,12 +8,32 @@
                 <div class="row ">
                     <h1 class="fw-bold h mb-4">Halaman Grafik Perkembangan </h1>
                     <div class="mb-2">
-                        <select class="form-select border border-dark" aria-label="Default select example">
-                            <option selected disabled>-Pilih Posyandu</option>
-                            @foreach ($dbulans as $dbulans)
-                                <option>{{ $dbulans->danaks->t_posyandu }}</option>
-                            @endforeach
-                        </select>
+                        <form method="GET" action="{{ route('gperkembangans.index') }}">
+                            <div class="d-flex flex-row">
+                                <select class="form-select border border-dark" aria-label="Default select example"
+                                    name="posyandu">
+                                    <option selected disabled>-Pilih Posyandu-</option>
+                                    @php
+                                        $uniquePosyandus = [];
+
+                                        foreach ($dbulans as $dbulan) {
+                                            $posyandu = $dbulan->danaks->dposyandu->nama_posyandu;
+
+                                            if (!in_array($posyandu, $uniquePosyandus)) {
+                                                $uniquePosyandus[] = $posyandu;
+                                            }
+                                        }
+
+                                        sort($uniquePosyandus); // Mengurutkan array dari A-Z
+                                    @endphp
+
+                                    @foreach ($uniquePosyandus as $posyandu)
+                                        <option>{{ $posyandu }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="submit" class="btn btn-success ms-2">Tampilkan</button>
+                            </div>
+                        </form>
 
                     </div>
                     <div class="mt-3 shadow rounded rounded-3">

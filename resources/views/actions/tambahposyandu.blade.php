@@ -10,11 +10,37 @@
                 placeholder="Masukkan Nama Posyandu" required>
             <label for="floatingInput" class="fw-bold">Nama Posyandu:</label>
         </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control border border-dark-subtle" id="pkm" name="pkm"
+                        placeholder="Masukkan Nama Puskesmas" required>
+                    <label for="floatingInput" class="fw-bold">Nama Puskesmas:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control border border-dark-subtle" id="kel" name="kel"
+                        placeholder="Masukkan Nama Kelurahan" required>
+                    <label for="floatingInput" class="fw-bold">Nama Kelurahan:</label>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control border border-dark-subtle" id="rw" name="rw"
+                        placeholder="Masukkan RW" required>
+                    <label for="floatingInput" class="fw-bold">RW:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control border border-dark-subtle" id="rt" name="rt"
+                        placeholder="Masukkan RT" required>
+                    <label for="floatingInput" class="fw-bold">RT:</label>
+                </div>
+            </div>
+        </div>
         <div class="form-floating mb-3">
-            <textarea class="form-control" placeholder="Lokasi Posyandu" id="lokasi_posyandu" name="lokasi_posyandu" style="height: 100px"></textarea>
+            <textarea class="form-control" placeholder="Lokasi Posyandu" id="lokasi_posyandu" name="lokasi_posyandu"
+                style="height: 100px"></textarea>
             <label for="floatingTextarea2" class="fw-bold">Lokasi Posyandu:</label>
         </div>
-
 
 
         {{-- Button --}}

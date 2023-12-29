@@ -44,21 +44,21 @@
                 <td>&nbsp;{{ $dbulan->danaks->nik_anak }}</td>
                 <td >{{ $dbulan->danaks->nama_anak }}</td>
                 <td>{{ $dbulan->danaks->tanggal_lahir }}</td>
-                <td></td>
-                <td></td>
+                <td>{{ $dbulan->umur_tahun }}</td>
+                <td>{{ $dbulan->umur_bulan }}</td>
                 <td>{{ $dbulan->danaks->jk }}</td>
                 <td>{{ $dbulan->danaks->nama_ortu }}</td>
                 <td >&nbsp;{{ $dbulan->danaks->nik_ortu }}</td>
-                <td>{{ $dbulan->danaks->hp_ortu }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{ $dbulan->nama_posyandu }}</td>
+                <td>&nbsp;{{ $dbulan->danaks->hp_ortu }}</td>
+                <td>{{ $dbulan->danaks->dposyandu->pkm }}</td>
+                <td>{{ $dbulan->danaks->dposyandu->kel }}</td>
+                <td>{{ $dbulan->danaks->dposyandu->nama_posyandu }}</td>
+                <td>{{ $dbulan->danaks->dposyandu->rt }}</td>
+                <td>{{ $dbulan->danaks->dposyandu->rw }}</td>
+                <td>{{ $dbulan->danaks->dposyandu->lokasi_posyandu }}</td>
                 <td>{{ $dbulan->created_at->format('Y-m-d') }}</td>
                 <td>{{ $dbulan->tb_anak }}</td>
-                <td></td>
+                <td>-</td>
                 <td>{{ $dbulan->bb_anak }}</td>
                 <td>{{ $dbulan->ll_anak }}</td>
                 <td></td>

@@ -59,11 +59,12 @@
                     aria-label="Default select example" name="dposyandu_id" id="dposyandu_id" required>
                     <option disabled value="" {{ old('dposyandu_id') ? '' : 'selected' }}>Pilih Posyandu</option>
                     @foreach ($dposyandu->sortBy('nama_posyandu') as $data)
-                        <option value="{{ $data->id}}"
+                        <option value="{{ $data->id }}"
                             {{ old('dposyandu_id') === $data->nama_posyandu ? 'selected' : '' }}>
                             {{ $data->nama_posyandu }}
                         </option>
                     @endforeach
+
                 </select>
                 @error('dposyandu_id')
                     <div class="invalid-feedback">{{ $message }}</div>

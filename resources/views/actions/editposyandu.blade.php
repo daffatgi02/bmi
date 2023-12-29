@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.navbar')
     <section class="home-section mb-5">
-        <div class="container mt-5 pt-5">
+        <div class="container mt-5">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-8">
                     <div class="card shadow">
@@ -21,6 +21,37 @@
                                         placeholder="Masukkan Nama Posyandu" value="{{ $dposyandus->nama_posyandu }}"
                                         required>
                                     <label for="floatingInput" class="fw-bold">Nama Posyandu:</label>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="pkm" name="pkm"
+                                            placeholder="Masukkan Nama Puskesmas" value="{{ $dposyandus->pkm }}"
+                                            required>
+                                            <label for="floatingInput" class="fw-bold">Puskesmas:</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="kel" name="kel"
+                                                placeholder="Masukkan Nama Kelurahan" value="{{ $dposyandus->kel }}"
+                                                required>
+                                            <label for="floatingInput" class="fw-bold">Kelurahan:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="rt" name="rt"
+                                                placeholder="Masukkan RT" value="{{ $dposyandus->rt }}"
+                                                required>
+                                            <label for="floatingInput" class="fw-bold">RW:</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="rw" name="rw"
+                                                placeholder="Masukkan RW" value="{{ $dposyandus->rw }}"
+                                                required>
+                                            <label for="floatingInput" class="fw-bold">RW:</label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <textarea class="form-control" placeholder="Lokasi Posyandu" id="lokasi_posyandu" name="lokasi_posyandu"

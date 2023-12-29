@@ -56,10 +56,15 @@ class DatabulananController extends Controller
     }
 
 
-    public function exportbulanan()
+    public function exportbulanan(Request $request)
     {
-        return Excel::download(new DbulanExport, 'Data-Bulanan.xlsx');
+        $posyandu = $request->input('nama_posyandu'); // Ambil posyandu dari permintaan
+        $nama_posyandu = $posyandu;
+        // Tanggal saat ini
+        $tanggal = date('Y-m-d');
+        return Excel::download(new DbulanExport($posyandu), 'Data-Bulanan-' .'(' .$nama_posyandu .') '. $tanggal . '.xlsx');
     }
+
 
 
     /**
@@ -80,6 +85,8 @@ class DatabulananController extends Controller
         $dbulans->danaks_id = $request->danaks_id;
         $dbulans->umur_periksa = $request->umur_periksa;
         $dbulans->nama_posyandu = $request->nama_posyandu;
+        $dbulans->umur_tahun = $request->umur_tahun;
+        $dbulans->umur_bulan = $request->umur_bulan;
         $dbulans->bb_anak = $request->bb_anak;
         $dbulans->tb_anak = $request->tb_anak;
         $dbulans->lk_anak = $request->lk_anak;

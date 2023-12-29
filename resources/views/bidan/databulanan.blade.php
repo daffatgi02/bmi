@@ -37,25 +37,17 @@
                                                         $sekarang = new DateTime();
                                                         $umur = $tanggal_lahir->diff($sekarang);
 
-                                                        if ($umur->y < 1) {
-                                                            if ($umur->m < 1) {
-                                                                $umurTotal = '±' . $umur->d . ' hari';
-                                                            } else {
-                                                                $umurTotal = $umur->m . ' bulan';
-                                                            }
-                                                        } else {
-                                                            $umurTotal = $umur->y . ' tahun';
-                                                            if ($umur->m > 0) {
-                                                                $umurTotal .= ' ' . $umur->m . ' bulan';
-                                                            }
-                                                        }
+                                                        $umurTotal = $umur->y;
+                                                        $umurTotal2 = $umur->m;
+                                                        $umurTotal3 = $umur->y . ' Tahun ' . $umur->m . ' Bulan';
                                                     @endphp
                                                     <option
                                                         class="border border-dark-subtle mb-2 px-2 overflow-auto overflow-md-hidden"
                                                         value="{{ $data->id }}" {{-- untuk rumus stunting --}}
                                                         data-jk="{{ $data->jk }}"
                                                         data-nama_posyandu="{{ $data->dposyandu->nama_posyandu }}"
-                                                        data-umur="{{ $umurTotal }}"> <!-- Menambahkan data-umur -->
+                                                        data-umur="{{ $umurTotal }}" data-umur2="{{ $umurTotal2 }}"
+                                                        data-umur3="{{ $umurTotal3 }}"> <!-- Menambahkan data-umur -->
                                                         - {{ $data->nama_anak }} | {{ $data->nik_anak }}
                                                     </option>
                                                 @endforeach
@@ -65,8 +57,14 @@
                                     <div class="row mt-2">
                                         <div class="col-6">
                                             {{-- Untuk Umur Periksa --}}
-                                            <input type="text" id="umur_periksa" name="umur_periksa" class="d-none">
-                                            <input type="text" id="nama_posyandu" name='nama_posyandu' class="d-none">
+                                            <input type="text" id="umur_tahun" name="umur_tahun" class="d-none"
+                                                placeholder="umur_tahun">
+                                            <input type="text" id="umur_bulan" name="umur_bulan" class="d-none"
+                                                placeholder="umur_bulan">
+                                            <input type="text" id="umur_periksa" name="umur_periksa" class="d-none"
+                                                placeholder="umur_periksa">
+                                            <input type="text" id="nama_posyandu" name='nama_posyandu' class="d-none"
+                                                placeholder="nama_posyandu">
                                             <div class="form-floating mb-3">
                                                 <input type="number" class="form-control border border-dark-subtle"
                                                     id="bb_anak" name="bb_anak" placeholder="Masukan Berat Badan (KG)"
@@ -98,10 +96,12 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-floating mb-3">
-                                                <input type="number" class="form-control border-dark-subtle" id="ll_anak"
-                                                    name="ll_anak" placeholder="Masukan Lingkar Lengan (CM)" value="0"
-                                                    required onclick="selectAllText(this);" onfocus="selectAllText(this);">
-                                                <label class="d-md-block d-none" for="ll_anak">Lingkar Lengan (CM)</label>
+                                                <input type="number" class="form-control border-dark-subtle"
+                                                    id="ll_anak" name="ll_anak"
+                                                    placeholder="Masukan Lingkar Lengan (CM)" value="0" required
+                                                    onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                                <label class="d-md-block d-none" for="ll_anak">Lingkar Lengan
+                                                    (CM)</label>
                                                 <label class="d-md-none d-block" for="ll_anak">Lingkar Lengan</label>
                                             </div>
                                         </div>
@@ -131,12 +131,12 @@
                     </div>
 
                     <div class="col-12 col-lg-6 mb-4">
-                        <div class="d-flex">
+                        <div class="d-flex align-items-center">
                             <i class="bi bi-list-ol fs-4 me-2"></i>
-                            <h2>Silahkan Pilih Posyandu</h2>
+                            <h2>Antrian</h2>
                         </div>
                         <div class="mt-2 px-1">
-                            <div class="mb-4">
+                            <div class="mb-2">
                                 {{-- <h6>Silahkan Pilih Posyandu: </h6> --}}
                                 @foreach ($dposyandu as $data)
                                     <button class="badge ku" onclick="tampilkanTabel(this)">
@@ -161,15 +161,27 @@
 
 
                     <div class="col-12">
-                        <div class="row align-items-center mb-3">
-                            <div class="col-lg-4 col-md-6 col-12">
+                        <div class="row align-items-center mb-5">
+                            <div class="col-lg-4 col-md-6 col-12 mb-2">
                                 <h2 class="d-block mt-2" id="totabel"> Tabel Bulanan:</h2>
 
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 d-flex justify-content-md-end">
-                                <a href="{{ route('exportbulanan') }}" class="btn btn-success">
-                                    <i class="bi bi-file-earmark-spreadsheet"></i> Excel
-                                </a>
+                                <form action="{{ route('exportbulanan') }}" method="GET">
+                                    <form action="{{ route('exportbulanan') }}" method="GET">
+                                        <select name="nama_posyandu"
+                                            class="select_posyandu form-select me-4 border border-dark mb-2">
+                                            <option value="null" selected disabled>Pilih Posyandu</option>
+                                            @foreach ($dposyandu->sortBy('nama_posyandu') as $posyandu)
+                                                <option value="{{ $posyandu->nama_posyandu }}">
+                                                    {{ $posyandu->nama_posyandu }}</option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" class="btn btn-success w-100 shadow" id="downloadButton"
+                                            disabled>
+                                            <i class="bi bi-file-earmark-spreadsheet"></i> Download
+                                        </button>
+                                    </form>
                             </div>
                         </div>
 
@@ -183,10 +195,10 @@
                                     <th id="th" class="text-center">Umur</th>
                                     <th id="th" class="text-center">Jenis Kelamin
                                     </th>
-                                    <th id="th" class="text-center">Status</th>
-                                    <th id="th" class="text-center">Tanggal
+                                    <th id="th" class="text-center w-25">Status</th>
+                                    <th id="th" class="text-center w-25">Tanggal
                                         Priksa</th>
-                                    <th id="th" class="text-center">Posyandu</th>
+                                    <th id="th" class="text-center w-25">Posyandu</th>
                                     <th id="th" class="text-center">Opsi</th>
                                 </tr>
                             </thead>
@@ -197,22 +209,42 @@
 
                 {{-- Script --}}
                 <script>
+                    // btn POSYANDU EXCEL
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var dropdown = document.querySelector('.select_posyandu');
+                        var button = document.getElementById('downloadButton');
+
+                        dropdown.addEventListener('change', function() {
+                            if (this.value !== 'null') {
+                                button.removeAttribute('disabled');
+                            } else {
+                                button.setAttribute('disabled', 'disabled');
+                            }
+                        });
+                    });
+
                     // Mendapatkan elemen select dengan class 'form-select' dan id 'danaks_id'
                     let select = document.getElementById('danaks_id');
 
-                    // Mendapatkan elemen input dengan id 'umur_periksa'
-                    let umurInput = document.getElementById('umur_periksa');
+                    // Mendapatkan elemen input dengan id 'umur_tahun'
+                    let umurInputt = document.getElementById('umur_tahun');
+                    let umurInputb = document.getElementById('umur_bulan');
+                    let umurInputa = document.getElementById('umur_periksa');
                     let posyanduInput = document.getElementById('nama_posyandu');
 
                     // Menambahkan event listener untuk mengubah nilai input saat opsi dipilih
                     select.addEventListener('change', function() {
                         // Mendapatkan umur dari data-umur pada opsi yang dipilih
                         let selectedOption = select.options[select.selectedIndex];
-                        let umur = selectedOption.getAttribute('data-umur');
+                        let umurt = selectedOption.getAttribute('data-umur');
+                        let umurb = selectedOption.getAttribute('data-umur2');
+                        let umura = selectedOption.getAttribute('data-umur3');
                         let posyandu = selectedOption.getAttribute('data-nama_posyandu');
 
-                        // Memasukkan nilai umur ke dalam input 'umur_periksa'
-                        umurInput.value = umur;
+                        // Memasukkan nilai umur ke dalam input 'umur_tahun'
+                        umurInputt.value = umurt;
+                        umurInputb.value = umurb;
+                        umurInputa.value = umura;
                         posyanduInput.value = posyandu;
                     });
 
@@ -397,7 +429,7 @@
                         data: "danaks.nama_anak",
                         name: "danaks.nama_anak",
                         className: 'align-middle',
-                        width: "25%",
+                        // width: "25%",
 
                     },
                     {
@@ -406,13 +438,14 @@
                         className: ' align-middle',
                         width: "10%",
                         searchable: false,
+                        visible: false,
 
                     },
                     {
                         data: "danaks.jk",
                         name: "danaks.jk",
                         className: 'align-middle',
-                        width: "15%",
+                        // width: "15%",
                         searchable: false,
 
                     },
@@ -420,7 +453,7 @@
                         data: "st_anak",
                         name: "st_anak",
                         className: ' align-middle',
-                        width: "15%",
+                        // width: "15%",
                         render: function(data, type, row, meta) {
                             if (data === 'Gizi Baik') {
                                 return '<span style="color: green; font-weight:bold ">' +
@@ -438,7 +471,7 @@
                         data: "created_at",
                         name: "created_at",
                         className: ' align-middle',
-                        width: "15%",
+                        // width: "15%",
                         render: function(data) {
                             // Konversi data tanggal dari format default (biasanya ISO 8601) ke "DD-MM-YYYY"
                             if (data) {
@@ -459,7 +492,7 @@
                         data: "nama_posyandu",
                         name: "nama_posyandu",
                         className: 'align-middle',
-                        width: "25%",
+                        // width: "25%",
                         searchable: true,
 
                     },

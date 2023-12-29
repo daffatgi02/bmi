@@ -17,16 +17,19 @@ class DbulanFactory extends Factory
      */
     public function definition(): array
     {
-        $danak = Danak::factory()->create();
+        $danak = Danak::inRandomOrder()->first();
         return [
             'danaks_id' => $danak->id,
-            'umur_periksa' => $this->faker->numberBetween(1, 10),
-            'bb_anak' => $this->faker->numberBetween(10, 15),
-            'tb_anak' => $this->faker->numberBetween(80, 120),
-            'lk_anak' => $this->faker->numberBetween(30, 50),
-            'll_anak' => $this->faker->numberBetween(10, 15),
+            'umur_periksa' => $this->faker->randomElement(['0 tahun 6 bulan', '0 tahun 1 bulan', '0 tahun 12 bulan', '1 tahun 2 bulan', '3 tahun 4 bulan', '5 tahun 6 bulan']),
+            'nama_posyandu' => 'Posyandu ' . sprintf('%02d', $danak->dposyandu_id),
+            'umur_tahun' => $this->faker->numberBetween(1, 10),
+            'umur_bulan' => $this->faker->numberBetween(1, 12),
+            'bb_anak' => $this->faker->numberBetween(10, 30),
+            'tb_anak' => $this->faker->numberBetween(70, 120),
+            'lk_anak' => $this->faker->numberBetween(35, 50),
+            'll_anak' => $this->faker->numberBetween(10, 20),
             'st_anak' => $this->faker->randomElement(['Gizi Baik', 'Gizi Buruk']),
-            'created_at' => $this->faker->dateTimeBetween('2023-01-01', 'now'),
+            'created_at' =>$this->faker->dateTimeBetween('2023-01-01', 'now'),
         ];
     }
 }

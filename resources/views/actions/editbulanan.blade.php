@@ -17,43 +17,53 @@
                                 @method('PUT') <!-- Use the PUT method for editing -->
 
                                 <h3 class="mb-4 text-center">{{ $dbulanans->danaks->nama_anak }}</h3>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control border border-0z " id="umur_periksa" name="umur_periksa"
+                                                placeholder="Masukkan Umur" value="{{ $dbulanans->umur_periksa }}" required
+                                                readonly>
+                                            <label for="floatingInput" class="fw-bold">Umur:</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control border border-0z " id="st_anak" name="st_anak"
+                                                placeholder="Status Anak" value="{{ $dbulanans->st_anak }}" required
+                                                readonly>
+                                            <label for="st_anak" class="fw-bold">Status Anak:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control border border-0z   " id="bb_anak_input" name="bb_anak"
+                                                placeholder="Masukkan Berat Badan (KG)" value="{{ $dbulanans->bb_anak }}"
+                                                required>
+                                            <label for="bb_anak_input" class="fw-bold">Berat Badan (KG):</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control border border-0z   " id="tb_anak_input" name="tb_anak"
+                                                placeholder="Masukkan Tinggi Badan (CM)" value="{{ $dbulanans->tb_anak }}"
+                                                required>
+                                            <label for="tb_anak_input" class="fw-bold">Tinggi Badan (CM):</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control border border-0z " id="lk_anak" name="lk_anak"
+                                                placeholder="Masukkan Lingkar Kepala (CM)" value="{{ $dbulanans->lk_anak }}"
+                                                required>
+                                            <label for="floatingInput" class="fw-bold">Lingkar Kepala (CM):</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control border border-0z " id="ll_anak" name="ll_anak"
+                                                placeholder="Masukkan Lingkar Lengan (CM)" value="{{ $dbulanans->ll_anak }}"
+                                                required>
+                                            <label for="floatingInput" class="fw-bold">Lingkar Lengan (CM):</label>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control border border-0z " id="umur_periksa" name="umur_periksa"
-                                        placeholder="Masukkan Umur" value="{{ $dbulanans->umur_periksa }}" required
-                                        readonly>
-                                    <label for="floatingInput" class="fw-bold">Umur:</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control border border-0z   " id="bb_anak_input" name="bb_anak"
-                                        placeholder="Masukkan Berat Badan (KG)" value="{{ $dbulanans->bb_anak }}"
-                                        required>
-                                    <label for="bb_anak_input" class="fw-bold">Berat Badan (KG):</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control border border-0z   " id="tb_anak_input" name="tb_anak"
-                                        placeholder="Masukkan Tinggi Badan (CM)" value="{{ $dbulanans->tb_anak }}"
-                                        required>
-                                    <label for="tb_anak_input" class="fw-bold">Tinggi Badan (CM):</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control border border-0z " id="lk_anak" name="lk_anak"
-                                        placeholder="Masukkan Lingkar Kepala (CM)" value="{{ $dbulanans->lk_anak }}"
-                                        required>
-                                    <label for="floatingInput" class="fw-bold">Lingkar Kepala (CM):</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control border border-0z " id="ll_anak" name="ll_anak"
-                                        placeholder="Masukkan Lingkar Lengan (CM)" value="{{ $dbulanans->ll_anak }}"
-                                        required>
-                                    <label for="floatingInput" class="fw-bold">Lingkar Lengan (CM):</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control border border-0z " id="st_anak" name="st_anak"
-                                        placeholder="Status Anak" value="{{ $dbulanans->st_anak }}" required
-                                        readonly>
-                                    <label for="st_anak" class="fw-bold">Status Anak:</label>
-                                </div>
 
                                 {{-- d-none --}}
                                 <div class="d-none">

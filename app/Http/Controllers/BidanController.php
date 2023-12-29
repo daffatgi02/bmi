@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\GrafikdashboardChart;
 use App\Models\Danak;
+use App\Models\Dantrian;
 use App\Models\Dbulan;
 use App\Models\Dposyandu;
 use Illuminate\Http\Request;
@@ -12,13 +14,18 @@ class BidanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(GrafikdashboardChart $chart)
     {
-        $title="Dashboard";
+        $title = "Dashboard";
         $danaks = Danak::all();
         $dbulans = Dbulan::all();
         $dposyandus = Dposyandu::all();
-        return view('bidan.index', compact('danaks', 'dposyandus', 'dbulans', 'title'));
+        $dantrians = Dantrian::all();
+        return view(
+            'bidan.index',
+            compact('danaks', 'dposyandus', 'dbulans', 'dantrians', 'title'),
+            ['chart' => $chart->build()]
+        );
     }
 
     /**
