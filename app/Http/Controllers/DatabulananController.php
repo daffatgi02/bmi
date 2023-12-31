@@ -62,7 +62,7 @@ class DatabulananController extends Controller
         $nama_posyandu = $posyandu;
         // Tanggal saat ini
         $tanggal = date('Y-m-d');
-        return Excel::download(new DbulanExport($posyandu), 'Data-Bulanan-' .'(' .$nama_posyandu .') '. $tanggal . '.xlsx');
+        return Excel::download(new DbulanExport($posyandu), 'Data-Bulanan-' . '(' . $nama_posyandu . ') ' . $tanggal . '.xlsx');
     }
 
 
@@ -109,17 +109,16 @@ class DatabulananController extends Controller
     {
         // ELOQUENT
         $title = "E-KMS Anak";
-        $dbulanans = Dbulan::find($danaks_id);
-
-        // Assuming 'danaks_id' is extracted from the URL parameter $id
-        // $danaksId = $id; // Adjust this part based on how you retrieve the danaks_id
+        $dbulanans = Dbulan::where('danaks_id', $danaks_id)->orderBy('created_at', 'asc')->get();
+        $danaks = Danak::all();
 
         return view(
             'actions.detailbulanan',
-            compact('dbulanans', 'title'),
+            compact('dbulanans', 'title', 'danaks'),
             ['chart' => $chart->build($danaks_id)]
         );
     }
+
 
 
     /**
@@ -130,13 +129,22 @@ class DatabulananController extends Controller
         // ELOQUENT
         $title = "Edit Data Bulanan Anak";
         $dbulanans = Dbulan::find($id);
+
+        // Get danaks_id from the currently edited Dbulan
+        $danaks_id = $dbulanans->danaks_id;
+
+        // Fetch all Dbulans with the same danaks_id
+        $relatedDbulanans = Dbulan::where('danaks_id', $danaks_id)->get();
         $danaks = Danak::all();
 
         return view(
             'actions.editbulanan',
-            compact('dbulanans', 'danaks', 'title'),
+            compact('dbulanans', 'danaks', 'title', 'relatedDbulanans'),
         );
     }
+
+
+
 
     /**
      * Update the specified resource in storage.

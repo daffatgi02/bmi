@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="loading-overlay">
+        <div class="spinner-container">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <label>Loading</label>
+        </div>
+    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 mt-md-4 mt-5 pt-md-0 pt-5">
@@ -14,7 +22,8 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12 col-lg-6 d-md-block d-none mt-3">
-                                        <img class="img-fluid" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}" alt="logo"style="width: auto;">
+                                        <img class="img-fluid" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}"
+                                            alt="logo"style="width: auto;">
                                     </div>
                                     <div class="col-md-12 col-lg-6 col-12">
                                         <div class="row mb-3">
@@ -51,8 +60,9 @@
                                         <div class="row mb-3">
                                             <div class="col-md-12">
                                                 <div class="form-check">
-                                                    <input class="form-check-input border border-secondary shadow" type="checkbox"
-                                                        name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                    <input class="form-check-input border border-secondary shadow"
+                                                        type="checkbox" name="remember" id="remember"
+                                                        {{ old('remember') ? 'checked' : '' }}>
 
                                                     <label class="form-check-label" for="remember">
                                                         Ingat Saya
@@ -86,4 +96,17 @@
             </div>
         </div>
     </div>
+    <script>
+         document.addEventListener("DOMContentLoaded", function() {
+            // Menampilkan overlay saat halaman dimuat
+            document.querySelector('.loading-overlay').style.display = 'flex';
+
+            // Sembunyikan overlay setelah 2 detik setelah semua konten dimuat
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    document.querySelector('.loading-overlay').style.display = 'none';
+                }, 1000); // 2 detik (dalam milidetik)
+            });
+        });
+    </script>
 @endsection

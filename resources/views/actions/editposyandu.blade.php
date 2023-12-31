@@ -40,16 +40,16 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="rt" name="rt"
-                                                placeholder="Masukkan RT" value="{{ $dposyandus->rt }}"
-                                                required>
+                                            <input type="text" class="form-control" id="rw" name="rw"
+                                            placeholder="Masukkan RW" value="{{ $dposyandus->rw }}"
+                                            required>
                                             <label for="floatingInput" class="fw-bold">RW:</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="rw" name="rw"
-                                                placeholder="Masukkan RW" value="{{ $dposyandus->rw }}"
+                                            <input type="text" class="form-control" id="rt" name="rt"
+                                                placeholder="Masukkan RT" value="{{ $dposyandus->rt }}"
                                                 required>
-                                            <label for="floatingInput" class="fw-bold">RW:</label>
+                                            <label for="floatingInput" class="fw-bold">RT:</label>
                                         </div>
                                     </div>
                                 </div>

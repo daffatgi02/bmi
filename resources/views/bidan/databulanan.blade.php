@@ -130,6 +130,7 @@
                         </form>
                     </div>
 
+                    {{-- BADEGE POSYANDU --}}
                     <div class="col-12 col-lg-6 mb-4">
                         <div class="d-flex align-items-center">
                             <i class="bi bi-list-ol fs-4 me-2"></i>
@@ -160,6 +161,7 @@
                     </div>
 
 
+                    {{-- TABEL BULANAN --}}
                     <div class="col-12">
                         <div class="row align-items-center mb-5">
                             <div class="col-lg-4 col-md-6 col-12 mb-2">
@@ -223,6 +225,7 @@
                         });
                     });
 
+
                     // Mendapatkan elemen select dengan class 'form-select' dan id 'danaks_id'
                     let select = document.getElementById('danaks_id');
 
@@ -247,6 +250,52 @@
                         umurInputa.value = umura;
                         posyanduInput.value = posyandu;
                     });
+
+
+                    // Stautus BMI RUMUS BESAR
+                    // Ambil elemen input bb_anak, tb_anak, dan st_anak
+                    let bb_anakInput = document.getElementById('bb_anak');
+                    let tb_anakInput = document.getElementById('tb_anak');
+                    let st_anakInput = document.getElementById('st_anak');
+                    let danaksId = document.getElementById('danaks_id');
+
+                    // Tambahkan event listener untuk perubahan dropdown
+                    danaksId.addEventListener('change', updateStatusAnak);
+                    bb_anakInput.addEventListener('input', updateStatusAnak);
+                    tb_anakInput.addEventListener('input', updateStatusAnak);
+
+                    function updateStatusAnak() {
+                        let selectedOption = danaksId.options[danaksId.selectedIndex];
+                        let jkValue = selectedOption.getAttribute('data-jk');
+
+                        let bb_anakValue = parseFloat(bb_anakInput.value);
+                        let tb_anakValue = parseFloat(tb_anakInput.value);
+
+                        if (!isNaN(bb_anakValue) && !isNaN(tb_anakValue)) {
+                            let st_anakValue = bb_anakValue + tb_anakValue;
+
+                            if (jkValue === 'L') {
+                                if (st_anakValue <= 10) {
+                                    st_anakInput.value = "Gizi Buruk";
+                                } else {
+                                    st_anakInput.value = "Gizi Baik";
+                                }
+                            } else if (jkValue === 'P') {
+                                if (st_anakValue <= 10) {
+                                    st_anakInput.value = "Gizi Baik";
+                                } else {
+                                    st_anakInput.value = "Gizi Buruk";
+                                }
+                            }
+                        } else {
+                            st_anakInput.value = '- Inputan Tidak Valid';
+                        }
+                    }
+
+                    // Select
+                    function selectAllText(input) {
+                        input.select();
+                    };
 
                     // Tabel Antrian
                     function tampilkanTabel(button) {
@@ -336,52 +385,6 @@
                             });
                         });
                     });
-
-
-                    // Stautus
-                    // Ambil elemen input bb_anak, tb_anak, dan st_anak
-                    let bb_anakInput = document.getElementById('bb_anak');
-                    let tb_anakInput = document.getElementById('tb_anak');
-                    let st_anakInput = document.getElementById('st_anak');
-                    let danaksId = document.getElementById('danaks_id');
-
-                    // Tambahkan event listener untuk perubahan dropdown
-                    danaksId.addEventListener('change', updateStatusAnak);
-                    bb_anakInput.addEventListener('input', updateStatusAnak);
-                    tb_anakInput.addEventListener('input', updateStatusAnak);
-
-                    function updateStatusAnak() {
-                        let selectedOption = danaksId.options[danaksId.selectedIndex];
-                        let jkValue = selectedOption.getAttribute('data-jk');
-
-                        let bb_anakValue = parseFloat(bb_anakInput.value);
-                        let tb_anakValue = parseFloat(tb_anakInput.value);
-
-                        if (!isNaN(bb_anakValue) && !isNaN(tb_anakValue)) {
-                            let st_anakValue = bb_anakValue + tb_anakValue;
-
-                            if (jkValue === 'L') {
-                                if (st_anakValue <= 10) {
-                                    st_anakInput.value = "Gizi Buruk";
-                                } else {
-                                    st_anakInput.value = "Gizi Baik";
-                                }
-                            } else if (jkValue === 'P') {
-                                if (st_anakValue <= 10) {
-                                    st_anakInput.value = "Gizi Baik";
-                                } else {
-                                    st_anakInput.value = "Gizi Buruk";
-                                }
-                            }
-                        } else {
-                            st_anakInput.value = '- Inputan Tidak Valid';
-                        }
-                    }
-
-                    // Select
-                    function selectAllText(input) {
-                        input.select();
-                    };
                 </script>
             </div>
     </section>
@@ -430,6 +433,7 @@
                         name: "danaks.nama_anak",
                         className: 'align-middle',
                         // width: "25%",
+                        orderable: false,
 
                     },
                     {
@@ -439,6 +443,7 @@
                         width: "10%",
                         searchable: false,
                         visible: false,
+                        orderable: false,
 
                     },
                     {
@@ -447,6 +452,7 @@
                         className: 'align-middle',
                         // width: "15%",
                         searchable: false,
+                        orderable: false,
 
                     },
                     {
@@ -466,6 +472,8 @@
                             }
                         },
                         searchable: false,
+                        orderable: false,
+
                     },
                     {
                         data: "created_at",

@@ -76,24 +76,7 @@
                                         </div>
 
 
-                                        <!-- Select Posyandu -->
-                                        <label for="dposyandu_id" class="">Nama Posyandu:</label>
-                                        <select class="form-select mb-3" aria-label="Default select example"
-                                            name="dposyandu_id" id="dposyandu_id" required>
-                                            <option disabled value=""
-                                                {{ old('dposyandu_id', $danaks->dposyandu_id) ? '' : 'selected' }}>
-                                                Pilih Posyandu
-                                            </option>
-                                            @foreach ($dposyandu->sortBy('nama_posyandu') as $posyandu)
-                                                <option value="{{ $posyandu->id }}"
-                                                    {{ old('dposyandu_id', $danaks->dposyandu_id) == $posyandu->id ? 'selected' : '' }}>
-                                                    {{ $posyandu->nama_posyandu }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('dposyandu_id')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+
                                     </div>
 
                                     <!-- Second Column -->
@@ -122,13 +105,32 @@
 
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="hp_ortu" name="hp_ortu"
-                                                placeholder="Masukkan No WA"
-                                                value="{{ old('hp_ortu', $danaks->hp_ortu) }}" required maxlength="13">
+                                                placeholder="Masukkan No WA" value="{{ old('hp_ortu', $danaks->hp_ortu) }}"
+                                                required maxlength="13">
                                             <label for="floatingInput" class="">No WA:</label>
                                             @error('hp_ortu')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+
+                                        <!-- Select Posyandu -->
+                                        <label for="dposyandu_id" class="">Nama Posyandu:</label>
+                                        <select class="form-select mb-3" aria-label="Default select example"
+                                            name="dposyandu_id" id="dposyandu_id" required>
+                                            <option disabled value=""
+                                                {{ old('dposyandu_id', $danaks->dposyandu_id) ? '' : 'selected' }}>
+                                                Pilih Posyandu
+                                            </option>
+                                            @foreach ($dposyandu->sortBy('nama_posyandu') as $posyandu)
+                                                <option value="{{ $posyandu->id }}"
+                                                    {{ old('dposyandu_id', $danaks->dposyandu_id) == $posyandu->id ? 'selected' : '' }}>
+                                                    {{ $posyandu->nama_posyandu }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('dposyandu_id')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
