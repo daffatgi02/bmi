@@ -56,10 +56,15 @@ class DatabulananController extends Controller
     }
 
 
-    public function exportbulanan()
+    public function exportbulanan(Request $request)
     {
-        return Excel::download(new DbulanExport, 'Data-Bulanan.xlsx');
+        $posyandu = $request->input('nama_posyandu'); // Ambil posyandu dari permintaan
+        $nama_posyandu = $posyandu;
+        // Tanggal saat ini
+        $tanggal = date('Y-m-d');
+        return Excel::download(new DbulanExport($posyandu), 'Data-Bulanan-' . '(' . $nama_posyandu . ') ' . $tanggal . '.xlsx');
     }
+
 
 
     /**
@@ -80,6 +85,8 @@ class DatabulananController extends Controller
         $dbulans->danaks_id = $request->danaks_id;
         $dbulans->umur_periksa = $request->umur_periksa;
         $dbulans->nama_posyandu = $request->nama_posyandu;
+        $dbulans->umur_tahun = $request->umur_tahun;
+        $dbulans->umur_bulan = $request->umur_bulan;
         $dbulans->bb_anak = $request->bb_anak;
         $dbulans->tb_anak = $request->tb_anak;
         $dbulans->lk_anak = $request->lk_anak;
@@ -102,17 +109,16 @@ class DatabulananController extends Controller
     {
         // ELOQUENT
         $title = "E-KMS Anak";
-        $dbulanans = Dbulan::find($danaks_id);
-
-        // Assuming 'danaks_id' is extracted from the URL parameter $id
-        // $danaksId = $id; // Adjust this part based on how you retrieve the danaks_id
+        $dbulanans = Dbulan::where('danaks_id', $danaks_id)->orderBy('created_at', 'asc')->get();
+        $danaks = Danak::all();
 
         return view(
             'actions.detailbulanan',
-            compact('dbulanans', 'title'),
+            compact('dbulanans', 'title', 'danaks'),
             ['chart' => $chart->build($danaks_id)]
         );
     }
+
 
 
     /**
@@ -123,13 +129,22 @@ class DatabulananController extends Controller
         // ELOQUENT
         $title = "Edit Data Bulanan Anak";
         $dbulanans = Dbulan::find($id);
+
+        // Get danaks_id from the currently edited Dbulan
+        $danaks_id = $dbulanans->danaks_id;
+
+        // Fetch all Dbulans with the same danaks_id
+        $relatedDbulanans = Dbulan::where('danaks_id', $danaks_id)->get();
         $danaks = Danak::all();
 
         return view(
             'actions.editbulanan',
-            compact('dbulanans', 'danaks', 'title'),
+            compact('dbulanans', 'danaks', 'title', 'relatedDbulanans'),
         );
     }
+
+
+
 
     /**
      * Update the specified resource in storage.

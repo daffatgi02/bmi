@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string("nama_posyandu");
             $table->string("lokasi_posyandu");
+            $table->string("pkm");
+            $table->string("kel");
+            $table->string("rt");
+            $table->string("rw");
             $table->timestamps();
         });
     }

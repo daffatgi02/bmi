@@ -296,7 +296,7 @@ body {
         text-decoration: none;
     }
 
-    #btn-logout{
+    #btn-logout {
         margin-top: 40px;
         list-style: none;
         border: rgb(201, 255, 233) solid 2px;
@@ -305,7 +305,8 @@ body {
         background-color: rgb(255, 0, 0, 0.2);
         font-weight: bold;
     }
-    .tooltip{
+
+    .tooltip {
         display: none;
     }
 
@@ -400,4 +401,24 @@ h1.fw-bold.h {
 .btn-success-cp:hover {
     background-color: rgb(65, 230, 164, 1);
     color: #0d3122;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    /* Background putih dengan opasitas */
+    z-index: 9999;
+    /* Menempatkan overlay di atas konten lain */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CSS untuk spinner */
+.spinner-container {
+    text-align: center;
 }

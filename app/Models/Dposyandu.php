@@ -16,4 +16,5 @@ class Dposyandu extends Model
     {
         return $this->hasMany(Dantrian::class);
     }
+    
 }

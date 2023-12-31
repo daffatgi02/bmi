@@ -4,7 +4,6 @@
     </a>
     <a href="{{ route('dbulanans.show', ['dbulanan' => $dbulanan->danaks_id]) }}"
         class="btn btn-warning btn-sm me-2 shadow">
-        <i class="bi bi-graph-up"></i>
+        <i class="bi bi-file-earmark-bar-graph text-white"></i>
     </a>
-
 </div>

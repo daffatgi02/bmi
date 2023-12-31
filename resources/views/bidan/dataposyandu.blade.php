@@ -21,8 +21,12 @@
                                 <tr>
                                     <th id="th" class="text-center">id</th>
                                     <th id="th" class="text-center">No.</th>
-                                    <th id="th" class="text-center w-50">Nama Posyandu</th>
-                                    <th id="th" class="text-center w-50">Alamat Posyandu</th>
+                                    <th id="th" class="text-center w-25">Nama Posyandu</th>
+                                    <th id="th" class="text-center w-25">Alamat Posyandu</th>
+                                    <th id="th" class="text-center w-25">Puskesmas</th>
+                                    <th id="th" class="text-center w-25">Kelurahan</th>
+                                    <th id="th" class="text-center w-50">RW</th>
+                                    <th id="th" class="text-center w-50">RT</th>
                                     <th id="th" class="text-center">Opsi</th>
                                 </tr>
                             </thead>
@@ -83,6 +87,30 @@
                     {
                         data: "lokasi_posyandu",
                         name: "lokasi_posyandu",
+                        className: 'align-middle',
+
+                    },
+                    {
+                        data: "pkm",
+                        name: "pkm",
+                        className: 'align-middle',
+
+                    },
+                    {
+                        data: "kel",
+                        name: "kel",
+                        className: 'align-middle',
+
+                    },
+                    {
+                        data: "rw",
+                        name: "rw",
+                        className: 'align-middle',
+
+                    },
+                    {
+                        data: "rt",
+                        name: "rt",
                         className: 'align-middle',
 
                     },

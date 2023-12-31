@@ -49,6 +49,10 @@ class DataPosyanduController extends Controller
         $dposyandu = new Dposyandu();
         $dposyandu->nama_posyandu = $request->nama_posyandu;
         $dposyandu->lokasi_posyandu = $request->lokasi_posyandu;
+        $dposyandu->pkm = $request->pkm;
+        $dposyandu->kel = $request->kel;
+        $dposyandu->rt = $request->rt;
+        $dposyandu->rw = $request->rw;
 
         // Simpan objek Mahal ke dalam database
         $dposyandu->save();
@@ -90,6 +94,10 @@ class DataPosyanduController extends Controller
         // Update data posyandu berdasarkan ID yang diterima
         $dposyandu->nama_posyandu = $request->nama_posyandu;
         $dposyandu->lokasi_posyandu = $request->lokasi_posyandu;
+        $dposyandu->pkm = $request->pkm;
+        $dposyandu->kel = $request->kel;
+        $dposyandu->rt = $request->rt;
+        $dposyandu->rw = $request->rw;
 
         // Simpan perubahan data posyandu ke dalam database
         $dposyandu->save();

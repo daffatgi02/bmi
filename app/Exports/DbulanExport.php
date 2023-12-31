@@ -10,9 +10,6 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use PhpOffice\PhpSpreadsheet\Cell\DataType;
-
 
 
 class DbulanExport implements ShouldAutoSize, WithStyles, FromView
@@ -30,10 +27,19 @@ class DbulanExport implements ShouldAutoSize, WithStyles, FromView
         ];
     }
 
+    private $posyandu;
+
+    public function __construct($posyandu)
+    {
+        $this->posyandu = $posyandu;
+    }
+
     public function view(): View
     {
+        $dbulans = Dbulan::where('nama_posyandu', $this->posyandu)->get();
+
         return view('bidan.export_bulanan', [
-            'dbulans' => Dbulan::all()
+            'dbulans' => $dbulans
         ]);
     }
 

@@ -10,6 +10,6 @@ class Dbulan extends Model
     use HasFactory;
     public function danaks()
     {
-        return $this->belongsTo(Danak::class);
+        return $this->belongsTo(Danak::class, 'danaks_id');
     }
 }

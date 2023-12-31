@@ -6,11 +6,13 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/sass/app.scss',
+                "resources/css/nav.css",
                 'resources/js/app.js',
                 'resources/css/app.css',
                 "resources/js/auth.js",
-                "resources/css/nav.css",
-                "resources/js/nav.js"
+                "resources/js/bootstrap.js",
+                "resources/js/nav.js",
+                'resources/sass/app.scss'
             ],
             refresh: true,
         }),

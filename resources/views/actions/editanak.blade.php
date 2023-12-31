@@ -76,6 +76,43 @@
                                         </div>
 
 
+
+                                    </div>
+
+                                    <!-- Second Column -->
+                                    <hr class="d-lg-none d-block">
+                                    <div class="col-12 col-lg-6">
+                                        <h5 class="fw-bold">Informasi Orang Tua</h5>
+
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="nik_ortu" name="nik_ortu"
+                                                placeholder="Masukkan NIK" value="{{ old('nik_ortu', $danaks->nik_ortu) }}"
+                                                required maxlength="16">
+                                            <label for="floatingInput" class="">NIK Orang Tua:</label>
+                                            @error('nik_ortu')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="nama_ortu" name="nama_ortu"
+                                                placeholder="Masukkan Nama Anak"
+                                                value="{{ old('nama_ortu', $danaks->nama_ortu) }}" required>
+                                            <label for="floatingInput" class="">Nama Anak:</label>
+                                            @error('nama_ortu')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="hp_ortu" name="hp_ortu"
+                                                placeholder="Masukkan No WA" value="{{ old('hp_ortu', $danaks->hp_ortu) }}"
+                                                required maxlength="13">
+                                            <label for="floatingInput" class="">No WA:</label>
+                                            @error('hp_ortu')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
                                         <!-- Select Posyandu -->
                                         <label for="dposyandu_id" class="">Nama Posyandu:</label>
                                         <select class="form-select mb-3" aria-label="Default select example"
@@ -94,41 +131,6 @@
                                         @error('dposyandu_id')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
-                                    </div>
-
-                                    <!-- Second Column -->
-                                    <hr class="d-lg-none d-block">
-                                    <div class="col-12 col-lg-6">
-                                        <h5 class="fw-bold">Informasi Orang Tua</h5>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="nama_ortu" name="nama_ortu"
-                                                placeholder="Masukkan Nama Anak"
-                                                value="{{ old('nama_ortu', $danaks->nama_ortu) }}" required>
-                                            <label for="floatingInput" class="">Nama Anak:</label>
-                                            @error('nama_ortu')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="nik_ortu" name="nik_ortu"
-                                                placeholder="Masukkan NIK" value="{{ old('nik_ortu', $danaks->nik_ortu) }}"
-                                                required maxlength="16">
-                                            <label for="floatingInput" class="">NIK Orang Tua:</label>
-                                            @error('nik_ortu')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="hp_ortu" name="hp_ortu"
-                                                placeholder="Masukkan No WA"
-                                                value="{{ old('hp_ortu', $danaks->hp_ortu) }}" required maxlength="13">
-                                            <label for="floatingInput" class="">No WA:</label>
-                                            @error('hp_ortu')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
                                     </div>
                                 </div>
                             </div>
