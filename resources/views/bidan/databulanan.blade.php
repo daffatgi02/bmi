@@ -25,7 +25,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <select class="form-select mb-2" size="7" id="danaks_id" name="danaks_id"
-                                                required>
+                                                required style="cursor: pointer">
                                                 <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2"
                                                     value="null" disabled>
                                                     Silahkan Pilih Nama
@@ -55,16 +55,39 @@
                                         </div>
                                     </div>
                                     <div class="row mt-2">
+                                        {{-- Cara Ukur --}}
+                                        <div class="mb-3 d-flex justify-content-center align-items-center">
+                                            <form>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input border border-dark" type="radio" required
+                                                        id="berdiriCheckbox" name="postureCheckbox"
+                                                        value="Berdiri">
+                                                    <label class="form-check-label fw-bold"
+                                                        for="berdiriCheckbox">Berdiri</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input border border-dark" type="radio" required
+                                                        id="telentangCheckbox" name="postureCheckbox"
+                                                        value="Telentang">
+                                                    <label class="form-check-label fw-bold"
+                                                        for="telentangCheckbox">Telentang</label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        {{-- Cara Ukur --}}
                                         <div class="col-6">
                                             {{-- Untuk Umur Periksa --}}
-                                            <input type="text" id="umur_tahun" name="umur_tahun" class="d-none"
+                                            <input type="text" id="umur_tahun" name="umur_tahun" class="d-none" required
                                                 placeholder="umur_tahun">
-                                            <input type="text" id="umur_bulan" name="umur_bulan" class="d-none"
+                                            <input type="text" id="umur_bulan" name="umur_bulan" class="d-none" required
                                                 placeholder="umur_bulan">
                                             <input type="text" id="umur_periksa" name="umur_periksa" class="d-none"
-                                                placeholder="umur_periksa">
+                                                required placeholder="umur_periksa">
                                             <input type="text" id="nama_posyandu" name='nama_posyandu' class="d-none"
-                                                placeholder="nama_posyandu">
+                                                required placeholder="nama_posyandu">
+                                            <input type="text" id="c_ukur" name='c_ukur' class="d-none" required
+                                                placeholder="c_ukur">
+
                                             <div class="form-floating mb-3">
                                                 <input type="number" class="form-control border border-dark-subtle"
                                                     id="bb_anak" name="bb_anak" placeholder="Masukan Berat Badan (KG)"
@@ -78,7 +101,8 @@
                                             <div class="form-floating mb-3">
                                                 <input type="number" class="form-control border-dark-subtle" id="tb_anak"
                                                     name="tb_anak" placeholder="Masukan Tinggi Badan (KG)" value="0"
-                                                    required onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                                    required onclick="selectAllText(this);"
+                                                    onfocus="selectAllText(this);">
                                                 <label class="d-md-block d-none" for="tb_anak">Tinggi Badan (CM)</label>
                                                 <label class="d-md-none d-block" for="tb_anak">Tinggi Badan</label>
                                             </div>
@@ -87,10 +111,11 @@
                                         <div class="col-6">
                                             <div class="form-floating mb-3">
                                                 <input type="number" class="form-control border border-dark-subtle"
-                                                    id="lk_anak" name="lk_anak" placeholder="Masukan Lingkar Kepala (CM)"
-                                                    value="0" required onclick="selectAllText(this);"
-                                                    onfocus="selectAllText(this);">
-                                                <label class="d-md-block d-none" for="lk_anak">Lingkar Kepala (CM)</label>
+                                                    id="lk_anak" name="lk_anak"
+                                                    placeholder="Masukan Lingkar Kepala (CM)" value="0" required
+                                                    onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                                <label class="d-md-block d-none" for="lk_anak">Lingkar Kepala
+                                                    (CM)</label>
                                                 <label class="d-md-none d-block" for="lk_anak">Lingkar Kepala</label>
                                             </div>
                                         </div>
@@ -226,6 +251,30 @@
                     });
 
 
+                    // Cara Ukur
+                    const berdiriCheckbox = document.getElementById('berdiriCheckbox');
+                    const telentangCheckbox = document.getElementById('telentangCheckbox');
+                    const cUkurInput = document.getElementById('c_ukur');
+
+                    berdiriCheckbox.addEventListener('change', function() {
+                        if (berdiriCheckbox.checked) {
+                            telentangCheckbox.checked = false;
+                            cUkurInput.value = 'Berdiri';
+                        } else {
+                            cUkurInput.value = '';
+                        }
+                    });
+
+                    telentangCheckbox.addEventListener('change', function() {
+                        if (telentangCheckbox.checked) {
+                            berdiriCheckbox.checked = false;
+                            cUkurInput.value = 'Telentang';
+                        } else {
+                            cUkurInput.value = '';
+                        }
+                    });
+
+
                     // Mendapatkan elemen select dengan class 'form-select' dan id 'danaks_id'
                     let select = document.getElementById('danaks_id');
 
@@ -349,9 +398,9 @@
                         // Temukan elemen tombol reset
                         let resetButton = document.getElementById("reset");
 
-                        // Temukan semua elemen input dalam formulir yang ingin di-reset, except for the search input
+                        // Temukan semua elemen input dalam formulir yang ingin di-reset, kecuali untuk input pencarian
                         let inputElements = document.querySelectorAll('input[type="text"], input[type="number"]');
-                        // Exclude the search input from the list of input elements
+                        // Kecualikan input pencarian dari daftar elemen input
                         let searchInput = document.getElementById("searchInput");
 
                         // Temukan elemen select yang ingin di-reset
@@ -360,12 +409,15 @@
                         // Temukan semua elemen radio
                         let radioElements = document.querySelectorAll('input[type="radio"]');
 
+                        // Temukan semua elemen checkbox
+                        let checkboxElements = document.querySelectorAll('input[type="checkbox"]');
+
                         // Simpan indeks pilihan awal
                         let initialSelectedIndex = danaksSelect.selectedIndex;
 
                         // Tambahkan event listener untuk tombol reset
                         resetButton.addEventListener("click", function() {
-                            // Loop melalalui semua elemen input kecuali search input dan reset nilainya
+                            // Loop melalui semua elemen input kecuali input pencarian dan reset nilainya
                             inputElements.forEach(function(input) {
                                 if (input !== searchInput) {
                                     if (input.type === "text") {
@@ -382,6 +434,11 @@
                             // Uncheck semua radio buttons
                             radioElements.forEach(function(radio) {
                                 radio.checked = false;
+                            });
+
+                            // Uncheck semua checkbox
+                            checkboxElements.forEach(function(checkbox) {
+                                checkbox.checked = false;
                             });
                         });
                     });

@@ -93,6 +93,7 @@ class DatabulananController extends Controller
         $dbulans->ll_anak = $request->ll_anak;
 
         $dbulans->st_anak = $request->st_anak;
+        $dbulans->c_ukur = $request->c_ukur;
 
         // Simpan objek Mahal ke dalam database
         $dbulans->save();
@@ -162,6 +163,7 @@ class DatabulananController extends Controller
         $dbulans->lk_anak = $request->lk_anak;
         $dbulans->ll_anak = $request->ll_anak;
         $dbulans->st_anak = $request->st_anak;
+        $dbulans->c_ukur = $request->c_ukur;
 
         $dbulans->created_at = $request->created_at;
         $dbulans->updated_at = $request->updated_at;

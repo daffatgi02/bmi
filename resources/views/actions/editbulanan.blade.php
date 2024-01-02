@@ -27,15 +27,24 @@
                                             <label for="floatingInput" class="fw-bold">Umur:</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control border border-0z " id="st_anak"
-                                                name="st_anak" placeholder="Status Anak" value="{{ $dbulanans->st_anak }}"
-                                                required readonly>
+                                            <input type="text" class="form-control" id="st_anak" name="st_anak"
+                                                placeholder="Status Anak" value="{{ $dbulanans->st_anak }}" required
+                                                readonly>
                                             <label for="st_anak" class="fw-bold">Status Anak:</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" id="floatingSelectGrid" required>
+                                                <option selected value="{{ $dbulanans->c_ukur }}">{{ $dbulanans->c_ukur }}
+                                                </option>
+                                                <option value="Berdiri">Berdiri</option>
+                                                <option value="Telentang">Telentang</option>
+                                            </select>
+                                            <label for="floatingSelectGrid" class="fw-bold">Cara Ukur</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control border border-0z   "
                                                 id="bb_anak_input" name="bb_anak" placeholder="Masukkan Berat Badan (KG)"
@@ -49,7 +58,7 @@
                                             <label for="tb_anak_input" class="fw-bold">Tinggi Badan (CM):</label>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control border border-0z " id="lk_anak"
                                                 name="lk_anak" placeholder="Masukkan Lingkar Kepala (CM)"
@@ -104,10 +113,7 @@
         </div>
 
 
-
         <script>
-            
-
             // Stautus
             let bb_anakInput = document.getElementById('bb_anak_input');
             let tb_anakInput = document.getElementById('tb_anak_input');

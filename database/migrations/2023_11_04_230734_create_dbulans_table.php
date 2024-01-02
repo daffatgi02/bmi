@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("tb_anak");
             $table->string("lk_anak");
             $table->string("ll_anak");
+            $table->string("c_ukur");
             $table->string("st_anak");
             $table->timestamps();
         });

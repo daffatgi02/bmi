@@ -181,7 +181,7 @@
                 umurTotal = umurBulan + " bulan";
             }
         } else {
-            umurTotal = umurTahun + " tahun";
+            umurTotal = umurTahun + " tahun " + umurBulan + " bulan";
         }
 
         // Set nilai umur pada elemen input

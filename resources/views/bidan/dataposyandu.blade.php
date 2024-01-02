@@ -82,36 +82,44 @@
                         data: "nama_posyandu",
                         name: "nama_posyandu",
                         className: 'align-middle',
+                        // orderable: false,
 
                     },
                     {
                         data: "lokasi_posyandu",
                         name: "lokasi_posyandu",
                         className: 'align-middle',
+                        orderable: false,
 
                     },
                     {
                         data: "pkm",
                         name: "pkm",
                         className: 'align-middle',
+                        orderable: false,
+
 
                     },
                     {
                         data: "kel",
                         name: "kel",
                         className: 'align-middle',
+                        orderable: false,
 
                     },
                     {
                         data: "rw",
                         name: "rw",
                         className: 'align-middle',
+                        orderable: false,
 
                     },
                     {
                         data: "rt",
                         name: "rt",
                         className: 'align-middle',
+                        orderable: false,
+
 
                     },
                     {
