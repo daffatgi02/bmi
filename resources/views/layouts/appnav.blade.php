@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
 
+    <link rel="shortcut icon" href="{{ Vite::asset('resources/images/Logo_Web.ico') }}" type="image/x-icon">
+
     <title>{{$title}}</title>
 
     {{-- CSS DATATABLES --}}

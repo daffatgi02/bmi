@@ -10,6 +10,8 @@
 
     <title>Connect Pediatrics</title>
 
+    <link rel="shortcut icon" href="{{ Vite::asset('resources/images/Logo_Web.ico') }}" type="image/x-icon">
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">

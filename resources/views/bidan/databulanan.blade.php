@@ -7,6 +7,37 @@
             <div class="container mt-3 pt-3">
                 <div class="row justify-content-center">
                     <h1 class="fw-bold h mb-4">Halaman Data Bulanan</h1>
+
+
+                    {{-- BADEGE POSYANDU --}}
+                    <div class="col-12 col-lg-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-list-ol fs-4 me-2"></i>
+                            <h2>Antrian</h2>
+                        </div>
+                        <div class="mt-2 px-1">
+                            <div class="mb-2">
+                                {{-- <h6>Silahkan Pilih Posyandu: </h6> --}}
+                                @foreach ($dposyandu as $data)
+                                    <button class="badge ku" onclick="tampilkanTabel(this)">
+                                        {{ $data->nama_posyandu }}
+                                    </button>
+                                @endforeach
+                            </div>
+                            <table id="tabel_antrian" class="table table-bordered shadow"
+                                style="width:100%; display: none;">
+                                <thead class="table-warning">
+                                    <tr>
+                                        <th>id</th>
+                                        <th id="th">Urutan</th>
+                                        <th id="th" class="w-50">Nama</th>
+                                        <th id="th" class="w-50">Posyandu</th>
+                                        <th id="th" class="w-50">Opsi</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
                     <div class="col-12 col-lg-6 mb-5 d-flex">
                         <form action="{{ route('dbulanans.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -59,8 +90,8 @@
                                         <div class="mb-3 d-flex justify-content-center align-items-center">
                                             <form>
                                                 <div class="form-check form-check-inline">
-                                                    <button class="btn border border-dark" type="button"
-                                                        id="berdiriButton" value="Berdiri">Berdiri</button>
+                                                    <button class="btn border border-dark" type="button" id="berdiriButton"
+                                                        value="Berdiri">Berdiri</button>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <button class="btn border border-dark" type="button"
@@ -139,7 +170,6 @@
                                         </div>
                                     </div>
 
-
                                     {{-- Button --}}
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-md-3 col-4 d-grid">
@@ -152,36 +182,6 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-
-                    {{-- BADEGE POSYANDU --}}
-                    <div class="col-12 col-lg-6 mb-4">
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-list-ol fs-4 me-2"></i>
-                            <h2>Antrian</h2>
-                        </div>
-                        <div class="mt-2 px-1">
-                            <div class="mb-2">
-                                {{-- <h6>Silahkan Pilih Posyandu: </h6> --}}
-                                @foreach ($dposyandu as $data)
-                                    <button class="badge ku" onclick="tampilkanTabel(this)">
-                                        {{ $data->nama_posyandu }}
-                                    </button>
-                                @endforeach
-                            </div>
-                            <table id="tabel_antrian" class="table table-bordered shadow"
-                                style="width:100%; display: none;">
-                                <thead class="table-warning">
-                                    <tr>
-                                        <th>id</th>
-                                        <th id="th">Urutan</th>
-                                        <th id="th" class="w-50">Nama</th>
-                                        <th id="th" class="w-50">Posyandu</th>
-                                        <th id="th" class="w-50">Opsi</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
                     </div>
 
 
