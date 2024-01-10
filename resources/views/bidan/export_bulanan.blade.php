@@ -58,7 +58,7 @@
                 <td>{{ $dbulan->danaks->dposyandu->lokasi_posyandu }}</td>
                 <td>{{ $dbulan->created_at->format('Y-m-d') }}</td>
                 <td>{{ $dbulan->tb_anak }}</td>
-                <td>-</td>
+                <td>{{ $dbulan->c_ukur }}</td>
                 <td>{{ $dbulan->bb_anak }}</td>
                 <td>{{ $dbulan->ll_anak }}</td>
                 <td></td>

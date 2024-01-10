@@ -13,7 +13,7 @@ class DataPosyanduController extends Controller
      */
     public function index()
     {
-        $title="Data Posyandu";
+        $title = "Data Posyandu";
         confirmDelete();
         return view("bidan.dataposyandu", compact('title'));
     }
@@ -75,7 +75,7 @@ class DataPosyanduController extends Controller
      */
     public function edit(string $id)
     {
-        $title="Edit Data Posyandu";
+        $title = "Edit Data Posyandu";
 
         // ELOQUENT
         $dposyandus = Dposyandu::find($id);
@@ -112,12 +112,15 @@ class DataPosyanduController extends Controller
      */
     public function destroy(string $id)
     {
-        // ELOQUENT
-        $dposyandus = Dposyandu::find($id);
+        try {
+            // ELOQUENT
+            $dposyandus = Dposyandu::findOrFail($id); // Menggunakan findOrFail agar melempar error jika tidak ditemukan
 
-
-        $dposyandus->delete(); // Hapus data dari database
-        Alert::success('Berhasil Terhapus', 'Data Posyandu Terhapus.');
+            $dposyandus->delete(); // Hapus data dari database
+            Alert::success('Berhasil Terhapus', 'Data Posyandu Terhapus.');
+        } catch (\Exception $e) {
+            Alert::error('Gagal Menghapus', 'Terjadi kesalahan dalam menghapus data.');
+        }
 
         return redirect()->route('dposyandus.index');
     }
