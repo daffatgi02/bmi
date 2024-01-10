@@ -28,7 +28,7 @@ class DbulanFactory extends Factory
             'tb_anak' => $this->faker->numberBetween(70, 120),
             'lk_anak' => $this->faker->numberBetween(35, 50),
             'll_anak' => $this->faker->numberBetween(10, 20),
-            'st_anak' => $this->faker->randomElement(['Gizi Baik', 'Gizi Buruk']),
+            'st_anak' => $this->faker->randomElement(['Kelebihan Berat Badan', 'Normal', 'Gizi Kurang', 'Gizi Buruk',]),
             'c_ukur' => $this->faker->randomElement(['Berdiri', 'Telentang']),
             'created_at' =>$this->faker->dateTimeBetween('2024-01-01', '2024-12-31'),
         ];

@@ -40,13 +40,13 @@
                         <div class="card-body">
                             <div class="d-flex ">
                                 <i class="bi bi-search fs-3 me-2"></i>
-                                <input type="text" id="searchInput" class="form-control mb-3 border border-dark-subtle"
+                                <input type="text" id="searchInput" class="form-control mb-2 border border-dark-subtle"
                                     placeholder="Cari Nama" onclick="selectAllText(this);" onfocus="selectAllText(this);">
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <select class="form-select mb-2" size="7" id="danaks_id" name="danaks_id"
-                                        required>
+                                    <select class="form-select mb-2" size="5" id="danaks_id" name="danaks_id" required
+                                        style="cursor: pointer">
                                         <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2"
                                             value="null" disabled>
                                             Silahkan Pilih Nama
@@ -54,17 +54,21 @@
 
                                         @foreach ($danaks->sortBy('nama_anak') as $data)
                                             @php
-                                                // Mendapatkan umur dari perbedaan tanggal sekarang dengan tanggal lahir
                                                 $tanggal_lahir = new DateTime($data->tanggal_lahir);
                                                 $sekarang = new DateTime();
                                                 $umur = $tanggal_lahir->diff($sekarang);
-                                                $umurTotal = $umur->y < 1 ? ($umur->m < 1 ? '±' . $umur->d . ' hari' : $umur->m . ' bulan') : $umur->y . ' tahun';
+
+                                                $umurTotal = $umur->y;
+                                                $umurTotal2 = $umur->m;
+                                                $umurTotal3 = $umur->y . ' Tahun ' . $umur->m . ' Bulan';
                                             @endphp
                                             <option
                                                 class="border border-dark-subtle mb-2 px-2 overflow-auto overflow-md-hidden"
                                                 value="{{ $data->id }}" {{-- untuk rumus stunting --}}
-                                                data-jk="{{ $data->jk }}" data-t_posyandu="{{ $data->t_posyandu }}"
-                                                data-umur="{{ $umurTotal }}"> <!-- Menambahkan data-umur -->
+                                                data-jk="{{ $data->jk }}"
+                                                data-nama_posyandu="{{ $data->dposyandu->nama_posyandu }}"
+                                                data-umur="{{ $umurTotal }}" data-umur2="{{ $umurTotal2 }}"
+                                                data-umur3="{{ $umurTotal3 }}"> <!-- Menambahkan data-umur -->
                                                 - {{ $data->nama_anak }} | {{ $data->nik_anak }}
                                             </option>
                                         @endforeach
@@ -72,22 +76,52 @@
                                 </div>
                             </div>
                             <div class="row mt-2">
+                                {{-- Cara Ukur --}}
+                                <div class="mb-3 d-flex justify-content-center align-items-center">
+                                    <form>
+                                        <div class="form-check form-check-inline">
+                                            <button class="btn border border-dark" type="button" id="berdiriButton"
+                                                value="Berdiri">Berdiri</button>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <button class="btn border border-dark" type="button" id="telentangButton"
+                                                value="Telentang">Telentang</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <input type="text" id="jk_anak" name="jk_anak" class="d-none" required
+                                    placeholder="jk_anak">
+                                <input type="text" id="umur_tahun" name="umur_tahun" class="d-none" required
+                                    placeholder="umur_tahun">
+                                <input type="text" id="umur_bulan" name="umur_bulan" class="d-none" required
+                                    placeholder="umur_bulan">
+                                <input type="text" id="umur_periksa" name="umur_periksa" class="d-none" required
+                                    placeholder="umur_periksa">
+                                <input type="text" id="nama_posyandu" name='nama_posyandu' class="d-none" required
+                                    placeholder="nama_posyandu">
+                                <input type="text" id="c_ukur" name='c_ukur' class="d-none" required
+                                    placeholder="c_ukur">
+                                <input type="text" id="h_imt" name='h_imt' class="d-none" required
+                                    placeholder="h_imt">
+
+                                {{-- Cara Ukur --}}
                                 <div class="col-6">
                                     {{-- Untuk Umur Periksa --}}
-                                    <input type="text" id="umur_periksa" name="umur_periksa" class="d-none">
+
                                     <div class="form-floating mb-3">
-                                        <input type="number" class="form-control border border-dark-subtle" id="bb_anak"
-                                            name="bb_anak" placeholder="Masukan Berat Badan (KG)" value="0" required
-                                            onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                        <input type="text" class="form-control border border-dark-subtle"
+                                            id="bb_anak" name="bb_anak" placeholder="Masukan Berat Badan (KG)"
+                                            value="0" required onclick="selectAllText(this);"
+                                            onfocus="selectAllText(this);">
                                         <label class="d-md-block d-none" for="bb_anak">Berat Badan (KG)</label>
                                         <label class="d-md-none d-block" for="bb_anak">Berat Badan</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-floating mb-3">
-                                        <input type="number" class="form-control border-dark-subtle" id="tb_anak"
-                                            name="tb_anak" placeholder="Masukan Tinggi Badan (KG)" value="0" required
-                                            onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                        <input type="text" class="form-control border-dark-subtle" id="tb_anak"
+                                            name="tb_anak" placeholder="Masukan Tinggi Badan (KG)" value="0"
+                                            required onclick="selectAllText(this);" onfocus="selectAllText(this);">
                                         <label class="d-md-block d-none" for="tb_anak">Tinggi Badan (CM)</label>
                                         <label class="d-md-none d-block" for="tb_anak">Tinggi Badan</label>
                                     </div>
@@ -95,19 +129,22 @@
                                 {{-- LIla --}}
                                 <div class="col-6">
                                     <div class="form-floating mb-3">
-                                        <input type="number" class="form-control border border-dark-subtle" id="lk_anak"
-                                            name="lk_anak" placeholder="Masukan Lingkar Kepala (CM)" value="0" required
-                                            onclick="selectAllText(this);" onfocus="selectAllText(this);">
-                                        <label class="d-md-block d-none" for="lk_anak">Lingkar Kepala (CM)</label>
+                                        <input type="text" class="form-control border border-dark-subtle"
+                                            id="lk_anak" name="lk_anak" placeholder="Masukan Lingkar Kepala (CM)"
+                                            value="0" required onclick="selectAllText(this);"
+                                            onfocus="selectAllText(this);">
+                                        <label class="d-md-block d-none" for="lk_anak">Lingkar Kepala
+                                            (CM)</label>
                                         <label class="d-md-none d-block" for="lk_anak">Lingkar Kepala</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-floating mb-3">
-                                        <input type="number" class="form-control border-dark-subtle" id="ll_anak"
+                                        <input type="text" class="form-control border-dark-subtle" id="ll_anak"
                                             name="ll_anak" placeholder="Masukan Lingkar Lengan (CM)" value="0"
                                             required onclick="selectAllText(this);" onfocus="selectAllText(this);">
-                                        <label class="d-md-block d-none" for="ll_anak">Lingkar Lengan (CM)</label>
+                                        <label class="d-md-block d-none" for="ll_anak">Lingkar Lengan
+                                            (CM)</label>
                                         <label class="d-md-none d-block" for="ll_anak">Lingkar Lengan</label>
                                     </div>
                                 </div>
@@ -140,20 +177,134 @@
     {{-- Script --}}
     <script>
         // Mendapatkan elemen select dengan class 'form-select' dan id 'danaks_id'
-        var select = document.getElementById('danaks_id');
+        let select = document.getElementById('danaks_id');
 
-        // Mendapatkan elemen input dengan id 'umur_periksa'
-        var umurInput = document.getElementById('umur_periksa');
+        // Mendapatkan elemen input dengan id 'umur_tahun'
+        let jkInput = document.getElementById('jk_anak');
+        let umurInputt = document.getElementById('umur_tahun');
+        let umurInputb = document.getElementById('umur_bulan');
+        let umurInputa = document.getElementById('umur_periksa');
+        let posyanduInput = document.getElementById('nama_posyandu');
 
         // Menambahkan event listener untuk mengubah nilai input saat opsi dipilih
         select.addEventListener('change', function() {
             // Mendapatkan umur dari data-umur pada opsi yang dipilih
-            var selectedOption = select.options[select.selectedIndex];
-            var umur = selectedOption.getAttribute('data-umur');
+            let selectedOption = select.options[select.selectedIndex];
+            let jk = selectedOption.getAttribute('data-jk');
+            let umurt = selectedOption.getAttribute('data-umur');
+            let umurb = selectedOption.getAttribute('data-umur2');
+            let umura = selectedOption.getAttribute('data-umur3');
+            let posyandu = selectedOption.getAttribute('data-nama_posyandu');
 
-            // Memasukkan nilai umur ke dalam input 'umur_periksa'
-            umurInput.value = umur;
+            // Memasukkan nilai umur ke dalam input 'umur_tahun'
+            jkInput.value = jk;
+            umurInputt.value = umurt;
+            umurInputb.value = umurb;
+            umurInputa.value = umura;
+            posyanduInput.value = posyandu;
         });
+
+
+
+        // Cara Ukur
+        const berdiriButton = document.getElementById('berdiriButton');
+        const telentangButton = document.getElementById('telentangButton');
+        const cUkurInput = document.getElementById('c_ukur');
+
+        berdiriButton.addEventListener('click', function() {
+            berdiriButton.style.backgroundColor = '#42E6A4';
+            telentangButton.style.backgroundColor = '';
+            cUkurInput.value = 'Berdiri';
+        });
+
+        telentangButton.addEventListener('click', function() {
+            telentangButton.style.backgroundColor = '#42E6A4';
+            berdiriButton.style.backgroundColor = '';
+            cUkurInput.value = 'Telentang';
+        });
+
+
+
+        // Stautus BMI RUMUS BESAR
+        // Ambil elemen input bb_anak, tb_anak, dan st_anak
+        let bb_anakInput = document.getElementById('bb_anak');
+        let tb_anakInput = document.getElementById('tb_anak');
+        let lk_anakInput = document.getElementById('lk_anak');
+        let ll_anakInput = document.getElementById('ll_anak');
+        let st_anakInput = document.getElementById('st_anak');
+        let imt_anakInput = document.getElementById('h_imt');
+        let danaksId = document.getElementById('danaks_id');
+
+        // Tambahkan event listener untuk perubahan dropdown
+        danaksId.addEventListener('change', updateStatusAnak);
+        bb_anakInput.addEventListener('input', updateStatusAnak);
+        tb_anakInput.addEventListener('input', updateStatusAnak);
+        lk_anakInput.addEventListener('input', updateStatusAnak);
+        ll_anakInput.addEventListener('input', updateStatusAnak);
+        imt_anakInput.addEventListener('input', updateStatusAnak);
+
+        function updateStatusAnak() {
+
+            let selectedOption = danaksId.options[danaksId.selectedIndex];
+            let jkValue = selectedOption.getAttribute('data-jk');
+
+            let bb_anakValue = parseFloat(bb_anakInput.value);
+            let tb_anakValue = parseFloat(tb_anakInput.value);
+            let lk_anakValue = parseFloat(lk_anakInput.value);
+            let ll_anakValue = parseFloat(ll_anakInput.value);
+            let ut_anakValue = parseFloat(umurInputt.value);
+
+
+            if (!isNaN(bb_anakValue) && !isNaN(tb_anakValue) && !isNaN(lk_anakValue) && !isNaN(ll_anakValue)) {
+                // let st_anakValue = lk_anakValue + ll_anakValue;
+                let tinggiMeter = tb_anakValue / 100; // Ubah tinggi ke meter
+                let imt = bb_anakValue / (tinggiMeter * tinggiMeter); //mencari Indeks masa tubuh
+                if (ut_anakValue < 5) {
+                    if (jkValue === 'L') {
+                        if (imt < 16) {
+                            st_anakInput.value = "Gizi Buruk";
+                            imt_anakInput.value = imt
+                        } else if (imt >= 16 && imt < 17) {
+                            st_anakInput.value = 'Gizi Kurang';
+                            imt_anakInput.value = imt
+                        } else if (imt >= 17 && imt < 18) {
+                            st_anakInput.value = 'Normal';
+                            imt_anakInput.value = imt
+                        } else {
+                            st_anakInput.value = 'Kelebihan Berat Badan';
+                            imt_anakInput.value = imt
+                        }
+                    } else if (jkValue === 'P') {
+                        if (imt < 16) {
+                            st_anakInput.value = "Gizi Buruk";
+                            imt_anakInput.value = imt
+                        } else if (imt >= 16 && imt < 17) {
+                            st_anakInput.value = 'Gizi Kurang';
+                            imt_anakInput.value = imt
+                        } else if (imt >= 17 && imt < 18) {
+                            st_anakInput.value = 'Normal';
+                            imt_anakInput.value = imt
+                        } else {
+                            st_anakInput.value = 'Kelebihan Berat Badan';
+                            imt_anakInput.value = imt
+                        }
+                    }
+                } else {
+                    if (imt < 10) {
+                        st_anakInput.value = 'Gizi Kurang';
+                    } else if (imt >= 10 && imt < 25) {
+                        st_anakInput.value = 'Normal';
+                    } else {
+                        st_anakInput.value = 'Kelebihan Berat Badan';
+                    }
+                }
+                imt_anakInput.value = imt.toFixed(2);
+            } else {
+                st_anakInput.value = '- Inputan Tidak Valid';
+            }
+        }
+
+
         // Tabel Antrian
         function tampilkanTabel(button) {
             var badges = document.querySelectorAll('.badge.ku');
@@ -175,6 +326,9 @@
             const searchInput = document.getElementById("searchInput");
             const danaksSelect = document.getElementById("danaks_id");
 
+            // Initially hide the select element
+            danaksSelect.style.display = 'none';
+
             // Simpan opsi "Silahkan Pilih Nama" ke dalam variabel
             const placeholderOption = danaksSelect.querySelector('option[value="null"]');
 
@@ -184,19 +338,28 @@
             // Menambahkan event listener untuk input pencarian
             searchInput.addEventListener("input", function() {
                 const searchText = searchInput.value.toLowerCase();
-                const filteredOptions = options.filter(option => option.textContent.toLowerCase().includes(
-                    searchText));
+                const filteredOptions = options.filter(option =>
+                    option.textContent.toLowerCase().includes(searchText)
+                );
 
                 // Mengosongkan dropdown
                 danaksSelect.innerHTML = '';
 
-                // Tambahkan kembali opsi "Silahkan Pilih Nama"
-                danaksSelect.appendChild(placeholderOption);
+                if (searchText.length > 0) {
+                    // Tampilkan select element jika ada teks dalam input
+                    danaksSelect.style.display = 'block';
 
-                // Menampilkan opsi yang sesuai
-                filteredOptions.forEach(option => {
-                    danaksSelect.appendChild(option.cloneNode(true));
-                });
+                    // Tambahkan kembali opsi "Silahkan Pilih Nama"
+                    danaksSelect.appendChild(placeholderOption);
+
+                    // Menampilkan opsi yang sesuai
+                    filteredOptions.forEach(option => {
+                        danaksSelect.appendChild(option.cloneNode(true));
+                    });
+                } else {
+                    // Sembunyikan select element jika input kosong
+                    danaksSelect.style.display = 'none';
+                }
             });
         });
 
@@ -205,9 +368,9 @@
             // Temukan elemen tombol reset
             let resetButton = document.getElementById("reset");
 
-            // Temukan semua elemen input dalam formulir yang ingin di-reset, except for the search input
+            // Temukan semua elemen input dalam formulir yang ingin di-reset, kecuali untuk input pencarian
             let inputElements = document.querySelectorAll('input[type="text"], input[type="number"]');
-            // Exclude the search input from the list of input elements
+            // Kecualikan input pencarian dari daftar elemen input
             let searchInput = document.getElementById("searchInput");
 
             // Temukan elemen select yang ingin di-reset
@@ -216,16 +379,27 @@
             // Temukan semua elemen radio
             let radioElements = document.querySelectorAll('input[type="radio"]');
 
+            // Temukan semua elemen checkbox
+            let checkboxElements = document.querySelectorAll('input[type="checkbox"]');
+
             // Simpan indeks pilihan awal
             let initialSelectedIndex = danaksSelect.selectedIndex;
 
+            // Temukan elemen button Berdiri dan Telentang
+            let berdiriButton = document.getElementById('berdiriButton');
+            let telentangButton = document.getElementById('telentangButton');
+
+
             // Tambahkan event listener untuk tombol reset
             resetButton.addEventListener("click", function() {
-                // Loop melalalui semua elemen input kecuali search input dan reset nilainya
+
+                berdiriButton.style.backgroundColor = '';
+                telentangButton.style.backgroundColor = '';
+                // Loop melalui semua elemen input kecuali input pencarian dan reset nilainya
                 inputElements.forEach(function(input) {
                     if (input !== searchInput) {
                         if (input.type === "text") {
-                            input.value = "- Silahkan Pilih Jenis Kelamin";
+                            input.value = "";
                         } else if (input.type === "number") {
                             input.value = 0;
                         }
@@ -239,50 +413,14 @@
                 radioElements.forEach(function(radio) {
                     radio.checked = false;
                 });
+
+                // Uncheck semua checkbox
+                checkboxElements.forEach(function(checkbox) {
+                    checkbox.checked = false;
+                });
             });
         });
 
-
-        // Stautus
-        // Ambil elemen input bb_anak, tb_anak, dan st_anak
-        let bb_anakInput = document.getElementById('bb_anak');
-        let tb_anakInput = document.getElementById('tb_anak');
-        let st_anakInput = document.getElementById('st_anak');
-        let danaksId = document.getElementById('danaks_id');
-
-        // Tambahkan event listener untuk perubahan dropdown
-        danaksId.addEventListener('change', updateStatusAnak);
-        bb_anakInput.addEventListener('input', updateStatusAnak);
-        tb_anakInput.addEventListener('input', updateStatusAnak);
-
-        function updateStatusAnak() {
-            let selectedOption = danaksId.options[danaksId.selectedIndex];
-            let jkValue = selectedOption.getAttribute('data-jk');
-            let tPosyandu = selectedOption.getAttribute('data-t_posyandu');
-
-            let bb_anakValue = parseFloat(bb_anakInput.value);
-            let tb_anakValue = parseFloat(tb_anakInput.value);
-
-            if (!isNaN(bb_anakValue) && !isNaN(tb_anakValue)) {
-                let st_anakValue = bb_anakValue + tb_anakValue;
-
-                if (jkValue === 'L') {
-                    if (st_anakValue <= 10) {
-                        st_anakInput.value = "Stunting";
-                    } else {
-                        st_anakInput.value = "Tidak Stunting";
-                    }
-                } else if (jkValue === 'P') {
-                    if (st_anakValue <= 10) {
-                        st_anakInput.value = "Tidak Stunting";
-                    } else {
-                        st_anakInput.value = "Stunting";
-                    }
-                }
-            } else {
-                st_anakInput.value = '- Inputan Tidak Valid';
-            }
-        }
 
 
         // Select

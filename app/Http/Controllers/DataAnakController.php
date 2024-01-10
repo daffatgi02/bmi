@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Charts\DetailChart;
 use App\Models\Danak;
+use App\Models\Dbulan;
 use App\Models\Dposyandu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -97,10 +98,20 @@ class DataAnakController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $danaks_id, DetailChart $chart)
     {
-        //
+        // ELOQUENT
+        $title = "E-KMS Anak";
+        $dbulanans = Dbulan::where('danaks_id', $danaks_id)->orderBy('created_at', 'asc')->get();
+        $danaks = Danak::all();
+
+        return view(
+            'actions.detailbulanan',
+            compact('dbulanans', 'title', 'danaks'),
+            ['chart' => $chart->build($danaks_id)]
+        );
     }
+
 
     /**
      * Show the form for editing the specified resource.

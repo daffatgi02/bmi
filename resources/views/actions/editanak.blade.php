@@ -112,9 +112,8 @@
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-
+                                        <h5 class="fw-bold mt-4">Informasi Posyandu</h5>
                                         <!-- Select Posyandu -->
-                                        <label for="dposyandu_id" class="">Nama Posyandu:</label>
                                         <select class="form-select mb-3" aria-label="Default select example"
                                             name="dposyandu_id" id="dposyandu_id" required>
                                             <option disabled value=""

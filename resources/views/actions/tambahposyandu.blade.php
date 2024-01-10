@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="form-floating mb-3">
-            <textarea class="form-control" placeholder="Lokasi Posyandu" id="lokasi_posyandu" name="lokasi_posyandu"
+            <textarea class="form-control" placeholder="Lokasi Posyandu" id="lokasi_posyandu" name="lokasi_posyandu" required
                 style="height: 100px"></textarea>
             <label for="floatingTextarea2">Lokasi Posyandu:</label>
         </div>

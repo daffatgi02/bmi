@@ -29,12 +29,16 @@
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="st_anak" name="st_anak"
                                                 placeholder="Status Anak" value="{{ $dbulanans->st_anak }}" required
-                                                readonly>
+                                                readonly
+                                                style="color: {{ $dbulanans->st_anak === 'Normal' ? 'mediumseagreen' : ($dbulanans->st_anak === 'Gizi Buruk' ? 'red' : ($dbulanans->st_anak === 'Gizi Kurang' ? 'darkorange' : ($dbulanans->st_anak === 'Kelebihan Berat Badan' ? 'darkblue' : 'black'))) }}">
+
                                             <label for="st_anak" class="fw-bold">Status Anak:</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <select class="form-select" id="floatingSelectGrid" required>
-                                                <option selected value="{{ $dbulanans->c_ukur }}">{{ $dbulanans->c_ukur }}
+                                            <select class="form-select" id="floatingSelectGrid" name="c_ukur"
+                                                id="c_ukur">
+                                                <option class="d-none" selected value="{{ $dbulanans->c_ukur }}">
+                                                    {{ $dbulanans->c_ukur }}
                                                 </option>
                                                 <option value="Berdiri">Berdiri</option>
                                                 <option value="Telentang">Telentang</option>
@@ -46,16 +50,16 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
                                         <div class="form-floating mb-3">
-                                            <input type="number" class="form-control border border-0z   "
-                                                id="bb_anak_input" name="bb_anak" placeholder="Masukkan Berat Badan (KG)"
+                                            <input type="text" class="form-control border border-0z   " id="bb_anak"
+                                                name="bb_anak" placeholder="Masukkan Berat Badan (KG)"
                                                 value="{{ $dbulanans->bb_anak }}" required>
-                                            <label for="bb_anak_input" class="fw-bold">Berat Badan (KG):</label>
+                                            <label for="bb_anak" class="fw-bold">Berat Badan (KG):</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input type="number" class="form-control border border-0z   "
-                                                id="tb_anak_input" name="tb_anak" placeholder="Masukkan Tinggi Badan (CM)"
+                                            <input type="text" class="form-control border border-0z   " id="tb_anak"
+                                                name="tb_anak" placeholder="Masukkan Tinggi Badan (CM)"
                                                 value="{{ $dbulanans->tb_anak }}" required>
-                                            <label for="tb_anak_input" class="fw-bold">Tinggi Badan (CM):</label>
+                                            <label for="tb_anak" class="fw-bold">Tinggi Badan (CM):</label>
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
@@ -95,6 +99,15 @@
                                     </div>
                                 </div>
 
+                                {{-- RUNUS BACKEND --}}
+                                <input type="text" id="umur_tahun" name="umur_tahun" class="d-block" required
+                                    placeholder="umur_tahun" value="{{ $dbulanans->umur_tahun }}">
+                                <input type="text" id="umur_bulan" name="umur_bulan" class="d-block" required
+                                    placeholder="umur_bulan" value="{{ $dbulanans->umur_bulan }}">
+                                <input type="text" id="data-jk" name="data-jk" class="d-block" required
+                                    placeholder="data-jk" value="{{ $dbulanans->danaks->jk }}">
+
+
                                 <hr>
                                 <div class="row d-flex justify-content-center pb-4">
                                     <div class="col-md-4 col-4 d-grid">
@@ -114,32 +127,91 @@
 
 
         <script>
-            // Stautus
-            let bb_anakInput = document.getElementById('bb_anak_input');
-            let tb_anakInput = document.getElementById('tb_anak_input');
-            let st_anakInput = document.getElementById('st_anak');
+            document.addEventListener("DOMContentLoaded", function() {
+                // Mendapatkan referensi ke elemen input
+                let bb_anakInput = document.getElementById('bb_anak');
+                let tb_anakInput = document.getElementById('tb_anak');
+                let lk_anakInput = document.getElementById('lk_anak');
+                let ll_anakInput = document.getElementById('ll_anak');
+                let umurInputt = document.getElementById('umur_tahun');
+                let st_anakInput = document.getElementById('st_anak');
+                let jkValue = document.getElementById('data-jk').value; // Ambil nilai dari elemen
 
-            bb_anakInput.addEventListener('input', updateStatusAnak);
-            tb_anakInput.addEventListener('input', updateStatusAnak);
+                // Tambahkan event listener ke setiap input untuk memanggil fungsi updateStatusAnak saat ada perubahan
+                bb_anakInput.addEventListener('input', updateStatusAnak);
+                tb_anakInput.addEventListener('input', updateStatusAnak);
+                lk_anakInput.addEventListener('input', updateStatusAnak);
+                ll_anakInput.addEventListener('input', updateStatusAnak);
 
-            function updateStatusAnak() {
-                let bb_anakValue = parseFloat(bb_anakInput.value);
-                let tb_anakValue = parseFloat(tb_anakInput.value);
+                function updateStatusAnak() {
+                    let bb_anakValue = parseFloat(bb_anakInput.value);
+                    let tb_anakValue = parseFloat(tb_anakInput.value);
+                    let lk_anakValue = parseFloat(lk_anakInput.value);
+                    let ll_anakValue = parseFloat(ll_anakInput.value);
+                    let ut_anakValue = parseFloat(umurInputt.value);
 
-                if (!isNaN(bb_anakValue) && !isNaN(tb_anakValue)) {
-                    let st_anakValue = bb_anakValue + tb_anakValue;
+                    if (!isNaN(bb_anakValue) && !isNaN(tb_anakValue) && !isNaN(lk_anakValue) && !isNaN(ll_anakValue)) {
+                        let tinggiMeter = tb_anakValue / 100;
+                        let imt = bb_anakValue / (tinggiMeter * tinggiMeter);
 
-                    // Implement the logic here based on your requirements
-                    // Example logic (please modify based on your requirements):
-                    if (st_anakValue <= 10) {
-                        st_anakInput.value = "Gizi Buruk";
+                        // Logika perhitungan status anak berdasarkan usia dan jenis kelamin
+                        if (ut_anakValue < 5) {
+                            if (jkValue === 'L') {
+                                if (imt < 16) {
+                                    st_anakInput.value = "Gizi Buruk";
+                                } else if (imt >= 16 && imt < 17) {
+                                    st_anakInput.value = 'Gizi Kurang';
+                                } else if (imt >= 17 && imt < 18) {
+                                    st_anakInput.value = 'Normal';
+                                } else {
+                                    st_anakInput.value = 'Kelebihan Berat Badan';
+                                }
+                            } else if (jkValue === 'P') {
+                                if (imt < 16) {
+                                    st_anakInput.value = "Gizi Buruk";
+                                } else if (imt >= 16 && imt < 17) {
+                                    st_anakInput.value = 'Gizi Kurang';
+                                } else if (imt >= 17 && imt < 18) {
+                                    st_anakInput.value = 'Normal';
+                                } else {
+                                    st_anakInput.value = 'Kelebihan Berat Badan';
+                                }
+                            }
+                        } else {
+                            if (imt < 10) {
+                                st_anakInput.value = 'Gizi Kurang';
+                            } else if (imt >= 10 && imt < 25) {
+                                st_anakInput.value = 'Normal';
+                            } else {
+                                st_anakInput.value = 'Kelebihan Berat Badan';
+                            }
+                        }
+
+                        // Set warna teks berdasarkan nilai status anak yang baru
+                        switch (st_anakInput.value) {
+                            case 'Normal':
+                                st_anakInput.style.color = 'mediumseagreen';
+                                break;
+                            case 'Gizi Buruk':
+                                st_anakInput.style.color = 'red';
+                                break;
+                            case 'Gizi Kurang':
+                                st_anakInput.style.color = 'darkorange';
+                                break;
+                            case 'Kelebihan Berat Badan':
+                                st_anakInput.style.color = 'darkblue';
+                                break;
+                            default:
+                                st_anakInput.style.color = 'black';
+                                break;
+                        }
                     } else {
-                        st_anakInput.value = "Gizi Baik";
+                        st_anakInput.value = '- Inputan Tidak Valid';
                     }
-                } else {
-                    st_anakInput.value = '- Inputan Tidak Valid';
                 }
-            }
+            });
         </script>
+
+
     </section>
 @endsection

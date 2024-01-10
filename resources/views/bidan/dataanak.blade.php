@@ -23,12 +23,9 @@
                                     <th id="th" class="text-center">No.</th>
                                     <th id="th" class="text-center w-25">Nama</th>
                                     <th id="th" class="text-center  w-25">NIK</th>
-                                    <th id="th" class="text-center">No WA</th>
                                     <th id="th" class="text-center">Jenis Kelamin
                                     </th>
                                     <th id="th" class="text-center  w-25">Umur</th>
-                                    <th id="th" class="text-center">Tanggal Lahir
-                                    </th>
                                     <th id="th" class="text-center w-25">Posyandu
                                     </th>
                                     <th id="th" class="text-center">Opsi</th>
@@ -94,28 +91,21 @@
                     {
                         data: "nik_anak",
                         name: "nik_anak",
-                        className: 'align-middle',
+                        className: 'align-middle text-center',
                         // visible:false,
-
-                    },
-                    {
-                        data: "hp_ortu",
-                        name: "hp_ortu",
-                        className: 'align-middle',
-                        visible: false,
 
                     },
                     {
                         data: "jk",
                         name: "jk",
-                        className: 'align-middle',
+                        className: 'align-middle text-center',
 
                     },
                     // logika untuk mendapatkan umur
                     {
                         data: "tanggal_lahir",
                         name: "tanggal_lahir",
-                        className: 'align-middle',
+                        className: 'align-middle text-center',
                         render: function(data, type, row) {
                             if (type === 'display' || type === 'filter') {
                                 var birthDate = new Date(data);
@@ -145,28 +135,7 @@
 
                     },
 
-                    {
-                        data: "tanggal_lahir",
-                        name: "tanggal_lahir",
-                        className: 'align-middle',
-                        visible: false,
-                        render: function(data) {
-                            // Konversi data tanggal dari format default (biasanya ISO 8601) ke "DD-MM-YYYY"
-                            if (data) {
-                                var date = new Date(data);
-                                var day = date.getDate();
-                                var month = date.getMonth() +
-                                    1; // Perlu ditambahkan 1 karena Januari dimulai dari 0
-                                var year = date.getFullYear();
-                                // Format tanggal dalam "DD-MM-YYYY"
-                                return day.toString().padStart(2, '0') + '-' + month.toString()
-                                    .padStart(2, '0') + '-' + year;
-                            } else {
-                                return '';
-                            }
-                        },
 
-                    },
                     {
                         data: "dposyandu.nama_posyandu",
                         name: "dposyandu.nama_posyandu",
