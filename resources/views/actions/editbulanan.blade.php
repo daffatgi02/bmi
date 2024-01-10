@@ -100,11 +100,11 @@
                                 </div>
 
                                 {{-- RUNUS BACKEND --}}
-                                <input type="text" id="umur_tahun" name="umur_tahun" class="d-block" required
+                                <input type="text" id="umur_tahun" name="umur_tahun" class="d-none" required
                                     placeholder="umur_tahun" value="{{ $dbulanans->umur_tahun }}">
-                                <input type="text" id="umur_bulan" name="umur_bulan" class="d-block" required
+                                <input type="text" id="umur_bulan" name="umur_bulan" class="d-none" required
                                     placeholder="umur_bulan" value="{{ $dbulanans->umur_bulan }}">
-                                <input type="text" id="data-jk" name="data-jk" class="d-block" required
+                                <input type="text" id="data-jk" name="data-jk" class="d-none" required
                                     placeholder="data-jk" value="{{ $dbulanans->danaks->jk }}">
 
 
