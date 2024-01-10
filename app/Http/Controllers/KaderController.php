@@ -54,12 +54,16 @@ class KaderController extends Controller
         $dbulans = new Dbulan();
         $dbulans->danaks_id = $request->danaks_id;
         $dbulans->umur_periksa = $request->umur_periksa;
+        $dbulans->nama_posyandu = $request->nama_posyandu;
+        $dbulans->umur_tahun = $request->umur_tahun;
+        $dbulans->umur_bulan = $request->umur_bulan;
         $dbulans->bb_anak = $request->bb_anak;
         $dbulans->tb_anak = $request->tb_anak;
         $dbulans->lk_anak = $request->lk_anak;
         $dbulans->ll_anak = $request->ll_anak;
 
         $dbulans->st_anak = $request->st_anak;
+        $dbulans->c_ukur = $request->c_ukur;
 
         // Simpan objek Mahal ke dalam database
         $dbulans->save();

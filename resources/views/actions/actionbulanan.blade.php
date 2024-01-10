@@ -6,4 +6,8 @@
         class="btn btn-warning btn-sm me-2 shadow">
         <i class="bi bi-file-earmark-bar-graph text-white"></i>
     </a>
+    <a href="{{ route('exportpdf', ['danaks_id' => $dbulanan->danaks_id]) }}" target="__blank"
+        class="btn btn-danger btn-sm me-2 shadow">
+        <i class="bi bi-file-earmark-bar-graph text-white"></i>
+    </a>
 </div>

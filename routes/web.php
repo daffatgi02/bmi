@@ -6,6 +6,7 @@ use App\Http\Controllers\BidanController;
 use App\Http\Controllers\DataAnakController;
 use App\Http\Controllers\DatabulananController;
 use App\Http\Controllers\DataPosyanduController;
+use App\Http\Controllers\ExportpdfController;
 use App\Http\Controllers\GrafikPerkembanganController;
 use App\Http\Controllers\KaderController;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,8 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
         Route::get('gettabelantrian1', [DatabulananController::class, 'getData2'])->name('antrians.getData');
         Route::get('exportbulanan', [DatabulananController::class, 'exportbulanan'])->name('exportbulanan');
 
+        Route::get('exportpdf/{danaks_id}', [ExportpdfController::class, 'exportpdf'])->name('exportpdf');
+
 
 
 
@@ -65,7 +68,6 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
 
         // GrafikPerkembanganController
         Route::resource('gperkembangans', GrafikPerkembanganController::class);
-
     });
 
 
@@ -76,7 +78,6 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
         // Route kader
         Route::resource('kaders', KaderController::class);
         Route::get('gettabelantrian2', [KaderController::class, 'getData2'])->name('antrians.getData');
-
     });
 });
 
