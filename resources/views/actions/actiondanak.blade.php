@@ -1,6 +1,6 @@
 <div class="d-flex">
     <a href="{{ route('danaks.edit', ['danak' => $danak->id]) }}" class="btn btn-primary btn-sm me-2 shadow">
-        <i class="bi-info-circle"></i>
+        <i class="bi-pencil-square"></i>
     </a>
 
     <div>
