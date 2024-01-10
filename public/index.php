@@ -1,55 +1,88 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Http\Request;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance</title>
+    <link rel="shortcut icon" href="assets/Logo_Web.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+            /* Warna latar belakang putih */
+        }
 
-define('LARAVEL_START', microtime(true));
+        .maintenance-container {
+            text-align: center;
+        }
 
-/*
-|--------------------------------------------------------------------------
-| Check If The Application Is Under Maintenance
-|--------------------------------------------------------------------------
-|
-| If the application is in maintenance / demo mode via the "down" command
-| we will load this file so that any pre-rendered content can be shown
-| instead of starting the framework, which could cause an exception.
-|
-*/
+        .image {
+            width: 30%;
+        }
 
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
-    require $maintenance;
-}
+        .text_maintenece {
+            font-size: 25px;
+            font-weight: bold;
+        }
 
-/*
-|--------------------------------------------------------------------------
-| Register The Auto Loader
-|--------------------------------------------------------------------------
-|
-| Composer provides a convenient, automatically generated class loader for
-| this application. We just need to utilize it! We'll simply require it
-| into the script here so we don't need to manually load our classes.
-|
-*/
 
-require __DIR__.'/../vendor/autoload.php';
+        @media (max-width: 800px) {
+            .maintenance-container {
+                text-align: center;
+                width: 100%;
+                /* Mengurangi lebar kontainer pada layar kecil */
+                margin: 0 auto;
+                /* Posisi tengah pada layar kecil */
+            }
 
-/*
-|--------------------------------------------------------------------------
-| Run The Application
-|--------------------------------------------------------------------------
-|
-| Once we have the application, we can handle the incoming request using
-| the application's HTTP kernel. Then, we will send the response back
-| to this client's browser, allowing them to enjoy our application.
-|
-*/
+            .image {
+                width: 50%;
+                /* Memperbesar gambar pada layar kecil */
+            }
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+            .text_maintenece {
+                font-size: 18px;
+                /* Mengurangi ukuran teks pada layar kecil */
+            }
+        }
+        @media (max-width: 450px) {
+            .maintenance-container {
+                text-align: center;
+                width: 90%;
+                /* Mengurangi lebar kontainer pada layar kecil */
+                margin: 0 auto;
+                /* Posisi tengah pada layar kecil */
+            }
 
-$kernel = $app->make(Kernel::class);
+            .image {
+                width: 75%;
+                /* Memperbesar gambar pada layar kecil */
+            }
 
-$response = $kernel->handle(
-    $request = Request::capture()
-)->send();
+            .text_maintenece {
+                font-size: 18px;
+                /* Mengurangi ukuran teks pada layar kecil */
+            }
+        }
+    </style>
+</head>
 
-$kernel->terminate($request, $response);
+<body>
+    <div class="maintenance-container">
+        <img src="assets/Logo_Web.png" alt="Image" class="image">
+        <p class="text_maintenece">Website Sedang Maintenance</p>
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>
