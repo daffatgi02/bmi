@@ -102,13 +102,19 @@ class KaderController extends Controller
      */
     public function destroy(string $id)
     {
-        // ELOQUENT
+        // Temukan data kader berdasarkan ID
         $kader = Dantrian::find($id);
-
-
-        $kader->delete(); // Hapus data dari database
-        Alert::success('Antrian Selesai');
-
+    
+        // Periksa apakah data kader ditemukan
+        if ($kader) {
+            // Hapus data dari database
+            $kader->delete();
+            Alert::success('Antrian Selesai');
+        } else {
+            Alert::success('Antrian Selesai');
+        }
+    
         return redirect()->route('kaders.index');
     }
+    
 }
