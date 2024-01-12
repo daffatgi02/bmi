@@ -69,11 +69,10 @@
                 <thead class="table-warning">
                     <tr>
                         <th>id</th>
-                        <th id="th" >Urutan</th>
+                        <th id="th">Urutan</th>
                         <th id="th" class="w-50">Nama</th>
                         <th id="th" class="w-30">Posyandu</th>
-                        <th id="th" >Waktu Daftar</th>
-                        
+                        <th id="th">Waktu Daftar</th>
                     </tr>
                 </thead>
             </table>
@@ -140,28 +139,28 @@
 
                         },
                         {
-        data: "created_at",
-        name: "created_at",
-        className: 'align-middle',
-        orderable: false,
-        render: function(data, type, row, meta) {
-            // Buat objek Date dari string tanggal
-            var date = new Date(data);
-            // Format tanggal dan waktu secara manual
-            var formattedDate = date.toLocaleDateString("id-ID", {
-                timeZone: "Asia/Jakarta",
-                weekday: 'long'
-            });
-            var formattedTime = date.toLocaleTimeString("id-ID", {
-                timeZone: "Asia/Jakarta",
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit', 
-                hour12: false
-            }).replace(/\./g, ':');
-            return "" + formattedDate + ", " + formattedTime + " WIB";
-        }
-    },
+                            data: "created_at",
+                            name: "created_at",
+                            className: 'align-middle',
+                            orderable: false,
+                            render: function(data, type, row, meta) {
+                                // Buat objek Date dari string tanggal
+                                var date = new Date(data);
+                                // Format tanggal dan waktu secara manual
+                                var formattedDate = date.toLocaleDateString("id-ID", {
+                                    timeZone: "Asia/Jakarta",
+                                    weekday: 'long'
+                                });
+                                var formattedTime = date.toLocaleTimeString("id-ID", {
+                                    timeZone: "Asia/Jakarta",
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    second: '2-digit',
+                                    hour12: false
+                                }).replace(/\./g, ':');
+                                return "" + formattedDate + ", " + formattedTime + " WIB";
+                            }
+                        },
                     ],
                     order: [
                         [3, "desc"]
