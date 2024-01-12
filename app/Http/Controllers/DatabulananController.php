@@ -181,13 +181,19 @@ class DatabulananController extends Controller
      */
     public function destroy(string $id)
     {
-        // ELOQUENT
+        // Temukan data bulanan berdasarkan ID
         $dbulanan = Dantrian::find($id);
-
-
-        $dbulanan->delete(); // Hapus data dari database
-        Alert::success('Antrian Selesai');
-
+    
+        // Periksa apakah data bulanan ditemukan
+        if ($dbulanan) {
+            // Hapus data dari database
+            $dbulanan->delete();
+            Alert::success('Antrian Selesai');
+        } else {
+            Alert::success('Antrian Selesai');
+        }
+    
         return redirect()->route('dbulanans.index');
     }
+    
 }

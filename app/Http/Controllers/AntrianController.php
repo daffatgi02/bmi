@@ -6,7 +6,7 @@ use App\Models\Dantrian;
 use App\Models\Dposyandu;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Illuminate\Support\Facades\DB;
 class AntrianController extends Controller
 {
     /**
