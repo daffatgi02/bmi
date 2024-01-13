@@ -28,8 +28,10 @@ class DatabulananController extends Controller
 
     public function getData(Request $request)
     {
+        // Ambil bulan saat ini
+        $currentMonth = now()->format('m');
 
-        $dbulanans = Dbulan::with('danaks');
+        $dbulanans = Dbulan::with('danaks')->whereMonth('created_at', $currentMonth);
 
         if ($request->ajax()) {
             return datatables()->of($dbulanans)
@@ -40,6 +42,7 @@ class DatabulananController extends Controller
                 ->toJson();
         }
     }
+
     public function getData2(Request $request)
     {
 
@@ -183,7 +186,7 @@ class DatabulananController extends Controller
     {
         // Temukan data bulanan berdasarkan ID
         $dbulanan = Dantrian::find($id);
-    
+
         // Periksa apakah data bulanan ditemukan
         if ($dbulanan) {
             // Hapus data dari database
@@ -192,8 +195,21 @@ class DatabulananController extends Controller
         } else {
             Alert::success('Antrian Selesai');
         }
-    
+
         return redirect()->route('dbulanans.index');
     }
-    
+
+    public function destroy2()
+    {
+        // Ambil tanggal saat ini
+        $currentDate = now()->toDateString();
+
+        // Hapus data Dbulan dengan tanggal kurang dari tanggal saat ini
+        Dbulan::whereDate('created_at', '<', $currentDate)
+            ->delete();
+
+        Alert::success('Data Terupdate');
+
+        return redirect()->route('dbulanans.index');
+    }
 }

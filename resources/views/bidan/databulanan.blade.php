@@ -186,6 +186,8 @@
 
 
                     {{-- TABEL BULANAN --}}
+                    {{-- Triger Update data  --}}
+
                     <div class="col-12">
                         <div class="row align-items-center mb-5">
                             <div class="col-lg-4 col-md-6 col-12 mb-2">
@@ -230,6 +232,13 @@
                             </thead>
                         </table>
                     </div>
+                    <div class="d-flex flex-row justify-content-center justify-content-md-end ">
+                        <a href="{{ route('destroy2') }}" class="btn btn-secondary mt-2" id="update-data">
+                            <i class="bi bi-stars"></i>
+                             Bersihkan Cache
+                        </a>
+                    </div>
+
                 </div>
 
 
