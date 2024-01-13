@@ -4,10 +4,10 @@
     </a>
     <a href="{{ route('dbulanans.show', ['dbulanan' => $dbulanan->danaks_id]) }}"
         class="btn btn-warning btn-sm me-2 shadow">
-        <i class="bi bi-file-earmark-bar-graph text-white"></i>
+        <i class="bi bi-file-earmark-bar-graph"></i>
     </a>
-    <a href="{{ route('exportpdf', ['danaks_id' => $dbulanan->danaks_id]) }}" target="__blank"
+    {{-- <a href="{{ route('exportpdf', ['danaks_id' => $dbulanan->danaks_id]) }}" target="__blank"
         class="btn btn-danger btn-sm me-2 shadow">
         <i class="bi bi-file-earmark-bar-graph text-white"></i>
-    </a>
+    </a> --}}
 </div>

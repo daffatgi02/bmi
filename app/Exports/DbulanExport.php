@@ -36,12 +36,15 @@ class DbulanExport implements ShouldAutoSize, WithStyles, FromView
 
     public function view(): View
     {
-        $dbulans = Dbulan::where('nama_posyandu', $this->posyandu)->get();
+        // Ambil bulan saat ini
+        $currentMonth = now()->format('m');
+
+        $dbulans = Dbulan::where('nama_posyandu', $this->posyandu)
+            ->whereMonth('created_at', $currentMonth)
+            ->get();
 
         return view('bidan.export_bulanan', [
             'dbulans' => $dbulans
         ]);
     }
-
-
 }
