@@ -72,7 +72,7 @@
 <div class="sidebar">
     <div class="logo-details">
         <div class="logo_name">Connect Pediatrics</div>
-        <i class='bx bx-menu' id="btn" style='color:#ffffff'></i>
+        <i class='bx bx-menu d-xxl-block d-none' id="btn" style='color:#ffffff'></i>
     </div>
     <ul class="nav-list">
         <li>
