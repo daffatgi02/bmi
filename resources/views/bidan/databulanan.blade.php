@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <select class="form-select mb-2" size="5" id="danaks_id" name="danaks_id"
+                                            <select class="form-select mb-2 border border-0" id="danaks_id" name="danaks_id"
                                                 required style="cursor: pointer">
                                                 <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2"
                                                     value="null" disabled>
@@ -79,7 +79,7 @@
                                                         data-nama_posyandu="{{ $data->dposyandu->nama_posyandu }}"
                                                         data-umur="{{ $umurTotal }}" data-umur2="{{ $umurTotal2 }}"
                                                         data-umur3="{{ $umurTotal3 }}"> <!-- Menambahkan data-umur -->
-                                                        - {{ $data->nama_anak }} | {{ $data->nik_anak }}
+                                                        {{ $data->nama_anak }} | {{ $data->nik_anak }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -119,7 +119,7 @@
                                             {{-- Untuk Umur Periksa --}}
 
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control border border-dark-subtle"
+                                                <input type="text" class="form-control border border-dark-subtle  "
                                                     id="bb_anak" name="bb_anak" placeholder="Masukan Berat Badan (KG)"
                                                     value="0" required onclick="selectAllText(this);"
                                                     onfocus="selectAllText(this);">
@@ -129,7 +129,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control border-dark-subtle"
+                                                <input type="text" class="form-control border border-dark-subtle "
                                                     id="tb_anak" name="tb_anak" placeholder="Masukan Tinggi Badan (KG)"
                                                     value="0" required onclick="selectAllText(this);"
                                                     onfocus="selectAllText(this);">
@@ -140,7 +140,7 @@
                                         {{-- LIla --}}
                                         <div class="col-6">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control border border-dark-subtle"
+                                                <input type="text" class="form-control border border-dark-subtle  "
                                                     id="lk_anak" name="lk_anak"
                                                     placeholder="Masukan Lingkar Kepala (CM)" value="0" required
                                                     onclick="selectAllText(this);" onfocus="selectAllText(this);">
@@ -151,7 +151,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control border-dark-subtle"
+                                                <input type="text" class="form-control border border-dark-subtle "
                                                     id="ll_anak" name="ll_anak"
                                                     placeholder="Masukan Lingkar Lengan (CM)" value="0" required
                                                     onclick="selectAllText(this);" onfocus="selectAllText(this);">
@@ -235,7 +235,7 @@
                     <div class="d-flex flex-row justify-content-center justify-content-md-end ">
                         <a href="{{ route('destroy2') }}" class="btn btn-secondary mt-2" id="update-data">
                             <i class="bi bi-stars"></i>
-                             Bersihkan Cache
+                            Bersihkan Cache
                         </a>
                     </div>
 
