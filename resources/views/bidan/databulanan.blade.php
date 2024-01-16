@@ -340,43 +340,52 @@
                             // let st_anakValue = lk_anakValue + ll_anakValue;
                             let tinggiMeter = tb_anakValue / 100; // Ubah tinggi ke meter
                             let imt = bb_anakValue / (tinggiMeter * tinggiMeter); //mencari Indeks masa tubuh
+
                             if (ut_anakValue < 5) {
                                 if (jkValue === 'L') {
                                     if (imt < 16) {
                                         st_anakInput.value = "Gizi Buruk";
-                                        imt_anakInput.value = imt
+                                        imt_anakInput.value = imt;
                                     } else if (imt >= 16 && imt < 17) {
                                         st_anakInput.value = 'Gizi Kurang';
-                                        imt_anakInput.value = imt
+                                        imt_anakInput.value = imt;
                                     } else if (imt >= 17 && imt < 18) {
                                         st_anakInput.value = 'Normal';
-                                        imt_anakInput.value = imt
-                                    } else {
+                                        imt_anakInput.value = imt;
+                                    } else if (imt >= 18 && imt < 30) {
                                         st_anakInput.value = 'Kelebihan Berat Badan';
-                                        imt_anakInput.value = imt
+                                        imt_anakInput.value = imt;
+                                    } else {
+                                        st_anakInput.value = 'Obesitas';
+                                        imt_anakInput.value = imt;
                                     }
                                 } else if (jkValue === 'P') {
                                     if (imt < 16) {
                                         st_anakInput.value = "Gizi Buruk";
-                                        imt_anakInput.value = imt
+                                        imt_anakInput.value = imt;
                                     } else if (imt >= 16 && imt < 17) {
                                         st_anakInput.value = 'Gizi Kurang';
-                                        imt_anakInput.value = imt
+                                        imt_anakInput.value = imt;
                                     } else if (imt >= 17 && imt < 18) {
                                         st_anakInput.value = 'Normal';
-                                        imt_anakInput.value = imt
-                                    } else {
+                                        imt_anakInput.value = imt;
+                                    } else if (imt >= 18 && imt < 30) {
                                         st_anakInput.value = 'Kelebihan Berat Badan';
-                                        imt_anakInput.value = imt
+                                        imt_anakInput.value = imt;
+                                    } else {
+                                        st_anakInput.value = 'Obesitas';
+                                        imt_anakInput.value = imt;
                                     }
                                 }
                             } else {
                                 if (imt < 10) {
-                                    st_anakInput.value = 'Gizi Kurang';
+                                    st_anakInput.value = 'Gizi Buruk';
                                 } else if (imt >= 10 && imt < 25) {
                                     st_anakInput.value = 'Normal';
-                                } else {
+                                } else if (imt >= 25 && imt < 30) {
                                     st_anakInput.value = 'Kelebihan Berat Badan';
+                                } else {
+                                    st_anakInput.value = 'Obesitas';
                                 }
                             }
                             imt_anakInput.value = imt.toFixed(2);
@@ -573,6 +582,9 @@
                                     data + '</span>';
                             } else if (data === 'Kelebihan Berat Badan') {
                                 return '<span style="color: DarkBlue; font-weight:bold  ">' +
+                                    data + '</span>';
+                            } else if (data === 'Obesitas') {
+                                return '<span style="color: Black; font-weight:bold  ">' +
                                     data + '</span>';
                             } else {
                                 return data;

@@ -25,6 +25,7 @@ class GrafikdashboardChart
         $jmlh_data2 = [];
         $jmlh_data3 = [];
         $jmlh_data4 = [];
+        $jmlh_data5 = [];
 
         foreach ($tgl_periksa as $index => $bulan) {
             // Ambil data berdasarkan bulan, tahun saat ini, dan posyandu yang dipilih
@@ -57,11 +58,19 @@ class GrafikdashboardChart
                 //     $query->where('nama_posyandu', $selectedPosyandu);
                 // })
                 ->count();
+            $total_obesitas = Dbulan::whereMonth('created_at', $index + 1)
+                ->whereYear('created_at', date('Y'))
+                ->where('st_anak', 'Obesitas')
+                // ->whereHas('danaks.dposyandu', function ($query) use ($selectedPosyandu) {
+                //     $query->where('nama_posyandu', $selectedPosyandu);
+                // })
+                ->count();
 
             $jmlh_data1[] = $total_normal;
             $jmlh_data2[] = $total_gizi_kurang;
             $jmlh_data3[] = $total_gizi_buruk;
             $jmlh_data4[] = $total_kelebihan_bb;
+            $jmlh_data5[] = $total_obesitas;
         }
 
         return $this->chart->barChart()
@@ -71,7 +80,8 @@ class GrafikdashboardChart
             ->addData('Gizi Kurang', $jmlh_data2)
             ->addData('Gizi Buruk', $jmlh_data3)
             ->addData('Kelebihan Berat Badan', $jmlh_data4)
-            ->setColors(['#3CB371', '#FF942D', "#FB4E32" , "#04098f"])
+            ->addData('Obesitas', $jmlh_data5)
+            ->setColors(['#3CB371', '#FF942D', "#FB4E32" , "#04098f", "#051E51"])
             ->setXAxis($tgl_periksa)
             ->setGrid('#3F51B5', 0.01);
         // ->setMarkers(['#FF6464', '#2EB086'], 6, 8);

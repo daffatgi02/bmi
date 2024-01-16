@@ -66,12 +66,20 @@
                                         </a>
                                     </div>
 
-                                    <p class="fw-bold">
-                                        <span class="badge text me-2" style="background-color:mediumseagreen"> &ensp; </span> {{ $dbulans->where('st_anak', 'Normal')->count() }} <br>
-                                        <span class="badge text me-2" style="background-color:darkorange"> &ensp; </span> {{ $dbulans->where('st_anak', 'Gizi Kurang')->count() }} <br>
-                                        <span class="badge text me-2" style="background-color:red"> &ensp; </span> {{ $dbulans->where('st_anak', 'Gizi Buruk')->count() }} <br>
-                                        <span class="badge text me-2" style="background-color:darkblue"> &ensp; </span> {{ $dbulans->where('st_anak', 'Kelebihan Berat Badan')->count() }}
-                                    </p>
+                                    <div class="d-flex flex-row">
+                                        <p class="fw-bold">
+                                            <span class="badge text me-1" style="background-color:mediumseagreen"> &ensp; </span> {{ $dbulans->where('st_anak', 'Normal')->count() }} <br>
+                                            <span class="badge text me-1" style="background-color:darkorange"> &ensp; </span> {{ $dbulans->where('st_anak', 'Gizi Kurang')->count() }} <br>
+                                            <span class="badge text me-1" style="background-color:red"> &ensp; </span> {{ $dbulans->where('st_anak', 'Gizi Buruk')->count() }} <br>
+
+                                        </p>
+                                    </div>
+                                    <div class="d-flex flex-row ms-2">
+                                        <p class="fw-bold">
+                                            <span class="badge text me-1" style="background-color:darkblue"> &ensp; </span> {{ $dbulans->where('st_anak', 'Kelebihan Berat Badan')->count() }} <br>
+                                            <span class="badge text me-1" style="background-color:rgb(2, 2, 35)"> &ensp; </span> {{ $dbulans->where('st_anak', 'Obesitas')->count() }}
+                                        </p>
+                                    </div>
                                 </div>
 
                             </div>
