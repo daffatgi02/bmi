@@ -48,6 +48,5 @@ class DetailChart
             ->setXAxis($tgl_periksa)
             ->setMarkers(['#FF5722', '#E040FB'], 6, 8)
             ->setGrid('#3F51B5', 0.01);
-
     }
 }
