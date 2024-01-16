@@ -104,7 +104,7 @@ class KaderController extends Controller
     {
         // Temukan data kader berdasarkan ID
         $kader = Dantrian::find($id);
-    
+
         // Periksa apakah data kader ditemukan
         if ($kader) {
             // Hapus data dari database
@@ -113,8 +113,8 @@ class KaderController extends Controller
         } else {
             Alert::success('Antrian Selesai');
         }
-    
+
         return redirect()->route('kaders.index');
     }
-    
+
 }
