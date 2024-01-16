@@ -6,7 +6,7 @@
         <div class="content">
             <div class="container mt-3 pt-3">
                 <div class="row ">
-                    <h1 class="fw-bold h mb-4">Halaman Data Anak</h1>
+                    <h1 class="fw-bold h mb-4">Data Anak</h1>
                     <div class="col-md-3 col-lg-2 col-7 offset-md-9 offset-lg-10 offset-5 mb-4 d-grid">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn shadow" data-bs-toggle="modal" id="btn-tambah"
@@ -45,7 +45,6 @@
             </div>
         </div>
     </div>
-
     {{-- PESAN ERROR --}}
     @if (session('error'))
         <script>

@@ -41,7 +41,7 @@
                         <div class="card-body">
                             <div class="d-flex ">
                                 <i class="bi bi-search fs-3 me-2"></i>
-                                <input type="text" id="searchInput" class="form-control mb-2 border border-dark-subtle"
+                                <input type="text" id="searchInput" class="form-control mb-3 border border-dark-subtle"
                                     placeholder="Cari Nama" onclick="selectAllText(this);" onfocus="selectAllText(this);">
                             </div>
                             <div class="row">

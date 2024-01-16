@@ -82,7 +82,7 @@ class GrafikPerkembanganChart
                 ->addData('Gizi Kurang', $jmlh_data2)
                 ->addData('Gizi Buruk', $jmlh_data3)
                 ->addData('Kelebihan Berat Badan', $jmlh_data4)
-                ->addData('Obesitas', $jmlh_dat5)
+                ->addData('Obesitas', $jmlh_data5)
                 ->setColors(['#3CB371', '#FF942D', "#FB4E32" , "#04098f", "#051E51"])
                 ->setXAxis($tgl_periksa)
                 ->setGrid('#3F51B5', 0.01);

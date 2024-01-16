@@ -1,12 +1,20 @@
 @extends('layouts.appnav')
 
 @section('content')
+    <div class="loading-overlay">
+        <div class="spinner-container">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <label>Loading</label>
+        </div>
+    </div>
     @include('layouts.navbar')
     <section class="home-section">
         <div class="content">
             <div class="container mt-3 pt-3">
                 <div class="row ">
-                    <h1 class="fw-bold h mb-4">Dashboard </h1>
+                    <h1 class="fw-bold h mb-4">Dashboard</h1>
 
                     {{-- Total Anak --}}
                     <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
@@ -68,16 +76,21 @@
 
                                     <div class="d-flex flex-row">
                                         <p class="fw-bold">
-                                            <span class="badge text me-1" style="background-color:mediumseagreen"> &ensp; </span> {{ $dbulans->where('st_anak', 'Normal')->count() }} <br>
-                                            <span class="badge text me-1" style="background-color:darkorange"> &ensp; </span> {{ $dbulans->where('st_anak', 'Gizi Kurang')->count() }} <br>
-                                            <span class="badge text me-1" style="background-color:red"> &ensp; </span> {{ $dbulans->where('st_anak', 'Gizi Buruk')->count() }} <br>
+                                            <span class="badge text me-1" style="background-color:mediumseagreen"> &ensp;
+                                            </span> {{ $dbulans->where('st_anak', 'Normal')->count() }} <br>
+                                            <span class="badge text me-1" style="background-color:darkorange"> &ensp;
+                                            </span> {{ $dbulans->where('st_anak', 'Gizi Kurang')->count() }} <br>
+                                            <span class="badge text me-1" style="background-color:red"> &ensp; </span>
+                                            {{ $dbulans->where('st_anak', 'Gizi Buruk')->count() }} <br>
 
                                         </p>
                                     </div>
                                     <div class="d-flex flex-row ms-2">
                                         <p class="fw-bold">
-                                            <span class="badge text me-1" style="background-color:darkblue"> &ensp; </span> {{ $dbulans->where('st_anak', 'Kelebihan Berat Badan')->count() }} <br>
-                                            <span class="badge text me-1" style="background-color:rgb(2, 2, 35)"> &ensp; </span> {{ $dbulans->where('st_anak', 'Obesitas')->count() }}
+                                            <span class="badge text me-1" style="background-color:darkblue"> &ensp; </span>
+                                            {{ $dbulans->where('st_anak', 'Kelebihan Berat Badan')->count() }} <br>
+                                            <span class="badge text me-1" style="background-color:rgb(2, 2, 35)"> &ensp;
+                                            </span> {{ $dbulans->where('st_anak', 'Obesitas')->count() }}
                                         </p>
                                     </div>
                                 </div>
@@ -88,7 +101,7 @@
                     <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
                         <div class="card shadow rounded-2" id="card-dash"
                             style="width: 18rem; max-width:18rem; height: 15rem; max-height:15rem;">
-                            <h5 class="card-header fw-bold"><i class='bx bx-walk' ></i>Total Antrian</h5>
+                            <h5 class="card-header fw-bold"><i class='bx bx-walk'></i>Total Antrian</h5>
                             <div class="card-body rounded-bottom-2" id="card-body-dash">
                                 <h6 class="card-title">Pada Posyandu Kelurahan Japan</h6>
                                 <div class="d-flex flex-row">
@@ -112,6 +125,20 @@
         </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Menampilkan overlay saat halaman dimuat
+            document.querySelector('.loading-overlay').style.display = 'flex';
+
+            // Sembunyikan overlay setelah 2 detik setelah semua konten dimuat
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    document.querySelector('.loading-overlay').style.display = 'none';
+                }, 1000); // 2 detik (dalam milidetik)
+            });
+        });
+    </script>
     <script src="{{ $chart->cdn() }}"></script>
     {{ $chart->script() }}
 

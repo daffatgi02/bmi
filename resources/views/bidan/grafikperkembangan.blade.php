@@ -12,13 +12,9 @@
     </div>
     <section class="home-section">
         <div class="content">
-            {{-- <div class="spinner-border text-success" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <label>Loading</label> --}}
             <div class="container mt-3 pt-3">
                 <div class="row ">
-                    <h1 class="fw-bold h mb-4">Halaman Grafik Perkembangan </h1>
+                    <h1 class="fw-bold h mb-4">Grafik Perkembangan </h1>
                     <div class="mb-2">
                         <form method="GET" action="{{ route('gperkembangans.index') }}">
                             <div class="d-flex flex-row">
