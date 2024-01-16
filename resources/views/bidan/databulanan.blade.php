@@ -55,10 +55,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <select class="form-select mb-2 border border-0" id="danaks_id" name="danaks_id"
+                                            <select class="form-select mb-2 border border-dark-subtle" id="danaks_id" name="danaks_id"
                                                 required style="cursor: pointer">
                                                 <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2"
-                                                    value="null" disabled>
+                                                    value="null">
                                                     Silahkan Pilih Nama
                                                 </option>
 

@@ -42,6 +42,7 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
@@ -53,10 +54,13 @@ class LoginController extends Controller
                 return redirect()->route('kaders.index');
             }
         }
+
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Email Tidak Terdaftar/Salah',
+            'password' => 'Password yang dimasukkan salah',
         ])->onlyInput('email');
     }
+
     public function logout(Request $request)
     {
         $this->guard()->logout();

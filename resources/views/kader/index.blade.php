@@ -4,12 +4,13 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6 mb-4">
-                <div class="d-flex">
+                <div class="d-flex align-items-center">
                     <i class="bi bi-list-ol fs-4 me-2"></i>
-                    <h2>Silahkan Pilih Posyandu</h2>
+                    <h2>Antrian</h2>
                 </div>
                 <div class="mt-2 px-1">
-                    <div class="mb-4">
+                    <div class="mb-2">
+                        {{-- <h6>Silahkan Pilih Posyandu: </h6> --}}
                         @foreach ($dposyandu as $data)
                             <button class="badge ku" onclick="tampilkanTabel(this)">
                                 {{ $data->nama_posyandu }}
@@ -23,14 +24,13 @@
                                 <th id="th">Urutan</th>
                                 <th id="th" class="w-50">Nama</th>
                                 <th id="th" class="w-50">Posyandu</th>
-                                {{-- <th id="th">Waktu Daftar</th> --}}
-                                <th id="th" class="w-20">Opsi</th>
+                                <th id="th" class="w-50">Opsi</th>
                             </tr>
                         </thead>
                     </table>
                 </div>
             </div>
-            <div class="col-12 col-lg-6 ">
+            <div class="col-12 col-lg-6 mb-5 d-flex">
                 <form action="{{ route('kaders.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card shadow">
@@ -46,10 +46,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <select class="form-select mb-2" size="5" id="danaks_id" name="danaks_id" required
-                                        style="cursor: pointer">
+                                    <select class="form-select mb-2 border border-dark-subtle" id="danaks_id"
+                                        name="danaks_id" required style="cursor: pointer">
                                         <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2"
-                                            value="null" disabled>
+                                            value="null">
                                             Silahkan Pilih Nama
                                         </option>
 
@@ -70,7 +70,7 @@
                                                 data-nama_posyandu="{{ $data->dposyandu->nama_posyandu }}"
                                                 data-umur="{{ $umurTotal }}" data-umur2="{{ $umurTotal2 }}"
                                                 data-umur3="{{ $umurTotal3 }}"> <!-- Menambahkan data-umur -->
-                                                - {{ $data->nama_anak }} | {{ $data->nik_anak }}
+                                                {{ $data->nama_anak }} | {{ $data->nik_anak }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -110,7 +110,7 @@
                                     {{-- Untuk Umur Periksa --}}
 
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control border border-dark-subtle"
+                                        <input type="text" class="form-control border border-dark-subtle  "
                                             id="bb_anak" name="bb_anak" placeholder="Masukan Berat Badan (KG)"
                                             value="0" required onclick="selectAllText(this);"
                                             onfocus="selectAllText(this);">
@@ -120,9 +120,10 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control border-dark-subtle" id="tb_anak"
-                                            name="tb_anak" placeholder="Masukan Tinggi Badan (KG)" value="0"
-                                            required onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                        <input type="text" class="form-control border border-dark-subtle "
+                                            id="tb_anak" name="tb_anak" placeholder="Masukan Tinggi Badan (KG)"
+                                            value="0" required onclick="selectAllText(this);"
+                                            onfocus="selectAllText(this);">
                                         <label class="d-md-block d-none" for="tb_anak">Tinggi Badan (CM)</label>
                                         <label class="d-md-none d-block" for="tb_anak">Tinggi Badan</label>
                                     </div>
@@ -130,7 +131,7 @@
                                 {{-- LIla --}}
                                 <div class="col-6">
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control border border-dark-subtle"
+                                        <input type="text" class="form-control border border-dark-subtle  "
                                             id="lk_anak" name="lk_anak" placeholder="Masukan Lingkar Kepala (CM)"
                                             value="0" required onclick="selectAllText(this);"
                                             onfocus="selectAllText(this);">
@@ -141,9 +142,10 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control border-dark-subtle" id="ll_anak"
-                                            name="ll_anak" placeholder="Masukan Lingkar Lengan (CM)" value="0"
-                                            required onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                        <input type="text" class="form-control border border-dark-subtle "
+                                            id="ll_anak" name="ll_anak" placeholder="Masukan Lingkar Lengan (CM)"
+                                            value="0" required onclick="selectAllText(this);"
+                                            onfocus="selectAllText(this);">
                                         <label class="d-md-block d-none" for="ll_anak">Lingkar Lengan
                                             (CM)</label>
                                         <label class="d-md-none d-block" for="ll_anak">Lingkar Lengan</label>
@@ -158,7 +160,6 @@
                                     </div>
                                 </div>
                             </div>
-
 
                             {{-- Button --}}
                             <div class="row d-flex justify-content-center">
@@ -260,43 +261,52 @@
                 // let st_anakValue = lk_anakValue + ll_anakValue;
                 let tinggiMeter = tb_anakValue / 100; // Ubah tinggi ke meter
                 let imt = bb_anakValue / (tinggiMeter * tinggiMeter); //mencari Indeks masa tubuh
+
                 if (ut_anakValue < 5) {
                     if (jkValue === 'L') {
                         if (imt < 16) {
                             st_anakInput.value = "Gizi Buruk";
-                            imt_anakInput.value = imt
+                            imt_anakInput.value = imt;
                         } else if (imt >= 16 && imt < 17) {
                             st_anakInput.value = 'Gizi Kurang';
-                            imt_anakInput.value = imt
+                            imt_anakInput.value = imt;
                         } else if (imt >= 17 && imt < 18) {
                             st_anakInput.value = 'Normal';
-                            imt_anakInput.value = imt
-                        } else {
+                            imt_anakInput.value = imt;
+                        } else if (imt >= 18 && imt < 30) {
                             st_anakInput.value = 'Kelebihan Berat Badan';
-                            imt_anakInput.value = imt
+                            imt_anakInput.value = imt;
+                        } else {
+                            st_anakInput.value = 'Obesitas';
+                            imt_anakInput.value = imt;
                         }
                     } else if (jkValue === 'P') {
                         if (imt < 16) {
                             st_anakInput.value = "Gizi Buruk";
-                            imt_anakInput.value = imt
+                            imt_anakInput.value = imt;
                         } else if (imt >= 16 && imt < 17) {
                             st_anakInput.value = 'Gizi Kurang';
-                            imt_anakInput.value = imt
+                            imt_anakInput.value = imt;
                         } else if (imt >= 17 && imt < 18) {
                             st_anakInput.value = 'Normal';
-                            imt_anakInput.value = imt
-                        } else {
+                            imt_anakInput.value = imt;
+                        } else if (imt >= 18 && imt < 30) {
                             st_anakInput.value = 'Kelebihan Berat Badan';
-                            imt_anakInput.value = imt
+                            imt_anakInput.value = imt;
+                        } else {
+                            st_anakInput.value = 'Obesitas';
+                            imt_anakInput.value = imt;
                         }
                     }
                 } else {
                     if (imt < 10) {
-                        st_anakInput.value = 'Gizi Kurang';
+                        st_anakInput.value = 'Gizi Buruk';
                     } else if (imt >= 10 && imt < 25) {
                         st_anakInput.value = 'Normal';
-                    } else {
+                    } else if (imt >= 25 && imt < 30) {
                         st_anakInput.value = 'Kelebihan Berat Badan';
+                    } else {
+                        st_anakInput.value = 'Obesitas';
                     }
                 }
                 imt_anakInput.value = imt.toFixed(2);
