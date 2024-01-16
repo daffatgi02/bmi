@@ -1,6 +1,14 @@
 @extends('layouts.appnav')
 
 @section('content')
+    <div class="loading-overlay">
+        <div class="spinner-container">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <label>Loading</label>
+        </div>
+    </div>
     @include('layouts.navbar')
     <section class="home-section mb-5">
         <div class="container mt-5">
@@ -27,8 +35,8 @@
                                     <div class="col-lg-6">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="pkm" name="pkm"
-                                            placeholder="Masukkan Nama Puskesmas" value="{{ $dposyandus->pkm }}"
-                                            required>
+                                                placeholder="Masukkan Nama Puskesmas" value="{{ $dposyandus->pkm }}"
+                                                required>
                                             <label for="floatingInput" class="fw-bold">Puskesmas:</label>
                                         </div>
                                         <div class="form-floating mb-3">
@@ -41,14 +49,12 @@
                                     <div class="col-lg-6">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="rw" name="rw"
-                                            placeholder="Masukkan RW" value="{{ $dposyandus->rw }}"
-                                            required>
+                                                placeholder="Masukkan RW" value="{{ $dposyandus->rw }}" required>
                                             <label for="floatingInput" class="fw-bold">RW:</label>
                                         </div>
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="rt" name="rt"
-                                                placeholder="Masukkan RT" value="{{ $dposyandus->rt }}"
-                                                required>
+                                                placeholder="Masukkan RT" value="{{ $dposyandus->rt }}" required>
                                             <label for="floatingInput" class="fw-bold">RT:</label>
                                         </div>
                                     </div>
@@ -78,4 +84,17 @@
             </div>
         </div>
     </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Menampilkan overlay saat halaman dimuat
+            document.querySelector('.loading-overlay').style.display = 'flex';
+
+            // Sembunyikan overlay setelah 2 detik setelah semua konten dimuat
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    document.querySelector('.loading-overlay').style.display = 'none';
+                }, 1000); // 2 detik (dalam milidetik)
+            });
+        });
+    </script>
 @endsection

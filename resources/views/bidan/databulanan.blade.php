@@ -6,7 +6,7 @@
         <div class="content">
             <div class="container mt-3 pt-3">
                 <div class="row justify-content-center">
-                    <h1 class="fw-bold h mb-4">Halaman Data Bulanan</h1>
+                    <h1 class="fw-bold h mb-4">Data Bulanan</h1>
 
 
                     {{-- BADEGE POSYANDU --}}
@@ -50,13 +50,13 @@
                                     <div class="d-flex ">
                                         <i class="bi bi-search fs-3 me-2"></i>
                                         <input type="text" id="searchInput"
-                                            class="form-control mb-2 border border-dark-subtle" placeholder="Cari Nama"
+                                            class="form-control mb-3 border border-dark-subtle" placeholder="Cari Nama"
                                             onclick="selectAllText(this);" onfocus="selectAllText(this);">
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <select class="form-select mb-2 border border-dark-subtle" id="danaks_id" name="danaks_id"
-                                                required style="cursor: pointer">
+                                            <select class="form-select mb-2 border border-dark-subtle" id="danaks_id"
+                                                name="danaks_id" required style="cursor: pointer">
                                                 <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2"
                                                     value="null">
                                                     Silahkan Pilih Nama

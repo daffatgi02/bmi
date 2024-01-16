@@ -1,6 +1,14 @@
 @extends('layouts.appnav')
 
 @section('content')
+    <div class="loading-overlay">
+        <div class="spinner-container">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <label>Loading</label>
+        </div>
+    </div>
     @include('layouts.navbar')
     <section class="home-section mb-5">
         <div class="container mt-2 pt-4">
@@ -105,8 +113,8 @@
 
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="hp_ortu" name="hp_ortu"
-                                                placeholder="Masukkan No WA" value="{{ old('hp_ortu', $danaks->hp_ortu) }}"
-                                                required maxlength="13">
+                                                placeholder="Masukkan No WA"
+                                                value="{{ old('hp_ortu', $danaks->hp_ortu) }}" required maxlength="13">
                                             <label for="floatingInput" class="">No WA:</label>
                                             @error('hp_ortu')
                                                 <div class="text-danger">{{ $message }}</div>
@@ -153,6 +161,19 @@
         </div>
     </section>
     <script>
+        // Loading
+        document.addEventListener("DOMContentLoaded", function() {
+            // Menampilkan overlay saat halaman dimuat
+            document.querySelector('.loading-overlay').style.display = 'flex';
+
+            // Sembunyikan overlay setelah 2 detik setelah semua konten dimuat
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    document.querySelector('.loading-overlay').style.display = 'none';
+                }, 1000); // 2 detik (dalam milidetik)
+            });
+        });
+
         // Mendapatkan elemen input dengan id 'umur'
         var umurInput = document.getElementById('umur');
 
