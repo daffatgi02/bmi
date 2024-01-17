@@ -7,7 +7,7 @@
                 <i class="bi bi-book fs-4 me-2"></i>
                 <h2 class="fw-bold">Daftar Antrian</h2>
                 <div class="ms-auto">
-                    <a id="reloadLink" href="{{ route('antrians.index') }}" class="d-none">reload</a>
+
 
                     <a id="batal" href="/" class="btn btn-danger shadow"> <i class="bi bi-arrow-left-square"></i>
                         Kembali</a>
@@ -58,6 +58,12 @@
             <i class="bi bi-list-ol fs-4 me-2"></i>
             <h2 class="fw-bold">Lihat Urutan Antrian</h2>
         </div>
+        <div class="d-flex justify-content-end">
+            <a href="{{ route('antrians.index') }}" class="btn btn-logreg">
+                <i class="bi bi-arrow-clockwise me-1 "></i>
+                Muat Ulang
+            </a>
+        </div>
         <div class="mt-4 px-1">
             <div class="mt-4 mb-4">
                 <h5>Silahkan Pilih Posyandu: </h5>
@@ -82,18 +88,6 @@
 
         <script>
             // Fungsi untuk reload setiap 10 detik
-            function reloadEvery5Seconds() {
-                setTimeout(function() {
-                    // Mendapatkan elemen <a> berdasarkan ID atau tag
-                    var reloadLink = document.getElementById('reloadLink') || document.querySelector('a');
-
-                    // Memanggil fungsi reload untuk menjalankan link
-                    reloadLink.click();
-
-                    // Mengulangi fungsi setiap 10 detik
-                    reloadEvery5Seconds();
-                }, 10000); // Waktu dalam milidetik (10 detik = 10 milidetik)
-            }
 
             // Memanggil fungsi saat halaman dimuat
             window.onload = function() {
