@@ -24,11 +24,8 @@
         .cards {
             width: 50rem;
             height: 20rem;
-            border-radius: 10px
-        }
+            border-radius: 10px;
 
-        .wcard {
-            height: 100vh;
         }
 
         .card1 {
@@ -108,7 +105,7 @@
 
 
         .cards2 {
-            width: 23rem;
+            width: 20rem;
             height: 40rem;
             border-radius: 10px
         }
@@ -191,7 +188,7 @@
         </div>
     </div>
     {{-- HP --}}
-    <div class="row d-block d-lg-none">
+    <div class="row d-block d-lg-none pb-5 mb-3">
         <div class="col-8 p-3 ps-3">
             <div class="cards2 shadow-lg">
                 <div class="card-bodys2">

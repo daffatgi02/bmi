@@ -7,6 +7,8 @@
                 <i class="bi bi-book fs-4 me-2"></i>
                 <h2 class="fw-bold">Daftar Antrian</h2>
                 <div class="ms-auto">
+                    <a id="reloadLink" href="{{ route('antrians.index') }}" class="d-none">reload</a>
+
                     <a id="batal" href="/" class="btn btn-danger shadow"> <i class="bi bi-arrow-left-square"></i>
                         Kembali</a>
                 </div>
@@ -79,6 +81,26 @@
         </div>
 
         <script>
+            // Fungsi untuk reload setiap 10 detik
+            function reloadEvery5Seconds() {
+                setTimeout(function() {
+                    // Mendapatkan elemen <a> berdasarkan ID atau tag
+                    var reloadLink = document.getElementById('reloadLink') || document.querySelector('a');
+
+                    // Memanggil fungsi reload untuk menjalankan link
+                    reloadLink.click();
+
+                    // Mengulangi fungsi setiap 10 detik
+                    reloadEvery5Seconds();
+                }, 10000); // Waktu dalam milidetik (10 detik = 10 milidetik)
+            }
+
+            // Memanggil fungsi saat halaman dimuat
+            window.onload = function() {
+                reloadEvery5Seconds();
+            };
+
+
             // Tabel Antrian
             function tampilkanTabel(button) {
                 var badges = document.querySelectorAll('.badge.ku');
@@ -138,30 +160,6 @@
                             className: 'align-middle',
 
                         },
-                        // {
-                        //     data: "created_at",
-                        //     name: "created_at",
-                        //     className: 'align-middle',
-                        //     orderable: false,
-                        //     searchable: false,
-                        //     render: function(data, type, row, meta) {
-                        //         // Buat objek Date dari string tanggal
-                        //         var date = new Date(data);
-                        //         // Format tanggal dan waktu secara manual
-                        //         var formattedDate = date.toLocaleDateString("id-ID", {
-                        //             timeZone: "Asia/Jakarta",
-                        //             weekday: 'long'
-                        //         });
-                        //         var formattedTime = date.toLocaleTimeString("id-ID", {
-                        //             timeZone: "Asia/Jakarta",
-                        //             hour: '2-digit',
-                        //             minute: '2-digit',
-                        //             second: '2-digit',
-                        //             hour12: false
-                        //         }).replace(/\./g, ':');
-                        //         return "" + formattedDate + ", " + formattedTime + " WIB";
-                        //     }
-                        // },
                     ],
                     order: [
                         [3, "desc"]
