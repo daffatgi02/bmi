@@ -61,6 +61,8 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
         Route::get('exportpdf/{danaks_id}', [ExportpdfController::class, 'exportpdf'])->name('exportpdf');
 
         Route::get('/update', [DatabulananController::class, 'destroy2'])->name('destroy2');
+        Route::delete('login/delete/{id}', [DatabulananController::class, 'destroy3'])->name('destroy3');
+
 
 
 

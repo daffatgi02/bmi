@@ -715,6 +715,25 @@
                 });
                 $('#tabel_antrian_filter input[type="search"]').prop('disabled', true);
             });
+
+            $(".datatable").on("click", ".btn-delete", function(e) {
+                e.preventDefault();
+
+                var form = $(this).closest("form");
+
+                Swal.fire({
+                    title: "Apakah Anda Yakin Menghapus Data " + "?",
+                    text: "Anda tidak akan dapat mengembalikannya!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "bg-primary",
+                    confirmButtonText: "Ya, hapus!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
         });
     </script>
 @endpush
