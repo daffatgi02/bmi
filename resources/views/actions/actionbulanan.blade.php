@@ -9,7 +9,7 @@
     </a>
 
     <div>
-        <form action="{{ route('dbulanans.destroy', ['dbulanan' => $dbulanan->id]) }}" method="POST">
+        <form action="{{ route('destroy3', ['id' => $dbulanan->id]) }}" method="POST">
             @csrf
             @method('delete')
             <button type="submit" class="btn btn-danger btn-sm me-2 btn-delete shadow">
@@ -17,4 +17,5 @@
             </button>
         </form>
     </div>
+
 </div>

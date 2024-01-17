@@ -23,6 +23,7 @@ class DatabulananController extends Controller
         $danaks = Danak::all();
         $dbulans = Dbulan::all();
         $dposyandu = Dposyandu::all();
+        confirmDelete();
         return view("bidan.databulanan", compact('danaks', 'dbulans', 'dposyandu', 'title'));
     }
 
@@ -197,12 +198,12 @@ class DatabulananController extends Controller
     public function destroy(string $id)
     {
         // Temukan data bulanan berdasarkan ID
-        $dbulanan = Dantrian::find($id);
+        $dantrian = Dantrian::find($id);
 
         // Periksa apakah data bulanan ditemukan
-        if ($dbulanan) {
+        if ($dantrian) {
             // Hapus data dari database
-            $dbulanan->delete();
+            $dantrian->delete();
             Alert::success('Antrian Selesai');
         } else {
             Alert::success('Antrian Selesai');
@@ -221,6 +222,23 @@ class DatabulananController extends Controller
             ->delete();
 
         Alert::success('Data Terupdate');
+
+        return redirect()->route('dbulanans.index');
+    }
+
+    public function destroy3(string $id)
+    {
+        // Temukan data bulanan berdasarkan ID
+        $dbulanan = Dbulan::find($id);
+
+        // Periksa apakah data bulanan ditemukan
+        if ($dbulanan) {
+            // Hapus data dari database
+            $dbulanan->delete();
+            Alert::success('Berhasil Terhapus', 'Data Anak Terhapus.');
+        } else {
+            Alert::success('Berhasil Terhapus', 'Data Anak Terhapus.');
+        }
 
         return redirect()->route('dbulanans.index');
     }
