@@ -45,6 +45,18 @@ class DataPosyanduController extends Controller
      */
     public function store(Request $request)
     {
+
+        // Cek entri terakhir berdasarkan yang di input sama user
+        $lastEntry = Dposyandu::where('nama_posyandu', $request->nama_posyandu)
+            ->where('pkm', $request->pkm)
+            ->latest()
+            ->first();
+
+        // Cek entri terakhir dibuat dalam interval waktu 5 detil kalau misal spam, nanti muncul error
+        if ($lastEntry && $lastEntry->created_at->gt(now()->subSeconds(5))) {
+            Alert::success('Berhasil Menambahkan', 'Data Posyandu Berhasil Terinput.');
+            return redirect()->route('dposyandus.index');
+        }
         // Buat objek Mahal baru berdasarkan data yang diterima
         $dposyandu = new Dposyandu();
         $dposyandu->nama_posyandu = $request->nama_posyandu;

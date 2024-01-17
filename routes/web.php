@@ -9,6 +9,7 @@ use App\Http\Controllers\DataPosyanduController;
 use App\Http\Controllers\ExportpdfController;
 use App\Http\Controllers\GrafikPerkembanganController;
 use App\Http\Controllers\KaderController;
+use App\Http\Controllers\LandingpageControler;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 // Guest
 Route::get('/', function () {
-    return view('auth.login');
+    return view('landingpage');
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -33,6 +34,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Login
 Auth::routes();
 Route::post('/login', [LoginController::class, 'authenticate']);
+
+
 
 
 // Controller Login
