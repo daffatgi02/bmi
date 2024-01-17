@@ -7,6 +7,7 @@ use App\Models\Dposyandu;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
+
 class AntrianController extends Controller
 {
     /**
@@ -47,13 +48,13 @@ class AntrianController extends Controller
     {
         // Cek entri terakhir berdasarkan yang di input sama user
         $lastEntry = Dantrian::where('n_antrian', $request->n_antrian)
-                             ->where('t_posyandu', $request->t_posyandu)
-                             ->latest()
-                             ->first();
+            ->where('t_posyandu', $request->t_posyandu)
+            ->latest()
+            ->first();
 
         // Cek entri terakhir dibuat dalam interval waktu 5 detil kalau misal spam, nanti muncul error
         if ($lastEntry && $lastEntry->created_at->gt(now()->subSeconds(5))) {
-            Alert::error('Gagal', 'Anda baru saja mendaftar. Silakan tunggu sebelum mendaftar lagi.');
+            Alert::success('Berhasil Menambahkan', 'Data Antrian Berhasil Terinput.');
             return redirect()->route('antrians.index');
         }
 

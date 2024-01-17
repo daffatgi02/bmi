@@ -75,6 +75,19 @@ class DataAnakController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+
+        // Cek entri terakhir berdasarkan yang di input sama user
+        $lastEntry = Danak::where('nik_anak', $request->nik_anak)
+            ->where('nik_ortu', $request->nik_ortu)
+            ->latest()
+            ->first();
+
+        // Cek entri terakhir dibuat dalam interval waktu 5 detil kalau misal spam, nanti muncul error
+        if ($lastEntry && $lastEntry->created_at->gt(now()->subSeconds(5))) {
+            Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
+            return redirect()->route('danaks.index');
+        }
+
         $danak = new Danak;
         $danak->nik_anak = $request->nik_anak;
         $danak->nama_anak = $request->nama_anak;

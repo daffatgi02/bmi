@@ -83,6 +83,18 @@ class DatabulananController extends Controller
      */
     public function store(Request $request)
     {
+
+        // Cek entri terakhir berdasarkan yang di input sama user
+        $lastEntry = Dbulan::where('danaks_id', $request->danaks_id)
+            ->where('nama_posyandu', $request->nama_posyandu)
+            ->latest()
+            ->first();
+
+        // Cek entri terakhir dibuat dalam interval waktu 5 detil kalau misal spam, nanti muncul error
+        if ($lastEntry && $lastEntry->created_at->gt(now()->subSeconds(5))) {
+            Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
+            return redirect()->route('dbulanans.index');
+        }
         // Buat objek Mahal baru berdasarkan data yang diterima
         $dbulans = new Dbulan();
         $dbulans->danaks_id = $request->danaks_id;
