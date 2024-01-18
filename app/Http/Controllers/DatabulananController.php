@@ -126,15 +126,18 @@ class DatabulananController extends Controller
     {
         // ELOQUENT
         $title = "E-KMS Anak";
+        $danak = Danak::findOrFail($danaks_id); // Mengambil data dari tabel 'danaks' berdasarkan 'danaks_id'
+
         $dbulanans = Dbulan::where('danaks_id', $danaks_id)->orderBy('created_at', 'asc')->get();
         $danaks = Danak::all();
 
         return view(
             'actions.detailbulanan',
             compact('dbulanans', 'title', 'danaks'),
-            ['chart' => $chart->build($danaks_id)]
+            ['chart' => $chart->build($danak->jk)]
         );
     }
+
 
 
 
