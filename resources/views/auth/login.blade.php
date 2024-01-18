@@ -90,9 +90,9 @@
                         </div>
                     @endguest
                 </div>
-                <a href="{{ route('antrians.index') }}" class="link-secondary link-offset-2 link-opacity-75-hover">
+                {{-- <a href="{{ route('antrians.index') }}" class="link-secondary link-offset-2 link-opacity-75-hover">
                     <i class="bi bi-hourglass-split me-2"></i>Daftar Antrian
-                </a>
+                </a> --}}
             </div>
         </div>
     </div>
