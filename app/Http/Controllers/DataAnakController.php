@@ -111,7 +111,7 @@ class DataAnakController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $danaks_id, DetailChart $chart)
+    public function show(string $danaks_id)
     {
         // ELOQUENT
         $title = "E-KMS Anak";
@@ -121,7 +121,6 @@ class DataAnakController extends Controller
         return view(
             'actions.detailbulanan',
             compact('dbulanans', 'title', 'danaks'),
-            ['chart' => $chart->build($danaks_id)]
         );
     }
 

@@ -1,14 +1,14 @@
 @extends('layouts.appnav')
 
 @section('content')
-<div class="loading-overlay">
-    <div class="spinner-container">
-        <div class="spinner-border text-success" role="status">
-            <span class="visually-hidden">Loading...</span>
+    <div class="loading-overlay">
+        <div class="spinner-container">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <label>Loading</label>
         </div>
-        <label>Loading</label>
     </div>
-</div>
     @include('layouts.navbar')
     <section class="home-section mb-5">
         <div class="mt-2 p-4">
@@ -18,10 +18,18 @@
                     Data Bulanan - {{ $dbulanans[0]->danaks->nama_anak }}
                 </p>
             @endif
-            <div class="row d-flex">
-                <div class="col-12 pe-4 chart-container">
+            <div class="row">
+                <div class="col-12 pe-4 ">
                     {!! $chart->container() !!}
                 </div>
+                <div class="col-12 pe-4 ">
+                    {!! $chart2->container() !!}
+                </div>
+                <div class="col-12 pe-4 d-none">
+                    chart 3
+                </div>
+
+
                 <div class="col-12 mt-4 mb-5 table-container">
                     <!-- Tambahkan elemen pembatas untuk memulai halaman baru -->
                     <div class="page-break"></div>
@@ -62,6 +70,7 @@
                 </div>
             </div>
         </div>
+
     </section>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -72,13 +81,18 @@
             window.addEventListener('load', function() {
                 setTimeout(function() {
                     document.querySelector('.loading-overlay').style.display = 'none';
-                }, 1000); // 2 detik (dalam milidetik)
+                }, 2500); // 2 detik (dalam milidetik)
             });
         });
     </script>
     {{-- </section> --}}
+
     <script src="{{ $chart->cdn() }}"></script>
     {{ $chart->script() }}
+    <script src="{{ $chart2->cdn() }}"></script>
+    {{ $chart2->script() }}
+
+
     <script>
         // Fungsi ini dipanggil setelah delay 1.5 detik
         new DataTable('#example', {

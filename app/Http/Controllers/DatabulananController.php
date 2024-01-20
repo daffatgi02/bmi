@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Charts\DetailChart;
+use App\Charts\DetailChart2;
 use App\Exports\DbulanExport;
 use App\Models\Danak;
 use App\Models\Dantrian;
@@ -122,22 +123,34 @@ class DatabulananController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $danaks_id, DetailChart $chart)
-    {
+    public function show(
+        string $danaks_id,
+        DetailChart $chart,
+        DetailChart2 $chart2,
+    ) {
         // ELOQUENT
         $title = "E-KMS Anak";
-        $danak = Danak::findOrFail($danaks_id); // Mengambil data dari tabel 'danaks' berdasarkan 'danaks_id'
+        $danak = Danak::findOrFail($danaks_id);
 
         $dbulanans = Dbulan::where('danaks_id', $danaks_id)->orderBy('created_at', 'asc')->get();
         $danaks = Danak::all();
 
+        // Extract umur_tahun and umur_bulan values from dbulans
+        $umur_tahun = $dbulanans->pluck('umur_tahun')->toArray();
+        $umur_bulan = $dbulanans->pluck('umur_bulan')->toArray();
+        $bb_anak = $dbulanans->pluck('bb_anak')->toArray();
+        $tb_anak = $dbulanans->pluck('tb_anak')->toArray();
+
         return view(
             'actions.detailbulanan',
             compact('dbulanans', 'title', 'danaks'),
-            ['chart' => $chart->build($danak->jk)]
+            [
+                'chart' => $chart->build($danak->jk, $umur_tahun, $umur_bulan, $bb_anak),
+                'chart2' => $chart2->build($danak->jk, $umur_tahun, $umur_bulan, $tb_anak)
+            ]
+            // ['chart2' => $chart2->build()]
         );
     }
-
 
 
 

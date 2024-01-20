@@ -101,9 +101,9 @@
                                         </div>
                                         <input type="text" id="jk_anak" name="jk_anak" class="d-none" required
                                             placeholder="jk_anak">
-                                        <input type="text" id="umur_tahun" name="umur_tahun" class="d-none" required
+                                        <input type="text" id="umur_tahun" name="umur_tahun" class="d-block" required
                                             placeholder="umur_tahun">
-                                        <input type="text" id="umur_bulan" name="umur_bulan" class="d-none" required
+                                        <input type="text" id="umur_bulan" name="umur_bulan" class="d-block" required
                                             placeholder="umur_bulan">
                                         <input type="text" id="umur_periksa" name="umur_periksa" class="d-none" required
                                             placeholder="umur_periksa">
