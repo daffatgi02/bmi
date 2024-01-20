@@ -14,14 +14,53 @@ class DetailChart
         $this->chart = $chart;
     }
 
-    public function build($jk): \ArielMejiaDev\LarapexCharts\lineChart
-    {
+    public function build(
+        $jk,
+        $umur_tahun,
+        $umur_bulan,
+        $bb_anak
+    ): \ArielMejiaDev\LarapexCharts\lineChart {
+
+        $kali_ut = array_map(fn ($value) => $value * 12, $umur_tahun);
+        $ut = $kali_ut;
+        $ub = $umur_bulan;
+        $bb = $bb_anak;
+        $jmlh_u = array_map(function ($ut_value, $ub_value) {
+            return $ut_value + $ub_value;
+        }, $ut, $ub);
+
+        // Cek Jumlah data
+
+        $tu = $jmlh_u;
+
         $umur = [
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
             41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
         ];
 
+        $scatterPoints = [];
+
+        foreach ($tu as $index => $value) {
+            $scatterPoints[$value] = $bb_anak[$index] ?? null;
+        }
+
+        // Inisialisasi nilai default untuk indeks yang tidak ada di $tu
+        for ($i = 0; $i <= 60; $i++) {
+            if (!isset($scatterPoints[$i])) {
+                $scatterPoints[$i] = null;
+            }
+        }
+
+        ksort($scatterPoints);
+
+
+        // dd($tu, $bb, $scatterPoints,);
+        // dd(array_keys($jmlh_u));
+        // dd($tu);
+        // dd($umur);
+
+        // Laki
         $lkondisi1 = [
             2.1, 2.9, 3.8, 4.4, 4.9, 5.3, 5.7, 5.9, 6.2, 6.4, 6.6, 6.8, 6.9, 7.1, 7.2, 7.4, 7.5,
             7.7, 7.8, 8, 8.1, 8.2, 8.4, 8.5, 8.6, 8.8, 8.9, 9, 9.1, 9.2, 9.4, 9.5, 9.6, 9.7, 9.8,
@@ -42,9 +81,9 @@ class DetailChart
         ];
         $lkondisi4 = [
             4.4, 5.8, 7.1, 8, 8.7, 9.3, 9.8, 10.3, 10.7, 11, 11.4, 11.7, 12, 12.3, 12.6, 12.8, 13.1,
-             13.4, 13.7, 13.9, 14.2, 14.5, 14.7, 15, 15.3, 15.5, 15.8, 16.1, 16.3, 16.6, 16.9, 17.1,
-             17.4, 17.6, 17.8, 18.1, 18.3, 18.6, 18.8, 19, 19.3, 19.5, 19.7, 20, 20.2, 20.5, 20.7,
-             20.9, 21.2, 21.4, 21.7, 21.9, 22.2, 22.4, 22.7, 22.9, 23.2, 23.4, 23.7, 23.9, 24.2
+            13.4, 13.7, 13.9, 14.2, 14.5, 14.7, 15, 15.3, 15.5, 15.8, 16.1, 16.3, 16.6, 16.9, 17.1,
+            17.4, 17.6, 17.8, 18.1, 18.3, 18.6, 18.8, 19, 19.3, 19.5, 19.7, 20, 20.2, 20.5, 20.7,
+            20.9, 21.2, 21.4, 21.7, 21.9, 22.2, 22.4, 22.7, 22.9, 23.2, 23.4, 23.7, 23.9, 24.2
         ];
         $lkondisi5 = [
             5, 6.6, 8, 9, 9.7, 10.4, 10.9, 11.4, 11.9, 12.3, 12.7, 13, 13.3, 13.7, 14, 14.3, 14.6,
@@ -53,7 +92,7 @@ class DetailChart
             23.9, 24.2, 24.5, 24.8, 25.1, 25.4, 25.7, 26, 26.3, 26.6, 26.9, 27.2, 27.6, 27.9
         ];
 
-
+        // Perempuan
         $pkondisi1 = [
             2, 2.7, 3.4, 4, 4.4, 4.8, 5.1, 5.3, 5.6, 5.8, 5.9, 6.1, 6.3, 6.4, 6.6, 6.7, 6.9, 7, 7.2,
             7.3, 7.5, 7.6, 7.8, 7.9, 8.1, 8.2, 8.4, 8.5, 8.6, 8.8, 8.9, 9, 9.1, 9.3, 9.4, 9.5, 9.6, 9.7,
@@ -89,27 +128,27 @@ class DetailChart
         if ($jk == 'P') {
             return $this->chart->lineChart()
                 ->setTitle('Data ' . date('Y') . '.')
-                ->setSubtitle('Data Berat Badan Anak Semua Posyandu.')
+                ->setSubtitle('Data Berat Badan Terhadap Umur (Bulan).')
                 ->addData('-3 SD', $pkondisi1)
                 ->addData('-2 SD', $pkondisi2)
                 ->addData('-0 SD', $pkondisi3)
                 ->addData('2 SD', $pkondisi4)
                 ->addData('3 SD', $pkondisi5)
-                ->setColors(['#3A3B3E', '#04098F', '#41E0A0', '#FF942D', '#FB4E32'])
-                ->setXAxis($umur)
-                ->setGrid('#3F51B5', 0.01);
+                ->addData('Kondisi', $scatterPoints)
+                ->setColors(['rgba(58, 59, 62, 0.4)', 'rgba(4, 9, 143, 0.4)', 'rgba(65, 224, 160, 0.4)', 'rgba(255, 148, 45, 0.4)', 'rgba(251, 78, 50, 0.4)', 'rgba(0, 0, 0, 0.8)'])
+                ->setXAxis($umur);
         } elseif ($jk == 'L') {
             return $this->chart->lineChart()
                 ->setTitle('Data ' . date('Y') . '.')
-                ->setSubtitle('Data Berat Badan Anak Semua Posyandu.')
+                ->setSubtitle('Data Berat Badan Terhadap Umur (Bulan).')
                 ->addData('-3 SD', $lkondisi1)
                 ->addData('-2 SD', $lkondisi2)
                 ->addData('-0 SD', $lkondisi3)
                 ->addData('2 SD', $lkondisi4)
                 ->addData('3 SD', $lkondisi5)
-                ->setColors(['#3A3B3E', '#04098F', '#41E0A0', '#FF942D', '#FB4E32'])
-                ->setXAxis($umur)
-                ->setGrid('#3F51B5', 0.01);
+                ->addData('Kondisi', $scatterPoints)
+                ->setColors(['rgba(58, 59, 62, 0.4)', 'rgba(4, 9, 143, 0.4)', 'rgba(65, 224, 160, 0.4)', 'rgba(255, 148, 45, 0.4)', 'rgba(251, 78, 50, 0.4)', 'rgba(0, 0, 0, 0.8)'])
+                ->setXAxis($umur);
         } else {
             // Handle jika 'jk' tidak sama dengan 'P' atau 'L'
             // Misalnya, bisa mengembalikan chart default atau memberikan pesan error.
