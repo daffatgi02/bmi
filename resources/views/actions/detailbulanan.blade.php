@@ -19,14 +19,14 @@
                 </p>
             @endif
             <div class="row">
-                <div class="col-12 pe-4 ">
+                <div class="col-12 pe-4 pe-none">
                     {!! $chart->container() !!}
                 </div>
-                <div class="col-12 pe-4 ">
+                <div class="col-12 pe-4 pe-none">
                     {!! $chart2->container() !!}
                 </div>
-                <div class="col-12 pe-4 d-none">
-                    chart 3
+                <div class="col-12 pe-4 pe-none">
+                    {!! $chart3->container() !!}
                 </div>
 
 
@@ -38,25 +38,25 @@
                         style="width: 100%">
                         <thead>
                             <tr>
-                                <th id="th" class="text-center">Nama</th>
-                                <th id="th" class="text-center">Umur Periksa</th>
-                                <th id="th" class="text-center">Berat Badan</th>
-                                <th id="th" class="text-center">Tinggi Badan</th>
-                                <th id="th" class="text-center">Lingkar Lengan</th>
-                                <th id="th" class="text-center">Lingkar Kepala</th>
-                                <th id="th" class="text-center">Status</th>
-                                <th id="th" class="text-center">Tanggal Periksa</th>
+                                <th id="th" class="text-center align-middle w-25">Nama</th>
+                                <th id="th" class="text-center align-middle w-25">Umur Periksa</th>
+                                <th id="th" class="text-center align-middle">Berat Badan</th>
+                                <th id="th" class="text-center align-middle">Tinggi Badan</th>
+                                <th id="th" class="text-center align-middle">Lingkar Lengan</th>
+                                <th id="th" class="text-center align-middle">Lingkar Kepala</th>
+                                <th id="th" class="text-center align-middle w-25">Status</th>
+                                <th id="th" class="text-center align-middle w-25">Tanggal Periksa</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
                             @foreach ($dbulanans as $data)
                                 <tr>
-                                    <td>{{ $data->danaks->nama_anak }}</td>
+                                    <td class="text-center">{{ $data->danaks->nama_anak }}</td>
                                     <td class="text-center">{{ $data->umur_periksa }}</td>
-                                    <td class="text-center">{{ $data->bb_anak }}</td>
-                                    <td class="text-center">{{ $data->tb_anak }}</td>
-                                    <td class="text-center">{{ $data->ll_anak }}</td>
-                                    <td class="text-center">{{ $data->lk_anak }}</td>
+                                    <td class="text-center">{{ $data->bb_anak }} kg</td>
+                                    <td class="text-center">{{ $data->tb_anak }} cm</td>
+                                    <td class="text-center">{{ $data->ll_anak }} cm</td>
+                                    <td class="text-center">{{ $data->lk_anak }} cm</td>
                                     <td class="text-center fw-bold"
                                         style="color: {{ $data->st_anak === 'Normal' ? 'mediumseagreen' : ($data->st_anak === 'Gizi Buruk' ? 'red' : ($data->st_anak === 'Gizi Kurang' ? 'darkorange' : ($data->st_anak === 'Kelebihan Berat Badan' ? 'darkblue' : 'black'))) }}">
                                         {{ $data->st_anak }}
@@ -91,6 +91,8 @@
     {{ $chart->script() }}
     <script src="{{ $chart2->cdn() }}"></script>
     {{ $chart2->script() }}
+    <script src="{{ $chart3->cdn() }}"></script>
+    {{ $chart3->script() }}
 
 
     <script>

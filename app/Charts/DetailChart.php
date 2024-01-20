@@ -33,16 +33,21 @@ class DetailChart
 
         $tu = $jmlh_u;
 
-        $umur = [
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-            21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-            41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
-        ];
+        $umur = [];
+
+        for ($i = 0; $i <= 60; $i++) {
+            if ($i % 10 == 0 || $i == 60) {
+                $umur[] = $i;
+            } else {
+                $umur[] = '*';
+            }
+        }
+        // dd($umur);
 
         $scatterPoints = [];
 
         foreach ($tu as $index => $value) {
-            $scatterPoints[$value] = $bb_anak[$index] ?? null;
+            $scatterPoints[$value] = $bb[$index] ?? null;
         }
 
         // Inisialisasi nilai default untuk indeks yang tidak ada di $tu
@@ -59,6 +64,7 @@ class DetailChart
         // dd(array_keys($jmlh_u));
         // dd($tu);
         // dd($umur);
+        // dd($scatterPoints);
 
         // Laki
         $lkondisi1 = [
