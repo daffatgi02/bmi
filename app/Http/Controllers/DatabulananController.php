@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Charts\DetailChart;
 use App\Charts\DetailChart2;
+use App\Charts\DetailChart3;
 use App\Exports\DbulanExport;
 use App\Models\Danak;
 use App\Models\Dantrian;
@@ -127,6 +128,7 @@ class DatabulananController extends Controller
         string $danaks_id,
         DetailChart $chart,
         DetailChart2 $chart2,
+        DetailChart3 $chart3,
     ) {
         // ELOQUENT
         $title = "E-KMS Anak";
@@ -146,7 +148,8 @@ class DatabulananController extends Controller
             compact('dbulanans', 'title', 'danaks'),
             [
                 'chart' => $chart->build($danak->jk, $umur_tahun, $umur_bulan, $bb_anak),
-                'chart2' => $chart2->build($danak->jk, $umur_tahun, $umur_bulan, $tb_anak)
+                'chart2' => $chart2->build($danak->jk, $umur_tahun, $umur_bulan, $tb_anak),
+                'chart3' => $chart3->build($danak->jk, $tb_anak,$bb_anak)
             ]
             // ['chart2' => $chart2->build()]
         );
