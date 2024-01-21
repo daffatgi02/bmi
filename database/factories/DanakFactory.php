@@ -21,12 +21,12 @@ class DanakFactory extends Factory
             'dposyandu_id' => Dposyandu::inRandomOrder()->first()->id,
             'nik_anak' => $this->generateNIK(), // Menggunakan method generateNIK yang sudah ada di factory
             'nama_anak' => $this->faker->name(),
-            'tanggal_lahir' => $this->faker->dateTimeBetween('2018-01-01', '2023-12-31')->format('Y-m-d'),
+            'tanggal_lahir' => $this->faker->dateTimeBetween('2018-01-01', '2022-12-31')->format('Y-m-d'),
             'jk' => $this->faker->randomElement(['L', 'P']),
             'nama_ortu' => $this->faker->name(),
             'nik_ortu' => $this->generateNIK(), // Menggunakan method generateNIK yang sudah ada di factory
             'hp_ortu' => $this->generateNoWa(), // Menggunakan method generateNoWa yang sudah ada di factory
-            
+
         ];
     }
 

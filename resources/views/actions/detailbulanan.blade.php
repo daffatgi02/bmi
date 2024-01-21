@@ -18,18 +18,54 @@
                     Data Bulanan - {{ $dbulanans[0]->danaks->nama_anak }}
                 </p>
             @endif
-            <div class="row">
-                <div class="col-12 pe-4 pe-none">
-                    {!! $chart->container() !!}
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header fw-bold">
+                        <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <label for="" class="fw-bold">
+                               1. Kurva Berat Badan Menurut Umur (Bulan)
+                            </label>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="p-4 pe-none">
+                            {!! $chart->container() !!}
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 pe-4 pe-none">
-                    {!! $chart2->container() !!}
+                <div class="accordion-item">
+                    <h2 class="accordion-header fw-bold">
+                        <button class="accordion-button  collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <label for="" class="fw-bold">
+                               2. Kurva Panjang/Tinggi Badan Menurut Umur (Bulan)
+                            </label>
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="p-4 pe-none">
+                            {!! $chart2->container() !!}
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 pe-4 pe-none">
-                    {!! $chart3->container() !!}
+                <div class="accordion-item">
+                    <h2 class="accordion-header fw-bold">
+                        <button class="accordion-button  collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <label for="" class="fw-bold">
+                              3. Kurva Berat Badan Menurut Panjang/Tinggi Badan
+                            </label>
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="p-4 pe-none">
+                            {!! $chart3->container() !!}
+                        </div>
+                    </div>
                 </div>
-
-
+            </div>
+            <div class="row p-lg-4 p-0">
                 <div class="col-12 mt-4 mb-5 table-container">
                     <!-- Tambahkan elemen pembatas untuk memulai halaman baru -->
                     <div class="page-break"></div>
@@ -49,10 +85,13 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            @foreach ($dbulanans as $data)
+                            @foreach ($dbulanans->sortByDesc('created_at') as $data)
                                 <tr>
                                     <td class="text-center">{{ $data->danaks->nama_anak }}</td>
-                                    <td class="text-center">{{ $data->umur_periksa }}</td>
+                                    <td class="text-center">
+                                        {{ $data->umur_tahun }} Tahun
+                                        {{ $data->umur_bulan }} Bulan
+                                    </td>
                                     <td class="text-center">{{ $data->bb_anak }} kg</td>
                                     <td class="text-center">{{ $data->tb_anak }} cm</td>
                                     <td class="text-center">{{ $data->ll_anak }} cm</td>

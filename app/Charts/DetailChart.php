@@ -133,8 +133,6 @@ class DetailChart
         // dd($data_bb_anak);
         if ($jk == 'P') {
             return $this->chart->lineChart()
-                ->setTitle('Data ' . date('Y') . '.')
-                ->setSubtitle('Data Berat Badan Terhadap Umur (Bulan).')
                 ->addData('-3 SD', $pkondisi1)
                 ->addData('-2 SD', $pkondisi2)
                 ->addData('-0 SD', $pkondisi3)
@@ -145,8 +143,6 @@ class DetailChart
                 ->setXAxis($umur);
         } elseif ($jk == 'L') {
             return $this->chart->lineChart()
-                ->setTitle('Data ' . date('Y') . '.')
-                ->setSubtitle('Data Berat Badan Terhadap Umur (Bulan).')
                 ->addData('-3 SD', $lkondisi1)
                 ->addData('-2 SD', $lkondisi2)
                 ->addData('-0 SD', $lkondisi3)

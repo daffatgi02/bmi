@@ -173,8 +173,6 @@ class DetailChart3
 
         if ($jk == 'P') {
             return $this->chart3->lineChart()
-                ->setTitle('Data ' . date('Y') . '.')
-                ->setSubtitle('Data Berat Badan Menurut Panjang/Tinggi Badan.')
                 ->addData('-3 SD', $pkondisi1)
                 ->addData('-2 SD', $pkondisi2)
                 ->addData('-1 SD', $pkondisi3)
@@ -196,8 +194,6 @@ class DetailChart3
                 ->setXAxis($pt);
         } elseif ($jk == 'L') {
             return $this->chart3->lineChart()
-                ->setTitle('Data ' . date('Y') . '.')
-                ->setSubtitle('Data Berat Badan Menurut Panjang/Tinggi Badan.')
                 ->addData('-3 SD', $lkondisi1)
                 ->addData('-2 SD', $lkondisi2)
                 ->addData('-1 SD', $lkondisi3)
