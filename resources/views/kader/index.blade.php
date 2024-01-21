@@ -42,7 +42,8 @@
                             <div class="d-flex ">
                                 <i class="bi bi-search fs-3 me-2"></i>
                                 <input type="text" id="searchInput" class="form-control mb-3 border border-dark-subtle"
-                                    placeholder="Cari Nama" onclick="selectAllText(this);" onfocus="selectAllText(this);">
+                                    placeholder="Cari Nama" onclick="selectAllText(this);" onfocus="selectAllText(this);"
+                                    required>
                             </div>
                             <div class="row">
                                 <div class="col-12">
@@ -92,10 +93,26 @@
                                 </div>
                                 <input type="text" id="jk_anak" name="jk_anak" class="d-none" required
                                     placeholder="jk_anak">
-                                <input type="text" id="umur_tahun" name="umur_tahun" class="d-none" required
-                                    placeholder="umur_tahun">
-                                <input type="text" id="umur_bulan" name="umur_bulan" class="d-none" required
-                                    placeholder="umur_bulan">
+
+                                <div class="row mb-3 mt-2 px-3 ">
+                                    <div class="col-6 text-center">
+                                        <label for="" class="border-bottom border-3">Umur Tahun</label><br>
+                                        <span class="badge rounded-pill text-bg-success fs-5 mt-2" id="umur_tahun_badge">
+                                            0
+                                        </span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <label for="" class="border-bottom border-3">Umur Bulan</label><br>
+                                        <span class="badge rounded-pill text-bg-success fs-5 mt-2" id="umur_bulan_badge">
+                                            0
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <input type="text" id="umur_tahun" name="umur_tahun" class="d-none "
+                                    placeholder="umur_tahun" required>
+                                <input type="text" id="umur_bulan" name="umur_bulan" class="d-none "
+                                    placeholder="umur_bulan" required>
                                 <input type="text" id="umur_periksa" name="umur_periksa" class="d-none" required
                                     placeholder="umur_periksa">
                                 <input type="text" id="nama_posyandu" name='nama_posyandu' class="d-none" required
@@ -167,7 +184,20 @@
                                     <a id="reset" class="btn btn-danger shadow">Reset</a>
                                 </div>
                                 <div class="col-md-3 col-4 d-grid">
-                                    <button class="btn btn-success shadow">Submit</button>
+                                    <button class="btn btn-success" id="liveToastBtn">Submit</button>
+                                </div>
+                            </div>
+                            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                                <div id="liveToast" class="toast" role="alert" aria-live="assertive"
+                                    aria-atomic="true">
+                                    <div class="toast-header bg-warning">
+                                        <strong class="me-auto">Info</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="toast-body bg-white">
+                                        Silahkan Pilih Cara Ukur Terlebih Dahulu
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -204,8 +234,13 @@
             umurInputb.value = umurb;
             umurInputa.value = umura;
             posyanduInput.value = posyandu;
-        });
 
+            // Update nilai pada span Umur Tahun
+            document.getElementById('umur_tahun_badge').innerText = `${umurt}`;
+
+            // Update nilai pada span Umur Bulan
+            document.getElementById('umur_bulan_badge').innerText = `${umurb}`;
+        });
 
 
         // Cara Ukur
@@ -223,6 +258,38 @@
             telentangButton.style.backgroundColor = '#42E6A4';
             berdiriButton.style.backgroundColor = '';
             cUkurInput.value = 'Telentang';
+        });
+
+        // Toast
+        document.addEventListener("DOMContentLoaded", function() {
+            const berdiriButton = document.getElementById('berdiriButton');
+            const telentangButton = document.getElementById('telentangButton');
+            const cUkurInput = document.getElementById('c_ukur');
+            const submitButton = document.getElementById('liveToastBtn');
+            const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+
+            berdiriButton.addEventListener('click', function() {
+                berdiriButton.style.backgroundColor = '#42E6A4';
+                telentangButton.style.backgroundColor = '';
+                cUkurInput.value = 'Berdiri';
+            });
+
+            telentangButton.addEventListener('click', function() {
+                telentangButton.style.backgroundColor = '#42E6A4';
+                berdiriButton.style.backgroundColor = '';
+                cUkurInput.value = 'Telentang';
+            });
+
+            submitButton.addEventListener('click', function() {
+                // Check if either "Berdiri" or "Telentang" is selected
+                if (cUkurInput.value !== 'Berdiri' && cUkurInput.value !== 'Telentang') {
+                    // If not, show the toast
+                    toast.show();
+                } else {
+                    // Otherwise, proceed with your form submission logic
+                    // Your form submission code here
+                }
+            });
         });
 
 
@@ -401,8 +468,12 @@
             let telentangButton = document.getElementById('telentangButton');
 
 
+
             // Tambahkan event listener untuk tombol reset
             resetButton.addEventListener("click", function() {
+                // Set .innerText to '0' for specific elements
+                let elementToReset1 = document.getElementById('umur_tahun_badge');
+                let elementToReset2 = document.getElementById('umur_bulan_badge');
 
                 berdiriButton.style.backgroundColor = '';
                 telentangButton.style.backgroundColor = '';
@@ -429,6 +500,14 @@
                 checkboxElements.forEach(function(checkbox) {
                     checkbox.checked = false;
                 });
+
+                if (umur_tahun_badge) {
+                    umur_tahun_badge.innerText = '0';
+                }
+
+                if (umur_bulan_badge) {
+                    umur_bulan_badge.innerText = '0';
+                }
             });
         });
 
