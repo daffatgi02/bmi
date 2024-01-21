@@ -30,7 +30,7 @@
                                             <input type="text" class="form-control" id="st_anak" name="st_anak"
                                                 placeholder="Status Anak" value="{{ $dbulanans->st_anak }}" required
                                                 readonly
-                                                style="color: {{ $dbulanans->st_anak === 'Normal' ? 'mediumseagreen' : ($dbulanans->st_anak === 'Gizi Buruk' ? 'red' : ($dbulanans->st_anak === 'Gizi Kurang' ? 'darkorange' : ($dbulanans->st_anak === 'Kelebihan Berat Badan' ? 'darkblue' : 'black'))) }}">
+                                                style="color: {{ $dbulanans->st_anak === 'Normal' ? 'mediumseagreen' : ($dbulanans->st_anak === 'Gizi Buruk' ? 'red' : ($dbulanans->st_anak === 'Gizi Kurang' ? 'darkorange' : ($dbulanans->st_anak === 'Kelebihan Berat Badan' ? 'darkblue' : ($dbulanans->st_anak === 'Obesitas' ? 'black' : 'black')))) }}">
 
                                             <label for="st_anak" class="fw-bold">Status Anak:</label>
                                         </div>
@@ -151,60 +151,58 @@
                     let ut_anakValue = parseFloat(umurInputt.value);
 
                     if (!isNaN(bb_anakValue) && !isNaN(tb_anakValue) && !isNaN(lk_anakValue) && !isNaN(ll_anakValue)) {
-                        let tinggiMeter = tb_anakValue / 100;
-                        let imt = bb_anakValue / (tinggiMeter * tinggiMeter);
+                        // let st_anakValue = lk_anakValue + ll_anakValue;
+                        let tinggiMeter = tb_anakValue / 100; // Ubah tinggi ke meter
+                        let imt = bb_anakValue / (tinggiMeter * tinggiMeter); //mencari Indeks masa tubuh
 
-                        // Logika perhitungan status anak berdasarkan usia dan jenis kelamin
                         if (ut_anakValue < 5) {
                             if (jkValue === 'L') {
                                 if (imt < 16) {
                                     st_anakInput.value = "Gizi Buruk";
+                                    imt_anakInput.value = imt;
                                 } else if (imt >= 16 && imt < 17) {
                                     st_anakInput.value = 'Gizi Kurang';
+                                    imt_anakInput.value = imt;
                                 } else if (imt >= 17 && imt < 18) {
                                     st_anakInput.value = 'Normal';
-                                } else {
+                                    imt_anakInput.value = imt;
+                                } else if (imt >= 18 && imt < 30) {
                                     st_anakInput.value = 'Kelebihan Berat Badan';
+                                    imt_anakInput.value = imt;
+                                } else {
+                                    st_anakInput.value = 'Obesitas';
+                                    imt_anakInput.value = imt;
                                 }
                             } else if (jkValue === 'P') {
                                 if (imt < 16) {
                                     st_anakInput.value = "Gizi Buruk";
+                                    imt_anakInput.value = imt;
                                 } else if (imt >= 16 && imt < 17) {
                                     st_anakInput.value = 'Gizi Kurang';
+                                    imt_anakInput.value = imt;
                                 } else if (imt >= 17 && imt < 18) {
                                     st_anakInput.value = 'Normal';
-                                } else {
+                                    imt_anakInput.value = imt;
+                                } else if (imt >= 18 && imt < 30) {
                                     st_anakInput.value = 'Kelebihan Berat Badan';
+                                    imt_anakInput.value = imt;
+                                } else {
+                                    st_anakInput.value = 'Obesitas';
+                                    imt_anakInput.value = imt;
                                 }
                             }
                         } else {
                             if (imt < 10) {
-                                st_anakInput.value = 'Gizi Kurang';
+                                st_anakInput.value = 'Gizi Buruk';
                             } else if (imt >= 10 && imt < 25) {
                                 st_anakInput.value = 'Normal';
-                            } else {
+                            } else if (imt >= 25 && imt < 30) {
                                 st_anakInput.value = 'Kelebihan Berat Badan';
+                            } else {
+                                st_anakInput.value = 'Obesitas';
                             }
                         }
-
-                        // Set warna teks berdasarkan nilai status anak yang baru
-                        switch (st_anakInput.value) {
-                            case 'Normal':
-                                st_anakInput.style.color = 'mediumseagreen';
-                                break;
-                            case 'Gizi Buruk':
-                                st_anakInput.style.color = 'red';
-                                break;
-                            case 'Gizi Kurang':
-                                st_anakInput.style.color = 'darkorange';
-                                break;
-                            case 'Kelebihan Berat Badan':
-                                st_anakInput.style.color = 'darkblue';
-                                break;
-                            default:
-                                st_anakInput.style.color = 'black';
-                                break;
-                        }
+                        imt_anakInput.value = imt.toFixed(2);
                     } else {
                         st_anakInput.value = '- Inputan Tidak Valid';
                     }
