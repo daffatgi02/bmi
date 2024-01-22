@@ -3,7 +3,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-    <form action="{{ route('danaks.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('storekader') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-lg-6 col-md-12 col-12">

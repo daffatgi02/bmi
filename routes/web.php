@@ -85,6 +85,7 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
         // Route kader
         Route::resource('kaders', KaderController::class);
         Route::get('gettabelantrian2', [KaderController::class, 'getData2'])->name('antrians.getData');
+        Route::post('/storekader', [KaderController::class, 'storekader'])->name('storekader');
     });
 });
 

@@ -5,15 +5,18 @@
     <section class="home-section mb-5">
         <div class="content">
             <div class="container mt-3 pt-3">
+                <h1 class="fw-bold h mb-4">Data Anak</h1>
+                <div class="d-flex flex-md-row flex-column justify-content-end mb-3">
+                    <button type="button" class="btn shadow me-md-3 me-0 mb-3 mb-md-0" data-bs-toggle="modal" id="btn-tambah"
+                        data-bs-target="#exampleModal2">
+                        <i class="bi bi-list-task me-2"></i>Tambah Antrian
+                    </button>
+                    <button type="button" class="btn shadow" data-bs-toggle="modal" id="btn-tambah"
+                        data-bs-target="#exampleModal">
+                        <i class="bi bi-person-fill-add me-2"></i>Data Anak
+                    </button>
+                </div>
                 <div class="row ">
-                    <h1 class="fw-bold h mb-4">Data Anak</h1>
-                    <div class="col-md-3 col-lg-2 col-7 offset-md-9 offset-lg-10 offset-5 mb-4 d-grid">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn shadow" data-bs-toggle="modal" id="btn-tambah"
-                            data-bs-target="#exampleModal">
-                            <i class="bi bi-plus-circle me-2"></i>Data Anak
-                        </button>
-                    </div>
                     <div class="col-12">
                         <table class="table table-striped table-hover table-bordered datatable shadow" id="tabelanak"
                             style="width: 100%">
@@ -37,14 +40,25 @@
             </div>
         </div>
     </section>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <!-- Modal Anak-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 @include('actions.tambahanak')
             </div>
         </div>
     </div>
+    {{-- Modal Antrian --}}
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModal2Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                @include('actions.tambahantrian')
+            </div>
+        </div>
+    </div>
+
+
+
     {{-- PESAN ERROR --}}
     @if (session('error'))
         <script>
@@ -155,8 +169,8 @@
                     [0, "desc"]
                 ],
                 lengthMenu: [
-                    [25, 50, 100, -1],
-                    [25, 50, 100, "All"],
+                    [100, -1],
+                    [100, "All"],
                 ],
 
             });

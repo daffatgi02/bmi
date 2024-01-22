@@ -7,6 +7,7 @@ use App\Models\Dantrian;
 use App\Models\Dbulan;
 use App\Models\Dposyandu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class KaderController extends Controller
@@ -83,6 +84,67 @@ class KaderController extends Controller
         // Redirect ke halaman yang sesuai setelah penyimpanan data
         return redirect()->route('kaders.index');
     }
+
+    public function storekader(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nik_anak' => 'required|numeric|digits:16',
+            'nama_anak' => 'required|string|max:255',
+            'nama_ortu' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jk' => 'required|in:L,P',
+            'dposyandu_id' => 'required|string|max:255',
+            'nik_ortu' => 'required|numeric|digits:16',
+            'hp_ortu' => 'required|numeric', // Merubah maksimal digit menjadi 13
+        ], [
+            'nik_anak.required' => 'Kolom NIK anak harus diisi.',
+            'nik_anak.numeric' => 'NIK anak harus berupa angka.',
+            'nik_anak.digits' => 'NIK anak harus terdiri dari 16 digit.',
+            'hp_ortu.required' => 'Kolom Nomor WA harus diisi.',
+            'hp_ortu.numeric' => 'Nomor WA harus berupa angka.',
+        ]);
+
+
+        if ($validator->fails()) {
+            Alert::error('Gagal Menambahkan', 'Perisksa kembali data yang diinputkan.');
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Cek entri terakhir berdasarkan yang di input sama user
+        $lastEntry = Danak::where('nik_anak', $request->nik_anak)
+            ->where('nik_ortu', $request->nik_ortu)
+            ->latest()
+            ->first();
+
+        // Cek entri terakhir dibuat dalam interval waktu 5 detil kalau misal spam, nanti muncul error
+        if ($lastEntry && $lastEntry->created_at->gt(now()->subSeconds(5))) {
+            Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
+            return redirect()->back();
+        }
+
+        $danak = new Danak;
+        $danak->nik_anak = $request->nik_anak;
+        $danak->nama_anak = $request->nama_anak;
+        $danak->tanggal_lahir = $request->tanggal_lahir;
+        $danak->dposyandu_id = $request->dposyandu_id;
+        $danak->jk = $request->jk;
+
+
+        $danak->nik_ortu = $request->nik_ortu;
+        $danak->nama_ortu = $request->nama_ortu;
+        $danak->hp_ortu = $request->hp_ortu;
+
+        // Simpan objek Mahal ke dalam database
+        $danak->save();
+        Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
+
+        // Redirect ke halaman yang sesuai setelah penyimpanan data
+        return redirect()->back();
+    }
+
+
 
     /**
      * Display the specified resource.

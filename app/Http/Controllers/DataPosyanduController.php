@@ -55,7 +55,7 @@ class DataPosyanduController extends Controller
         // Cek entri terakhir dibuat dalam interval waktu 5 detil kalau misal spam, nanti muncul error
         if ($lastEntry && $lastEntry->created_at->gt(now()->subSeconds(5))) {
             Alert::success('Berhasil Menambahkan', 'Data Posyandu Berhasil Terinput.');
-            return redirect()->route('dposyandus.index');
+            return redirect()->back();
         }
         // Buat objek Mahal baru berdasarkan data yang diterima
         $dposyandu = new Dposyandu();
@@ -71,7 +71,7 @@ class DataPosyanduController extends Controller
         Alert::success('Berhasil Menambahkan', 'Data Posyandu Berhasil Terinput.');
 
         // Redirect ke halaman yang sesuai setelah penyimpanan data
-        return redirect()->route('dposyandus.index');
+        return redirect()->back();
     }
 
     /**

@@ -40,8 +40,6 @@
                                 @endforeach
                             </select>
                         </div>
-
-
                     </div>
                     <div class="card-footer">
                         {{-- Button Submit --}}
