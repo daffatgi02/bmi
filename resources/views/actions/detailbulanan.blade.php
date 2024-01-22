@@ -64,6 +64,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header fw-bold">
+                        <button class="accordion-button  collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <label for="" class="fw-bold">
+                              4. Kurva Linkar Kepala Menurut Umur (Bulan)
+                            </label>
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="p-4 pe-none">
+                            {!! $chart4->container() !!}
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row p-lg-4 p-0">
                 <div class="col-12 mt-4 mb-5 table-container">
@@ -132,6 +147,8 @@
     {{ $chart2->script() }}
     <script src="{{ $chart3->cdn() }}"></script>
     {{ $chart3->script() }}
+    <script src="{{ $chart4->cdn() }}"></script>
+    {{ $chart4->script() }}
 
 
     <script>

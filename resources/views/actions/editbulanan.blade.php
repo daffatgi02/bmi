@@ -157,16 +157,16 @@
 
                         if (ut_anakValue < 5) {
                             if (jkValue === 'L') {
-                                if (imt < 16) {
+                                if (imt < 12) {
                                     st_anakInput.value = "Gizi Buruk";
                                     imt_anakInput.value = imt;
-                                } else if (imt >= 16 && imt < 17) {
+                                } else if (imt >= 12 && imt < 13) {
                                     st_anakInput.value = 'Gizi Kurang';
                                     imt_anakInput.value = imt;
-                                } else if (imt >= 17 && imt < 18) {
+                                } else if (imt >= 13 && imt < 15) {
                                     st_anakInput.value = 'Normal';
                                     imt_anakInput.value = imt;
-                                } else if (imt >= 18 && imt < 30) {
+                                } else if (imt >= 15 && imt < 30) {
                                     st_anakInput.value = 'Kelebihan Berat Badan';
                                     imt_anakInput.value = imt;
                                 } else {
@@ -174,16 +174,16 @@
                                     imt_anakInput.value = imt;
                                 }
                             } else if (jkValue === 'P') {
-                                if (imt < 16) {
+                                if (imt < 12) {
                                     st_anakInput.value = "Gizi Buruk";
                                     imt_anakInput.value = imt;
-                                } else if (imt >= 16 && imt < 17) {
+                                } else if (imt >= 12 && imt < 13) {
                                     st_anakInput.value = 'Gizi Kurang';
                                     imt_anakInput.value = imt;
-                                } else if (imt >= 17 && imt < 18) {
+                                } else if (imt >= 13 && imt < 15) {
                                     st_anakInput.value = 'Normal';
                                     imt_anakInput.value = imt;
-                                } else if (imt >= 18 && imt < 30) {
+                                } else if (imt >= 15 && imt < 30) {
                                     st_anakInput.value = 'Kelebihan Berat Badan';
                                     imt_anakInput.value = imt;
                                 } else {

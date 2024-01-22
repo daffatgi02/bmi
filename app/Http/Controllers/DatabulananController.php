@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Charts\DetailChart;
 use App\Charts\DetailChart2;
 use App\Charts\DetailChart3;
+use App\Charts\DetailChart4;
 use App\Exports\DbulanExport;
 use App\Models\Danak;
 use App\Models\Dantrian;
@@ -96,7 +97,7 @@ class DatabulananController extends Controller
         // Cek entri terakhir dibuat dalam interval waktu 5 detil kalau misal spam, nanti muncul error
         if ($lastEntry && $lastEntry->created_at->gt(now()->subSeconds(5))) {
             Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
-            return redirect()->route('dbulanans.index');
+            return redirect()->back();
         }
         // Buat objek Mahal baru berdasarkan data yang diterima
         $dbulans = new Dbulan();
@@ -118,7 +119,7 @@ class DatabulananController extends Controller
         Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
 
         // Redirect ke halaman yang sesuai setelah penyimpanan data
-        return redirect()->route('dbulanans.index');
+        return redirect()->back();
     }
 
     /**
@@ -129,6 +130,7 @@ class DatabulananController extends Controller
         DetailChart $chart,
         DetailChart2 $chart2,
         DetailChart3 $chart3,
+        DetailChart4 $chart4,
     ) {
         // ELOQUENT
         $title = "E-KMS Anak";
@@ -142,6 +144,7 @@ class DatabulananController extends Controller
         $umur_bulan = $dbulanans->pluck('umur_bulan')->toArray();
         $bb_anak = $dbulanans->pluck('bb_anak')->toArray();
         $tb_anak = $dbulanans->pluck('tb_anak')->toArray();
+        $lk_anak = $dbulanans->pluck('lk_anak')->toArray();
 
         return view(
             'actions.detailbulanan',
@@ -149,7 +152,8 @@ class DatabulananController extends Controller
             [
                 'chart' => $chart->build($danak->jk, $umur_tahun, $umur_bulan, $bb_anak),
                 'chart2' => $chart2->build($danak->jk, $umur_tahun, $umur_bulan, $tb_anak),
-                'chart3' => $chart3->build($danak->jk, $tb_anak,$bb_anak)
+                'chart3' => $chart3->build($danak->jk, $tb_anak,$bb_anak),
+                'chart4' => $chart4->build($danak->jk, $umur_tahun, $umur_bulan, $lk_anak),
             ]
             // ['chart2' => $chart2->build()]
         );

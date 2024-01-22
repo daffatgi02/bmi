@@ -55,7 +55,7 @@ class AntrianController extends Controller
         // Cek entri terakhir dibuat dalam interval waktu 5 detil kalau misal spam, nanti muncul error
         if ($lastEntry && $lastEntry->created_at->gt(now()->subSeconds(5))) {
             Alert::success('Berhasil Menambahkan', 'Data Antrian Berhasil Terinput.');
-            return redirect()->route('antrians.index');
+            return redirect()->back();
         }
 
         // Jika tidak ada masalah, lanjutkan proses penyimpanan
@@ -65,7 +65,7 @@ class AntrianController extends Controller
         $dantrian->save();
 
         Alert::success('Berhasil Menambahkan', 'Data Antrian Berhasil Terinput.');
-        return redirect()->route('antrians.index');
+        return redirect()->back();
     }
 
 

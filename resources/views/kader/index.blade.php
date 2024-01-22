@@ -2,6 +2,35 @@
 
 @section('content')
     <div class="container">
+        <div class="d-flex flex-md-row flex-column justify-content-end mb-3">
+            <button type="button" class="btn shadow me-md-3 me-0 mb-3 mb-md-0" data-bs-toggle="modal" id="btn-tambah"
+                data-bs-target="#exampleModal2">
+                <i class="bi bi-list-task me-2"></i>Tambah Antrian
+            </button>
+            <button type="button" class="btn shadow" data-bs-toggle="modal" id="btn-tambah" data-bs-target="#exampleModal">
+                <i class="bi bi-person-fill-add me-2"></i>Data Anak
+            </button>
+        </div>
+
+
+        <!-- Modal Anak-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    @include('actions.tambahanak2')
+                </div>
+            </div>
+        </div>
+        {{-- Modal Antrian --}}
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModal2Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    @include('actions.tambahantrian')
+                </div>
+            </div>
+        </div>
+
+
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6 mb-4">
                 <div class="d-flex align-items-center">
@@ -205,6 +234,20 @@
                 </form>
             </div>
         </div>
+        <div class="d-flex justify-content-end mb-3">
+            <div class="d-flex flex-row d-block d-md-none">
+                <a class="btn btn-danger" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                    <i class="bi bi-box-arrow-left me-2"></i>
+                    Keluar
+                </a>
+            </div>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </div>
     </div>
     {{-- Script --}}
     <script>
@@ -331,16 +374,16 @@
 
                 if (ut_anakValue < 5) {
                     if (jkValue === 'L') {
-                        if (imt < 16) {
+                        if (imt < 12) {
                             st_anakInput.value = "Gizi Buruk";
                             imt_anakInput.value = imt;
-                        } else if (imt >= 16 && imt < 17) {
+                        } else if (imt >= 12 && imt < 13) {
                             st_anakInput.value = 'Gizi Kurang';
                             imt_anakInput.value = imt;
-                        } else if (imt >= 17 && imt < 18) {
+                        } else if (imt >= 13 && imt < 15) {
                             st_anakInput.value = 'Normal';
                             imt_anakInput.value = imt;
-                        } else if (imt >= 18 && imt < 30) {
+                        } else if (imt >= 15 && imt < 30) {
                             st_anakInput.value = 'Kelebihan Berat Badan';
                             imt_anakInput.value = imt;
                         } else {
@@ -348,16 +391,16 @@
                             imt_anakInput.value = imt;
                         }
                     } else if (jkValue === 'P') {
-                        if (imt < 16) {
+                        if (imt < 12) {
                             st_anakInput.value = "Gizi Buruk";
                             imt_anakInput.value = imt;
-                        } else if (imt >= 16 && imt < 17) {
+                        } else if (imt >= 12 && imt < 13) {
                             st_anakInput.value = 'Gizi Kurang';
                             imt_anakInput.value = imt;
-                        } else if (imt >= 17 && imt < 18) {
+                        } else if (imt >= 13 && imt < 15) {
                             st_anakInput.value = 'Normal';
                             imt_anakInput.value = imt;
-                        } else if (imt >= 18 && imt < 30) {
+                        } else if (imt >= 15 && imt < 30) {
                             st_anakInput.value = 'Kelebihan Berat Badan';
                             imt_anakInput.value = imt;
                         } else {

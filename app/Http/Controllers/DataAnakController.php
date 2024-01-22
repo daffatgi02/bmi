@@ -85,7 +85,7 @@ class DataAnakController extends Controller
         // Cek entri terakhir dibuat dalam interval waktu 5 detil kalau misal spam, nanti muncul error
         if ($lastEntry && $lastEntry->created_at->gt(now()->subSeconds(5))) {
             Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
-            return redirect()->route('danaks.index');
+            return redirect()->back();
         }
 
         $danak = new Danak;
@@ -105,7 +105,7 @@ class DataAnakController extends Controller
         Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
 
         // Redirect ke halaman yang sesuai setelah penyimpanan data
-        return redirect()->route('danaks.index');
+        return redirect()->back();
     }
 
     /**
