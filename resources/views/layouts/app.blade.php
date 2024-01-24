@@ -55,14 +55,16 @@
                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @else
-                    <div class="d-flex flex-row d-none d-md-block">
-                        <a class="btn btn-danger" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+                    <a class="btn btn-danger" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                            <i class="bi bi-box-arrow-left me-2"></i>
-                            Keluar
-                        </a>
-                    </div>
+                        <div class="d-flex">
+                            <i class="bi bi-box-arrow-left me-0 me-sm-2 fs-5"></i>
+                            <label class="d-sm-block d-none">
+                                Keluar
+                            </label>
+                        </div>
+                    </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf

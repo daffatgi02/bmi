@@ -6,14 +6,14 @@
         <div class="content">
             <div class="container mt-3 pt-3">
                 <h1 class="fw-bold h mb-4">Data Anak</h1>
-                <div class="d-flex flex-md-row flex-column justify-content-end mb-3">
-                    <button type="button" class="btn shadow me-md-3 me-0 mb-3 mb-md-0" data-bs-toggle="modal" id="btn-tambah"
+                <div class="d-flex flex-row justify-content-end mb-3">
+                    <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0" data-bs-toggle="modal" id="btn-tambah"
                         data-bs-target="#exampleModal2">
-                        <i class="bi bi-list-task me-2"></i>Tambah Antrian
+                        <i class="bi bi-list-task me-sm-2 me-0"></i><label class="d-sm-block d-none">Tambah Antrian</label>
                     </button>
-                    <button type="button" class="btn shadow" data-bs-toggle="modal" id="btn-tambah"
+                    <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0 " data-bs-toggle="modal" id="btn-tambah"
                         data-bs-target="#exampleModal">
-                        <i class="bi bi-person-fill-add me-2"></i>Data Anak
+                        <i class="bi bi-person-fill-add me-sm-2 me-0"></i><label class="d-sm-block d-none">Data Anak</label>
                     </button>
                 </div>
                 <div class="row ">

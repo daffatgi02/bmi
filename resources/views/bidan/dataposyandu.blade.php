@@ -7,11 +7,10 @@
             <div class="container mt-3 pt-3">
                 <div class="row ">
                     <h1 class="fw-bold h mb-4">Data Posyandu</h1>
-                    <div class="col-md-3 col-lg-2 col-7 offset-md-9 offset-lg-10 offset-5 mb-4 d-grid">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn shadow" data-bs-toggle="modal" id="btn-tambah"
+                    <div class="d-flex flex-row justify-content-end mb-3">
+                        <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0 " data-bs-toggle="modal" id="btn-tambah"
                             data-bs-target="#exampleModal">
-                            <i class="bi bi-plus-circle me-2"></i>Posyandu
+                            <i class="bi bi-plus-circle me-sm-2 me-0"></i><label class="d-sm-block d-none">Posyandu</label>
                         </button>
                     </div>
                     <div class="col-12">
