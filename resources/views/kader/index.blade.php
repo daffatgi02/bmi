@@ -250,20 +250,6 @@
                 </form>
             </div>
         </div>
-        <div class="d-flex justify-content-end mb-3">
-            <div class="d-flex flex-row d-block d-md-none">
-                <a class="btn btn-danger" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
-                    <i class="bi bi-box-arrow-left me-2"></i>
-                    Keluar
-                </a>
-            </div>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        </div>
     </div>
     {{-- Script --}}
     <script>
