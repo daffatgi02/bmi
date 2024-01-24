@@ -15,27 +15,37 @@ class KaderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function pposyandu()
     {
 
-        $danaks = Danak::all();
-        $dbulans = Dbulan::all();
         $dposyandu = Dposyandu::all();
-        return view('kader.index', compact('danaks', 'dbulans', 'dposyandu'));
+        return view('kader.pposyandu', compact('dposyandu'));
     }
-    public function getData2(Request $request)
+
+    public function index(Request $request)
     {
+        // Mengambil nilai input dari form
+        $id_posyandu = $request->input('id_posyandu');
+        $nama_posyandu = $request->input('nama_posyandu');
 
-        $dantrians = Dantrian::all();
+        // Melakukan filter berdasarkan nilai input pada model Danak
+        $danaks = Danak::when($id_posyandu, function ($query) use ($id_posyandu) {
+            return $query->where('dposyandu_id', $id_posyandu);
+        })
+            ->get();
 
-        if ($request->ajax()) {
-            return datatables()->of($dantrians)
-                ->addIndexColumn()
-                ->addColumn('actions', function ($dantrian) {
-                    return view('actions.actionantrian2', compact('dantrian'));
-                })
-                ->toJson();
-        }
+        // Melakukan filter berdasarkan nilai input pada model Dposyandu
+        $dposyandu = Dposyandu::when($id_posyandu, function ($query) use ($id_posyandu) {
+            return $query->where('id', $id_posyandu);
+        })
+            ->get();
+
+        $dantrian = Dantrian::when($nama_posyandu, function ($query) use ($nama_posyandu) {
+            return $query->where('t_posyandu', $nama_posyandu);
+        })
+            ->get();
+
+        return view('kader.index', compact('danaks', 'dposyandu', 'dantrian', 'nama_posyandu'));
     }
 
     /**
@@ -187,6 +197,6 @@ class KaderController extends Controller
             Alert::success('Antrian Selesai');
         }
 
-        return redirect()->route('kaders.index');
+        return redirect()->back();
     }
 }

@@ -11,9 +11,9 @@ body {
     background-color: #fff;
 }
 
-#tabel_antrian_filter input[type="search"] {
+/* #tabel_antrian_filter input[type="search"] {
     display: none;
-}
+} */
 
 
 .badge {
@@ -30,6 +30,26 @@ body {
 .badge.active {
     background-color: rgb(65, 230, 164, 0.7);
     color: #19573e;
+}
+
+
+.btn_pposyandu{
+    color: #19573e;
+    background-color: #fff;
+    border: solid 1px #19573e;
+}
+
+/* Ketika dihover */
+.btn_pposyandu:hover {
+    background-color: #42E6A4;
+    color: #19573e;
+    border: solid 1px #19573e;
+}
+
+.btn_pposyandu.active {
+    background-color: rgb(65, 230, 164, 0.7);
+    color: #19573e;
+    border: solid 1px #19573e;
 }
 
 #calc-stunting {
