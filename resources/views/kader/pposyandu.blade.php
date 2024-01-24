@@ -19,6 +19,16 @@
 </style>
 
 @section('content')
+    <div class="loadku d-none">
+        <div class="loading-overlay">
+            <div class="spinner-container">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <label>Loading</label>
+            </div>
+        </div>
+    </div>
     <div class="container mt-3">
         <form action="{{ route('kaders.index') }}" method="get" id="filterForm">
             @csrf
@@ -26,10 +36,16 @@
                 <p class="fs-3 fw-bold mb-4 text-center">
                     Silahkan Pilih Posyandu
                 </p>
+                <div class="d-flex justify-content-end mb-4">
+                    <button type="submit" class="btn ms-3" id="btn-tambah">
+                        Selanjutnya <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
                 @foreach ($dposyandu as $posyandu)
                     <div class="col-md-3 col-6 p-3 text-center">
-                        <button type="button" class="btn btn_pposyandu fw-bold p-3 pop-in"
+                        <button type="button" class="btn btn_pposyandu fw-bold p-3 pop-in w-100"
                             onclick="fillInput('{{ $posyandu->id }}', '{{ $posyandu->nama_posyandu }}')">
+                            <i class="bi bi-hospital fs-4 me-2"></i>
                             {{ $posyandu->nama_posyandu }}
                         </button>
                     </div>
@@ -43,10 +59,6 @@
                 <input class="form-control d-none" type="text" placeholder="nama_posyandu" name="nama_posyandu"
                     id="nama_posyandu" aria-label="nama_posyandu">
 
-            </div>
-            <div class="d-flex justify-content-end mb-3">
-                <button type="submit" class="btn ms-3" id="btn-tambah">Selanjutnya <i
-                        class="bi bi-chevron-right"></i></button>
             </div>
         </form>
 
@@ -70,6 +82,7 @@
             const idPosyanduInput = document.getElementById('id_posyandu');
             const namaPosyanduInput = document.getElementById('nama_posyandu');
             const submitButton = document.getElementById('btn-tambah');
+            const loadkuDiv = document.querySelector('.loadku');
             const toast = new bootstrap.Toast(document.getElementById('liveToast'));
 
             submitButton.addEventListener('click', function(event) {
@@ -79,8 +92,16 @@
                     event.preventDefault();
                     // Show the toast
                     toast.show();
+                } else {
+                    // If inputs are filled, show the loading overlay for 2 seconds
+                    loadkuDiv.classList.remove('d-none');
+                    loadkuDiv.classList.add('d-block');
+
+                    setTimeout(function() {
+                        // After 2 seconds, submit the form
+                        filterForm.submit();
+                    }, 2000);
                 }
-                // Otherwise, the form will be submitted as usual
             });
         });
 

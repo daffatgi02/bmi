@@ -6,18 +6,18 @@
             <p class="fs-3 fw-bold ">
                 {{ $nama_posyandu }}
             </p>
-            <div class="d-flex flex-md-row flex-column justify-content-end mb-3">
-                <a class="btn me-md-3 me-0 mb-3 mb-md-0" id="btn-tambah" href="{{ route('pposyandu') }}">
-                    <i class="bi bi-chevron-left me-1"></i>
-                    Kembali
+            <div class="d-flex flex-row justify-content-end mb-3">
+                <a class="btn d-flex me-sm-3 me-2 mb-3 mb-md-0" id="btn-tambah" href="{{ route('pposyandu') }}">
+                    <i class="bi bi-chevron-left me-sm-2 me-0"></i>
+                    <label class="d-sm-block d-none">Kembali</label>
                 </a>
-                <button type="button" class="btn shadow me-md-3 me-0 mb-3 mb-md-0" data-bs-toggle="modal" id="btn-tambah"
+                <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0" data-bs-toggle="modal" id="btn-tambah"
                     data-bs-target="#exampleModal2">
-                    <i class="bi bi-list-task me-2"></i>Tambah Antrian
+                    <i class="bi bi-list-task me-sm-2 me-0"></i><label class="d-sm-block d-none">Tambah Antrian</label>
                 </button>
-                <button type="button" class="btn shadow " data-bs-toggle="modal" id="btn-tambah"
+                <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0 " data-bs-toggle="modal" id="btn-tambah"
                     data-bs-target="#exampleModal">
-                    <i class="bi bi-person-fill-add me-2"></i>Data Anak
+                    <i class="bi bi-person-fill-add me-sm-2 me-0"></i><label class="d-sm-block d-none">Data Anak</label>
                 </button>
             </div>
         </div>
@@ -116,8 +116,7 @@
                                                 data-nama_posyandu="{{ $data->dposyandu->nama_posyandu }}"
                                                 data-umur="{{ $umurTotal }}" data-umur2="{{ $umurTotal2 }}"
                                                 data-umur3="{{ $umurTotal3 }}"> <!-- Menambahkan data-umur -->
-                                                {{ $data->nama_anak }} | {{ $data->nik_anak }} |
-                                                {{ $data->dposyandu->nama_posyandu }}
+                                                {{ $data->nama_anak }} | {{ $data->nik_anak }}
                                             </option>
                                         @endforeach
                                     </select>
