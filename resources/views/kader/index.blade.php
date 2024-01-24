@@ -2,14 +2,24 @@
 
 @section('content')
     <div class="container">
-        <div class="d-flex flex-md-row flex-column justify-content-end mb-3">
-            <button type="button" class="btn shadow me-md-3 me-0 mb-3 mb-md-0" data-bs-toggle="modal" id="btn-tambah"
-                data-bs-target="#exampleModal2">
-                <i class="bi bi-list-task me-2"></i>Tambah Antrian
-            </button>
-            <button type="button" class="btn shadow" data-bs-toggle="modal" id="btn-tambah" data-bs-target="#exampleModal">
-                <i class="bi bi-person-fill-add me-2"></i>Data Anak
-            </button>
+        <div class="d-flex flex row">
+            <p class="fs-3 fw-bold ">
+                {{ $nama_posyandu }}
+            </p>
+            <div class="d-flex flex-md-row flex-column justify-content-end mb-3">
+                <a class="btn me-md-3 me-0 mb-3 mb-md-0" id="btn-tambah" href="{{ route('pposyandu') }}">
+                    <i class="bi bi-chevron-left me-1"></i>
+                    Kembali
+                </a>
+                <button type="button" class="btn shadow me-md-3 me-0 mb-3 mb-md-0" data-bs-toggle="modal" id="btn-tambah"
+                    data-bs-target="#exampleModal2">
+                    <i class="bi bi-list-task me-2"></i>Tambah Antrian
+                </button>
+                <button type="button" class="btn shadow " data-bs-toggle="modal" id="btn-tambah"
+                    data-bs-target="#exampleModal">
+                    <i class="bi bi-person-fill-add me-2"></i>Data Anak
+                </button>
+            </div>
         </div>
 
 
@@ -33,29 +43,35 @@
 
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6 mb-4">
-                <div class="d-flex align-items-center">
-                    <i class="bi bi-list-ol fs-4 me-2"></i>
-                    <h2>Antrian</h2>
-                </div>
                 <div class="mt-2 px-1">
-                    <div class="mb-2">
-                        {{-- <h6>Silahkan Pilih Posyandu: </h6> --}}
-                        @foreach ($dposyandu as $data)
-                            <button class="badge ku" onclick="tampilkanTabel(this)">
-                                {{ $data->nama_posyandu }}
-                            </button>
-                        @endforeach
-                    </div>
-                    <table id="tabel_antrian" class="table table-bordered shadow" style="width:100%; display: none;">
+                    <table id="tabel_antrian" class="table table-bordered shadow" style="width:100%; display: block;">
                         <thead class="table-warning">
                             <tr>
-                                <th>id</th>
                                 <th id="th">Urutan</th>
                                 <th id="th" class="w-50">Nama</th>
                                 <th id="th" class="w-50">Posyandu</th>
                                 <th id="th" class="w-50">Opsi</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @php $nomor = 1; @endphp
+                            @foreach ($dantrian as $dantrian)
+                                <tr>
+                                    <td class="text-center">
+                                        {{ $nomor++ }}.
+                                    </td>
+                                    <td>
+                                        {{ $dantrian->n_antrian }}
+                                    </td>
+                                    <td>
+                                        {{ $dantrian->t_posyandu }}
+                                    </td>
+                                    <td>
+                                        @include('actions.actionantrian2')
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -100,7 +116,8 @@
                                                 data-nama_posyandu="{{ $data->dposyandu->nama_posyandu }}"
                                                 data-umur="{{ $umurTotal }}" data-umur2="{{ $umurTotal2 }}"
                                                 data-umur3="{{ $umurTotal3 }}"> <!-- Menambahkan data-umur -->
-                                                {{ $data->nama_anak }} | {{ $data->nik_anak }}
+                                                {{ $data->nama_anak }} | {{ $data->nik_anak }} |
+                                                {{ $data->dposyandu->nama_posyandu }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -574,102 +591,13 @@
     <script type="module">
         // Tabel Antrian
         $(document).ready(function() {
-            $('.badge.ku').on('click', function() {
-                var posyanduValue = $(this).text().trim();
-                $('#tabel_antrian_filter input[type="search"]').val(posyanduValue).trigger(
-                    'input');
-                dataTable.search(posyanduValue).draw(); // Memfilter dan memperbarui DataTable
-            });
             var dataTable = new DataTable('#tabel_antrian', {
-                processing: true,
-                serverSide: true,
-                responsive: true,
-                ajax: "gettabelantrian2",
                 pagingType: 'simple',
-                columns: [{
-                        data: "id",
-                        name: "id",
-                        visible: false
-                    },
-                    {
-                        data: "DT_RowIndex",
-                        name: "DT_RowIndex",
-                        orderable: false,
-                        searchable: false,
-                        className: 'text-center align-middle',
-                        render: function(data, type, row, meta) {
-                            return data + '.';
-                        }
-                    },
-                    {
-                        data: "n_antrian",
-                        name: "n_antrian",
-                        className: 'align-middle',
-                        searchable: false,
-                        orderable: false,
-                    },
-                    {
-                        data: "t_posyandu",
-                        name: "t_posyandu",
-                        className: 'align-middle',
-
-                    },
-                    // {
-                    //     data: "created_at",
-                    //     name: "created_at",
-                    //     className: 'align-middle',
-                    //     orderable: false,
-                    //     searchable: false,
-                    //     render: function(data, type, row, meta) {
-                    //         // Buat objek Date dari string tanggal
-                    //         var date = new Date(data);
-
-                    //         // Format tanggal dan waktu secara manual
-                    //         var formattedDate = date.toLocaleDateString("id-ID", {
-                    //             timeZone: "Asia/Jakarta",
-                    //             weekday: 'long'
-                    //         });
-                    //         var formattedTime = date.toLocaleTimeString("id-ID", {
-                    //             timeZone: "Asia/Jakarta",
-                    //             hour: '2-digit',
-                    //             minute: '2-digit',
-                    //             second: '2-digit',
-                    //             hour12: false
-                    //         }).replace(/\./g, ':');
-
-                    //         return "" + formattedDate + ", " + formattedTime + " WIB";
-                    //     }
-
-                    // },
-                    {
-                        data: "actions",
-                        name: "actions",
-                        orderable: false,
-                        searchable: false,
-                        className: 'align-middle',
-                        width: "5%"
-
-                    },
-
-                ],
-                order: [
-                    [3, "desc"]
-                ],
                 lengthMenu: [
-                    [6],
-                    [6],
-                ],
-
-                searching: true,
-                search: {
-                    smart: false,
-                    regex: true
-                },
-                language: {
-                    search: "", // Mengganti teks "Search" menjadi "Cari"
-                },
+                    [6, 10],
+                    [6, 10]
+                ]
             });
-            $('#tabel_antrian_filter input[type="search"]').prop('disabled', true);
         });
     </script>
 @endpush
