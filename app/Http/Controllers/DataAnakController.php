@@ -52,18 +52,18 @@ class DataAnakController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'nik_anak' => 'required|numeric|digits:16',
+            // 'nik_anak' => 'required|numeric|digits:16',
             'nama_anak' => 'required|string|max:255',
             'nama_ortu' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jk' => 'required|in:L,P',
             'dposyandu_id' => 'required|string|max:255',
-            'nik_ortu' => 'required|numeric|digits:16',
+            // 'nik_ortu' => 'required|numeric|digits:16',
             'hp_ortu' => 'required|numeric', // Merubah maksimal digit menjadi 13
         ], [
-            'nik_anak.required' => 'Kolom NIK anak harus diisi.',
-            'nik_anak.numeric' => 'NIK anak harus berupa angka.',
-            'nik_anak.digits' => 'NIK anak harus terdiri dari 16 digit.',
+            // 'nik_anak.required' => 'Kolom NIK anak harus diisi.',
+            // 'nik_anak.numeric' => 'NIK anak harus berupa angka.',
+            // 'nik_anak.digits' => 'NIK anak harus terdiri dari 16 digit.',
             'hp_ortu.required' => 'Kolom Nomor WA harus diisi.',
             'hp_ortu.numeric' => 'Nomor WA harus berupa angka.',
         ]);
