@@ -13,6 +13,7 @@ class AntrianController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
     public function index()
     {
         $dposyandu = Dposyandu::all();

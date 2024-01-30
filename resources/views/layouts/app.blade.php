@@ -52,7 +52,7 @@
                     @endif --}}
 
                     @if (Route::has('register'))
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <a class="nav-link" href="{{ route('register') }}">Registrasi</a>
                     @endif
                 @else
                     <a class="btn btn-danger" href="{{ route('logout') }}"

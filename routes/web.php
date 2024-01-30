@@ -9,20 +9,10 @@ use App\Http\Controllers\DataPosyanduController;
 use App\Http\Controllers\ExportpdfController;
 use App\Http\Controllers\GrafikPerkembanganController;
 use App\Http\Controllers\KaderController;
-use App\Http\Controllers\LandingpageControler;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 // Guest
 Route::get('/', function () {
@@ -95,3 +85,4 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
 // Antrian
 Route::resource('antrians', AntrianController::class);
 Route::get('gettabelantrian', [AntrianController::class, 'getData'])->name('antrians.getData');
+

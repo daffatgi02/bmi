@@ -6,17 +6,23 @@
             <p class="fs-3 fw-bold ">
                 {{ $nama_posyandu }}
             </p>
-            <div class="d-flex flex-row justify-content-end mb-3">
+            <div class="d-flex justify-content-start">
                 <a class="btn d-flex me-sm-3 me-2 mb-3 mb-md-0" id="btn-tambah" href="{{ route('pposyandu') }}">
                     <i class="bi bi-chevron-left me-sm-2 me-0"></i>
                     <label class="d-sm-block d-none">Kembali</label>
                 </a>
-                <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0" data-bs-toggle="modal" id="btn-tambah"
-                    data-bs-target="#exampleModal2">
+            </div>
+            <div class="d-flex flex-row justify-content-end mb-3">
+                <a href="{{ route('kaders.index') }}" class="btn btn-logreg btn d-flex me-sm-3 me-2 mb-3 mb-md-0">
+                    <i class="bi bi-arrow-clockwise  me-sm-2 me-0 "></i>
+                    <label class="d-sm-block d-none">Muat Ulang</label>
+                </a>
+                <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0" data-bs-toggle="modal"
+                    id="btn-tambah" data-bs-target="#exampleModal2">
                     <i class="bi bi-list-task me-sm-2 me-0"></i><label class="d-sm-block d-none">Tambah Antrian</label>
                 </button>
-                <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0 " data-bs-toggle="modal" id="btn-tambah"
-                    data-bs-target="#exampleModal">
+                <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0 " data-bs-toggle="modal"
+                    id="btn-tambah" data-bs-target="#exampleModal">
                     <i class="bi bi-person-fill-add me-sm-2 me-0"></i><label class="d-sm-block d-none">Data Anak</label>
                 </button>
             </div>
@@ -53,7 +59,7 @@
                                 <th id="th" class="w-50">Opsi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tabel-antrian-body">
                             @php $nomor = 1; @endphp
                             @foreach ($dantrian as $dantrian)
                                 <tr>
@@ -563,7 +569,6 @@
             input.select();
         };
     </script>
-
     {{-- PESAN ERROR --}}
     @if (session('error'))
         <script>

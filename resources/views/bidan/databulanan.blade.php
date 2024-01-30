@@ -9,7 +9,6 @@
                 <div class="row justify-content-center">
                     <h1 class="fw-bold h mb-4">Data Bulanan</h1>
 
-
                     {{-- BADEGE POSYANDU --}}
                     <div class="col-12 col-lg-6 mb-4">
                         <div class="d-flex align-items-center">
@@ -447,7 +446,8 @@
                 ajax: "gettabelbulanan",
                 pagingType: "simple_numbers",
                 responsive: true,
-                columns: [{
+                columns: [
+                    {
                         data: "danaks.nama_anak",
                         name: "danaks.nama_anak",
                         className: 'align-middle',
