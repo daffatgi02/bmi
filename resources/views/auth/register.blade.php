@@ -26,8 +26,8 @@
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
-                                        class="form-control border border-secondary shadow @error('name') is-invalid @enderror"
-                                        name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                        class="form-control border border-secondary shadow  @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}" required autocomplete="name" autofocus >
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">

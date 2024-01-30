@@ -47,6 +47,36 @@ class DatabulananController extends Controller
         }
     }
 
+    // SALAH SATU SAJA YANG DITAMPILKAN
+    // public function getData(Request $request)
+    // {
+    //     // Ambil bulan saat ini
+    //     $currentMonth = now()->format('m');
+
+    //     $dbulanans = Dbulan::with('danaks')->whereMonth('created_at', $currentMonth);
+
+    //     if ($request->ajax()) {
+    //         $dbulanans = $dbulanans->get()->groupBy('danaks_id');
+
+    //         $result = collect();
+
+    //         foreach ($dbulanans as $danaks) {
+    //             // Pilih salah satu record (misalnya, yang pertama)
+    //             $selectedDanak = $danaks->first();
+
+    //             // Tambahkan ke hasil akhir
+    //             $result->push($selectedDanak);
+    //         }
+
+    //         return datatables()->of($result)
+    //             ->addIndexColumn()
+    //             ->addColumn('actions2', function ($dbulanan) {
+    //                 return view('actions.actionbulanan', compact('dbulanan'));
+    //             })
+    //             ->toJson();
+    //     }
+    // }
+
     public function getData2(Request $request)
     {
 
@@ -152,7 +182,7 @@ class DatabulananController extends Controller
             [
                 'chart' => $chart->build($danak->jk, $umur_tahun, $umur_bulan, $bb_anak),
                 'chart2' => $chart2->build($danak->jk, $umur_tahun, $umur_bulan, $tb_anak),
-                'chart3' => $chart3->build($danak->jk, $tb_anak,$bb_anak),
+                'chart3' => $chart3->build($danak->jk, $tb_anak, $bb_anak),
                 'chart4' => $chart4->build($danak->jk, $umur_tahun, $umur_bulan, $lk_anak),
             ]
             // ['chart2' => $chart2->build()]
