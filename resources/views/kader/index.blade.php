@@ -13,8 +13,8 @@
                 </a>
             </div>
             <div class="d-flex flex-row justify-content-end mb-3">
-                <a href="{{ route('kaders.index') }}" class="btn btn-logreg btn d-flex me-sm-3 me-2 mb-3 mb-md-0">
-                    <i class="bi bi-arrow-clockwise  me-sm-2 me-0 "></i>
+                <a class="btn btn-logreg btn d-flex me-sm-3 me-2 mb-3 mb-md-0" href="javascript:location.reload(true);">
+                    <i class="bi bi-arrow-clockwise me-sm-2 me-0"></i>
                     <label class="d-sm-block d-none">Muat Ulang</label>
                 </a>
                 <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0" data-bs-toggle="modal"
@@ -41,7 +41,7 @@
         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModal2Label" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
-                    @include('actions.tambahantrian')
+                    @include('actions.tambahantrian2')
                 </div>
             </div>
         </div>
