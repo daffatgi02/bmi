@@ -1,7 +1,7 @@
 @extends('layouts.appnav')
 
 @section('content')
-    @include('layouts.navbar')
+    {{-- @include('layouts.navbar') --}}
     <section class="home-section mb-5">
         <div class="container mt-3 pt-3">
             <div class="row d-flex justify-content-center">
@@ -11,8 +11,8 @@
                             <h1 class="card-title fs-3 fw-bold" id="examplecardLabel">Edit Data Bulanan Anak</h1>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('dbulanans.update', $dbulanans->id) }}" method="POST"
-                                enctype="multipart/form-dbulanans">
+                            <form action="{{ route('kaders.update', $dbulanans->id) }}" method="POST"
+                                enctype="multipart/form-kaders">
                                 @csrf
                                 @method('PUT') <!-- Use the PUT method for editing -->
 
@@ -108,11 +108,21 @@
                                     placeholder="data-jk" value="{{ $dbulanans->danaks->jk }}">
 
 
+
+                                <input class="form-control d-none" type="text" placeholder="id_posyandu"
+                                    name="id_posyandu" id="id_posyandu" aria-label="id_posyandu"
+                                    value="{{ $dbulanans->danaks->dposyandu_id }}">
+                                <input class="form-control d-none" type="text" placeholder="nama_posyandu"
+                                    name="nama_posyandu" id="nama_posyandu" aria-label="nama_posyandu"
+                                    value="{{ $dbulanans->nama_posyandu }}">
+
                                 <hr>
                                 <div class="row d-flex justify-content-center pb-4">
                                     <div class="col-md-4 col-4 d-grid">
-                                        <a href="{{ route('dbulanans.index') }}" id="batal"
-                                            class="btn btn-danger shadow" dposyandus-bs-dismiss="card">Batal</a>
+                                        <a href="javascript:void(0);" onclick="history.back();" id="batal"
+                                            class="btn btn-danger shadow">
+                                            Batal
+                                        </a>
                                     </div>
                                     <div class="col-md-4 col-3 d-grid">
                                         <button class="btn btn-success shadow">Edit</button>

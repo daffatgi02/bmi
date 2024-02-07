@@ -9,9 +9,15 @@
             <label>Loading</label>
         </div>
     </div>
-    @include('layouts.navbar')
+    {{-- @include('layouts.navbar') --}}
     <section class="home-section mb-5">
         <div class="mt-2 p-4">
+            <div class="d-flex justify-content-start">
+                <a class="btn d-flex me-sm-3 me-2 mb-3 mb-md-0" id="btn-tambah" href="javascript:void(0);" onclick="history.back();">
+                    <i class="bi bi-chevron-left me-2"></i>
+                    Kembali
+                </a>
+            </div>
             @if (count($dbulanans) > 0)
                 <button id="printButton" class="d-none">Cetak Halaman</button>
                 <p class="text-center fs-3 fw-bold mb-3">

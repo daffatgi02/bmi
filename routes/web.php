@@ -51,7 +51,7 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
         Route::get('exportpdf/{danaks_id}', [ExportpdfController::class, 'exportpdf'])->name('exportpdf');
 
         Route::get('/update', [DatabulananController::class, 'destroy2'])->name('destroy2');
-        Route::delete('login/delete/{id}', [DatabulananController::class, 'destroy3'])->name('destroy3');
+        Route::delete('login/delete1/{id}', [DatabulananController::class, 'destroy3'])->name('destroy3');
 
 
 
@@ -77,6 +77,7 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
         // Route::get('gettabelantrian2', [KaderController::class, 'getData2'])->name('antrians.getData');
         Route::post('/storekader', [KaderController::class, 'storekader'])->name('storekader');
         Route::get('/pposyandu', [KaderController::class, 'pposyandu'])->name('pposyandu');
+        Route::delete('login/delete2/{id}', [KaderController::class, 'destroykader'])->name('destroykader');
     });
 });
 
