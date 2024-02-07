@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\DetailChart;
+use App\Charts\DetailChart2;
+use App\Charts\DetailChart3;
+use App\Charts\DetailChart4;
 use App\Models\Danak;
 use App\Models\Dantrian;
 use App\Models\Dbulan;
@@ -24,6 +28,8 @@ class KaderController extends Controller
 
     public function index(Request $request)
     {
+        confirmDelete();
+
         // Mengambil nilai input dari form
         $id_posyandu = $request->input('id_posyandu');
         $nama_posyandu = $request->input('nama_posyandu');
@@ -45,8 +51,16 @@ class KaderController extends Controller
         })
             ->get();
 
-        return view('kader.index', compact('danaks', 'dposyandu', 'dantrian', 'nama_posyandu'));
+        $dbulans = Dbulan::when($nama_posyandu, function ($query) use ($nama_posyandu) {
+            return $query->where('nama_posyandu', $nama_posyandu);
+        })
+            ->orderBy('created_at', 'desc') // Mengurutkan berdasarkan kolom created_at secara descending
+            ->get();
+
+
+        return view('kader.index', compact('danaks', 'dposyandu', 'dantrian', 'nama_posyandu', 'dbulans'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -92,7 +106,7 @@ class KaderController extends Controller
         Alert::success('Berhasil Menambahkan', 'Data Anak Berhasil Terinput.');
 
         // Redirect ke halaman yang sesuai setelah penyimpanan data
-        return redirect()->route('kaders.index');
+        return redirect()->back();
     }
 
     public function storekader(Request $request)
@@ -159,9 +173,38 @@ class KaderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(
+        string $danaks_id,
+        DetailChart $chart,
+        DetailChart2 $chart2,
+        DetailChart3 $chart3,
+        DetailChart4 $chart4,
+    ) {
+        // ELOQUENT
+        $title = "E-KMS Anak";
+        $danak = Danak::findOrFail($danaks_id);
+
+        $dbulanans = Dbulan::where('danaks_id', $danaks_id)->orderBy('created_at', 'asc')->get();
+        $danaks = Danak::all();
+
+        // Extract umur_tahun and umur_bulan values from dbulans
+        $umur_tahun = $dbulanans->pluck('umur_tahun')->toArray();
+        $umur_bulan = $dbulanans->pluck('umur_bulan')->toArray();
+        $bb_anak = $dbulanans->pluck('bb_anak')->toArray();
+        $tb_anak = $dbulanans->pluck('tb_anak')->toArray();
+        $lk_anak = $dbulanans->pluck('lk_anak')->toArray();
+
+        return view(
+            'actions.detailbulanankader',
+            compact('dbulanans', 'title', 'danaks'),
+            [
+                'chart' => $chart->build($danak->jk, $umur_tahun, $umur_bulan, $bb_anak),
+                'chart2' => $chart2->build($danak->jk, $umur_tahun, $umur_bulan, $tb_anak),
+                'chart3' => $chart3->build($danak->jk, $tb_anak, $bb_anak),
+                'chart4' => $chart4->build($danak->jk, $umur_tahun, $umur_bulan, $lk_anak),
+            ]
+            // ['chart2' => $chart2->build()]
+        );
     }
 
     /**
@@ -169,15 +212,53 @@ class KaderController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // ELOQUENT
+        $title = "Edit Data Bulanan Anak";
+        $dbulanans = Dbulan::find($id);
+
+        // Get danaks_id from the currently edited Dbulan
+        $danaks_id = $dbulanans->danaks_id;
+
+        // Fetch all Dbulans with the same danaks_id
+        $relatedDbulanans = Dbulan::where('danaks_id', $danaks_id)->get();
+        $danaks = Danak::all();
+
+        return view(
+            'actions.editbulanankader',
+            compact('dbulanans', 'danaks', 'title', 'relatedDbulanans'),
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+
+        $dbulanans = Dbulan::findOrFail($id);
+
+        // Update data berdasarkan ID yang diterima
+        $dbulanans->danaks_id = $request->danaks_id;
+
+        $dbulanans->umur_periksa = $request->umur_periksa;
+        $dbulanans->bb_anak = $request->bb_anak;
+        $dbulanans->tb_anak = $request->tb_anak;
+        $dbulanans->lk_anak = $request->lk_anak;
+        $dbulanans->ll_anak = $request->ll_anak;
+        $dbulanans->st_anak = $request->st_anak;
+        $dbulanans->c_ukur = $request->c_ukur;
+
+        $dbulanans->created_at = $request->created_at;
+        $dbulanans->updated_at = $request->updated_at;
+        // Simpan perubahan data ke dalam database
+        $dbulanans->save();
+
+        Alert::success('Berhasil Memperbarui', 'Data Anak Berhasil Diperbarui.');
+        $id_posyandu = $request->input('id_posyandu');
+        $nama_posyandu = $request->input('nama_posyandu');
+
+        // Redirect to the index route with the filter parameters
+        return redirect()->route('kaders.index', ['id_posyandu' => $id_posyandu, 'nama_posyandu' => $nama_posyandu]);
     }
 
     /**
@@ -195,6 +276,23 @@ class KaderController extends Controller
             Alert::success('Antrian Selesai');
         } else {
             Alert::success('Antrian Selesai');
+        }
+
+        return redirect()->back();
+    }
+
+    public function destroykader(string $id)
+    {
+        // Temukan data bulanan berdasarkan ID
+        $dbulanan = Dbulan::find($id);
+
+        // Periksa apakah data bulanan ditemukan
+        if ($dbulanan) {
+            // Hapus data dari database
+            $dbulanan->delete();
+            Alert::success('Berhasil Terhapus', 'Data Anak Terhapus.');
+        } else {
+            Alert::success('Berhasil Terhapus', 'Data Anak Terhapus.');
         }
 
         return redirect()->back();

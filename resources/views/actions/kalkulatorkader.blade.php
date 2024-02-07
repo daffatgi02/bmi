@@ -1,4 +1,4 @@
-<form action="{{ route('dbulanans.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('kaders.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="card shadow">
         <div class="card-header" id="calc-stunting">

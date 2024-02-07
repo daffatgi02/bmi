@@ -16,5 +16,10 @@ class Dposyandu extends Model
     {
         return $this->hasMany(Dantrian::class);
     }
-    
+
+    public function dbulans()
+    {
+        return $this->hasMany(Dbulan::class);
+    }
+
 }
