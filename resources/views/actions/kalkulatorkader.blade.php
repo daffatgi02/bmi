@@ -115,7 +115,7 @@
             {{-- Button --}}
             <div class="row d-flex justify-content-center">
                 <div class="col-md-3 col-4 d-grid">
-                    <a id="reset" class="btn btn-danger shadow">Hapus</a>
+                    <a id="reset" class="btn btn-danger shadow">Ulangi</a>
                 </div>
                 <div class="col-md-3 col-4 d-grid">
                     <button class="btn btn-success" id="liveToastBtn">Simpan</button>
@@ -135,9 +135,10 @@
             </div>
         </div>
     </form>
-    <button onclick="getDataFromFirebase()" class="btn btn-info">
-        <label for="" class="fw-bold">UKUR</label>
-    </button>
+    <button onclick="getDataFromFirebase()" class="btn btn-outline-success" style="padding: 10px; margin: 0 auto 20px; width: 200px; display: block;">
+    <label class="fw-bold">UKUR DENGAN ALAT</label>
+</button>
+
 </div>
 <!-- Bootstrap JS (popper.js and bootstrap.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -157,46 +158,46 @@
         messagingSenderId: "982173600901",
         appId: "1:982173600901:web:c632d8788e40f55fc8adec"
     };
-
-    // Inisialisasi Firebase
     firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const timbanganRef = database.ref('/Timbangan');
 
-    // Referensi ke Firebase Database
-    var database = firebase.database();
-
+    //fungsi get data firebase
     function getDataFromFirebase() {
-        // Referensi ke titik data di Firebase yang sesuai dengan data tinggi badan anak
-        var tbAnakRef = database.ref('/Tinggi');
+    const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+    const cUkur = document.getElementById('c_ukur').value;
 
-        // Mendapatkan data secara real-time
-        tbAnakRef.on('value', function(snapshot) {
-            // Mendapatkan semua data anak
-            var dataAnak = snapshot.val();
+    if (cUkur === 'Berdiri' || cUkur === 'Telentang') {
+        // Ambil data dari Firebase kalau di trigger button
+        timbanganRef.once('value')
+            .then((snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    const berat = data.Berat || 0;
+                    const tinggi = data.Tinggi || 0;
+                    const panjang = data.Panjang || 0;
 
-            // Mendapatkan UID anak paling terbaru
-            var latestUid = Object.keys(dataAnak)[Object.keys(dataAnak).length - 1];
-
-            // Mendapatkan data anak dengan UID paling terbaru
-            var latestAnak = dataAnak[latestUid];
-
-            // Mendapatkan nilai distance
-            var distanceValue = latestAnak.distance;
-
-            // Mendapatkan nilai strength
-            var strengthValue = latestAnak.strength;
-
-            // Menyimpan nilai distance ke dalam "tb_anak"
-            document.getElementById('tb_anak').value = distanceValue;
-
-            // Menyimpan nilai strength ke dalam "bb_anak"
-            document.getElementById('bb_anak').value = strengthValue;
-
-            // Logging untuk memastikan bahwa nilai telah berhasil diambil
-            console.log('Tinggi Badan Anak:', distanceValue);
-            console.log('Berat Badan Anak:', strengthValue);
-        });
+                    if (cUkur === 'Berdiri') {
+                        document.getElementById('bb_anak').value = berat;
+                        document.getElementById('tb_anak').value = tinggi;
+                    } else if (cUkur === 'Telentang') {
+                        document.getElementById('bb_anak').value = berat;
+                        document.getElementById('tb_anak').value = panjang;
+                    }
+                    //debug di console
+                    //console.log('Data dari Firebase berhasil diambil:', { berat, tinggi, panjang });
+                } else {
+                    console.error('Data dari Firebase kosong.');
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching data from Firebase:', error);
+            });
+    } else {
+        // kalau si kader belum pilih cara ukur muncul notif toast
+        toast.show();
     }
-
+}
 
 
     // Cara Ukur
@@ -238,7 +239,6 @@
         submitButton.addEventListener('click', function() {
             // Check if either "Berdiri" or "Telentang" is selected
             if (cUkurInput.value !== 'Berdiri' && cUkurInput.value !== 'Telentang') {
-                // If not, show the toast
                 toast.show();
             } else {
                 // Otherwise, proceed with your form submission logic
@@ -246,6 +246,8 @@
             }
         });
     });
+
+
 
 
 
