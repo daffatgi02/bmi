@@ -185,42 +185,46 @@
     const database = firebase.database();
     const timbanganRef = database.ref('/Timbangan');
 
-    //fungsi get data firebase
+//fungsi get data firebase
     function getDataFromFirebase() {
-        const toast = new bootstrap.Toast(document.getElementById('liveToast'));
-        const cUkur = document.getElementById('c_ukur').value;
+    const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+    const cUkur = document.getElementById('c_ukur').value;
 
-        if (cUkur === 'Berdiri' || cUkur === 'Telentang') {
-            // Ambil data dari Firebase kalau di trigger button
-            timbanganRef.once('value')
-                .then((snapshot) => {
-                    const data = snapshot.val();
-                    if (data) {
-                        const berat = data.Berat || 0;
-                        const tinggi = data.Tinggi || 0;
-                        const panjang = data.Panjang || 0;
+    if (cUkur === 'Berdiri' || cUkur === 'Telentang') {
+        // Ambil data dari Firebase kalau di trigger button
+        timbanganRef.once('value')
+            .then((snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    const rawBerat = data.Berat || 0;
+                    const tinggi = data.Tinggi || 0;
+                    const panjang = data.Panjang || 0;
 
-                        if (cUkur === 'Berdiri') {
-                            document.getElementById('bb_anak').value = berat;
-                            document.getElementById('tb_anak').value = tinggi;
-                        } else if (cUkur === 'Telentang') {
-                            document.getElementById('bb_anak').value = berat;
-                            document.getElementById('tb_anak').value = panjang;
-                        }
-                        //debug di console
-                        //console.log('Data dari Firebase berhasil diambil:', { berat, tinggi, panjang });
-                    } else {
-                        console.error('Data dari Firebase kosong.');
+                    // Konversi nilai berat 
+                    const berat = (rawBerat / 1000).toFixed(2);
+
+                    if (cUkur === 'Berdiri') {
+                        document.getElementById('bb_anak').value = berat;
+                        document.getElementById('tb_anak').value = tinggi;
+                    } else if (cUkur === 'Telentang') {
+                        document.getElementById('bb_anak').value = berat;
+                        document.getElementById('tb_anak').value = panjang;
                     }
-                })
-                .catch((error) => {
-                    console.error('Error fetching data from Firebase:', error);
-                });
-        } else {
-            // kalau si kader belum pilih cara ukur muncul notif toast
-            toast.show();
-        }
+                    //debug di console
+                    console.log('Data dari Firebase berhasil diambil:', { berat, tinggi, panjang });
+                } else {
+                    console.error('Data dari Firebase kosong.');
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching data from Firebase:', error);
+            });
+    } else {
+        // kalau si kader belum pilih cara ukur muncul notif toast
+        toast.show();
     }
+}
+
 
 
     // Cara Ukur
