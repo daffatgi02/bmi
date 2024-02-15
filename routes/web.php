@@ -8,6 +8,7 @@ use App\Http\Controllers\DatabulananController;
 use App\Http\Controllers\DataPosyanduController;
 use App\Http\Controllers\ExportpdfController;
 use App\Http\Controllers\GrafikPerkembanganController;
+use App\Http\Controllers\IbubalitaController;
 use App\Http\Controllers\KaderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -87,3 +88,6 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
 Route::resource('antrians', AntrianController::class);
 Route::get('gettabelantrian', [AntrianController::class, 'getData'])->name('antrians.getData');
 
+
+// EKMS
+Route::resource('ekms', IbubalitaController::class);

@@ -1,10 +1,10 @@
-<form action="{{ route('dbulanans.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="card shadow">
-        <div class="card-header" id="calc-stunting">
-            <h3 class="fw-bold">Input Data</h3>
-        </div>
+<div class="card shadow">
+    <div class="card-header" id="calc-stunting">
+        <h3 class="fw-bold">Input Data</h3>
+    </div>
 
+    <form action="{{ route('dbulanans.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="card-body">
             <div class="d-flex ">
                 <i class="bi bi-search fs-3 me-2"></i>
@@ -136,12 +136,13 @@
             {{-- Button --}}
             <div class="row d-flex justify-content-center">
                 <div class="col-md-3 col-4 d-grid">
-                    <a id="reset" class="btn btn-danger shadow">Reset</a>
+                    <a id="reset" class="btn btn-danger shadow">Ulangi</a>
                 </div>
                 <div class="col-md-3 col-4 d-grid">
-                    <button class="btn btn-success" id="liveToastBtn">Submit</button>
+                    <button class="btn btn-success" id="liveToastBtn">Simpan</button>
                 </div>
             </div>
+
             <div class="toast-container position-fixed bottom-0 end-0 p-3">
                 <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header bg-warning">
@@ -155,12 +156,73 @@
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+    <button onclick="getDataFromFirebase()" class="btn btn-outline-success"
+        style="padding: 10px; margin: 0 auto 20px; width: 200px; display: block;">
+        <label class="fw-bold pe-none">UKUR DENGAN ALAT</label>
+    </button>
+
+</div>
 <!-- Bootstrap JS (popper.js and bootstrap.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+
 
 <script>
+    // Konfigurasi Firebase
+    var firebaseConfig = {
+        apiKey: "AIzaSyCzJu9iRvAi4f08JHm61kq-KfsR6Z0FopA",
+        authDomain: "connnectcarepediatrics.firebaseapp.com",
+        databaseURL: "https://connnectcarepediatrics-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "connnectcarepediatrics",
+        storageBucket: "connnectcarepediatrics.appspot.com",
+        messagingSenderId: "982173600901",
+        appId: "1:982173600901:web:c632d8788e40f55fc8adec"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const timbanganRef = database.ref('/Timbangan');
+
+    //fungsi get data firebase
+    function getDataFromFirebase() {
+        const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+        const cUkur = document.getElementById('c_ukur').value;
+
+        if (cUkur === 'Berdiri' || cUkur === 'Telentang') {
+            // Ambil data dari Firebase kalau di trigger button
+            timbanganRef.once('value')
+                .then((snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        const berat = data.Berat || 0;
+                        const tinggi = data.Tinggi || 0;
+                        const panjang = data.Panjang || 0;
+
+                        if (cUkur === 'Berdiri') {
+                            document.getElementById('bb_anak').value = berat;
+                            document.getElementById('tb_anak').value = tinggi;
+                        } else if (cUkur === 'Telentang') {
+                            document.getElementById('bb_anak').value = berat;
+                            document.getElementById('tb_anak').value = panjang;
+                        }
+                        //debug di console
+                        //console.log('Data dari Firebase berhasil diambil:', { berat, tinggi, panjang });
+                    } else {
+                        console.error('Data dari Firebase kosong.');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error fetching data from Firebase:', error);
+                });
+        } else {
+            // kalau si kader belum pilih cara ukur muncul notif toast
+            toast.show();
+        }
+    }
+
+
     // Cara Ukur
     const berdiriButton = document.getElementById('berdiriButton');
     const telentangButton = document.getElementById('telentangButton');
@@ -200,7 +262,6 @@
         submitButton.addEventListener('click', function() {
             // Check if either "Berdiri" or "Telentang" is selected
             if (cUkurInput.value !== 'Berdiri' && cUkurInput.value !== 'Telentang') {
-                // If not, show the toast
                 toast.show();
             } else {
                 // Otherwise, proceed with your form submission logic
@@ -208,6 +269,8 @@
             }
         });
     });
+
+
 
 
 

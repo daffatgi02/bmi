@@ -83,8 +83,12 @@
                                 Buat Tiket Antrian Dulu Yuk!
                             </div>
                             <div class="card-body d-flex justify-content-center">
-                                <a href="{{ route('antrians.index') }}" class="btn w-75 text-center">Daftar
-                                    Antrian</a>
+                                <a href="{{ route('antrians.index') }}" class="btn w-75 text-center me-2">
+                                    Daftar Antrian
+                                </a>
+                                <a href="{{ route('ekms.index') }}" class="btn w-75 text-center">
+                                    E-KMS
+                                </a>
                             </div>
                         </div>
                         <div class="card border-0">
@@ -124,8 +128,9 @@
                                 Buat Tiket Antrian Dulu Yuk!
                             </div>
                             <div class="card-body d-flex justify-content-center">
-                                <a href="{{ route('antrians.index') }}" class="btn w-75 text-center">Daftar
-                                    Antrian</a>
+                                <a href="{{ route('antrians.index') }}" class="btn w-75 text-center">
+                                    Daftar Antrian
+                                </a>
                             </div>
                         </div>
                         <div class="card border-0">
