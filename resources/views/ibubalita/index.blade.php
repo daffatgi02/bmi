@@ -1,7 +1,7 @@
 @extends('layouts.appbalita')
 
 @section('content')
-    <div class="container mt-2 mb-5 w-75">
+    <div class="container mt-2 mb-5 w-md-75 w-100">
         <div class="mb-4">
             <div class="d-flex mb-4">
                 <i class="bi bi-book fs-4 me-2"></i>
