@@ -241,6 +241,9 @@
                     [25, 50, 100, -1],
                     [25, 50, 100, "All"],
                 ],
+                language: {
+                    search: "Cari", // Mengganti teks "Search" menjadi "Cari"
+                },
             });
 
 

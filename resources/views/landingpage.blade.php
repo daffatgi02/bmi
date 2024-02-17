@@ -47,8 +47,6 @@
             color: #0d3122;
             font-weight: bold
         }
-
-
     </style>
 
 
@@ -122,14 +120,17 @@
                         </p>
                     </div>
 
-                    <div class="view2 w-100 rounded-bottom p-4">
-                        <div class="card border-0 mb-3 mt-3">
+                    <div class="view2 w-100 rounded-bottom p-3">
+                        <div class="card border-0 mt-4">
                             <div class="card-header fw-bold text-center">
                                 Buat Tiket Antrian Dulu Yuk!
                             </div>
-                            <div class="card-body d-flex justify-content-center">
-                                <a href="{{ route('antrians.index') }}" class="btn w-75 text-center">
+                            <div class="card-body d-flex flex-row">
+                                <a href="{{ route('antrians.index') }}" class="btn w-75 text-center me-2 d-flex justify-content-center align-items-center">
                                     Daftar Antrian
+                                </a>
+                                <a href="{{ route('ekms.index') }}" class="btn w-75 d-flex justify-content-center align-items-center">
+                                    E-KMS
                                 </a>
                             </div>
                         </div>

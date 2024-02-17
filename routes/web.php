@@ -91,3 +91,5 @@ Route::get('gettabelantrian', [AntrianController::class, 'getData'])->name('antr
 
 // EKMS
 Route::resource('ekms', IbubalitaController::class);
+Route::get('getekms', [IbubalitaController::class, 'getData'])->name('ekms.getData');
+
