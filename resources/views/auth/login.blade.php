@@ -40,15 +40,13 @@
                                                 @enderror
                                             </div>
                                         </div>
-
                                         <div class="row mb-3">
                                             <label for="password" class=" col-form-label fw-bold">Password</label>
 
                                             <div class="col-md-12">
-                                                <input id="password" type="password"
+                                                <input id="myPassword" type="password"
                                                     class="form-control shadow @error('password') is-invalid @enderror border border-dark-subtle"
                                                     name="password" required autocomplete="current-password">
-
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -62,10 +60,10 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input border border-secondary shadow"
                                                         type="checkbox" name="remember" id="remember"
-                                                        {{ old('remember') ? 'checked' : '' }}>
+                                                        {{ old('remember') ? 'checked' : '' }} onclick="myFunction()">
 
                                                     <label class="form-check-label" for="remember">
-                                                        Ingat Saya
+                                                        Tampilkan Password
                                                     </label>
                                                 </div>
                                             </div>
@@ -97,7 +95,7 @@
         </div>
     </div>
     <script>
-         document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function() {
             // Menampilkan overlay saat halaman dimuat
             document.querySelector('.loading-overlay').style.display = 'flex';
 
@@ -108,5 +106,14 @@
                 }, 1000); // 2 detik (dalam milidetik)
             });
         });
+
+        function myFunction() {
+            var x = document.getElementById("myPassword");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
     </script>
 @endsection
