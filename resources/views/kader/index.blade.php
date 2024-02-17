@@ -146,7 +146,10 @@
                 lengthMenu: [
                     [6, 10],
                     [6, 10]
-                ]
+                ],
+                language: {
+                    search: "Cari", // Mengganti teks "Search" menjadi "Cari"
+                },
             });
             var dataTable = new DataTable('#tabel_bulanan', {
                 pagingType: 'simple',
@@ -158,7 +161,11 @@
                     [25, 50, 100, -1],
                     [25, 50, 100, "All"],
                 ],
+                language: {
+                    search: "Cari", // Mengganti teks "Search" menjadi "Cari"
+                },
             });
+
         });
         $(".datatable").on("click", ".btn-delete", function(e) {
             e.preventDefault();
