@@ -1,52 +1,57 @@
 @extends('layouts.appbalita')
 
 @section('content')
-    <div class="container mt-3 mb-4">
-        <div class="d-flex justify-content-start mt-3 ms-3">
-            <a class="btn d-flex me-sm-3 me-2 mb-3 mb-md-0" id="btn-tambah" href="{{ url('/') }}">
-                <i class="bi bi-chevron-left me-sm-2 me-0"></i>
-                <label class="d-sm-block d-none">Kembali</label>
-            </a>
-        </div>
-        <div class="d-block d-md-none mb-5 text-center">
-            <img class="mx-auto d-block" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}" alt="logo"
-                style="width: 50%;">
-            <p class="fw-bold fs-2">
-                E-KMS Posyandu Japan
-            </p>
-        </div>
-        <div class="d-flex flex-row justify-content-center align-items-center">
-            <div class="w-100 d-none d-md-block">
-                <div class="view1 w-100 rounded-top vstack p-3">
-                    <img class="mx-auto d-block" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}"
-                        alt="logo" style="width: 50%;">
-                    <p class="fw-bold fs-5 text-center">
-                        E-KMS
-                    </p>
-                    <p class="fw-bold fs-5 text-center">
-                        Posyandu Desa Japan
-                    </p>
-                </div>
+<div class="container mt-3 mb-4">
+    <div class="d-flex justify-content-start mt-3 ms-3">
+        <a class="btn d-flex me-sm-3 me-2 mb-3 mb-md-0" id="btn-tambah" href="{{ url('/') }}">
+            <i class="bi bi-chevron-left me-sm-2 me-0"></i>
+            <label class="d-sm-block d-none">Kembali</label>
+        </a>
+    </div>
+    <div class="d-block d-md-none mb-5 text-center">
+        <img class="mx-auto d-block" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}" alt="logo" style="width: 50%;">
+        <p class="fw-bold fs-2">
+            E-KMS Posyandu Japan
+        </p>
+    </div>
+    <div class="d-flex flex-row justify-content-center align-items-center">
+        <div class="w-100 d-none d-md-block">
+            <div class="view1 w-100 rounded-top vstack p-3">
+                <img class="mx-auto d-block" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}" alt="logo" style="width: 50%;">
+                <p class="fw-bold fs-5 text-center">
+                    E-KMS
+                </p>
+                <p class="fw-bold fs-5 text-center">
+                    Posyandu Desa Japan
+                </p>
             </div>
-            <div class="w-100">
-                <table class="table table-striped table-hover table-bordered datatable shadow" id="ekms"
-                    style="width: 100%">
-                    <thead class="fw-bold">
-                        <tr>
-                            <th id="th" class="text-center">Nama</th>
-                            <th id="th" class="text-center">NIK</th>
-                            <th id="th" class="text-center">Posyandu</th>
-                            <th id="th" class="text-center">Opsi</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+        </div>
+        <div class="w-100">
+            <table class="table table-striped table-hover table-bordered datatable shadow" id="ekms" style="width: 100%">
+                <thead class="fw-bold">
+                    <tr>
+                        <th id="th" class="text-center">Nama</th>
+                        <th id="th" class="text-center">NIK</th>
+                        <th id="th" class="text-center">Posyandu</th>
+                        <th id="th" class="text-center">Opsi</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
+</div>
 @endsection
 
 @push('scripts')
-    <script type="module">
+<script type="module">
+    (function () {
+        function hideNIK(nik) {
+            // ngambil 8 karakter pertama dari NIK
+            var prefix = nik.substring(0, 8);
+            var hiddenPart = nik.substring(8).replace(/./g, '*');
+            return prefix + hiddenPart;
+        }
+
         $(document).ready(function() {
             var dataTable = new DataTable('#ekms', {
                 serverSide: true,
@@ -68,6 +73,9 @@
                         className: 'align-middle text-center',
                         searchable: true,
                         orderable: true,
+                        render: function(data, type, row, meta) {
+                            return hideNIK(data);
+                        }
 
                     },
                     {
@@ -99,6 +107,8 @@
                     search: "Cari", // Mengganti teks "Search" menjadi "Cari"
                 },
             });
+
         });
-    </script>
+    })();
+</script>
 @endpush
