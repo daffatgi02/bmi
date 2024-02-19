@@ -44,69 +44,71 @@
 
 @push('scripts')
 <script type="module">
-    function hideNIK(nik) {
-        // ngambil 8 karakter pertama dari NIK
-        var prefix = nik.substring(0, 8);
-        var hiddenPart = nik.substring(8).replace(/./g, '*');
-        return prefix + hiddenPart;
-    }
+    (function () {
+        function hideNIK(nik) {
+            // ngambil 8 karakter pertama dari NIK
+            var prefix = nik.substring(0, 8);
+            var hiddenPart = nik.substring(8).replace(/./g, '*');
+            return prefix + hiddenPart;
+        }
 
-    $(document).ready(function() {
-        var dataTable = new DataTable('#ekms', {
-            serverSide: true,
-            processing: true,
-            ajax: "getekms",
-            pagingType: "simple",
-            responsive: true,
-            columns: [{
-                    data: "danaks.nama_anak",
-                    name: "danaks.nama_anak",
-                    className: 'align-middle',
-                    searchable: true,
-                    orderable: true,
+        $(document).ready(function() {
+            var dataTable = new DataTable('#ekms', {
+                serverSide: true,
+                processing: true,
+                ajax: "getekms",
+                pagingType: "simple",
+                responsive: true,
+                columns: [{
+                        data: "danaks.nama_anak",
+                        name: "danaks.nama_anak",
+                        className: 'align-middle',
+                        searchable: true,
+                        orderable: true,
 
+                    },
+                    {
+                        data: "danaks.nik_anak",
+                        name: "danaks.nik_anak",
+                        className: 'align-middle text-center',
+                        searchable: true,
+                        orderable: true,
+                        render: function(data, type, row, meta) {
+                            return hideNIK(data);
+                        }
+
+                    },
+                    {
+                        data: "nama_posyandu",
+                        name: "nama_posyandu",
+                        className: 'align-middle',
+                        searchable: false,
+                        orderable: true,
+
+                    },
+                    {
+                        data: "actionsekms",
+                        name: "actionsekms",
+                        orderable: false,
+                        searchable: false,
+                        className: 'align-middle',
+                        width: "5%"
+
+                    },
+                ],
+                order: [
+                    [0, "asc"]
+                ],
+                lengthMenu: [
+                    [10],
+                    [10],
+                ],
+                language: {
+                    search: "Cari", // Mengganti teks "Search" menjadi "Cari"
                 },
-                {
-                    data: "danaks.nik_anak",
-                    name: "danaks.nik_anak",
-                    className: 'align-middle text-center',
-                    searchable: true,
-                    orderable: true,
-                    render: function(data, type, row, meta) {
-                        return hideNIK(data);
-                    }
+            });
 
-                },
-                {
-                    data: "nama_posyandu",
-                    name: "nama_posyandu",
-                    className: 'align-middle',
-                    searchable: false,
-                    orderable: true,
-
-                },
-                {
-                    data: "actionsekms",
-                    name: "actionsekms",
-                    orderable: false,
-                    searchable: false,
-                    className: 'align-middle',
-                    width: "5%"
-
-                },
-            ],
-            order: [
-                [0, "asc"]
-            ],
-            lengthMenu: [
-                [10],
-                [10],
-            ],
-            language: {
-                search: "Cari", // Mengganti teks "Search" menjadi "Cari"
-            },
         });
-
-    });
+    })();
 </script>
 @endpush
