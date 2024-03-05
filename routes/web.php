@@ -10,6 +10,7 @@ use App\Http\Controllers\ExportpdfController;
 use App\Http\Controllers\GrafikPerkembanganController;
 use App\Http\Controllers\IbubalitaController;
 use App\Http\Controllers\KaderController;
+use App\Http\Controllers\RiwayatController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +67,15 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
 
         // GrafikPerkembanganController
         Route::resource('gperkembangans', GrafikPerkembanganController::class);
+
+
+
+        // RiwayatController
+        Route::get('riwayat', [RiwayatController::class, 'index'])->name('riwayat');
+        Route::get('gettabelriwayat', [RiwayatController::class, 'getData']);
+        Route::put('riwayatpost', [RiwayatController::class, 'store'])->name('riwayatpost');
+
+
     });
 
 
@@ -79,6 +89,7 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
         Route::post('/storekader', [KaderController::class, 'storekader'])->name('storekader');
         Route::get('/pposyandu', [KaderController::class, 'pposyandu'])->name('pposyandu');
         Route::delete('login/delete2/{id}', [KaderController::class, 'destroykader'])->name('destroykader');
+        Route::put('riwayatpostkader', [KaderController::class, 'storeriwayat'])->name('riwayatpostkader');
     });
 });
 

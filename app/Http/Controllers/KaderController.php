@@ -10,6 +10,7 @@ use App\Models\Danak;
 use App\Models\Dantrian;
 use App\Models\Dbulan;
 use App\Models\Dposyandu;
+use App\Models\Riwayat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -296,5 +297,24 @@ class KaderController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function storeriwayat(Request $request)
+    {
+        // Buat objek Mahal baru berdasarkan data yang diterima
+        $riwayat = new Riwayat();
+        $riwayat->nama = $request->nama;
+        $riwayat->aktivitas = $request->aktivitas;
+        $riwayat->data = $request->data;
+
+        // Simpan objek Mahal ke dalam database
+        $riwayat->save();
+        Alert::success('Berhasil Memperbarui', 'Data Anak Berhasil Diperbarui.');
+
+        $id_posyandu = $request->input('id_posyandu');
+        $nama_posyandu = $request->input('nama_posyandu');
+
+        // Redirect to the index route with the filter parameters
+        return redirect()->route('kaders.index', ['id_posyandu' => $id_posyandu, 'nama_posyandu' => $nama_posyandu]);
     }
 }

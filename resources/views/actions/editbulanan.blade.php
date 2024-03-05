@@ -12,7 +12,7 @@
                         </div>
                         <div class="card-body">
                             <form action="{{ route('dbulanans.update', $dbulanans->id) }}" method="POST"
-                                enctype="multipart/form-dbulanans">
+                                enctype="multipart/form-dbulanans" id="editForm">
                                 @csrf
                                 @method('PUT') <!-- Use the PUT method for editing -->
 
@@ -118,6 +118,18 @@
                                         <button class="btn btn-success shadow">Edit</button>
                                     </div>
                                 </div>
+
+                            </form>
+                            <form action="{{ route('riwayatpost') }}" method="POST" enctype="multipart/form-riwayat"
+                                id="riwayatForm" class="d-none">
+                                @csrf
+                                @method('PUT') <!-- Use the PUT method for editing -->
+                                <input type="text" class="form-control " id="nama" name="nama"
+                                    placeholder="Nama" value="{{ Auth::user()->name }}" required readonly>
+                                <input type="text" class="form-control " id="aktivitas" name="aktivitas"
+                                    placeholder="Aktivitas" value="Edit" required readonly>
+                                <textarea class="form-control" id="data" name="data" rows="3" required readonly>{{ $dbulanans->danaks->nama_anak }} - {{ $dbulanans->umur_periksa }} - {{ $dbulanans->st_anak }} - {{ $dbulanans->c_ukur }} - berat badan {{ $dbulanans->bb_anak }} kg - tinggi badan {{ $dbulanans->tb_anak }} cm - lingkar Kepala {{ $dbulanans->lk_anak }} cm - lingkar lengan {{ $dbulanans->ll_anak }} cm
+                                </textarea>
                             </form>
                         </div>
                     </div>
@@ -127,6 +139,28 @@
 
 
         <script>
+            $(document).ready(function() {
+                // Intercept the submit event of the first form
+                $("#editForm").submit(function(event) {
+                    // Prevent the default form submission
+                    event.preventDefault();
+
+                    // Perform the form submission using AJAX
+                    $.ajax({
+                        url: $(this).attr("action"),
+                        method: $(this).attr("method"),
+                        data: $(this).serialize(),
+                        success: function(data) {
+                            // If the first form submission is successful, submit the second form
+                            $("#riwayatForm").submit();
+                        },
+                        error: function(error) {
+                            console.error("Error submitting editForm: ", error);
+                            // Handle errors if needed
+                        }
+                    });
+                });
+            });
             document.addEventListener("DOMContentLoaded", function() {
                 // Mendapatkan referensi ke elemen input
                 let bb_anakInput = document.getElementById('bb_anak');

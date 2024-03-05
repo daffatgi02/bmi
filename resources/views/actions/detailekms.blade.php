@@ -2,7 +2,7 @@
 
 <style>
     @media print {
-        
+
         @page {
             size: A3 landscape; /* Mengatur ukuran kertas menjadi A3 dan orientasi menjadi landscape */
             margin: 4cm 1cm 1cm 1cm; /* Sesuaikan margin sesuai kebutuhan Anda */

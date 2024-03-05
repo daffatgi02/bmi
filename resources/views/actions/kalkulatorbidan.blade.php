@@ -161,7 +161,6 @@
         style="padding: 10px; margin: 0 auto 20px; width: 200px; display: block;">
         <label class="fw-bold pe-none">UKUR DENGAN ALAT</label>
     </button>
-
 </div>
 <!-- Bootstrap JS (popper.js and bootstrap.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -200,7 +199,7 @@ function getDataFromFirebase() {
                     const tinggi = data.Tinggi || 0;
                     const panjang = data.Panjang || 0;
 
-                    // Konversi nilai berat 
+                    // Konversi nilai berat
                     const berat = (rawBerat / 1000).toFixed(2);
 
                     if (cUkur === 'Berdiri') {
