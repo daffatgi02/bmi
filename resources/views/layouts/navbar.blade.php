@@ -104,6 +104,13 @@
             </a>
             <span class="tooltip">Grafik Perkembangan</span>
         </li>
+        <li>
+            <a href="{{ route('riwayat') }}">
+                <i class='bx bx-history'></i>
+                <span class="links_name">Riwayat</span>
+            </a>
+            <span class="tooltip">Riwayat</span>
+        </li>
 
         <li class="profile">
             <div class="profile-details">

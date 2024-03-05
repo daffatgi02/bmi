@@ -238,7 +238,6 @@ class DatabulananController extends Controller
         $dbulans->updated_at = $request->updated_at;
         // Simpan perubahan data ke dalam database
         $dbulans->save();
-        Alert::success('Berhasil Memperbarui', 'Data Anak Berhasil Diperbarui.');
 
         // Redirect ke halaman yang sesuai setelah perubahan data
         return redirect()->route('dbulanans.index');

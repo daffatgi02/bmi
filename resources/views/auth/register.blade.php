@@ -1,14 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="loading-overlay">
-        <div class="spinner-container">
-            <div class="spinner-border text-success" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <label>Loading</label>
-        </div>
-    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -129,17 +121,6 @@
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Menampilkan overlay saat halaman dimuat
-            document.querySelector('.loading-overlay').style.display = 'flex';
-
-            // Sembunyikan overlay setelah 2 detik setelah semua konten dimuat
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    document.querySelector('.loading-overlay').style.display = 'none';
-                }, 1000); // 2 detik (dalam milidetik)
-            });
-        });
 
         function myFunction() {
             var x = document.getElementById("myPassword");
