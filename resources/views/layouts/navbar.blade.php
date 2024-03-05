@@ -42,6 +42,12 @@
                             <span>Grafik Perkembangan</span>
                         </li>
                     </a>
+                    <a href="{{ route('riwayat') }}">
+                        <li>
+                            <i class='bx bx-history'></i>
+                            <span>riwayat</span>
+                        </li>
+                    </a>
 
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
