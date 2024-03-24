@@ -53,7 +53,7 @@ class DetailChart
         // Inisialisasi nilai default untuk indeks yang tidak ada di $tu
         for ($i = 0; $i <= 60; $i++) {
             if (!isset($scatterPoints[$i])) {
-                $scatterPoints[$i] = null;
+                $scatterPoints[$i] = 0;
             }
         }
 

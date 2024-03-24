@@ -30,19 +30,20 @@ class DetailChart3
             }
         }
 
-
         $scatterPoints = [];
 
         foreach ($tb_anak as $index => $value) {
             $scatterPoints[$value] = $bb_anak[$index] ?? null;
         }
 
+
         // Inisialisasi nilai default untuk indeks yang tidak ada di $tb_anak
         for ($i = 0; $i <= 120; $i++) {
             if (!isset($scatterPoints[$i])) {
-                $scatterPoints[$i] = null;
+                $scatterPoints[$i] = 0;
             }
         }
+
 
         ksort($scatterPoints);
 
