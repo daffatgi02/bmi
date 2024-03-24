@@ -99,7 +99,7 @@ class DatabulananController extends Controller
         $nama_posyandu = $posyandu;
         // Tanggal saat ini
         $tanggal = date('Y-m-d');
-        return Excel::download(new DbulanExport($posyandu), 'Data-Bulanan-' . '(' . $nama_posyandu . ') ' . $tanggal . '.xlsx');
+        return Excel::download(new DbulanExport($nama_posyandu), 'Data-Bulanan-' . '(' . $nama_posyandu . ') ' . $tanggal . '.xlsx');
     }
 
 

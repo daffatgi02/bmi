@@ -51,7 +51,7 @@ class DetailChart2
         // Inisialisasi nilai default untuk indeks yang tidak ada di $tu
         for ($i = 0; $i <= 60; $i++) {
             if (!isset($scatterPoints[$i])) {
-                $scatterPoints[$i] = null;
+                $scatterPoints[$i] = 40;
             }
         }
 
@@ -62,6 +62,7 @@ class DetailChart2
         // dd(array_keys($jmlh_u));
         // dd($tu);
         // dd($umur);
+        // dd($scatterPoints);
 
         // Laki
         $lkondisi1 = [
