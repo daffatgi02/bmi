@@ -20,7 +20,7 @@
                             <div class="d-flex flex-row">
                                 <select class="form-select border border-dark select_posyandu"
                                     aria-label="Default select example" name="posyandu">
-                                    <option selected disabled value="null">-Pilih Posyandu-</option>
+                                    <option selected disabled value="null">- Pilih Posyandu</option>
                                     @php
                                         $uniquePosyandus = [];
 
@@ -38,11 +38,8 @@
                                         <option>{{ $posyandu }}</option>
                                     @endforeach
                                 </select>
-                                <button type="submit" class="btn btn-success ms-2" id="tampilkanBTN"
-                                    disabled>Tampilkan</button>
                             </div>
                         </form>
-
                     </div>
                     <div class="mt-3 shadow rounded rounded-3">
                         {!! $chart->container() !!}
@@ -80,13 +77,14 @@
         // btn POSYANDU EXCEL
         document.addEventListener('DOMContentLoaded', function() {
             var dropdown = document.querySelector('.select_posyandu');
-            var button = document.getElementById('tampilkanBTN');
 
             dropdown.addEventListener('change', function() {
+                // Jika ada posyandu yang dipilih
                 if (this.value !== 'null') {
-                    button.removeAttribute('disabled');
-                } else {
-                    button.setAttribute('disabled', 'disabled');
+                    // Ambil nilai dari dropdown
+                    var posyandu = this.value;
+                    // Redirect halaman ke URL dengan parameter posyandu yang dipilih
+                    window.location.href = "{{ route('gperkembangans.index') }}?posyandu=" + posyandu;
                 }
             });
         });
