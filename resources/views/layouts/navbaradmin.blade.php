@@ -12,34 +12,22 @@
             </div>
             <div class="offcanvas-body">
                 <ul class="nav-list">
-                    <a href="{{ route('bidans.index') }}">
+                    <a href="{{ route('admins.index') }}">
                         <li>
                             <i class='bx bx-grid-alt'></i>
                             <span>Dashboard</span>
                         </li>
                     </a>
-                    <a href="{{ route('danaks.index') }}">
+                    <a href="{{ route('admins.validasi') }}">
                         <li>
                             <i class='bx bx-user'></i>
-                            <span>Data Anak</span>
+                            <span>Data Akun</span>
                         </li>
                     </a>
-                    <a href="{{ route('dposyandus.index') }}">
+                    <a href="{{ route('admins.validasi') }}">
                         <li>
-                            <i class='bx bx-building-house'></i>
-                            <span>Data Posyandu</span>
-                        </li>
-                    </a>
-                    <a href="{{ route('dbulanans.index') }}">
-                        <li>
-                            <i class='bx bx-table'></i>
-                            <span>Data Bulanan</span>
-                        </li>
-                    </a>
-                    <a href="{{ route('gperkembangans.index') }}">
-                        <li>
-                            <i class='bx bx-line-chart'></i>
-                            <span>Grafik Perkembangan</span>
+                            <i class='bx bx-history'></i>
+                            <span>Riwayat</span>
                         </li>
                     </a>
 
@@ -69,39 +57,25 @@
     </div>
     <ul class="nav-list">
         <li>
-            <a href="{{ route('bidans.index') }}">
+            <a href="{{ route('admins.index') }}">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Dashboard</span>
             </a>
             <span class="tooltip">Dashboard</span>
         </li>
         <li>
-            <a href="{{ route('danaks.index') }}">
+            <a href="{{ route('admins.validasi') }}">
                 <i class='bx bx-user'></i>
-                <span class="links_name">Data Anak</span>
+                <span class="links_name">Data Akun</span>
             </a>
-            <span class="tooltip">Data Anak</span>
+            <span class="tooltip">Data Akun</span>
         </li>
         <li>
-            <a href="{{ route('dposyandus.index') }}">
-                <i class='bx bx-building-house'></i>
-                <span class="links_name">Data Posyandu</span>
+            <a href="{{ route('admins.riwayat') }}">
+                <i class='bx bx-history'></i>
+                <span class="links_name">Riwayat</span>
             </a>
-            <span class="tooltip">Data Posyandu</span>
-        </li>
-        <li>
-            <a href="{{ route('dbulanans.index') }}">
-                <i class='bx bx-table'></i>
-                <span class="links_name">Data Bulanan</span>
-            </a>
-            <span class="tooltip">Data Bulanan</span>
-        </li>
-        <li>
-            <a href="{{ route('gperkembangans.index') }}">
-                <i class='bx bx-line-chart'></i>
-                <span class="links_name">Grafik Perkembangan</span>
-            </a>
-            <span class="tooltip">Grafik Perkembangan</span>
+            <span class="tooltip">Riwayat</span>
         </li>
 
         <li class="profile">
@@ -113,7 +87,7 @@
             </div>
             <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();">
 
                 <i class='bx bx-log-out out' id="log_out"></i>
             </a>

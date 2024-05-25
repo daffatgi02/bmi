@@ -52,9 +52,22 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'level' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
+            'nik' => ['required', 'string', 'min:16 ', 'max:16'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/@gmail\.com$/i'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ],[
+            'level.required' => 'Kolom level harus diisi.',
+            'name.required' => 'Kolom nama harus diisi.',
+            'nik.required' => 'Kolom NIK harus diisi.',
+            'nik.min' => 'NIK harus terdiri dari 16 digit.',
+            'nik.max' => 'NIK harus terdiri dari 16 digit.',
+            'email.required' => 'Kolom email harus diisi.',
+            'email.email' => 'Email harus dalam format yang benar.',
+            'email.unique' => 'Email sudah digunakan.',
+            'email.regex' => 'Hanya email dengan domain @gmail.com yang diperbolehkan.',
+            'password.required' => 'Kolom password harus diisi.',
+            'password.min' => 'Password harus terdiri dari minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',]);
     }
 
     /**
@@ -67,7 +80,9 @@ class RegisterController extends Controller
     {
         return User::create([
             'level' => $data['level'],
+            'status' => $data['status'],
             'name' => $data['name'],
+            'nik' => $data['nik'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
 
