@@ -59,7 +59,7 @@ class KaderController extends Controller
             ->get();
 
 
-        return view('kader.index', compact('danaks', 'dposyandu', 'dantrian', 'nama_posyandu', 'dbulans'));
+        return view('kader.index', compact('danaks', 'dposyandu', 'dantrian', 'nama_posyandu', 'dbulans',));
     }
 
 
@@ -179,8 +179,8 @@ class KaderController extends Controller
         DetailChart $chart,
         DetailChart2 $chart2,
         DetailChart3 $chart3,
-        DetailChart4 $chart4,
-    ) {
+        DetailChart4 $chart4,)
+    {
         // ELOQUENT
         $title = "E-KMS Anak";
         $danak = Danak::findOrFail($danaks_id);
@@ -211,7 +211,7 @@ class KaderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Request $request)
     {
         // ELOQUENT
         $title = "Edit Data Bulanan Anak";
@@ -224,10 +224,12 @@ class KaderController extends Controller
         $relatedDbulanans = Dbulan::where('danaks_id', $danaks_id)->get();
         $danaks = Danak::all();
 
-        return view(
-            'actions.editbulanankader',
+        // $id_posyandu = $request->input('id_posyandu');
+        // $nama_posyandu = $request->input('nama_posyandu');
+        return view( 'actions.editbulanankader',
             compact('dbulanans', 'danaks', 'title', 'relatedDbulanans'),
         );
+
     }
 
     /**
@@ -253,13 +255,6 @@ class KaderController extends Controller
         $dbulanans->updated_at = $request->updated_at;
         // Simpan perubahan data ke dalam database
         $dbulanans->save();
-
-        Alert::success('Berhasil Memperbarui', 'Data Anak Berhasil Diperbarui.');
-        $id_posyandu = $request->input('id_posyandu');
-        $nama_posyandu = $request->input('nama_posyandu');
-
-        // Redirect to the index route with the filter parameters
-        return redirect()->route('kaders.index', ['id_posyandu' => $id_posyandu, 'nama_posyandu' => $nama_posyandu]);
     }
 
     /**
@@ -311,10 +306,7 @@ class KaderController extends Controller
         $riwayat->save();
         Alert::success('Berhasil Memperbarui', 'Data Anak Berhasil Diperbarui.');
 
-        $id_posyandu = $request->input('id_posyandu');
-        $nama_posyandu = $request->input('nama_posyandu');
-
         // Redirect to the index route with the filter parameters
-        return redirect()->route('kaders.index', ['id_posyandu' => $id_posyandu, 'nama_posyandu' => $nama_posyandu]);
+        return redirect()->back();
     }
 }

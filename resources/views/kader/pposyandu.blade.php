@@ -58,7 +58,6 @@
                     id="id_posyandu" aria-label="id_posyandu">
                 <input class="form-control d-none" type="text" placeholder="nama_posyandu" name="nama_posyandu"
                     id="nama_posyandu" aria-label="nama_posyandu">
-
             </div>
         </form>
 

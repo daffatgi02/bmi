@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AntrianController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BidanController;
@@ -32,6 +33,19 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 // Controller Login
 Route::prefix('login')->middleware(['auth'])->group(function () {
+    //Admin
+    Route::middleware(['admin'])->group(function () {
+        Route::resource('admins', AdminController::class);
+        Route::get('/data-akun', [AdminController::class, 'indexvalidasi'])->name('admins.validasi');
+        Route::get('/riwayat', [AdminController::class, 'indexriwayat'])->name('admins.riwayat');
+        Route::get('gettabelakun', [AdminController::class, 'getDataAkun']);
+        Route::post('/admin/update-status', [AdminController::class, 'updateStatus'])->name('admin.updateStatus');
+
+        // RiwayatController
+        Route::get('gettabelriwayat', [RiwayatController::class, 'getData']);
+    });
+
+
 
     // BIDAN
     Route::middleware(['bidan'])->group(function () {
@@ -56,30 +70,15 @@ Route::prefix('login')->middleware(['auth'])->group(function () {
         Route::delete('login/delete1/{id}', [DatabulananController::class, 'destroy3'])->name('destroy3');
 
 
-
-
-
         // DataPosyanduController
         Route::resource('dposyandus', DataPosyanduController::class);
         Route::get('gettabelposyandu', [DataPosyanduController::class, 'getData'])->name('dposyandus.getData');
 
-
-
         // GrafikPerkembanganController
         Route::resource('gperkembangans', GrafikPerkembanganController::class);
 
-
-
-        // RiwayatController
-        Route::get('riwayat', [RiwayatController::class, 'index'])->name('riwayat');
-        Route::get('gettabelriwayat', [RiwayatController::class, 'getData']);
         Route::put('riwayatpost', [RiwayatController::class, 'store'])->name('riwayatpost');
-
-
     });
-
-
-
 
     // KADER
     Route::middleware(['kader'])->group(function () {
@@ -103,4 +102,3 @@ Route::get('gettabelantrian', [AntrianController::class, 'getData'])->name('antr
 // EKMS
 Route::resource('ekms', IbubalitaController::class);
 Route::get('getekms', [IbubalitaController::class, 'getData'])->name('ekms.getData');
-

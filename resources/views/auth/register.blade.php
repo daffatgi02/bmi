@@ -28,6 +28,21 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="nik" class="col-md-4 col-form-label text-md-end fw-bold">NIK</label>
+
+                                <div class="col-md-6">
+                                    <input id="nik" type="number"
+                                        class="form-control border border-secondary shadow  @error('nik') is-invalid @enderror"
+                                        name="nik" value="{{ old('nik') }}" required autocomplete="nik" autofocus>
+
+                                    @error('nik')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="row mb-3">
                                 <label for="email" class="col-md-4 col-form-label text-md-end fw-bold">Email
@@ -79,6 +94,14 @@
 
                                 <div class="col-md-6">
                                     <input id="level" type="text" class="form-control" name="level" value="kader">
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-none">
+                                <label for="status"
+                                    class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Status') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="status" type="text" class="form-control" name="status" value="Belum Aktif">
                                 </div>
                             </div>
 

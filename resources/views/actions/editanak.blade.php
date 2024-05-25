@@ -97,7 +97,7 @@
                                             <input type="text" class="form-control" id="nama_ortu" name="nama_ortu"
                                                 placeholder="Masukkan Nama Anak"
                                                 value="{{ old('nama_ortu', $danaks->nama_ortu) }}" required>
-                                            <label for="floatingInput" class="">Nama Anak:</label>
+                                            <label for="floatingInput" class="">Nama Orang Tua:</label>
                                             @error('nama_ortu')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror

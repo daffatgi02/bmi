@@ -48,10 +48,12 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
-            if ($user->level === 'bidan') {
+            if ($user->level === 'bidan' && $user->status === 'Aktif') {
                 return redirect()->route('bidans.index');
-            } elseif ($user->level === 'kader') {
+            } elseif ($user->level === 'kader' && $user->status === 'Aktif') {
                 return redirect()->route('pposyandu');
+            } elseif ($user->level === 'admin' && $user->status === 'Aktif') {
+                return redirect()->route('admins.index');
             }
         }
 

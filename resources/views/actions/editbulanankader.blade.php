@@ -15,7 +15,6 @@
                                 enctype="multipart/form-kaders" id="editForm">
                                 @csrf
                                 @method('PUT') <!-- Use the PUT method for editing -->
-
                                 <h3 class="text-center">{{ $dbulanans->danaks->nama_anak }}</h3>
                                 <h6 class="mb-4 text-center">{{ $dbulanans->created_at }}</h6>
                                 <div class="row">
@@ -108,7 +107,7 @@
                                     placeholder="data-jk" value="{{ $dbulanans->danaks->jk }}">
 
 
-
+                                {{-- GET URL --}}
                                 <input class="form-control d-none" type="text" placeholder="id_posyandu"
                                     name="id_posyandu" id="id_posyandu" aria-label="id_posyandu"
                                     value="{{ $dbulanans->danaks->dposyandu_id }}">
@@ -121,7 +120,7 @@
                                     <div class="col-md-4 col-4 d-grid">
                                         <a href="javascript:void(0);" onclick="history.back();" id="batal"
                                             class="btn btn-danger shadow">
-                                            Batal
+                                            Kembali
                                         </a>
                                     </div>
                                     <div class="col-md-4 col-3 d-grid">
@@ -140,7 +139,6 @@
                                 <textarea class="form-control" id="data" name="data" rows="3" required readonly>{{ $dbulanans->danaks->nama_anak }} - {{ $dbulanans->umur_periksa }} - {{ $dbulanans->st_anak }} - {{ $dbulanans->c_ukur }} - berat badan {{ $dbulanans->bb_anak }} kg - tinggi badan {{ $dbulanans->tb_anak }} cm - lingkar Kepala {{ $dbulanans->lk_anak }} cm - lingkar lengan {{ $dbulanans->ll_anak }} cm
                             </textarea>
                                 <button class="btn btn-success shadow">Edit</button>
-
                             </form>
                         </div>
                     </div>
