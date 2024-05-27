@@ -13,8 +13,12 @@ class Dbulan extends Model
         return $this->belongsTo(Danak::class, 'danaks_id');
     }
 
-    public function dposyandus()
+    public function dposyandu()
     {
         return $this->belongsTo(Dposyandu::class, 'dposyandu_id');
+    }
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'users_id');
     }
 }

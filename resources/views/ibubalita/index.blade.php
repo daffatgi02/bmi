@@ -7,8 +7,6 @@
                 <i class="bi bi-book fs-4 me-2"></i>
                 <h2 class="fw-bold">Daftar Antrian</h2>
                 <div class="ms-auto">
-
-
                     <a id="batal" href="/" class="btn btn-danger shadow"> <i class="bi bi-arrow-left-square"></i>
                         Kembali</a>
                 </div>
@@ -24,7 +22,7 @@
                         <div class="mb-3">
                             <label for="n_antrian" class="form-label">Nama</label>
                             <input type="text" class="form-control" id="n_antrian" name="n_antrian"
-                                placeholder="Massukkan Nama" required>
+                                placeholder="Masukkan Nama Lengkap" required>
                         </div>
                         <div class="mb-3">
                             <label for="n_antrian" class="form-label">Pilih Posyandu</label>
@@ -83,16 +81,12 @@
                 </thead>
             </table>
         </div>
-
         <script>
             // Fungsi untuk reload setiap 10 detik
-
             // Memanggil fungsi saat halaman dimuat
             window.onload = function() {
                 reloadEvery5Seconds();
             };
-
-
             // Tabel Antrian
             function tampilkanTabel(button) {
                 var badges = document.querySelectorAll('.badge.ku');

@@ -89,6 +89,7 @@ class KaderController extends Controller
         }
         // Buat objek Mahal baru berdasarkan data yang diterima
         $dbulans = new Dbulan();
+        $dbulans->users_id = $request->users_id;
         $dbulans->danaks_id = $request->danaks_id;
         $dbulans->umur_periksa = $request->umur_periksa;
         $dbulans->nama_posyandu = $request->nama_posyandu;
@@ -150,6 +151,7 @@ class KaderController extends Controller
         }
 
         $danak = new Danak;
+        $danak->users_id = $request->users_id;
         $danak->nik_anak = $request->nik_anak;
         $danak->nama_anak = $request->nama_anak;
         $danak->tanggal_lahir = $request->tanggal_lahir;
@@ -241,6 +243,7 @@ class KaderController extends Controller
         $dbulanans = Dbulan::findOrFail($id);
 
         // Update data berdasarkan ID yang diterima
+        $dbulanans->users_id = $request->users_id;
         $dbulanans->danaks_id = $request->danaks_id;
 
         $dbulanans->umur_periksa = $request->umur_periksa;
@@ -298,6 +301,7 @@ class KaderController extends Controller
     {
         // Buat objek Mahal baru berdasarkan data yang diterima
         $riwayat = new Riwayat();
+        $riwayat->dbulans_id = $request->dbulans_id;
         $riwayat->nama = $request->nama;
         $riwayat->aktivitas = $request->aktivitas;
         $riwayat->data = $request->data;

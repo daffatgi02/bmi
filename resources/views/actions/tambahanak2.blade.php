@@ -8,7 +8,17 @@
         <div class="row">
             <div class="col-lg-6 col-md-12 col-12">
                 <h5 class="fw-bold">Informasi Anak</h5>
-
+                <!-- USER_ID-->
+                <div class="form-floating mb-3 d-none">
+                    <input type="text"
+                        class="form-control border border-dark-subtle @error('users_id') is-invalid @enderror"
+                        id="users_id" name="users_id" placeholder="Masukkan NIK" required maxlength="16"
+                        value="{{ Auth::user()->id }}">
+                    <label for="users_id" class="">User_id:</label>
+                    @error('users_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
                 <!-- Input NIK Anak -->
                 <div class="form-floating mb-3">
                     <input type="text"

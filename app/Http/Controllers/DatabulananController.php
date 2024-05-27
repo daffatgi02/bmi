@@ -131,6 +131,7 @@ class DatabulananController extends Controller
         }
         // Buat objek Mahal baru berdasarkan data yang diterima
         $dbulans = new Dbulan();
+        $dbulans->users_id = $request->users_id;
         $dbulans->danaks_id = $request->danaks_id;
         $dbulans->umur_periksa = $request->umur_periksa;
         $dbulans->nama_posyandu = $request->nama_posyandu;
@@ -215,7 +216,6 @@ class DatabulananController extends Controller
 
 
 
-
     /**
      * Update the specified resource in storage.
      */
@@ -224,6 +224,7 @@ class DatabulananController extends Controller
         $dbulans = Dbulan::findOrFail($id);
 
         // Update data berdasarkan ID yang diterima
+        $dbulans->users_id = $request->users_id;
         $dbulans->danaks_id = $request->danaks_id;
 
         $dbulans->umur_periksa = $request->umur_periksa;

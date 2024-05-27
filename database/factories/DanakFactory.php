@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Dposyandu;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,11 @@ class DanakFactory extends Factory
      */
     public function definition(): array
     {
+        $dposyandu = Dposyandu::inRandomOrder()->first();
+        $users = User::where('id', '!=', 3)->inRandomOrder()->first();
         return [
-            'dposyandu_id' => Dposyandu::inRandomOrder()->first()->id,
+            'users_id' => $users->id,
+            'dposyandu_id' => $dposyandu->id,
             'nik_anak' => $this->generateNIK(), // Menggunakan method generateNIK yang sudah ada di factory
             'nama_anak' => $this->faker->name(),
             'tanggal_lahir' => $this->faker->dateTimeBetween('2018-01-01', '2022-12-31')->format('Y-m-d'),
