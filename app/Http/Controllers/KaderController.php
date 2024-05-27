@@ -257,6 +257,7 @@ class KaderController extends Controller
         $dbulanans->created_at = $request->created_at;
         $dbulanans->updated_at = $request->updated_at;
         // Simpan perubahan data ke dalam database
+
         $dbulanans->save();
     }
 
@@ -310,7 +311,5 @@ class KaderController extends Controller
         $riwayat->save();
         Alert::success('Berhasil Memperbarui', 'Data Anak Berhasil Diperbarui.');
 
-        // Redirect to the index route with the filter parameters
-        return redirect()->back();
     }
 }
