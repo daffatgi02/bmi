@@ -21,6 +21,16 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-floating mb-3 d-none">
+                                            <input type="text"
+                                                class="form-control border border-dark-subtle @error('users_id') is-invalid @enderror"
+                                                id="users_id" name="users_id" placeholder="Masukkan NIK" required maxlength="16"
+                                                value="{{ Auth::user()->id }}">
+                                            <label for="users_id" class="">User_id:</label>
+                                            @error('users_id')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-floating mb-3 d-none">
                                             <input type="text" class="form-control " id="umur_periksa"
                                                 name="umur_periksa" placeholder="Masukkan Umur"
                                                 value="{{ $dbulanans->umur_periksa }}" required readonly>
@@ -124,6 +134,8 @@
                                 id="riwayatForm" class="d-none">
                                 @csrf
                                 @method('PUT') <!-- Use the PUT method for editing -->
+                                <input type="text" class="form-control " id="dbulans_id" name="dbulans_id"
+                                    placeholder="dbulans_id" value="{{ $dbulanans->id }}" required readonly>
                                 <input type="text" class="form-control " id="nama" name="nama"
                                     placeholder="Nama" value="{{ Auth::user()->name }}" required readonly>
                                 <input type="text" class="form-control " id="aktivitas" name="aktivitas"

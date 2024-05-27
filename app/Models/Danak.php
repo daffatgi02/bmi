@@ -12,6 +12,10 @@ class Danak extends Model
     {
         return $this->belongsTo(Dposyandu::class, 'dposyandu_id');
     }
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }
     public function dbulans()
     {
         return $this->hasMany(Dbulan::class);

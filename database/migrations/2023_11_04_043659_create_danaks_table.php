@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('danaks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('dposyandu_id')->constrained();
+            $table->foreignId('users_id')->constrained();
             $table->string("nik_anak");
             $table->string("nama_anak");
             $table->date("tanggal_lahir");

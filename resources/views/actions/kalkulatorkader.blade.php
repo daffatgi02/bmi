@@ -13,6 +13,16 @@
             </div>
             <div class="row">
                 <div class="col-12">
+                    <div class="form-floating mb-3 d-none">
+                        <input type="text"
+                            class="form-control border border-dark-subtle @error('users_id') is-invalid @enderror"
+                            id="users_id" name="users_id" placeholder="Masukkan NIK" required maxlength="16"
+                            value="{{ Auth::user()->id }}">
+                        <label for="users_id" class="">User_id:</label>
+                        @error('users_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <select class="form-select mb-2 border border-dark-subtle" id="danaks_id" name="danaks_id" required
                         style="cursor: pointer">
                         <option class="fw-bold fs-5 mb-3 text-center bg-dark-subtle rounded-2" value="null">
@@ -200,7 +210,7 @@
                     const tinggi = data.Tinggi || 0;
                     const panjang = data.Panjang || 0;
 
-                    // Konversi nilai berat 
+                    // Konversi nilai berat
                     const berat = (rawBerat / 1000).toFixed(2);
 
                     if (cUkur === 'Berdiri') {

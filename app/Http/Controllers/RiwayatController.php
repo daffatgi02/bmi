@@ -31,6 +31,7 @@ class RiwayatController extends Controller
     {
         // Buat objek Mahal baru berdasarkan data yang diterima
         $riwayat = new Riwayat();
+        $riwayat->dbulans_id = $request->dbulans_id;
         $riwayat->nama = $request->nama;
         $riwayat->aktivitas = $request->aktivitas;
         $riwayat->data = $request->data;

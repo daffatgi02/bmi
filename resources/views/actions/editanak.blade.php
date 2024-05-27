@@ -19,6 +19,15 @@
                                     <div class="col-12 col-lg-6">
                                         <h5 class="fw-bold">Informasi Anak</h5>
 
+                                        <div class="form-floating mb-3 d-none">
+                                            <input type="text" class="form-control" id="users_id" name="users_id"
+                                                placeholder="Masukkan NIK" value="{{ Auth::user()->id }}"
+                                                required maxlength="16">
+                                            <label for="floatingInput" class="">User_id:</label>
+                                            @error('users_id')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="nik_anak" name="nik_anak"
                                                 placeholder="Masukkan NIK" value="{{ old('nik_anak', $danaks->nik_anak) }}"

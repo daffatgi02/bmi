@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Riwayat extends Model
 {
     use HasFactory;
+    public function dbulans()
+    {
+        return $this->belongsTo(Dbulan::class, 'dbulans_id');
+    }
 }
