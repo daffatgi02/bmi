@@ -24,7 +24,6 @@ class IbubalitaController extends Controller
 
     public function getData(Request $request)
     {
-
         $dbulanans = Dbulan::with('danaks');
 
         if ($request->ajax()) {

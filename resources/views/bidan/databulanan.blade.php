@@ -90,13 +90,13 @@
                             </thead>
                         </table>
                     </div>
-                    <div class="d-flex flex-row justify-content-center justify-content-md-end ">
-                        <a href="{{ route('destroy2') }}" class="btn btn-secondary mt-2" id="update-data">
+                    {{-- <div class="d-flex flex-row justify-content-center justify-content-md-end">
+                        <a href="{{ route('destroy2') }}" class="btn btn-secondary mt-2 btn-chache"
+                            data-href="{{ route('destroy2') }}" id="update-data">
                             <i class="bi bi-stars"></i>
                             Bersihkan Cache
                         </a>
-                    </div>
-
+                    </div> --}}
                 </div>
 
 
@@ -115,7 +115,6 @@
                             }
                         });
                     });
-
                 </script>
             </div>
     </section>
@@ -139,8 +138,7 @@
                 ajax: "gettabelbulanan",
                 pagingType: "simple_numbers",
                 responsive: true,
-                columns: [
-                    {
+                columns: [{
                         data: "danaks.nama_anak",
                         name: "danaks.nama_anak",
                         className: 'align-middle',

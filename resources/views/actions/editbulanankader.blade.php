@@ -14,7 +14,7 @@
                             <form action="{{ route('kaders.update', $dbulanans->id) }}" method="POST"
                                 enctype="multipart/form-kaders" id="editForm">
                                 @csrf
-                                @method('PUT') <!-- Use the PUT method for editing -->
+                                @method('PUT')
                                 <h3 class="text-center">{{ $dbulanans->danaks->nama_anak }}</h3>
                                 <h6 class="mb-4 text-center">{{ $dbulanans->created_at }}</h6>
                                 <div class="row">
@@ -137,6 +137,20 @@
                                     <div class="col-md-4 col-3 d-grid">
                                         <button class="btn btn-success shadow">Edit</button>
                                     </div>
+                                    <!-- Your form fields here -->
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" id="id_posyandu" name="id_posyandu"
+                                        value="{{ $dbulanans->danaks->dposyandu_id }}">
+                                    <input type="hidden" id="nama_posyandu" name="nama_posyandu"
+                                        value="{{ $dbulanans->nama_posyandu }}">
+                                </div>
+                            </form>
+                            <form action="{{ route('kaders.index') }}" method="get" id="filterForm">
+                                <div class="d-flex flex-row mt-5 pt-5 d-none">
+                                    <input class="form-control " type="text" placeholder="id_posyandu"
+                                        name="id_posyandu" id="id_posyandu" aria-label=" id_posyandu">
+                                    <input class="form-control " type="text" placeholder="nama_posyandu"
+                                        name="nama_posyandu" id="nama_posyandu" aria-label="nama_posyandu">
                                 </div>
                             </form>
                             <form action="{{ route('riwayatpostkader') }}" method="POST"
@@ -167,14 +181,45 @@
                     // Prevent the default form submission
                     event.preventDefault();
 
+                    // Serialize the form data
+                    var editFormData = $(this).serialize();
+
                     // Perform the form submission using AJAX
                     $.ajax({
                         url: $(this).attr("action"),
                         method: $(this).attr("method"),
-                        data: $(this).serialize(),
+                        data: editFormData,
                         success: function(data) {
-                            // If the first form submission is successful, submit the second form
-                            $("#riwayatForm").submit();
+                            // If the first form submission is successful, serialize and submit the second form
+                            var riwayatFormData = $("#riwayatForm").serialize();
+
+                            $.ajax({
+                                url: $("#riwayatForm").attr("action"),
+                                method: $("#riwayatForm").attr("method"),
+                                data: riwayatFormData,
+                                success: function(data) {
+                                    // If the second form submission is successful, serialize and submit the third form
+                                    var filterFormData = $("#filterForm").serialize();
+
+                                    var token = $('input[name="_token"]').val();
+                                    var idPosyandu = $('#id_posyandu').val();
+                                    var namaPosyandu = $('#nama_posyandu').val();
+
+                                    // Construct the URL with the necessary parameters
+                                    var filterFormUrl = $("#filterForm").attr(
+                                            "action") + "?_token=" + token +
+                                        "&id_posyandu=" + idPosyandu +
+                                        "&nama_posyandu=" + namaPosyandu;
+
+                                    // Perform the GET request
+                                    window.location.href = filterFormUrl;
+                                },
+                                error: function(error) {
+                                    console.error("Error submitting riwayatForm: ",
+                                        error);
+                                    // Handle errors if needed
+                                }
+                            });
                         },
                         error: function(error) {
                             console.error("Error submitting editForm: ", error);
@@ -183,6 +228,8 @@
                     });
                 });
             });
+
+
             document.addEventListener("DOMContentLoaded", function() {
                 // Mendapatkan referensi ke elemen input
                 let bb_anakInput = document.getElementById('bb_anak');

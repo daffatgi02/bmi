@@ -53,10 +53,10 @@
 
             </div>
 
-            <div class="d-flex flex-row mt-5 pt-5">
-                <input class="form-control d-none" type="text" placeholder="id_posyandu" name="id_posyandu"
-                    id="id_posyandu" aria-label="id_posyandu">
-                <input class="form-control d-none" type="text" placeholder="nama_posyandu" name="nama_posyandu"
+            <div class="d-flex flex-row mt-5 pt-5 d-none">
+                <input class="form-control " type="text" placeholder="id_posyandu" name="id_posyandu"
+                    id="id_posyandu" aria-label=" id_posyandu">
+                <input class="form-control " type="text" placeholder="nama_posyandu" name="nama_posyandu"
                     id="nama_posyandu" aria-label="nama_posyandu">
             </div>
         </form>

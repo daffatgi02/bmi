@@ -155,7 +155,7 @@
                 pagingType: 'simple',
                 responsive: true,
                 order: [
-                    [3, "asc"]
+                    [2, "desc"]
                 ],
                 lengthMenu: [
                     [25, 50, 100, -1],

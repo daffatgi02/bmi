@@ -13,6 +13,6 @@ class DbulanSeeder extends Seeder
      */
     public function run(): void
     {
-        Dbulan::factory()->count(3000)->create();
+        Dbulan::factory()->count(1000)->create();
     }
 }

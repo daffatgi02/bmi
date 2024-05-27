@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
           DposyanduSeeder::class,
           DanakSeeder::class,
           DantrianSeeder::class,
-          DbulanSeeder::class,
+        //   DbulanSeeder::class,
         ]);
     }
 }
