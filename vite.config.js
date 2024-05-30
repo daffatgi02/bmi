@@ -7,6 +7,8 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 "resources/css/nav.css",
+                "resources/css/bottombar.css",
+                "resources/css/auth.css",
                 'resources/js/app.js',
                 'resources/css/app.css',
                 "resources/js/auth.js",

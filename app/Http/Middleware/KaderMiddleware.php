@@ -16,10 +16,19 @@ class KaderMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->level === 'kader') {
-            return $next($request);
+        if (Auth::check()) {
+            // Jika pengguna aktif dan levelnya kader, izinkan akses.
+            if (Auth::user()->level === 'kader' && Auth::user()->status === 'Aktif') {
+                return $next($request);
+            }
+
+            // Jika pengguna belum aktif, arahkan ke halaman home.
+            if (Auth::user()->status === 'Belum Aktif') {
+                return redirect()->to('/home');
+            }
         }
 
+        // Untuk semua kasus lainnya (misalnya, pengguna tidak aktif atau bukan kader), arahkan ke halaman bidan dengan pesan kesalahan.
         return redirect()->route('bidans.index')->with('error', 'Access denied. You need admin privileges.');
     }
 }

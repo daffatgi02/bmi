@@ -30,6 +30,21 @@
         </div>
     </div>
     <div class="container mt-3">
+        <div class="d-flex justify-content-end mt-3 ms-3">
+            <a id="batal" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+           document.getElementById('logout-form').submit();"
+                class="btn btn-keluar">
+                <div class="d-flex flex-row align-items-center">
+                    <i class="bi bi-box-arrow-left me-0 me-md-2"></i>
+                    <span class="d-none d-md-block">Keluar</span>
+                </div>
+            </a>
+        </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+        
         <form action="{{ route('kaders.index') }}" method="get" id="filterForm">
             @csrf
             <div class="row">
@@ -54,8 +69,8 @@
             </div>
 
             <div class="d-flex flex-row mt-5 pt-5 d-none">
-                <input class="form-control " type="text" placeholder="id_posyandu" name="id_posyandu"
-                    id="id_posyandu" aria-label=" id_posyandu">
+                <input class="form-control " type="text" placeholder="id_posyandu" name="id_posyandu" id="id_posyandu"
+                    aria-label=" id_posyandu">
                 <input class="form-control " type="text" placeholder="nama_posyandu" name="nama_posyandu"
                     id="nama_posyandu" aria-label="nama_posyandu">
             </div>

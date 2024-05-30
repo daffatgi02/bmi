@@ -1,163 +1,135 @@
-@extends('layouts.app')
+@extends('layouts.appauth')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card mt-3 mb-3">
-                    <div class="card-header" id="calc-stunting">
-                        <h3>Registrasi</h3>
-                    </div>
-
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
-                            @csrf
-
-                            <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end fw-bold">Nama</label>
-
-                                <div class="col-md-6">
-                                    <input id="name" type="text"
-                                        class="form-control border border-secondary shadow  @error('name') is-invalid @enderror"
-                                        name="name" value="{{ old('name') }}" required autocomplete="name" autofocus >
-
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="nik" class="col-md-4 col-form-label text-md-end fw-bold">NIK</label>
-
-                                <div class="col-md-6">
-                                    <input id="nik" type="number"
-                                        class="form-control border border-secondary shadow  @error('nik') is-invalid @enderror"
-                                        name="nik" value="{{ old('nik') }}" required autocomplete="nik" autofocus>
-
-                                    @error('nik')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="email" class="col-md-4 col-form-label text-md-end fw-bold">Email
-                                    Address</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email"
-                                        class="form-control border border-secondary shadow @error('email') is-invalid @enderror"
-                                        name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="password" class="col-md-4 col-form-label text-md-end fw-bold">Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="myPassword" type="password"
-                                        class="form-control border border-secondary shadow @error('password') is-invalid @enderror"
-                                        name="password" required autocomplete="new-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-end fw-bold">Konfirmasi
-                                    Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="myPassword2" type="password"
-                                        class="form-control border-secondary shadow" name="password_confirmation" required
-                                        autocomplete="new-password">
-                                </div>
-                            </div>
-
-                            <div class="row mb-3 d-none">
-                                <label for="level"
-                                    class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Level') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="level" type="text" class="form-control" name="level" value="kader">
-                                </div>
-                            </div>
-                            <div class="row mb-3 d-none">
-                                <label for="status"
-                                    class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Status') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="status" type="text" class="form-control" name="status" value="Belum Aktif">
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input border border-secondary shadow"
-                                            type="checkbox" name="remember" id="remember"
-                                            {{ old('remember') ? 'checked' : '' }} onclick="myFunction()">
-
-                                        <label class="form-check-label" for="remember">
-                                            Tampilkan Password
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input border border-secondary shadow" type="checkbox"
-                                            name="cekLevel" id="cekLevel">
-                                        <label class="form-check-label" for="cekLevel">
-                                            Registrasi Sebagai bidan
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-0 d-flex justify-content-center">
-                                <div class="col-md-4 d-grid col">
-                                    <button type="submit" class="btn btn-logreg fw-bold">
-                                        Registrasi
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+    <div class="content">
+        <div class="left-side">
+            <div class="login-box">
+                <div class="d-flex flex-row mb-3">
+                    <a href="/login" class="text-white">
+                        <i class="bi bi-chevron-left me-3 fs-4"></i>
+                    </a>
+                    <span class="h2">Registrasi</span>
                 </div>
-                <a href="/login" class="link-dark link-offset-2 link-opacity-75-hover">
-                    <i class="bi bi-box-arrow-in-up me-2 fw-bold"></i></i>Sudah Punya akun
-                </a>
+                <form method="POST" action="{{ route('register') }}">
+
+                    @csrf
+                    <label for="name" class="form-label">Nama</label>
+                    <div class=" mb-3">
+                        <input id="name" type="text"
+                            class="form-control border border-secondary shadow  @error('name') is-invalid @enderror"
+                            name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
+                            placeholder="Masukkan Nama">
+
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <label for="nik" class="form-label">NIK</label>
+                    <div class=" mb-3">
+                        <input id="nik" type="text"
+                            class="form-control border border-secondary shadow  @error('nik') is-invalid @enderror"
+                            name="nik" value="{{ old('nik') }}" required autocomplete="nik" autofocus maxlength="16"
+                            placeholder="Masukkuan NIK">
+
+                        @error('nik')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-white border-0" id="basic-addon2">
+                            <i class="bi bi-envelope text-secondary"></i>
+                        </span>
+                        <input type="email" id="email" name="email"
+                            class="form-control border-0 py-2 px-0 @error('email') is-invalid @enderror"
+                            placeholder="Masukkan Email" value="{{ old('email') }}" aria-label="Masukkan Email"
+                            aria-describedby="basic-addon2">
+                        @error('email')
+                            <span class="invalid-feedback text-danger"role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-white border-0" id="basic-addon2">
+                            <i class="bi bi-lock text-secondary"></i>
+                        </span>
+                        <input type="password" id="password" name="password"
+                            class="form-control border-0 py-2 px-0 @error('password') is-invalid @enderror"
+                            placeholder="Masukkan Password" aria-label="Masukkan Password" aria-describedby="basic-addon2">
+                        <span class="input-group-text bg-white border-0" id="basic-addon2">
+                            <i class="bi bi-eye-slash text-secondary" id="togglePassword" style="cursor: pointer"></i>
+                        </span>
+                        @error('password')
+                            <span class="invalid-feedback text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <label for="password-confirm" class="form-label">Konfirmasi Password</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-white border-0" id="basic-addon2">
+                            <i class="bi bi-lock text-secondary"></i>
+                        </span>
+                        <input id="password-confirm" type="password" class="form-control border-0 py-2 px-0"
+                            name="password_confirmation" required autocomplete="new-password"
+                            aria-describedby="basic-addon2" placeholder="Konfirmasi Password">
+                        <span class="input-group-text bg-white border-0" id="basic-addon2">
+                            <i class="bi bi-eye-slash text-secondary" id="togglePassword2" style="cursor: pointer"></i>
+                        </span>
+                    </div>
+
+
+                    {{-- BACKEND DATA BASE --}}
+                    <div class="row mb-3 d-none">
+                        <label for="level"
+                            class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Level') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="level" type="text" class="form-control" name="level" value="kader">
+                        </div>
+                    </div>
+                    <div class="row mb-3 d-none">
+                        <label for="status"
+                            class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Status') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="status" type="text" class="form-control" name="status" value="Belum Aktif">
+                        </div>
+                    </div>
+
+                    {{-- Registrasi Sebagai Bidan --}}
+                    <div class="form-check">
+                        <input class="form-check-input border border-secondary shadow" type="checkbox"
+                            name="cekLevel" id="cekLevel">
+                        <label class="form-check-label" for="cekLevel">
+                            Registrasi Sebagai bidan
+                        </label>
+                    </div>
+
+                    {{-- Button Register --}}
+                    <button type="submit" class="btn-login mt-3">
+                        <i class="bi bi-plus-circle"></i> Registrasi
+                    </button>
+                </form>
+                <p class="register-link">Sudah punya akun? <a href="/home">Masuk</a>.</p>
+            </div>
+        </div>
+        <div class="right-side"
+            style="background-image: url('{{ Vite::asset('resources/images/bg-rightside.png') }}'); background-size: cover; background-position: center;">
+            <div class="logo-container">
+                <img src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}" alt="Logo 1" class="logo">
+                <img src="{{ Vite::asset('resources/images/Logo_Web.png') }}" alt="Logo 2" class="logo">
             </div>
         </div>
     </div>
-    <script>
-
-        function myFunction() {
-            var x = document.getElementById("myPassword");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-            var z = document.getElementById("myPassword2");
-            if (z.type === "password") {
-                z.type = "text";
-            } else {
-                z.type = "password";
-            }
-        }
-    </script>
 @endsection

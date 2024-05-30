@@ -1,24 +1,30 @@
 @extends('layouts.appbalita')
 
 @section('content')
-    <div class="container mt-2 mb-5 w-md-75 w-100">
-        <div class="mb-4">
-            <div class="d-flex mb-4">
-                <i class="bi bi-book fs-4 me-2"></i>
-                <h2 class="fw-bold">Daftar Antrian</h2>
-                <div class="ms-auto">
-                    <a id="batal" href="/" class="btn btn-danger shadow"> <i class="bi bi-arrow-left-square"></i>
-                        Kembali</a>
-                </div>
+    <div class="container mt-4 mb-5 w-md-75 w-100">
+        <div class="d-flex mb-4">
+            <div class="d-flex">
+                <i class="bi bi-list-ol fs-4 me-2"></i>
+                <span class="fw-bold h2">Lihat Urutan Antrian</span>
             </div>
-
-            <form action="{{ route('antrians.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="card">
-                    <div class="card-header" id="calc-stunting">
-                        <span class="fs-5 fw-bold">Isi Data</span class="fs-5">
+            <div class="ms-auto">
+                <a id="batal" href="/" class="btn btn-keluar">
+                    <div class="d-flex flex-row">
+                        <i class="bi bi-box-arrow-left me-0 me-md-2"></i>
+                        <span class="d-none d-md-block">
+                            Kembali
+                        </span>
                     </div>
-                    <div class="card-body">
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-5 mb-4">
+                <form action="{{ route('antrians.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card p-4 rounded-4 shadow">
+                        <span class="h3 fw-bold mb-4">Daftar Antrian</span>
                         <div class="mb-3">
                             <label for="n_antrian" class="form-label">Nama</label>
                             <input type="text" class="form-control" id="n_antrian" name="n_antrian"
@@ -38,49 +44,52 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-                    <div class="card-footer">
                         {{-- Button Submit --}}
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-3 col-6 d-grid">
-                                <button class="btn btn-logreg fw-bold shadow">Daftar Antrian</button>
-                            </div>
+                        <div class="text-center">
+                            <button class="btn btn-logreg fw-bold shadow">
+                                <i class="bi bi-person-lines-fill"></i> Daftar Antrian
+                            </button>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
-        <div class="d-flex mt-5 mb-4">
-            <i class="bi bi-list-ol fs-4 me-2"></i>
-            <h2 class="fw-bold">Lihat Urutan Antrian</h2>
-        </div>
-        <div class="d-flex justify-content-end">
-            <a href="{{ route('antrians.index') }}" class="btn btn-logreg">
-                <i class="bi bi-arrow-clockwise me-1 "></i>
-                Muat Ulang
-            </a>
-        </div>
-        <div class="mt-4 px-1">
-            <div class="mt-4 mb-4">
-                <h5>Silahkan Pilih Posyandu: </h5>
-                @foreach ($dposyandu as $data)
-                    <button class="badge ku m-1" onclick="tampilkanTabel(this)">
-                        {{ $data->nama_posyandu }}
-                    </button>
-                @endforeach
+                </form>
             </div>
-            <table id="tabel_antrian" class="table table-bordered shadow" style="width:100%; display: none;">
-                <thead class="table-warning">
-                    <tr>
-                        <th>id</th>
-                        <th id="th">Urutan</th>
-                        <th id="th" class="w-50">Nama</th>
-                        <th id="th" class="w-30">Posyandu</th>
-                        {{-- <th id="th">Waktu Daftar</th> --}}
-                    </tr>
-                </thead>
-            </table>
+            <div class="col-md-7">
+                <div class="mt-4 px-1">
+                    <div class="mt-4 mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="h4 ">Silahkan Pilih Posyandu: </span>
+                            <div class="ms-auto">
+                                <a href="{{ route('antrians.index') }}" class="btn btn-logreg">
+                                    <div class="d-flex flex-row">
+                                        <i class="bi bi-arrow-clockwise me-0 me-md-2 "></i>
+                                        <span class="d-none d-md-block">
+                                            Muat Ulang
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        @foreach ($dposyandu as $data)
+                            <button class="badge ku m-1" onclick="tampilkanTabel(this)">
+                                {{ $data->nama_posyandu }}
+                            </button>
+                        @endforeach
+                    </div>
+                    <table id="tabel_antrian" class="table table-bordered shadow" style="width:100%; display: none;">
+                        <thead class="table-warning">
+                            <tr>
+                                <th>id</th>
+                                <th id="th">Urutan</th>
+                                <th id="th" class="w-50">Nama</th>
+                                <th id="th" class="w-30">Posyandu</th>
+                                {{-- <th id="th">Waktu Daftar</th> --}}
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
+
         <script>
             // Fungsi untuk reload setiap 10 detik
             // Memanggil fungsi saat halaman dimuat

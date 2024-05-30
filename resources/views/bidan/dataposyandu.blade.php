@@ -1,15 +1,35 @@
 @extends('layouts.appnav')
 
 @section('content')
-    @include('layouts.navbar')
+    <div class="d-none d-md-block">
+        @include('layouts.navbar')
+    </div>
     <section class="home-section mb-5">
         <div class="content">
             <div class="container mt-3 pt-3">
+                <div class="d-flex mb-4">
+                    <div class="d-flex">
+                        <span class="fw-bold h1">Data Posyandu</span>
+                    </div>
+                    <div class="ms-auto d-block d-md-none">
+                        <a id="batal" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+           document.getElementById('logout-form').submit();"
+                            class="btn btn-keluar">
+                            <div class="d-flex flex-row align-items-center">
+                                <i class="bi bi-box-arrow-left me-0 me-md-2"></i>
+                                <span class="d-none d-md-block">Keluar</span>
+                            </div>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
                 <div class="row ">
-                    <h1 class="fw-bold h mb-4">Data Posyandu</h1>
                     <div class="d-flex flex-row justify-content-end mb-3">
-                        <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0 " data-bs-toggle="modal" id="btn-tambah"
-                            data-bs-target="#exampleModal">
+                        <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0 " data-bs-toggle="modal"
+                            id="btn-tambah" data-bs-target="#exampleModal">
                             <i class="bi bi-plus-circle me-sm-2 me-0"></i><label class="d-sm-block d-none">Posyandu</label>
                         </button>
                     </div>
@@ -36,7 +56,7 @@
             </div>
         </div>
     </section>
-    <!-- Modal -->
+    <!-- Modal Posyandu-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -44,6 +64,10 @@
             </div>
         </div>
     </div>
+    <div class="d-block d-md-none">
+        @include('layouts.bottombar2')
+    </div>
+
 
     {{-- PESAN ERROR --}}
     @if (session('error'))

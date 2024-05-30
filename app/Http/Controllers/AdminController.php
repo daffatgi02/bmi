@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Riwayat;
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
@@ -18,6 +19,7 @@ class AdminController extends Controller
     public function indexvalidasi()
     {
         $title = 'Data Akun';
+        confirmDelete();
         $users = User::where('level', '!=', 'admin')->get();
         return view('admin.validasi', compact('title', 'users'));
     }
@@ -44,5 +46,22 @@ class AdminController extends Controller
         $title = 'Riwayat';
         $riwayat = Riwayat::all();
         return view('admin.riwayat', compact('title'));
+    }
+
+    public function destroy(string $id)
+    {
+        // Temukan data bulanan berdasarkan ID
+        $user = User::find($id);
+
+        // Periksa apakah data bulanan ditemukan
+        if ($user) {
+            // Hapus data dari database
+            $user->delete();
+            Alert::success('Berhasil Terhapus', 'Akun Berhasil Terhapus.');
+        } else {
+            Alert::success('Berhasil Terhapus', 'Akun Berhasil Terhapus.');
+        }
+
+        return redirect()->route('admins.validasi');
     }
 }

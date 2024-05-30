@@ -15,7 +15,7 @@
                             </div>
                         @endif
 
-                        Akun <b>{{ Auth::user()->name }}</b> sudah Terdaftar sebagai <b>{{ Auth::user()->level }}</b> dengan
+                        Akun <b>{{ Auth::user()->level }}</b> sudah Terdaftar sebagai <b>{{ Auth::user()->name }}</b> dengan
                         Status akun
                         @if (Auth::user()->status === 'Aktif')
                             <b class="text-success">{{ Auth::user()->status }}</b>!
@@ -23,12 +23,12 @@
                             <b class="text-danger">{{ Auth::user()->status }}</b>!
                         @endif
                         <br>
-                        <a class="btn btn-logreg fw-bold mt-5" href="{{ route('logout') }}"
+
+                        <a class="btn btn-keluar fw-bold mt-5" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">
-                            Keluar
+                            <i class="bi bi-box-arrow-in-left"></i> Keluar
                         </a>
-
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>

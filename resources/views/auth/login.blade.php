@@ -1,99 +1,62 @@
-@extends('layouts.app')
+@extends('layouts.appauth')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 mt-md-4 mt-5 pt-md-0 pt-5">
-                <div class="card shadow mb-3">
-                    <div class="card-header" id="calc-stunting">
-                        <h2>Login</h2>
-                    </div>
-                    @guest
-                        <div class="card-body">
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-6 d-md-block d-none mt-3">
-                                        <img class="img-fluid" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}"
-                                            alt="logo"style="width: auto;">
-                                    </div>
-                                    <div class="col-md-12 col-lg-6 col-12">
-                                        <div class="row mb-3">
-                                            <label for="email" class="col-form-label fw-bold">Email</label>
-                                            <div class="col-md-12 ">
-                                                <input id="email" type="email"
-                                                    class="form-control shadow @error('email') is-invalid @enderror border border-dark-subtle"
-                                                    name="email" value="{{ old('email') }}" required autocomplete="email"
-                                                    autofocus>
-                                                @error('email')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>Maaf, Perikasa Kembali Email dan Password</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="password" class=" col-form-label fw-bold">Password</label>
-
-                                            <div class="col-md-12">
-                                                <input id="myPassword" type="password"
-                                                    class="form-control shadow @error('password') is-invalid @enderror border border-dark-subtle"
-                                                    name="password" required autocomplete="current-password">
-                                                @error('password')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <div class="col-md-12">
-                                                <div class="form-check">
-                                                    <input class="form-check-input border border-secondary shadow"
-                                                        type="checkbox" name="remember" id="remember"
-                                                        {{ old('remember') ? 'checked' : '' }} onclick="myFunction()">
-
-                                                    <label class="form-check-label" for="remember">
-                                                        Tampilkan Password
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-0 d-flex justify-content-center">
-                                            <div class="col-md-8 d-grid col">
-                                                <button type="submit" class="btn btn-logreg fw-bold shadow">
-                                                    Masuk
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    @else
-                        <div class="mt-5 mb-5 ms-3">
-                            <h4>
-                                Anda Sudah Login, Silahkan
-                                <a href="{{ route('bidans.index') }}" class="btn btn-primary ms-2 mt-2"> Masuk </a>
-                            </h4>
-                        </div>
-                    @endguest
+    <div class="content">
+        <div class="left-side">
+            <div class="login-box">
+                <div class="d-flex flex-row mb-3">
+                    <a href="/" class="text-white">
+                        <i class="bi bi-chevron-left me-3 fs-4"></i>
+                    </a>
+                    <span class="h2">Login</span>
                 </div>
-                {{-- <a href="{{ route('antrians.index') }}" class="link-secondary link-offset-2 link-opacity-75-hover">
-                    <i class="bi bi-hourglass-split me-2"></i>Daftar Antrian
-                </a> --}}
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-white border-0" id="basic-addon2">
+                            <i class="bi bi-envelope text-secondary"></i>
+                        </span>
+                        <input type="email" id="email" name="email"
+                        class="form-control border-0 py-2 px-0 @error('email') is-invalid @enderror" placeholder="Masukkan Email"
+                        aria-label="Masukkan Email" aria-describedby="basic-addon2" required>
+                        @error('email')
+                        <span class="invalid-feedback text-danger"role="alert">
+                            <strong>Maaf, Perikasa Kembali Email</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-white border-0" id="basic-addon2">
+                            <i class="bi bi-lock text-secondary"></i>
+                        </span>
+                        <input type="password" id="password" name="password"
+                            class="form-control border-0 py-2 px-0 @error('password') is-invalid @enderror"
+                            placeholder="Masukkan Password" aria-label="Masukkan Password" aria-describedby="basic-addon2" required>
+                        <span class="input-group-text bg-white border-0" id="basic-addon2">
+                            <i class="bi bi-eye-slash text-secondary" id="togglePassword" style="cursor: pointer"></i>
+                        </span>
+                        @error('password')
+                            <span class="invalid-feedback text-danger" role="alert">
+                                <strong>Maaf, Perikasa Kembali Password</strong>
+                            </span>
+                        @enderror
+
+                    </div>
+                    <button type="submit" class="btn-login mt-3">
+                        <i class="bi bi-box-arrow-in-right"></i> Masuk
+                    </button>
+                </form>
+                <p class="register-link">Belum punya akun? <a href="/register">Registrasi</a>.</p>
+            </div>
+        </div>
+        <div class="right-side"
+            style="background-image: url('{{ Vite::asset('resources/images/bg-rightside.png') }}'); background-size: cover; background-position: center;">
+            <div class="logo-container">
+                <img src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}" alt="Logo 1" class="logo">
+                <img src="{{ Vite::asset('resources/images/Logo_Web.png') }}" alt="Logo 2" class="logo">
             </div>
         </div>
     </div>
-    <script>
-        function myFunction() {
-            var x = document.getElementById("myPassword");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        }
-    </script>
 @endsection

@@ -32,43 +32,15 @@
     <script src="https://cdn.datatables.net/fixedheader/3.4.0/js/dataTables.fixedHeader.min.js"></script>
 
     <!-- Bootstrap JS (popper.js and bootstrap.js) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 'resources/js/auth.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/bottombar.css', 'resources/js/auth.js'])
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <h4 id="nav-title" class="shadow fw-bold">Connect Pediatrics</h4>
-                </a>
-
-                @guest
-                    {{-- @if (Route::has('login'))
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    @endif --}}
-
-                    @if (Route::has('register'))
-                        <a class="nav-link" href="{{ route('register') }}">Registrasi</a>
-                    @endif
-                @else
-                    <a class="btn btn-danger d-flex align-items-center" href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="bi bi-box-arrow-left me-0 me-sm-2 fs-5"></i>
-                        <span class="d-sm-block d-none">Keluar</span>
-                    </a>
-
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                @endguest
-            </div>
-        </nav>
-
         <main class="py-4">
             @yield('content')
         </main>

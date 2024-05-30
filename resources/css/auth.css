@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    --primary: #3BDD9B;
+    --secondary-color: #3E6B58;
+    --background-color: #F2FFFA;
+    --white-color: #ffffff;
+    --dark-color: #474747;
+    --grey: #8D8D8D;
+    --yellow: #FFDB68;
+    --text-placeholder: #474747;
+    --blue: #0D6EFD;
+    --soft-grey: #E9ECEF;
+}
+
+body {
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    height: 100vh;
+}
+
+.left-side {
+    width: 40%;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-side {
+    width: 60%;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-menu{
+    background-color: var(--white-color);
+    color: var(--secondary-color);
+}
+.btn-menu:hover{
+    background-color: var(--dark-color);
+    columns: var(--white-color);
+}
+
+.login-box {
+    width: 80%;
+    max-width: 400px;
+    color: var(--white-color);
+}
+
+.login-box h2 {
+    margin-bottom: 20px;
+}
+
+
+
+.btn-login {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--primary);
+    color: var(--dark-color);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.btn-login:hover {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+}
+
+.register-link {
+    margin-top: 15px;
+    color: var(--white-color);
+    text-align: center;
+}
+
+.register-link a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+.logo-container {
+    text-align: center;
+}
+
+.logo {
+    max-width: 25%;
+    margin: 0% 1%;
+}
+
+.logofoot {
+    max-width: 20%;
+    margin: 0% 1%;
+}
+
+
+
+
+
+@media (max-width: 800px) {
+    .right-side {
+        width: 0%;
+    }
+
+    .left-side {
+        width: 100%;
+    }
+}
