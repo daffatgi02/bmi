@@ -1,18 +1,38 @@
 @extends('layouts.appnav')
 
 @section('content')
-    @include('layouts.navbar')
+    <div class="d-none d-md-block">
+        @include('layouts.navbar')
+    </div>
     <section class="home-section mb-5">
         <div class="content">
             <div class="container mt-3 pt-3">
-                <h1 class="fw-bold h mb-4">Data Anak</h1>
+                <div class="d-flex mb-4">
+                    <div class="d-flex">
+                        <span class="fw-bold h1">Data anak</span>
+                    </div>
+                    <div class="ms-auto d-block d-md-none">
+                        <a id="batal" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+           document.getElementById('logout-form').submit();"
+                            class="btn btn-keluar">
+                            <div class="d-flex flex-row align-items-center">
+                                <i class="bi bi-box-arrow-left me-0 me-md-2"></i>
+                                <span class="d-none d-md-block">Keluar</span>
+                            </div>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
                 <div class="d-flex flex-row justify-content-end mb-3">
-                    <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0" data-bs-toggle="modal" id="btn-tambah"
-                        data-bs-target="#exampleModal2">
+                    <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0" data-bs-toggle="modal"
+                        id="btn-tambah" data-bs-target="#exampleModal2">
                         <i class="bi bi-list-task me-sm-2 me-0"></i><label class="d-sm-block d-none">Tambah Antrian</label>
                     </button>
-                    <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0 " data-bs-toggle="modal" id="btn-tambah"
-                        data-bs-target="#exampleModal">
+                    <button type="button" class="btn d-flex shadow me-sm-3 me-2 mb-3 mb-md-0 " data-bs-toggle="modal"
+                        id="btn-tambah" data-bs-target="#exampleModal">
                         <i class="bi bi-person-fill-add me-sm-2 me-0"></i><label class="d-sm-block d-none">Data Anak</label>
                     </button>
                 </div>
@@ -56,6 +76,11 @@
             </div>
         </div>
     </div>
+
+    <div class="d-block d-md-none">
+        @include('layouts.bottombar2')
+    </div>
+
 
 
 

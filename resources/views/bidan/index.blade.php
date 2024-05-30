@@ -9,13 +9,32 @@
             <label>Loading</label>
         </div>
     </div>
-    @include('layouts.navbar')
+    <div class="d-none d-md-block">
+        @include('layouts.navbar')
+    </div>
     <section class="home-section">
         <div class="content">
             <div class="container mt-3 pt-3">
+                <div class="d-flex mb-4">
+                    <div class="d-flex">
+                        <span class="fw-bold h1">Dashboard</span>
+                    </div>
+                    <div class="ms-auto d-block d-md-none">
+                        <a id="batal" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+           document.getElementById('logout-form').submit();"
+                            class="btn btn-keluar">
+                            <div class="d-flex flex-row align-items-center">
+                                <i class="bi bi-box-arrow-left me-0 me-md-2"></i>
+                                <span class="d-none d-md-block">Keluar</span>
+                            </div>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
                 <div class="row ">
-                    <h1 class="fw-bold h mb-4">Dashboard</h1>
-
                     <div class="row">
                         <div class="col-xxl-3 col-xl-6 col-lg-6 col-12 mb-3">
                             <div class="card shadow rounded-2" id="card-dash">
@@ -116,7 +135,8 @@
                                             <div class="d-flex flex-row fw-bold mt-2">
                                                 <span class="badge text me-1" style="background-color:darkblue"> -
                                                 </span>{{ $dbulans->where('st_anak', 'Kelebihan Berat Badan')->count() }}
-                                                <span class="badge text me-1 ms-3" style="background-color:rgb(2, 2, 35)"> -
+                                                <span class="badge text me-1 ms-3" style="background-color:rgb(2, 2, 35)">
+                                                    -
                                                 </span> {{ $dbulans->where('st_anak', 'Obesitas')->count() }}
                                             </div>
 
@@ -183,6 +203,9 @@
         </div>
         </div>
     </section>
+    <div class="d-block d-md-none">
+        @include('layouts.bottombar2')
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {

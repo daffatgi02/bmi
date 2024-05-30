@@ -2,6 +2,21 @@
 
 @section('content')
     <div class="container">
+        <div class="d-flex justify-content-end mt-3 ms-3">
+            <a id="batal" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+           document.getElementById('logout-form').submit();"
+                class="btn btn-keluar">
+                <div class="d-flex flex-row align-items-center">
+                    <i class="bi bi-box-arrow-left me-0 me-md-2"></i>
+                    <span class="d-none d-md-block">Keluar</span>
+                </div>
+            </a>
+        </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+
         <div class="d-flex flex row">
             <p class="fs-3 fw-bold ">
                 Posyandu {{ $nama_posyandu }}

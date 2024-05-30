@@ -1,0 +1,61 @@
+:root {
+    --primary: #3BDD9B;
+    --secondary-color: #3E6B58;
+    --background-color: #F2FFFA;
+    --white-color: #ffffff;
+    --dark-color: #474747;
+    --grey: #8D8D8D;
+    --yellow: #FFDB68;
+    --text-placeholder: #474747;
+    --blue: #0D6EFD;
+    --soft-grey: #E9ECEF;
+}
+
+/* Bottom bar styles */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--white-color);
+    border-top: 1px solid #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.bottom-bar a,
+.bottom-bar button {
+    color: var(--dark-color);
+    text-align: center;
+    flex-grow: 1;
+    text-decoration: none;
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-bar a:hover,
+.bottom-bar button:hover {
+    color: var(--primary);
+}
+
+.bottom-bar a i,
+.bottom-bar button i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.bottom-bar a span {
+    font-size: 12px;
+    display: none;
+}
+
+/* Add padding to the bottom of the content to prevent overlap */
+.content {
+    padding-bottom: 60px; /* Adjust according to the height of the bottom bar */
+}

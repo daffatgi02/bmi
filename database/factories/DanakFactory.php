@@ -19,9 +19,7 @@ class DanakFactory extends Factory
     public function definition(): array
     {
         $dposyandu = Dposyandu::inRandomOrder()->first();
-        $users = User::where('id', '!=', 3)->inRandomOrder()->first();
         return [
-            'users_id' => $users->id,
             'dposyandu_id' => $dposyandu->id,
             'nik_anak' => $this->generateNIK(), // Menggunakan method generateNIK yang sudah ada di factory
             'nama_anak' => $this->faker->name(),

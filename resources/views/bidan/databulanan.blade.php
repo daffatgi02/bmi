@@ -2,12 +2,32 @@
 
 
 @section('content')
-    @include('layouts.navbar')
+    <div class="d-none d-md-block">
+        @include('layouts.navbar')
+    </div>
     <section class="home-section mb-5">
         <div class="content">
             <div class="container mt-3 pt-3">
+                <div class="d-flex mb-4">
+                    <div class="d-flex">
+                        <span class="fw-bold h1">Data Bulanan</span>
+                    </div>
+                    <div class="ms-auto d-block d-md-none">
+                        <a id="batal" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+           document.getElementById('logout-form').submit();"
+                            class="btn btn-keluar">
+                            <div class="d-flex flex-row align-items-center">
+                                <i class="bi bi-box-arrow-left me-0 me-md-2"></i>
+                                <span class="d-none d-md-block">Keluar</span>
+                            </div>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
                 <div class="row justify-content-center">
-                    <h1 class="fw-bold h mb-4">Data Bulanan</h1>
 
                     {{-- BADEGE POSYANDU --}}
                     <div class="col-12 col-lg-6 mb-4">
@@ -118,6 +138,9 @@
                 </script>
             </div>
     </section>
+    <div class="d-block d-md-none">
+        @include('layouts.bottombar2')
+    </div>
 
     {{-- PESAN ERROR --}}
     @if (session('error'))

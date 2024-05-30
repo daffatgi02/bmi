@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('riwayats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dbulans_id')->constrained();
+            $table->foreignId('dbulans_id')->nullable()->constrained()->onDelete('set null');
             $table->string('nama');
             $table->string('aktivitas');
             $table->string('data');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
