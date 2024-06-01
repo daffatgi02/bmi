@@ -21,8 +21,7 @@
                     </div>
                     <div class="ms-auto d-block d-md-none">
                         <a id="batal" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-           document.getElementById('logout-form').submit();"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             class="btn btn-keluar">
                             <div class="d-flex flex-row align-items-center">
                                 <i class="bi bi-box-arrow-left me-0 me-md-2"></i>
@@ -40,10 +39,10 @@
                             <div class="card shadow rounded-2" id="card-dash">
                                 <h5 class="card-header fw-bold"> <i class='bx bx-user'></i> Total Anak</h5>
                                 <div class="card-body rounded-bottom-2" id="card-body-dash">
-                                    <h6 class="card-title">Pada Posyandu Kelurahan Japan</h6>
+                                    <h6 class="card-title dash-title">Pada Posyandu Kelurahan Japan</h6>
                                     <div class="d-flex flex-row">
-                                        <h1 class="me-2 fw-bold">{{ $danaks->count() }}</h1>
-                                        <p class="fw-bold">
+                                        <h1 class="me-2 fw-bold dash-h1">{{ $danaks->count() }}</h1>
+                                        <p class="dash-content fw-bold">
                                             Laki-laki: {{ $danaks->where('jk', 'L')->count() }} <br>
                                             Perempuan: {{ $danaks->where('jk', 'P')->count() }}
                                         </p>
@@ -65,12 +64,12 @@
                         </div>
                         <div class="col-xxl-3 col-xl-6 col-lg-6 col-12 mb-3">
                             <div class="card shadow rounded-2" id="card-dash">
-                                <h5 class="card-header fw-bold"><i class='bx bx-building-house'></i> Total Posyandu</h5>
+                                <h5 class="card-header fw-bold"><i class='bi bi-hospital'></i> Total Posyandu</h5>
                                 <div class="card-body rounded-bottom-2" id="card-body-dash">
-                                    <h6 class="card-title">Pada Posyandu Kelurahan Japan</h6>
+                                    <h6 class="card-title dash-title">Pada Posyandu Kelurahan Japan</h6>
                                     <div class="d-flex flex-row">
-                                        <h1 class="fw-bold me-2">{{ $dposyandus->count() }}</h1>
-                                        <p class="mt-2 fw-bold">
+                                        <h1 class="fw-bold me-2 dash-h1">{{ $dposyandus->count() }}</h1>
+                                        <p class="dash-content mt-2 fw-bold">
                                             Posyandu
                                         </p>
                                     </div>
@@ -91,12 +90,12 @@
                         </div>
                         <div class="col-xxl-3 col-xl-6 col-lg-6 col-12 mb-3">
                             <div class="card shadow rounded-2" id="card-dash">
-                                <h5 class="card-header fw-bold"><i class='bx bx-table'></i> Total Pendataan</h5>
+                                <h5 class="card-header fw-bold"><i class='bi bi-clipboard-data'></i> Total Pendataan</h5>
                                 <div class="card-body rounded-bottom-2" id="card-body-dash">
-                                    <h6 class="card-title">Pada Posyandu Kelurahan Japan</h6>
+                                    <h6 class="card-title dash-title">Pada Posyandu Kelurahan Japan</h6>
                                     <div class="d-flex flex-row">
                                         <div class="d-flex flex-column me-4">
-                                            <h1 class="me-2 fw-bold">{{ $dbulans->count() }}</h1>
+                                            <h1 class="me-2 fw-bold dash-h1">{{ $dbulans->count() }}</h1>
                                             <div class="d-xxl-block d-none">
                                                 <a href="{{ route('dbulanans.index') }}" class="btn btn-light fw-bold "
                                                     id="btn-detail-dashboard">
@@ -105,7 +104,7 @@
                                             </div>
                                         </div>
                                         <div class="d-flex flex-row d-xxl-block d-none">
-                                            <p class="fw-bold">
+                                            <p class="dash-content fw-bold">
                                                 <span class="badge text me-1" style="background-color:mediumseagreen"> -
                                                 </span> {{ $dbulans->where('st_anak', 'Normal')->count() }} <br>
                                                 <span class="badge text me-1" style="background-color:darkorange"> -
@@ -116,7 +115,7 @@
                                             </p>
                                         </div>
                                         <div class="d-flex flex-row ms-2 d-xxl-block d-none">
-                                            <p class="fw-bold">
+                                            <p class="dash-content fw-bold">
                                                 <span class="badge text me-1" style="background-color:darkblue"> - </span>
                                                 {{ $dbulans->where('st_anak', 'Kelebihan Berat Badan')->count() }} <br>
                                                 <span class="badge text me-1" style="background-color:rgb(2, 2, 35)"> -
@@ -155,10 +154,10 @@
                             <div class="card shadow rounded-2" id="card-dash">
                                 <h5 class="card-header fw-bold"><i class='bx bx-walk'></i>Total Antrian</h5>
                                 <div class="card-body rounded-bottom-2" id="card-body-dash">
-                                    <h6 class="card-title">Pada Posyandu Kelurahan Japan</h6>
+                                    <h6 class="card-title dash-title">Pada Posyandu Kelurahan Japan</h6>
                                     <div class="d-flex flex-row">
-                                        <h1 class="me-2 fw-bold">{{ $dantrians->count() }}</h1>
-                                        <p class="mt-2 fw-bold">
+                                        <h1 class="me-2 fw-bold dash-h1">{{ $dantrians->count() }}</h1>
+                                        <p class="dash-content mt-2 fw-bold">
                                             Antrian
                                         </p>
                                     </div>
@@ -179,28 +178,12 @@
                         </div>
                     </div>
 
-                    {{-- Total Anak --}}
-                    <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
-
-                    </div>
-
-                    {{-- Total Posyandu --}}
-                    <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
-
-                    </div>
-
-                    <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
-
-                    </div>
-                    <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
-
-                    </div>
+                    {{-- Chart --}}
                     <div class="col-12 mb-4 mt-4">
                         {!! $chart->container() !!}
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
     <div class="d-block d-md-none">

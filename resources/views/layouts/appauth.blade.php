@@ -37,7 +37,7 @@
 
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/auth.css', 'resources/js/auth.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/auth.css'])
 </head>
 
 <body>

@@ -103,14 +103,15 @@
                             class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Status') }}</label>
 
                         <div class="col-md-6">
-                            <input id="status" type="text" class="form-control" name="status" value="Belum Aktif">
+                            <input id="status" type="text" class="form-control" name="status"
+                                value="Belum Aktif">
                         </div>
                     </div>
 
                     {{-- Registrasi Sebagai Bidan --}}
                     <div class="form-check">
-                        <input class="form-check-input border border-secondary shadow" type="checkbox"
-                            name="cekLevel" id="cekLevel">
+                        <input class="form-check-input border border-secondary shadow" type="checkbox" name="cekLevel"
+                            id="cekLevel">
                         <label class="form-check-label" for="cekLevel">
                             Registrasi Sebagai bidan
                         </label>
@@ -132,4 +133,48 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Temukan elemen checkbox dan input teks
+            var checkbox = document.getElementById("cekLevel");
+            var levelInput = document.getElementById("level");
+
+            // Tambahkan event listener untuk mengubah nilai input teks
+            checkbox.addEventListener("change", function() {
+                if (checkbox.checked) {
+                    levelInput.value = "bidan";
+                } else {
+                    levelInput.value = "kader";
+                }
+            });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
+            const togglePassword2 = document.getElementById('togglePassword2');
+            const passwordConfirm = document.getElementById('password-confirm');
+
+            togglePassword.addEventListener('click', function() {
+                // Toggle the type attribute
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+
+                // Toggle the icon
+                this.classList.toggle('bi-eye');
+                this.classList.toggle('bi-eye-slash');
+            });
+
+            togglePassword2.addEventListener('click', function() {
+                // Toggle the type attribute
+                const type = passwordConfirm.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordConfirm.setAttribute('type', type);
+
+                // Toggle the icon
+                this.classList.toggle('bi-eye');
+                this.classList.toggle('bi-eye-slash');
+            });
+        });
+    </script>
 @endsection

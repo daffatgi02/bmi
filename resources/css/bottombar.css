@@ -1,16 +1,16 @@
 :root {
-    --primary: #3BDD9B;
+    --primary:#3BDD9B;
     --secondary-color: #3E6B58;
     --background-color: #F2FFFA;
-    --white-color: #ffffff;
-    --dark-color: #474747;
-    --grey: #8D8D8D;
-    --yellow: #FFDB68;
-    --text-placeholder: #474747;
-    --blue: #0D6EFD;
-    --soft-grey: #E9ECEF;
+    --white-color:#ffffff;
+    --dark-color:#474747;
+    --grey:#8D8D8D;
+    --yellow:#FFDB68;
+    --red:#F54E4E;
+    --text-placeholder:#474747;
+    --blue:#0D6EFD;
+    --soft-grey:#E9ECEF;
 }
-
 /* Bottom bar styles */
 .bottom-bar {
     position: fixed;
@@ -58,4 +58,9 @@
 /* Add padding to the bottom of the content to prevent overlap */
 .content {
     padding-bottom: 60px; /* Adjust according to the height of the bottom bar */
+}
+
+.bottom-bar a:hover,
+.bottom-bar a.active {
+    color: var(--secondary-color);
 }

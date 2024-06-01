@@ -25,7 +25,7 @@
                         <br>
 
                         <a class="btn btn-keluar fw-bold mt-5" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+                            onclick="event.preventDefault()
                            document.getElementById('logout-form').submit();">
                             <i class="bi bi-box-arrow-in-left"></i> Keluar
                         </a>

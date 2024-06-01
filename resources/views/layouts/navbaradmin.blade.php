@@ -36,7 +36,6 @@
             <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-
                 <i class='bx bx-log-out out' id="log_out"></i>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
