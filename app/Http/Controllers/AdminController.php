@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\GrafikdashboardChart;
+use App\Models\Danak;
+use App\Models\Dantrian;
+use App\Models\Dbulan;
+use App\Models\Dposyandu;
 use App\Models\Riwayat;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,11 +14,16 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function index(GrafikdashboardChart $chart)
     {
         $title = 'Admin';
-        $riwayat = Riwayat::all();
-        return view('admin.admin', compact('title'));
+        $users = User::where('level', '!=', 'admin')->get();
+        $dbulans = Dbulan::all();
+        $riwayats = Riwayat::all();
+        $dposyandus = Dposyandu::all();
+        $danaks = Danak::all();
+        $dantrians = Dantrian::all();
+        return view('admin.admin', compact('title', 'users', 'dbulans', 'riwayats', 'dposyandus', 'danaks', 'dantrians'),['chart' => $chart->build()] );
     }
 
     public function indexvalidasi()

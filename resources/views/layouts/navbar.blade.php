@@ -5,37 +5,37 @@
         <i class='bx bx-menu d-xxl-block d-none' id="btn" style='color:#ffffff'></i>
     </div>
     <ul class="nav-list">
-        <li>
-            <a href="{{ route('bidans.index') }}">
-                <i class="bi bi-house"></i>
+        <li class="{{ Route::is('bidans.index') ? 'active' : '' }}">
+            <a href="{{ route('bidans.index') }}" class="nav-link">
+                <i class="bi bi-house{{ Route::is('bidans.index') ? '-fill' : '' }}"></i>
                 <span class="links_name">Dashboard</span>
             </a>
             <span class="tooltip">Dashboard</span>
         </li>
-        <li>
-            <a href="{{ route('danaks.index') }}">
-                <i class="bi bi-person"></i>
+        <li class="{{ Route::is('danaks.index') ? 'active' : '' }}">
+            <a href="{{ route('danaks.index') }}" class="nav-link">
+                <i class="bi bi-person{{ Route::is('danaks.index') ? '-fill' : '' }}"></i>
                 <span class="links_name">Data Anak</span>
             </a>
             <span class="tooltip">Data Anak</span>
         </li>
-        <li>
-            <a href="{{ route('dposyandus.index') }}">
-                <i class="bi bi-building-add"></i>
+        <li class="{{ Route::is('dposyandus.index') ? 'active' : '' }}">
+            <a href="{{ route('dposyandus.index') }}" class="nav-link">
+                <i class="bi bi-hospital{{ Route::is('dposyandus.index') ? '-fill' : '' }}"></i>
                 <span class="links_name">Data Posyandu</span>
             </a>
             <span class="tooltip">Data Posyandu</span>
         </li>
-        <li>
-            <a href="{{ route('dbulanans.index') }}">
-                <i class="bi bi-clipboard-data"></i>
+        <li class="{{ Route::is('dbulanans.index') ? 'active' : '' }}">
+            <a href="{{ route('dbulanans.index') }}" class="nav-link">
+                <i class="bi bi-clipboard-data{{ Route::is('dbulanans.index') ? '-fill' : '' }}"></i>
                 <span class="links_name">Data Bulanan</span>
             </a>
             <span class="tooltip">Data Bulanan</span>
         </li>
-        <li>
-            <a href="{{ route('gperkembangans.index') }}">
-                <i class="bi bi-bar-chart-line"></i>
+        <li class="{{ Route::is('gperkembangans.index') ? 'active' : '' }}">
+            <a href="{{ route('gperkembangans.index') }}" class="nav-link">
+                <i class="bi bi-bar-chart-line{{ Route::is('gperkembangans.index') ? '-fill' : '' }}"></i>
                 <span class="links_name">Grafik Persebaran</span>
             </a>
             <span class="tooltip">Grafik Persebaran</span>
@@ -60,3 +60,4 @@
         </li>
     </ul>
 </div>
+

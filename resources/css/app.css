@@ -156,6 +156,16 @@ body {
 
 }
 
+.dash-h1{
+    color:var(--dark-color);
+}
+.dash-title{
+    color:var(--dark-color);
+}
+.dash-content{
+    color:var(--dark-color);
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0.4;
