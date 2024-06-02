@@ -2,9 +2,7 @@
 
 
 @section('content')
-    <div class="d-none d-md-block">
-        @include('layouts.navbar')
-    </div>
+    @include('layouts.navbar')
     <section class="home-section mb-5">
         <div class="content">
             <div class="container mt-3 pt-3">
@@ -222,16 +220,21 @@
                         className: ' align-middle text-center',
                         // width: "15%",
                         render: function(data) {
-                            // Konversi data tanggal dari format default (biasanya ISO 8601) ke "DD-MM-YYYY"
+                            // Array nama-nama bulan
+                            var months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                                "Juli", "Agustus", "September", "Oktober", "November",
+                                "Desember"
+                            ];
+
+                            // Konversi data tanggal dari format default (biasanya ISO 8601) ke "DD-MMMM-YYYY"
                             if (data) {
                                 var date = new Date(data);
                                 var day = date.getDate();
-                                var month = date.getMonth() +
-                                    1; // Perlu ditambahkan 1 karena Januari dimulai dari 0
+                                var month = date.getMonth(); // Mengambil bulan dari 0 sampai 11
                                 var year = date.getFullYear();
-                                // Format tanggal dalam "DD-MM-YYYY"
-                                return day.toString().padStart(2, '0') + '-' + month.toString()
-                                    .padStart(2, '0') + '-' + year;
+                                // Format tanggal dalam "DD-MMMM-YYYY"
+                                return day.toString().padStart(2, '0') + '-' + months[month] + '-' +
+                                    year;
                             } else {
                                 return '';
                             }

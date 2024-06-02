@@ -2,9 +2,7 @@
 
 
 @section('content')
-    <div class="d-none d-md-block">
-        @include('layouts.navbaradmin')
-    </div>
+    @include('layouts.navbaradmin')
     <section class="home-section mb-5">
         <div class="content">
             <div class="container mt-3 pt-3">
@@ -141,8 +139,10 @@
                                             Kader: {{ $users->where('level', 'kader')->count() }}
                                         </p>
                                         <div class="mt-2 fw-bold ms-2">
-                                            <span class="px-2 rounded-3 bg-success text-white fw-bold ">Aktif</span> {{ $users->where('status', 'Aktif')->count() }} <br>
-                                            <span class="px-2 rounded-3 bg-danger text-white fw-bold">Belum Aktif</span> {{ $users->where('status', 'Belum Aktif')->count() }} <br>
+                                            <span class="px-2 rounded-3 bg-success text-white fw-bold "><i class="bi bi-check"></i></span>
+                                            {{ $users->where('status', 'Aktif')->count() }} <br>
+                                            <span class="px-2 rounded-3 bg-danger text-white fw-bold"><i class="bi bi-x"></i></span>
+                                            {{ $users->where('status', 'Belum Aktif')->count() }} <br>
                                         </div>
 
                                     </div>
@@ -154,7 +154,7 @@
                             <div class="card-body rounded-bottom-2" id="card-body-dash">
                                 <h6 class="card-title dash-title">Pada Posyandu Kelurahan Japan</h6>
                                 <div class="d-flex flex-row">
-                                    <h1 class="me-2 fw-bold dash-h1">{{ $riwayats->count() }}x</h1>
+                                    <h1 class="me-2 fw-bold dash-h1">{{ $riwayats->count() }}<span class="fs-3">x</span></h1>
                                     <div class="d-flex flex-row">
                                         <p class="dash-content mt-2 fw-bold">
                                             Perubahan data

@@ -9,9 +9,7 @@
             <label>Loading</label>
         </div>
     </div>
-    <div class="d-none d-md-block">
-        @include('layouts.navbar')
-    </div>
+    @include('layouts.navbar')
     <section class="home-section">
         <div class="content">
             <div class="container mt-3 pt-3">

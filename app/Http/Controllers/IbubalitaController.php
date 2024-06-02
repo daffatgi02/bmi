@@ -21,7 +21,6 @@ class IbubalitaController extends Controller
         return view('ibubalita.ekms', compact('dbulans'));
     }
 
-
     public function getData(Request $request)
     {
         $dbulanans = Dbulan::with('danaks');

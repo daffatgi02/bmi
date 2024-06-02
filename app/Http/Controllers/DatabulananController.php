@@ -32,9 +32,6 @@ class DatabulananController extends Controller
 
     public function getData(Request $request)
     {
-        // Ambil bulan saat ini
-        // $currentMonth = now()->format('m');
-
         $dbulanans = Dbulan::with('danaks');
 
         if ($request->ajax()) {

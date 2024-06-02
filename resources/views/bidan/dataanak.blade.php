@@ -1,9 +1,7 @@
 @extends('layouts.appnav')
 
 @section('content')
-    <div class="d-none d-md-block">
-        @include('layouts.navbar')
-    </div>
+    @include('layouts.navbar')
     <section class="home-section mb-5">
         <div class="content">
             <div class="container mt-3 pt-3">
