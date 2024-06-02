@@ -52,7 +52,7 @@
     <script type="module">
         (function() {
             function hideNIK(nik) {
-                // ngambil 8 karakter pertama dari NIK
+                // Mengambil 8 karakter pertama dari NIK
                 var prefix = nik.substring(0, 8);
                 var hiddenPart = nik.substring(8).replace(/./g, '*');
                 return prefix + hiddenPart;
@@ -71,7 +71,6 @@
                             className: 'align-middle',
                             searchable: true,
                             orderable: true,
-
                         },
                         {
                             data: "danaks.nik_anak",
@@ -82,7 +81,6 @@
                             render: function(data, type, row, meta) {
                                 return hideNIK(data);
                             }
-
                         },
                         {
                             data: "nama_posyandu",
@@ -90,7 +88,6 @@
                             className: 'align-middle',
                             searchable: false,
                             orderable: true,
-
                         },
                         {
                             data: "actionsekms",
@@ -99,7 +96,6 @@
                             searchable: false,
                             className: 'align-middle',
                             width: "5%"
-
                         },
                     ],
                     order: [
@@ -113,7 +109,6 @@
                         search: "Cari", // Mengganti teks "Search" menjadi "Cari"
                     },
                 });
-
             });
         })();
     </script>
