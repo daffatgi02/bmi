@@ -12,6 +12,7 @@ class DetailChart3
     {
         $this->chart3 = $chart3;
     }
+    // BB -> TB
 
     public function build(
         $jk,
@@ -40,7 +41,7 @@ class DetailChart3
         // Inisialisasi nilai default untuk indeks yang tidak ada di $tb_anak
         for ($i = 0; $i <= 120; $i++) {
             if (!isset($scatterPoints[$i])) {
-                $scatterPoints[$i] = 0;
+                $scatterPoints[$i] = null; //0
             }
         }
 

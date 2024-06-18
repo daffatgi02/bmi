@@ -51,8 +51,9 @@
 }
 
 .bottom-bar a span {
-    font-size: 12px;
-    display: none;
+    font-size: 9px;
+    font-weight: bold;
+    /* display: none; */
 }
 
 /* Add padding to the bottom of the content to prevent overlap */
