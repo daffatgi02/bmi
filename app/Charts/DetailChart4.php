@@ -12,6 +12,7 @@ class DetailChart4
     {
         $this->chart4 = $chart4;
     }
+    // LK -> Umur
 
     public function build(
         $jk,
@@ -51,7 +52,7 @@ class DetailChart4
         // Inisialisasi nilai default untuk indeks yang tidak ada di $tu
         for ($i = 0; $i <= 60; $i++) {
             if (!isset($scatterPoints[$i])) {
-                $scatterPoints[$i] = 30;
+                $scatterPoints[$i] = null; //30
             }
         }
 
