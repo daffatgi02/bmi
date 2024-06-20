@@ -12,6 +12,7 @@ use App\Models\Dantrian;
 use App\Models\Dbulan;
 use App\Models\Dposyandu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -32,7 +33,17 @@ class DatabulananController extends Controller
 
     public function getData(Request $request)
     {
-        $dbulanans = Dbulan::with('danaks');
+        // Subquery to get the first record per danaks_id
+        $subquery = DB::table('dbulans')
+            ->select('dbulans.*')
+            ->whereIn('id', function ($query) {
+                $query->select(DB::raw('MIN(id)'))
+                    ->from('dbulans')
+                    ->groupBy('danaks_id');
+            });
+
+        // Main query to get data with relations
+        $dbulanans = Dbulan::fromSub($subquery, 'dbulans')->with('danaks');
 
         if ($request->ajax()) {
             return datatables()->of($dbulanans)

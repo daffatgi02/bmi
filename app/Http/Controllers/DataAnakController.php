@@ -89,7 +89,6 @@ class DataAnakController extends Controller
         }
 
         $danak = new Danak;
-        $danak->users_id = $request->users_id;
         $danak->nik_anak = $request->nik_anak;
         $danak->nama_anak = $request->nama_anak;
         $danak->tanggal_lahir = $request->tanggal_lahir;
@@ -171,7 +170,6 @@ class DataAnakController extends Controller
         $danak = Danak::findOrFail($id);
 
         // Update data anak berdasarkan ID yang diterima
-        $danak->users_id = $request->users_id;
         $danak->nik_anak = $request->nik_anak;
         $danak->nama_anak = $request->nama_anak;
         $danak->tanggal_lahir = $request->tanggal_lahir;

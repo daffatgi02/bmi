@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-3 mb-4">
-        <div class="d-flex justify-content-end mt-3 ms-3">
+        <div class="d-flex justify-content-end mt-3 ms-3 mb-5">
             <a id="batal" href="/" class="btn btn-keluar">
                 <div class="d-flex flex-row">
                     <i class="bi bi-box-arrow-left me-0 me-md-2"></i>
