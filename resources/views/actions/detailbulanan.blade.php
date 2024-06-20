@@ -28,7 +28,7 @@
                             </label>
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse show show" data-bs-parent="#accordionExample">
                         <div class="p-4 pe-none">
                             {!! $chart3->container() !!}
                         </div>
@@ -43,7 +43,7 @@
                             </label>
                         </button>
                     </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div class="p-4 pe-none">
                             {!! $chart2->container() !!}
                         </div>
@@ -58,7 +58,7 @@
                             </label>
                         </button>
                     </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div class="p-4 pe-none">
                             {!! $chart->container() !!}
                         </div>
@@ -73,7 +73,7 @@
                             </label>
                         </button>
                     </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div id="collapseFour" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div class="p-4 pe-none">
                             {!! $chart4->container() !!}
                         </div>

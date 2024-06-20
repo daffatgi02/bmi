@@ -12,6 +12,7 @@ use App\Models\Dbulan;
 use App\Models\Dposyandu;
 use App\Models\Riwayat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -52,14 +53,24 @@ class KaderController extends Controller
         })
             ->get();
 
-        $dbulans = Dbulan::when($nama_posyandu, function ($query) use ($nama_posyandu) {
-            return $query->where('nama_posyandu', $nama_posyandu);
-        })
+        // Subquery to get the first record per danaks_id
+        $subquery = DB::table('dbulans')
+            ->select('dbulans.*')
+            ->whereIn('id', function ($query) {
+                $query->select(DB::raw('MIN(id)'))
+                    ->from('dbulans')
+                    ->groupBy('danaks_id');
+            });
+
+        // Main query to get data with the specified filters and order
+        $dbulans = Dbulan::fromSub($subquery, 'dbulans')
+            ->when($nama_posyandu, function ($query) use ($nama_posyandu) {
+                return $query->where('nama_posyandu', $nama_posyandu);
+            })
             ->orderBy('created_at', 'desc') // Mengurutkan berdasarkan kolom created_at secara descending
             ->get();
 
-
-        return view('kader.index', compact('danaks', 'dposyandu', 'dantrian', 'nama_posyandu', 'dbulans',));
+        return view('kader.index', compact('danaks', 'dposyandu', 'dantrian', 'nama_posyandu', 'dbulans'));
     }
 
 
@@ -181,8 +192,8 @@ class KaderController extends Controller
         DetailChart $chart,
         DetailChart2 $chart2,
         DetailChart3 $chart3,
-        DetailChart4 $chart4,)
-    {
+        DetailChart4 $chart4,
+    ) {
         // ELOQUENT
         $title = "E-KMS Anak";
         $danak = Danak::findOrFail($danaks_id);
@@ -228,10 +239,10 @@ class KaderController extends Controller
 
         // $id_posyandu = $request->input('id_posyandu');
         // $nama_posyandu = $request->input('nama_posyandu');
-        return view( 'actions.editbulanankader',
+        return view(
+            'actions.editbulanankader',
             compact('dbulanans', 'danaks', 'title', 'relatedDbulanans'),
         );
-
     }
 
     /**
@@ -310,6 +321,5 @@ class KaderController extends Controller
         // Simpan objek Mahal ke dalam database
         $riwayat->save();
         Alert::success('Berhasil Memperbarui', 'Data Anak Berhasil Diperbarui.');
-
     }
 }

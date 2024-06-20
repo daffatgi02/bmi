@@ -98,7 +98,7 @@
         </div>
         <div class="row mt-4">
             <p class="fs-3 fw-bold">
-                Tabel Bulanan Posyandu {{ $nama_posyandu }}
+                Tabel Bulanan {{ $nama_posyandu }}
             </p>
             <div class="col-12 mb-4">
                 <div class="mt-2 px-1">
