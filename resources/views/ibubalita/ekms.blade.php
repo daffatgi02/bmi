@@ -1,6 +1,7 @@
+<!-- resources/views/your-view.blade.php -->
+
 @extends('layouts.appbalita')
 
-{{-- note bracnh develope --}}
 @section('content')
     <div class="container mt-3 mb-4">
         <div class="d-flex justify-content-end mt-3 ms-3 mb-5">
@@ -12,58 +13,114 @@
             </a>
         </div>
 
-        <div class="d-block d-md-none mb-5 text-center">
-            <img class="mx-auto d-block" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}" alt="logo"
-                style="width: 50%;">
-            <p class="fw-bold fs-2">
-                E-KMS Posyandu Japan
-            </p>
-        </div>
-        <div class="d-flex flex-row justify-content-center align-items-center">
-            <div class="w-100 d-none d-md-block">
-                <div class="view1 w-100 rounded-top vstack p-3">
-                    <img class="mx-auto d-block" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}"
-                        alt="logo" style="width: 50%;">
-                    <p class="fw-bold fs-5 text-center">
-                        E-KMS
-                    </p>
-                    <p class="fw-bold fs-5 text-center">
-                        Posyandu Desa Japan
-                    </p>
+        <!-- Input Form for Validation -->
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <div class="mb-4">
+                    <div class="card  px-md-5 py-md-5  px-3 py-4 shadow">
+                        <div class="mb-5 text-center">
+                            <img class="mx-auto d-block" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}"
+                                alt="logo" style="width: 50%;">
+                            <p class="fw-bold fs-2">
+                                E-KMS Posyandu Japan
+                            </p>
+                        </div>
+                        <form id="validationForm">
+                            <div class="mb-3">
+                                <label for="nik_anak" class="form-label fw-bold">NIK Anak</label>
+                                <input type="number" class="form-control" id="nik_anak" name="nik_anak" required
+                                    placeholder="Masukkan NIK Anak">
+                            </div>
+                            <div class="mb-3">
+                                <label for="hp_ortu" class="form-label fw-bold">Nomor Hp</label>
+                                <input type="number" class="form-control" id="hp_ortu" name="hp_ortu" required
+                                    placeholder="Masukkan Nomor Hp">
+                            </div>
+                            <div class="d-flex flex-row justify-content-center">
+                                <a href="/ekms" class="btn btn-keluar w-50 w-md-25 shadow me-2">
+                                    <i class="bi bi-arrow-repeat"></i> Ulangi
+                                </a>
+                                <button type="submit" class="btn w-50 w-md-25 shadow me-2" id="btn-tambah">
+                                    <i class="bi bi-search"></i> Cari
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="w-100">
-                <table class="table table-striped table-hover table-bordered datatable shadow" id="ekms"
-                    style="width: 100%">
-                    <thead class="fw-bold">
-                        <tr>
-                            <th id="th" class="text-center">Nama</th>
-                            <th id="th" class="text-center">NIK</th>
-                            <th id="th" class="text-center">Posyandu</th>
-                            <th id="th" class="text-center">Opsi</th>
-                        </tr>
-                    </thead>
-                </table>
+            <div class="col-md-6 col-12">
+                <!-- Data Table -->
+                <div class="d-flex flex-row justify-content-center align-items-center" id="dataTableContainer"
+                    style="display: none;">
+                    <div class="w-100">
+                        <table class="table table-striped table-hover table-bordered datatable shadow" id="ekms"
+                            style="width: 100%">
+                            <thead class="fw-bold">
+                                <tr>
+                                    <th id="th" class="text-center">Nama</th>
+                                    <th id="th" class="text-center">NIK</th>
+                                    <th id="th" class="text-center">Posyandu</th>
+                                    <th id="th" class="text-center">Opsi</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
 
 @push('scripts')
     <script type="module">
         (function() {
             function hideNIK(nik) {
-                // Mengambil 8 karakter pertama dari NIK
-                var prefix = nik.substring(0, 8);
-                var hiddenPart = nik.substring(8).replace(/./g, '*');
+                var prefix = nik.substring(0, 4);
+                var hiddenPart = nik.substring(4).replace(/./g, '*');
                 return prefix + hiddenPart;
             }
 
-            $(document).ready(function() {
+            $('#validationForm').on('submit', function(e) {
+                e.preventDefault();
+                var nik_anak = $('#nik_anak').val();
+                var hp_ortu = $('#hp_ortu').val();
+                var $btnTambah = $('#btn-tambah');
+                $btnTambah.prop('disabled', true);
+                $.ajax({
+                    url: '{{ route('validateAnak') }}',
+                    method: 'POST',
+                    data: {
+                        nik_anak: nik_anak,
+                        hp_ortu: hp_ortu,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.valid) {
+                            $('#dataTableContainer').show();
+                            loadDataTable(nik_anak);
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Pencarian Tidak Ditemukan',
+                                text: 'Periksa Kembali NIK dan Nomor Hp yang benar'
+                            });
+                            $btnTambah.prop('disabled', false);
+                        }
+                    }
+                });
+            });
+
+            function loadDataTable(nik_anak) {
                 var dataTable = new DataTable('#ekms', {
                     serverSide: true,
                     processing: true,
-                    ajax: "getekms",
+                    ajax: {
+                        url: 'getekms',
+                        data: {
+                            nik_anak: nik_anak
+                        }
+                    },
                     pagingType: "simple",
                     responsive: true,
                     columns: [{
@@ -104,13 +161,15 @@
                     ],
                     lengthMenu: [
                         [10],
-                        [10],
+                        [10]
                     ],
                     language: {
-                        search: "Cari", // Mengganti teks "Search" menjadi "Cari"
+                        search: "Cari",
                     },
+                    dom: 's'
                 });
-            });
+            }
+
         })();
     </script>
 @endpush
