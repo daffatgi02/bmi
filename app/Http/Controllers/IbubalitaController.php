@@ -24,6 +24,8 @@ class IbubalitaController extends Controller
 
     public function getData(Request $request)
     {
+        $nik_anak = $request->input('nik_anak');
+
         // Subquery to get the first record per danaks_id
         $subquery = DB::table('dbulans')
             ->select('dbulans.*')
@@ -34,7 +36,11 @@ class IbubalitaController extends Controller
             });
 
         // Main query to get data with relations
-        $dbulanans = Dbulan::fromSub($subquery, 'dbulans')->with('danaks');
+        $dbulanans = Dbulan::fromSub($subquery, 'dbulans')
+            ->with('danaks')
+            ->whereHas('danaks', function ($query) use ($nik_anak) {
+                $query->where('nik_anak', $nik_anak);
+            });
 
         if ($request->ajax()) {
             return datatables()->of($dbulanans)
@@ -45,6 +51,25 @@ class IbubalitaController extends Controller
                 ->toJson();
         }
     }
+
+
+    // app/Http/Controllers/IbubalitaController.php
+
+    public function validateAnak(Request $request)
+    {
+        $nik_anak = $request->input('nik_anak');
+        $hp_ortu = $request->input('hp_ortu');
+
+        // Validate the inputs
+        $danak = Danak::where('nik_anak', $nik_anak)->where('hp_ortu', $hp_ortu)->first();
+
+        if ($danak) {
+            return response()->json(['valid' => true]);
+        } else {
+            return response()->json(['valid' => false]);
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
