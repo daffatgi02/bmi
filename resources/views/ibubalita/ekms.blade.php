@@ -32,12 +32,15 @@
                                     placeholder="Masukkan NIK Anak">
                             </div>
                             <div class="mb-3">
-                                <label for="hp_ortu" class="form-label fw-bold">HP Orang Tua</label>
+                                <label for="hp_ortu" class="form-label fw-bold">Nomor Hp</label>
                                 <input type="number" class="form-control" id="hp_ortu" name="hp_ortu" required
-                                    placeholder="Masukkan NIK Anak">
+                                    placeholder="Masukkan Nomor Hp">
                             </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn w-50 shadow" id="btn-tambah">
+                            <div class="d-flex flex-row justify-content-center">
+                                <a href="/ekms" class="btn btn-keluar w-50 w-md-25 shadow me-2">
+                                    <i class="bi bi-arrow-repeat"></i> Ulangi
+                                </a>
+                                <button type="submit" class="btn w-50 w-md-25 shadow me-2" id="btn-tambah">
                                     <i class="bi bi-search"></i> Cari
                                 </button>
                             </div>
@@ -82,6 +85,8 @@
                 e.preventDefault();
                 var nik_anak = $('#nik_anak').val();
                 var hp_ortu = $('#hp_ortu').val();
+                var $btnTambah = $('#btn-tambah');
+                $btnTambah.prop('disabled', true);
                 $.ajax({
                     url: '{{ route('validateAnak') }}',
                     method: 'POST',
@@ -100,6 +105,7 @@
                                 title: 'Pencarian Tidak Ditemukan',
                                 text: 'Periksa Kembali NIK dan Nomor Hp yang benar'
                             });
+                            $btnTambah.prop('disabled', false);
                         }
                     }
                 });
@@ -163,6 +169,7 @@
                     dom: 's'
                 });
             }
+
         })();
     </script>
 @endpush
