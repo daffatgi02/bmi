@@ -170,56 +170,7 @@
                             orderable: false,
 
                         },
-                        // {
-                        //     data: "st_anak",
-                        //     name: "st_anak",
-                        //     className: ' align-middle text-center',
-                        //     render: function(data, type, row, meta) {
-                        //         if (data === 'Normal') {
-                        //             return '<span style="color: mediumseagreen; font-weight:bold ">' +
-                        //                 data + '</span>';
-                        //         } else if (data === 'Pendek') {
-                        //             return '<span style="color: red; font-weight:bold  ">' +
-                        //                 data + '</span>';
-                        //         } else if (data === 'Tinggi') {
-                        //             return '<span style="color: Black; font-weight:bold  ">' +
-                        //                 data + '</span>';
-                        //         } else {
-                        //             return data;
-                        //         }
-                        //     },
-                        //     searchable: false,
-                        //     orderable: false,
 
-                        // },
-                        // {
-                        //     data: "gz_anak",
-                        //     name: "gz_anak",
-                        //     className: ' align-middle text-center',
-                        //     render: function(data, type, row, meta) {
-                        //         if (data === 'Normal') {
-                        //             return '<span style="color: mediumseagreen; font-weight:bold ">' +
-                        //                 data + '</span>';
-                        //         } else if (data === 'Gizi Buruk') {
-                        //             return '<span style="color: red; font-weight:bold  ">' +
-                        //                 data + '</span>';
-                        //         } else if (data === 'Gizi Kurang') {
-                        //             return '<span style="color: darkorange; font-weight:bold  ">' +
-                        //                 data + '</span>';
-                        //         } else if (data === 'Kelebihan Berat Badan') {
-                        //             return '<span style="color: DarkBlue; font-weight:bold  ">' +
-                        //                 data + '</span>';
-                        //         } else if (data === 'Obesitas') {
-                        //             return '<span style="color: Black; font-weight:bold  ">' +
-                        //                 data + '</span>';
-                        //         } else {
-                        //             return data;
-                        //         }
-                        //     },
-                        //     searchable: false,
-                        //     orderable: false,
-
-                        // },
                         {
                             data: "created_at",
                             name: "created_at",
