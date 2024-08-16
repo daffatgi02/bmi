@@ -18,12 +18,13 @@
                             <i class="bi bi-envelope text-secondary"></i>
                         </span>
                         <input type="email" id="email" name="email"
-                        class="form-control border-0 py-2 px-0 @error('email') is-invalid @enderror" placeholder="Masukkan Email"
-                        aria-label="Masukkan Email" aria-describedby="basic-addon2" required>
+                            class="form-control border-0 py-2 px-0 @error('email') is-invalid @enderror"
+                            placeholder="Masukkan Email" aria-label="Masukkan Email" aria-describedby="basic-addon2"
+                            required>
                         @error('email')
-                        <span class="invalid-feedback text-danger"role="alert">
-                            <strong>Maaf, Perikasa Kembali Email</strong>
-                        </span>
+                            <span class="invalid-feedback text-danger"role="alert">
+                                <strong>Maaf, Perikasa Kembali Email</strong>
+                            </span>
                         @enderror
                     </div>
                     <label for="password" class="form-label">Password</label>
@@ -33,7 +34,8 @@
                         </span>
                         <input type="password" id="password" name="password"
                             class="form-control border-0 py-2 px-0 @error('password') is-invalid @enderror"
-                            placeholder="Masukkan Password" aria-label="Masukkan Password" aria-describedby="basic-addon2" required>
+                            placeholder="Masukkan Password" aria-label="Masukkan Password" aria-describedby="basic-addon2"
+                            required>
                         <span class="input-group-text bg-white border-0" id="basic-addon2">
                             <i class="bi bi-eye-slash text-secondary" id="togglePassword" style="cursor: pointer"></i>
                         </span>
@@ -59,4 +61,21 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
+
+            togglePassword.addEventListener('click', function() {
+                // Toggle the type attribute
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+
+                // Toggle the icon
+                this.classList.toggle('bi-eye');
+                this.classList.toggle('bi-eye-slash');
+            });
+        });
+    </script>
 @endsection
