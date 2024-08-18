@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-6 col-12">
                 <div class="mb-4">
-                    <div class="card  px-md-5 py-md-5  px-3 py-4 shadow">
+                    <div class="card px-md-5 py-md-5 px-3 py-4 shadow">
                         <div class="mb-5 text-center">
                             <img class="mx-auto d-block" src="{{ Vite::asset('resources/images/LogoMojokerto.png') }}"
                                 alt="logo" style="width: 50%;">
@@ -59,8 +59,8 @@
                             <thead class="fw-bold">
                                 <tr>
                                     <th id="th" class="text-center">Nama</th>
-                                    <th id="th" class="text-center">NIK</th>
                                     <th id="th" class="text-center">Posyandu</th>
+                                    <th id="th" class="text-center">Tanggal Periksa</th>
                                     <th id="th" class="text-center">Opsi</th>
                                 </tr>
                             </thead>
@@ -113,63 +113,64 @@
             });
 
             function loadDataTable(nik_anak) {
-                var dataTable = new DataTable('#ekms', {
-                    serverSide: true,
-                    processing: true,
-                    ajax: {
-                        url: 'getekms',
-                        data: {
-                            nik_anak: nik_anak
-                        }
-                    },
-                    pagingType: "simple",
-                    responsive: true,
-                    columns: [{
-                            data: "danaks.nama_anak",
-                            name: "danaks.nama_anak",
-                            className: 'align-middle',
-                            searchable: true,
-                            orderable: true,
-                        },
-                        {
-                            data: "danaks.nik_anak",
-                            name: "danaks.nik_anak",
-                            className: 'align-middle text-center',
-                            searchable: true,
-                            orderable: true,
-                            render: function(data, type, row, meta) {
-                                return hideNIK(data);
-                            }
-                        },
-                        {
-                            data: "nama_posyandu",
-                            name: "nama_posyandu",
-                            className: 'align-middle',
-                            searchable: false,
-                            orderable: true,
-                        },
-                        {
-                            data: "actionsekms",
-                            name: "actionsekms",
-                            orderable: false,
-                            searchable: false,
-                            className: 'align-middle',
-                            width: "5%"
-                        },
-                    ],
-                    order: [
-                        [0, "asc"]
-                    ],
-                    lengthMenu: [
-                        [10],
-                        [10]
-                    ],
-                    language: {
-                        search: "Cari",
-                    },
-                    dom: 's'
-                });
+    var dataTable = new DataTable('#ekms', {
+        serverSide: true,
+        processing: true,
+        ajax: {
+            url: 'getekms',
+            data: {
+                nik_anak: nik_anak
             }
+        },
+        pagingType: "simple",
+        responsive: true,
+        columns: [
+            {
+                data: "danaks.nama_anak",
+                name: "danaks.nama_anak",
+                className: 'align-middle',
+                searchable: true,
+                orderable: true,
+            },
+            {
+                data: "nama_posyandu",
+                name: "nama_posyandu",
+                className: 'align-middle',
+                searchable: false,
+                orderable: true,
+            },
+            {
+                data: "created_at",
+                name: "created_at",
+                className: 'align-middle',
+                searchable: true,
+                orderable: true,
+                render: function(data, type, row) {
+                    return new Date(data).toISOString().split('T')[0];
+                }
+            },
+            {
+                data: "actionsekms",
+                name: "actionsekms",
+                orderable: false,
+                searchable: false,
+                className: 'align-middle',
+                width: "5%"
+            },
+        ],
+        order: [
+            [0, "asc"]
+        ],
+        lengthMenu: [
+            [10],
+            [10]
+        ],
+        language: {
+            search: "Cari",
+        },
+        dom: 's'
+    });
+}
 
         })();
     </script>
